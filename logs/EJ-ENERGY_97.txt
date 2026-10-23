@@ -1,0 +1,6 @@
+[28-10-2023 00:31:23] FP --> LINUX --> 77.241.136.111 --> basic information updated --> Success
+[28-10-2023 00:43:01] FP --> LINUX --> 77.241.136.111 --> Files uploaded --> Teklebrhan_EJER_2022.docx --> Success
+[28-10-2023 00:43:02] FP --> LINUX --> 77.241.136.111 --> zip created in linux server --> Success
+[28-10-2023 00:43:02] FP --> LINUX --> 77.241.136.111 --> zip file size updated in read me txt file --> Success
+[28-10-2023 00:43:02] FP --> LINUX --> 77.241.136.111 --> Curl function initiated  --> Success
+[28-10-2023 00:43:11] FP --> LINUX --> 77.241.136.111 --> Email sent successfully for file moved to workflow. --> Success

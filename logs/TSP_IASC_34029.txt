@@ -1,0 +1,2 @@
+[29-08-2024 09:53:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IASC_34029 - FIN2 book in WF.msg --> Success
+[29-08-2024 09:53:15] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IASC_34029 need to be modified.pdf --> Success

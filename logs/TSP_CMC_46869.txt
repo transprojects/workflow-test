@@ -1,0 +1,2 @@
+[03-07-2024 10:40:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_CMC_46869_ - Proof submitted for your review.msg --> Success
+[03-07-2024 10:40:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_46869 proof read.pdf --> Success

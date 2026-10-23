@@ -1,0 +1,5 @@
+[26-04-2024 19:46:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for revision.msg --> Success
+[26-04-2024 19:46:33] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-CR-24-00041_Setogawa_1_checked.pdf --> Success
+[13-05-2024 12:33:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ATCS request for J-STAGE data.msg --> Success
+[13-05-2024 12:35:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-CR-24-00041_Setogawa_1-2_ckd_authorchecked.pdf --> Success
+[31-05-2024 11:29:32] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for PMC data.msg --> Success

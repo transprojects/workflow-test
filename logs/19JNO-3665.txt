@@ -1,0 +1,3 @@
+[17-09-2024 12:24:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3665-004JNO.zip --> Success
+[23-09-2024 10:17:10] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Submission of 19JNO-3665 updated PDF-reg.msg --> Success
+[23-09-2024 10:17:22] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Confirmation of the receipt of the revised manuscript (19JNO-3665) which has all modifications clearly marked - reg.msg --> Success

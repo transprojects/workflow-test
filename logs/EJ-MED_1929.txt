@@ -1,0 +1,15 @@
+[25-09-2023 17:45:17] LINUX --> 77.241.128.118 --> Proof zip files from author downloaded by Ivanna --> Success
+[25-09-2023 17:45:51] LINUX --> 77.241.128.118 --> Curl function initiated  --> Success
+[26-09-2023 13:00:07] PRODUCTION REIEW --> LINUX --> 157.46.85.44 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[05-10-2023 20:36:47] PRODUCTION REIEW --> LINUX --> 77.241.128.161 --> REVISESED PROOF downloaded by Ivanna --> Success
+[06-10-2023 22:04:13] PRODUCTION REIEW --> LINUX --> 59.92.87.210 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[07-10-2023 14:28:17] PRODUCTION REIEW --> LINUX --> 223.187.122.214 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[09-10-2023 18:04:25] PRODUCTION REIEW --> LINUX --> 77.241.128.153 --> REVISESED PROOF downloaded by Ivanna --> Success
+[09-10-2023 18:07:40] META FORM  --> LINUX --> 77.241.128.153 --> Files uploaded --> EJ-MED_1929 (1).pdf --> Success
+[09-10-2023 18:07:44] META FORM --> LINUX --> 77.241.128.153 --> Correction status updated & form submitted --> Success
+[09-10-2023 18:07:44] META FORM --> LINUX --> 77.241.128.153 --> PDF files exist in the folder --> Success
+[09-10-2023 18:07:45] META FORM --> LINUX --> 77.241.128.153 --> zip created in linux server --> Success
+[09-10-2023 18:07:45] META FORM --> LINUX --> 77.241.128.153 --> Curl function initiated  --> Success
+[09-10-2023 18:07:59] META FORM --> LINUX --> 77.241.128.153 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24448'Email sent successfully. --> Success
+[11-10-2023 20:32:20] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 20:40:55] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> PUBLISHED --> published by Ivanna

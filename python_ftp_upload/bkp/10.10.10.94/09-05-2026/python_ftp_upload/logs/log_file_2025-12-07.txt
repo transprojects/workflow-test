@@ -1,0 +1,744 @@
+
+
+Program Run at: 2025-12-07 00:02:26.492217
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 00:17:38.330773
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 00:32:49.348431
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 00:48:00.861283
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 01:03:07.226881
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 01:18:18.247054
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 01:33:29.592839
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 01:48:39.129122
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 02:03:51.462677
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 02:19:03.143977
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	No articles are currently available in the journal workflow for upload to Xperttrack FTP.<br>
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 02:34:03.410336
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 02:49:16.405995
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 03:04:16.511669
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 03:19:16.473841
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 03:34:16.484998
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 03:49:16.427344
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 04:04:16.457588
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 04:19:16.492439
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 04:34:16.409421
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 04:49:16.479783
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 05:04:16.416844
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 05:19:16.438965
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 05:34:16.481906
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 05:49:16.423744
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 06:04:16.440995
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 06:19:16.439511
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 06:34:16.500388
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 06:49:16.475729
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 07:04:16.498784
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 07:19:16.430482
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 07:34:16.405080
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 07:49:16.519204
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 08:04:16.526388
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 08:19:16.461331
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 08:34:16.473014
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 08:49:16.423252
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 09:04:16.465135
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 09:20:02.070714
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/FHMT/TSP_FHMT_74325/transforma-fp-files/TSP_FHMT_74325.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/FHMT/TSP_FHMT_74325/TSP_FHMT_74325.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 09:35:02.423372
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 09:50:02.463025
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 10:05:02.525016
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 10:20:02.449779
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 10:35:32.985992
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/CJU/TSP_CJU_71284/transforma-fp-files/TSP_CJU_71284.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CJU/TSP_CJU_71284/TSP_CJU_71284.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 10:50:33.464881
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 11:06:09.176470
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/CMC/TSP_CMC_73584/transforma-fp-files/TSP_CMC_73584.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CMC/TSP_CMC_73584/TSP_CMC_73584.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 11:21:09.421932
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 11:36:47.528363
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/JPA/TSP_JPA_67273/transforma-fp-files/TSP_JPA_67273.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/JPA/TSP_JPA_67273/TSP_JPA_67273.zip
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: (550, b"5.2.254 InvalidRecipientsException; Sender throttled due to continuous invalid recipients errors.; STOREDRV.Submission.Exception:InvalidRecipientsException; Failed to process message due to a permanent exception with message [BeginDiagnosticData]Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted. InvalidRecipientsException: Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted.[EndDiagnosticData] [Hostname=TYZPR04MB8197.apcprd04.prod.outlook.com]").
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: (550, b"5.2.254 InvalidRecipientsException; Sender throttled due to continuous invalid recipients errors.; STOREDRV.Submission.Exception:InvalidRecipientsException; Failed to process message due to a permanent exception with message [BeginDiagnosticData]Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted. InvalidRecipientsException: Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted.[EndDiagnosticData] [Hostname=TYZPR04MB8197.apcprd04.prod.outlook.com]").
+-----------------------------------------------------------------------------------------
+Error: Email notification send to client is Failed. J:\JOURNAL\production\JOURNALS\TSP\JPA\Vol00000\TSP_JPA_67273\FP\Delivery\TSP_JPA_67273.zip - TSP_JPA_67273
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	Email notification send to client is Failed. <br>"Error: Email notification Failed to sent: (550, b"5.2.254 InvalidRecipientsException; Sender throttled due to continuous invalid recipients errors.; STOREDRV.Submission.Exception:InvalidRecipientsException; Failed to process message due to a permanent exception with message [BeginDiagnosticData]Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted. InvalidRecipientsException: Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted.[EndDiagnosticData] [Hostname=TYZPR04MB8197.apcprd04.prod.outlook.com]").".<br>
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 11:51:47.469088
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 12:06:47.489844
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 12:21:47.517432
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 12:36:47.492266
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 12:51:47.467772
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 13:06:47.500603
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 13:21:47.470988
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 13:37:26.334793
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/JPA/TSP_JPA_67273/transforma-fp-files/TSP_JPA_67273.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/JPA/TSP_JPA_67273/TSP_JPA_67273.zip
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: (550, b"5.2.254 InvalidRecipientsException; Sender throttled due to continuous invalid recipients errors.; STOREDRV.Submission.Exception:InvalidRecipientsException; Failed to process message due to a permanent exception with message [BeginDiagnosticData]Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted. InvalidRecipientsException: Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted.[EndDiagnosticData] [Hostname=TYZPR04MB8197.apcprd04.prod.outlook.com]").
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: (550, b"5.2.254 InvalidRecipientsException; Sender throttled due to continuous invalid recipients errors.; STOREDRV.Submission.Exception:InvalidRecipientsException; Failed to process message due to a permanent exception with message [BeginDiagnosticData]Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted. InvalidRecipientsException: Recipient 'Xianglian Yu' is not resolved. All recipients must be resolved before a message can be submitted.[EndDiagnosticData] [Hostname=TYZPR04MB8197.apcprd04.prod.outlook.com]").
+-----------------------------------------------------------------------------------------
+Error: Email notification send to client is Failed. J:\JOURNAL\production\JOURNALS\TSP\JPA\Vol00000\TSP_JPA_67273\FP\Delivery\TSP_JPA_67273.zip - TSP_JPA_67273
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 13:52:47.369075
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/JPA/TSP_JPA_67273/transforma-fp-files/TSP_JPA_67273.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/JPA/TSP_JPA_67273/TSP_JPA_67273.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 14:07:47.485910
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 14:22:47.482081
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 14:37:47.494603
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 14:52:47.427104
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 15:07:47.443982
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 15:22:47.493149
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 15:37:47.485407
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 15:52:47.534517
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 16:07:47.493971
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 16:22:47.424923
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 16:37:47.484059
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 16:52:47.422901
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 17:07:47.449945
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 17:22:47.443533
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 17:37:47.433271
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 17:52:47.455882
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 18:07:47.420565
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 18:22:47.434126
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 18:37:47.429620
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 18:52:47.408088
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 19:07:47.463453
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 19:22:47.483609
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 19:37:47.478452
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 19:53:06.554374
+=========================================
+
+Success: Uploaded file to FTP: REV/TSP/CMC/TSP_CMC_72777/REV1/transforma-to-client/TSP_CMC_72777.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 20:08:06.564559
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 20:23:06.439865
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 20:38:06.436318
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 20:53:06.436626
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 21:08:06.456854
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 21:23:06.479433
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 21:38:06.405851
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 21:53:06.401083
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 22:08:06.415243
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 22:23:06.502563
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 22:38:06.443606
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 22:53:06.445410
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 23:08:06.456140
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 23:23:06.481718
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 23:38:06.395876
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-07 23:53:06.474034
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------

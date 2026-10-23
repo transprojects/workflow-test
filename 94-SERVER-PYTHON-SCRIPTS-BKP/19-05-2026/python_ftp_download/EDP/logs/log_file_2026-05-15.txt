@@ -1,0 +1,365 @@
+
+
+Program Run at: 2026-05-15 12:06:24.428412
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an250226_corrected.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\EDP-Sci\m2an\Vol00000\m2an250226\FP is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 12:06:32.228782
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an250226_corrected.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\EDP-Sci\m2an\Vol00000\m2an250226\FP is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 12:12:04.018344
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 12:13:21.515867
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 12:14:17.830616
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an250226_corrected.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 12:36:25.845286
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 12:51:36.234688
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 13:03:34.750109
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 13:05:23.119127
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 13:21:15.396685
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 13:42:34.678033
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 13:59:06.546984
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 14:14:34.185690
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 14:32:18.761000
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 14:47:29.885348
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 15:05:33.047445
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 15:20:40.457396
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 15:35:47.189634
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 15:50:57.813841
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 16:06:04.950055
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 16:21:11.573766
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 16:36:17.373139
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 16:51:42.676289
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 17:06:49.550496
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 17:21:56.390464
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 17:37:03.426285
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 17:52:15.436522
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 18:07:22.381864
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 18:22:29.433773
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 18:37:35.400548
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 18:52:46.287396
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 19:07:52.391766
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 19:22:59.748176
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 19:38:05.216810
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 19:53:17.132338
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 20:08:23.140014
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 20:23:30.588790
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 20:38:37.403198
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 20:53:48.401948
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 21:08:55.658062
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 21:24:02.515915
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 21:39:33.657562
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 21:54:43.869522
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 22:09:49.538508
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 22:24:56.603516
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 22:40:03.536081
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 22:55:14.716152
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 23:10:21.372530
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 23:25:27.190525
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 23:40:33.224819
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-15 23:55:44.841096
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------

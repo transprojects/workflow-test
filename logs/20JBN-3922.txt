@@ -1,0 +1,2 @@
+[10-07-2024 10:04:46] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBN-2024-0089.zip --> Success
+[13-07-2024 10:08:51] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> RE_ JBN -- Probing Size-Dependent Cytotoxicity___ _20JBN-3922_ - Proof.msg --> Success

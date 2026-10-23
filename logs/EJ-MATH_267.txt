@@ -1,0 +1,16 @@
+[01-10-2023 20:46:49] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 20:46:55] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJMATH_267.docx --> Success
+[01-10-2023 20:46:56] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 20:46:56] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 20:46:56] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 20:47:05] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[20-10-2023 00:53:18] AUTHOR SUBMISSION --> LINUX --> 77.241.136.75 --> Proof zip files from author downloaded by Ivanna --> Success
+[20-10-2023 00:53:20] AUTHOR SUBMISSION --> LINUX --> 77.241.136.75 --> FP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 18:26:59] AUTHOR SUBMISSION --> LINUX --> 176.232.59.83 --> Proof zip files from author downloaded by Eda --> Success
+[20-10-2023 20:57:06] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> FP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 20:57:07] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> Proof zip files from author downloaded by Ivanna --> Success
+[24-10-2023 18:19:34] AUTHOR SUBMISSION --> LINUX --> 77.241.136.41 --> Proof zip files from author downloaded by Ivanna --> Success
+[24-10-2023 18:20:46] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.41 --> Files uploaded --> 267.zip --> Success
+[24-10-2023 18:21:26] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 18:21:26] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 18:21:33] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.41 --> EJ-MATH_267.zipEmail sent successfully. --> Success

@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peerj Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Datepicker CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css"
+        rel="stylesheet" />
+
+
+    <!-- Custom Styles -->
+    <link href="../css/main.min.css" rel="stylesheet" />
+    <link href="../styles.css" rel="stylesheet" />
+    <link href="../assets/css/select2.min.css" rel="stylesheet" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+    <style>
+        #dateRangeInputs {
+            display: none;
+            margin-top: 15px;
+            width: 500px;
+            min-width: 370px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .peerj {
+            margin-top: 40px;
+            margin-bottom: 64px;
+
+        }
+
+        .peerj-section1 {
+            border: 1px solid #E0DEDD;
+            box-shadow: 0px 0px 25px rgba(49, 46, 44, 0.15);
+            border-radius: 16px;
+        }
+
+        .peerj-section1-nav {
+            padding: 0 24px;
+            border-bottom: 1px solid #E0DEDD;
+
+        }
+
+        .peerj-section1-nav .peerj-nav-right {
+            gap: 56px;
+            align-items: center;
+        }
+
+        .peerj-nav-right h4 {
+            font-size: 20px;
+            color: #222222;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .peerj-nav-right p {
+            font-size: 16px;
+            font-weight: 400;
+            color: #33312F;
+            padding: 24px 8px;
+            cursor: pointer;
+        }
+
+        .peerj-nav-date {
+            position: relative;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            row-gap: 12px;
+        }
+
+        .perrj-date {
+            position: absolute;
+            top: 100px;
+            right: 0;
+            width: 500px;
+            display: flex;
+            background: white;
+            padding: 20px 0;
+            border-radius: 16px;
+            box-shadow: 0px 0px 25px rgba(49, 46, 44, 0.15);
+        }
+
+        .peerj1-clicked {
+            color: #F56500 !important;
+            font-weight: 600 !important;
+            border-bottom: 1px solid #F56500;
+        }
+
+        .peerj-nav-date #dateDisplay {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222222;
+        }
+
+        .peerj-datebtn {
+            outline: none;
+            border: none;
+            background-color: white;
+        }
+
+        .peerj-datebtn img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .peerj-section1-cards {
+            margin: 0 24px;
+            padding: 13px 0;
+            gap: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        .peerj-dash-card {
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .peerj-card-head img {
+            width: 52px;
+            height: 52px;
+        }
+
+        .peerj-card-head p {
+            font-size: 32px;
+            font-weight: 800;
+            color: #222222;
+        }
+
+        .peerj-dash-card>p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #33312F;
+            padding-top: 24px;
+        }
+
+        .peerj-dash-card1 {
+            background-color: #EBF8FB;
+
+        }
+
+        .peerj-dash-card2 {
+            background-color: rgba(246, 244, 255, 0.8);
+        }
+
+        .peerj-dash-card3 {
+            background-color: rgba(227, 248, 237, 0.8);
+        }
+
+        .peerj-dash-card4 {
+            background-color: rgba(254, 238, 233, 0.8);
+        }
+
+        .peerj-section2 {
+            display: flex;
+            width: 100%;
+            margin-top: 24px;
+            gap: 24px;
+        }
+
+        .peerj-section2-left {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .peerj-graph {
+            border: 1px solId #E0DEDD;
+            border-radius: 24px;
+            box-shadow: 0px 0px 25px rgba(49, 46, 44, 0.15);
+            padding: 24px;
+            background: white;
+        }
+
+        .peerj-graph h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #222222;
+        }
+
+        .peerj-graph-foot {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .peerj-graph-foot :nth-child(1) span {
+            background-color: #3771F2;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        .peerj-graph-foot :nth-child(2) span {
+            background-color: #EF4444;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        .peerj-graph-foot p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222222;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .peerj-common-head {
+            font-size: 20px;
+            font-weight: 600;
+            color: #222222;
+        }
+
+        .peerj-happenings {
+            border: 1px solId #E0DEDD;
+            border-radius: 24px;
+            box-shadow: 0px 0px 25px rgba(49, 46, 44, 0.15);
+            padding: 24px;
+            background: white;
+        }
+
+        .peerj-happenings-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            gap: 24px;
+            padding: 32px 0;
+
+        }
+
+        .peerj-happenings-content :nth-child(1) span {
+            background-color: #F56500;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        .peerj-happenings-content :nth-child(2) span {
+            background-color: #3771F2;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        .peerj-happenings-content :nth-child(3) span {
+            background-color: #644FBA;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        .peerj-happenings-content p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222222;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .peerj-section2-right {
+            border: 1px solid #E0DEDD;
+            border-radius: 24px;
+            box-shadow: 0px 0px 25px rgba(49, 46, 44, 0.15);
+            background: white;
+            width: 55%;
+        }
+
+        .peerj-table-items {
+            border-bottom: 1px solid #E0DEDD;
+        }
+
+        .peerj-table-items p {
+            font-size: 16px;
+            font-weight: 400;
+            color: #33312F;
+            padding: 24px;
+            cursor: pointer;
+        }
+
+        .peerj-table-nav {
+            /* horizontal scroll on small screens */
+            min-width: 370px;
+            overflow-x: auto;
+        }
+
+        .peerj-table-wrapper {
+            overflow-x: auto;
+            /* Enable horizontal scrolling */
+            width: 100%;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        .peerj-table {
+            min-width: 800px;
+            /* Minimum width to trigger scroll */
+            border-radius: 12px;
+            overflow: hidden;
+            /* Ensures the table doesn't overflow */
+            background-color: #fff;
+            border: 1px solid #dedef3;
+        }
+
+        .peerj-table-head {
+            background-color: rgba(117, 119, 205, 0.17);
+            ;
+        }
+
+        .peerj-table-head th {
+            color: #4648B8;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .peerj-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: fixed;
+            min-width: 800px;
+        }
+
+        .peerj-table th,
+        .peerj-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #dedef3;
+            word-wrap: break-word;
+            font-size: 14px;
+            font-weight: 400;
+            color: #33312F;
+        }
+
+
+
+        .peerj-table tbody tr:last-child td {
+            border-bottom: none;
+            /* Remove border from last row */
+        }
+
+        .peerj-table-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .peerj-table-wrapper::-webkit-scrollbar-thumb {
+            background-color: #999;
+            border-radius: 4px;
+        }
+
+        .peerj-table-wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: #7577cd;
+        }
+
+        @media (max-width:1024px) {
+            .peerj-section1-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .peerj-section2 {
+                flex-direction: column;
+            }
+
+            .peerj-section2-left,
+            .peerj-section2-right {
+                width: 100%;
+            }
+
+            .peerj-section2 #chatcontainer svg {
+                width: 100%;
+            }
+        }
+
+        @media (max-width:768px) {
+            .peerj-section1-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .peerj-nav-right {
+                gap: 20px !important;
+            }
+
+            .peerj-nav-date {
+                flex-direction: column-reverse;
+                align-items: flex-end;
+            }
+        }
+
+        @media (max-width:650px) {
+            .peerj-section1-nav {
+                flex-direction: column;
+            }
+
+            .peerj-nav-date {
+                flex-direction: row-reverse;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            .perrj-date {
+                width: 350px !important;
+            }
+
+            #dateRangeInputs {
+                width: 370px !important;
+            }
+        }
+
+        /* Increase z-index of the datepicker popup */
+        .datepicker {
+            z-index: 1051 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wholeouter">
+        <!-- Header logo section -->
+        <div class="row titlesection">
+            <div class="col-6 col-md-4 col-lg-4">
+                <a href="https://www.transforma.in" target="_blank">
+                    <img class="wkfwlogo" alt="transforma-logo" src="../assets/images/translogo.png" />
+                </a>
+            </div>
+            <div class="col-6 col-md-4 d-flex justify-content-center">
+                <img class="wkfwlogo1" alt="transforma-logo" src="../assets/images/workflowlogo.svg" />
+            </div>
+            <div class="col-2 col-md-2 col-lg-3 col-xl-4 d-none d-md-block">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-1 notificationsec">
+                        <div class="notiicon">
+                            <button class="notibtn">
+                                <img alt="notification_icon" src="../assets/images/notification.svg" />
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="vrline1"></div>
+                    </div>
+                    <div class="col-5 col-md-5 col-lg-2 d-flex align-items-center">
+                        <img alt="profileicon" src="../assets/images/profileicon.svg" />
+                        <div class="dropdown">
+                            <button class="btn userprofilebtn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Portal Admin
+                            </button>
+                            <ul class="dropdown-menu custdropdown" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Email Settings</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">User Report </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">User Work Status</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Send TSP CD Rev E-Mail</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Send TSP RD Rev E-Mail</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Change Password</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar section  -->
+        <nav class="navbar navbar-expand-xl d-flex navbar-dark nav-outer">
+            <button class="homebtn" type="button">Home</button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav navtitlelist">
+                    <li class="dropdown ddlist nav-item">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn1" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Accounts
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Create Invoice XLS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Create Invoice PDF</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Submit Invoice</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Submitted Invoice</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Company Details Config</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Customer Invoice Config</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn2" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Customers
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Customers Alert Email</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn3" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Journals
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Journal Type</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Manage Journals</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Manage Folder</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">File Configuration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Dispatch File Configuration</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn4" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Departments
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Manage Departments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Manage Move Files</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Manage Book Service</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn5" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Settings
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Workflow</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Bookflow</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Pages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Checklist</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Emails</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Client Feedback</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Article Query</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Article Type</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Schedule Mail details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Archive Config</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn6" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Users
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Award Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Shift Masters</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Members</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Add Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Assign Shift</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">My Account</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn7" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Reports
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Master Status Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">User Target Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Daywise User Target Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Customerwise Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Dispatch History</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn8" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Books
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Add Book</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Added Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Current Work</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Overdue Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">High Priority Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Books Under Dispatch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Chapters Under Dispatch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Services Under Dispatch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Books Under Client Review</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Chapters Under Client Review</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Completed Books</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown ddlist">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn9" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Articles
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Added Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Current Work</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Assign Due Date</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Assign to User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Re-assign to User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Queried/Hold Article</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">High Priority Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">ASP Article History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Under Dispatch Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Under Client Review</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Author Proofing Completed Files</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">GoDaddy Test-Under Dispatch Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">AWS Test-Under Dispatch Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">AWS REV1 Manual Booking Click here</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">AWS Delete FP Files List(Rebooking)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+                    <li class="dropdown">
+                        <button class="nav-link dropdown-toggle navlinkbtn navlinkbtn10" id="navbaraccountsdropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Issues
+                        </button>
+                        <ul class="dropdown-menu custdropdown dropdown-menu-end"
+                            aria-labelledby="navbaraccountsdropdown">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Manage Issues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Under Dispatch Issues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Under Client Issues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Completed Issues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">View All Issues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Volume Archive</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Individual Archive</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Upload Excel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">Assign Sequence numbers to Issue
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid peerj">
+            <div class="peerj-section1">
+                <div class="peerj-section1-nav justify-content-between d-flex">
+                    <div class="d-flex peerj-nav-right">
+                        <h4>Delivery Status</h4>
+                        <div class="d-flex delivery-items gap-3">
+                            <p id="first-proof" class=" peerj1-clicked" onclick="handleClick(this)">First Proof</p>
+                            <p id="revised" onclick="handleClick(this)">Revised</p>
+                        </div>
+                    </div>
+                    <div class="peerj-nav-date">
+                        <p id="dateDisplay"></p>
+                        <button id="openDatepicker" class="peerj-datebtn"><img
+                                src="../assets/images/date-piceker-icon.svg" alt=""></button>
+
+                        <div id="dateRangeInputs" class="mt-3">
+                            <div class="row g-3 align-items-center perrj-date">
+
+                                <div class="col-auto">
+                                    <label for="fromDate" class="col-form-label">From:</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="fromDate" class="form-control" placeholder="Start Date"
+                                        autocomplete="off" />
+                                </div>
+                                <div class="col-auto">
+                                    <label for="toDate" class="col-form-label">To:</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="toDate" class="form-control" placeholder="End Date"
+                                        autocomplete="off" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="peerj-section1-cards no-wrap">
+                    <div class="peerj-dash-card1 peerj-dash-card">
+                        <div class="d-flex gap-4 peerj-card-head">
+                            <img src="../assets/images/peerj/icon1.svg" alt="icon">
+                            <p>350</p>
+                        </div>
+                        <p>Total Articles</p>
+                    </div>
+                    <div class="peerj-dash-card2 peerj-dash-card">
+                        <div class="d-flex gap-4 peerj-card-head">
+                            <img src="../assets/images/peerj/icon2.svg" alt="icon">
+                            <p>88</p>
+                        </div>
+                        <p>Within 48 hrs</p>
+                    </div>
+                    <div class="peerj-dash-card3 peerj-dash-card">
+                        <div class="d-flex gap-4 peerj-card-head">
+                            <img src="../assets/images/peerj/icon3.svg" alt="icon">
+                            <p>120</p>
+                        </div>
+                        <p>48 - 72 hrs</p>
+                    </div>
+                    <div class="peerj-dash-card4 peerj-dash-card">
+                        <div class="d-flex gap-4 peerj-card-head">
+                            <img src="../assets/images/peerj/icon4.svg" alt="icon">
+                            <p>65</p>
+                        </div>
+                        <p>Above 72 hrs</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="peerj-section2">
+                <div class="peerj-section2-left ">
+                    <div class="peerj-graph">
+                        <h4>Review Statistics</h4>
+                        <div id="chart-container"></div>
+                        <div class="peerj-graph-foot">
+                            <p><span></span>First Proof</p>
+                            <p><span></span>Revised</p>
+
+                        </div>
+                    </div>
+                    <div class="peerj-happenings">
+                        <h4 class="peerj-common-head">Happenings</h4>
+                        <div class="peerj-happenings-content">
+                            <p><span></span>TSP - NEW CUSTOMER ADDED ON 04-01-2019</p>
+                            <p><span></span>CMC JOUNRAL ADDED AS NEW JOUNRAL IN TSP CUSTOMER</p>
+                            <p><span></span>Training for CE Team for Freshers on 05-05-2025</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="peerj-section2-right">
+                    <div class="peerj-table-nav">
+                        <div class="d-flex peerj-table-items  gap-3">
+                            <p id="first-proof" class=" peerj1-clicked" onclick="handleTableClick(this)">QMS</p>
+                            <p id="revised" onclick="handleTableClick(this)">CAPA</p>
+                        </div>
+                        <div class="peerj-table-wrapper">
+                            <div class="peerj-table">
+                                <table>
+                                    <colgroup>
+                                        <col width="10%" />
+                                        <col width="20%" />
+                                        <col width="20%" />
+                                        <col width="20%" />
+                                        <col width="30%" />
+                                    </colgroup>
+                                    <tr class="peerj-table-head">
+                                        <th>S.No</th>
+                                        <th>Journal Name</th>
+                                        <th>Article ID</th>
+                                        <th>User Name</th>
+                                        <th>Feedback</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Science Today</td>
+                                        <td>ATC-001</td>
+                                        <td>John Smith</td>
+                                        <td>Content is well-structured but requires additional references.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Science Today</td>
+                                        <td>ATC-001</td>
+                                        <td>John Smith</td>
+                                        <td>Content is well-structured but requires additional references.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Science Today</td>
+                                        <td>ATC-001</td>
+                                        <td>John Smith</td>
+                                        <td>Content is well-structured but requires additional references.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Science Today</td>
+                                        <td>ATC-001</td>
+                                        <td>John Smith</td>
+                                        <td>Content is well-structured but requires additional references.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Science Today</td>
+                                        <td>ATC-001</td>
+                                        <td>John Smith</td>
+                                        <td>Content is well-structured but requires additional references.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Science Today</td>
+                                        <td>ATC-001</td>
+                                        <td>John Smith</td>
+                                        <td>Content is well-structured but requires additional references.</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Footer Section -->
+        <div class="container-fluid footer">
+            <div class="row footerrow align-items-center">
+                <div class="col d-none d-md-block"></div>
+                <div class="col d-flex justify-content-center">
+                    <span style="font-family: Open Sans; color: #f26722">Transforma Pvt Ltd</span>
+                    - Workflow © 2023
+                </div>
+                <div class="col d-flex justify-content-end socialicons">
+                    <a href="" target="_blank">
+                        <img src="../assets/images/twitter.svg" alt="twitter_logo" />
+                    </a>
+                    <a href="" target="_blank">
+                        <img src="../assets/images/facebook.svg" alt="twitter_logo" />
+                    </a>
+                    <a href="" target="_blank">
+                        <img src="../assets/images/youtube.svg" alt="twitter_logo" />
+                    </a>
+                    <a href="" target="_blank">
+                        <img src="../assets/images/linkedin.svg" alt="twitter_logo" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap Datepicker JS -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
+   
+    <script>
+        $(document).ready(function () {
+    const today = new Date();
+    const formattedToday = today.toISOString().split('T')[0];  // Format: yyyy-mm-dd
+
+    // Set the default date on page load
+    $('#dateDisplay').text(`${formattedToday}`).show();
+
+    // Show the date inputs when button clicked
+    $('#openDatepicker').click(function () {
+        $('#dateRangeInputs').toggle();
+    });
+
+    // Initialize From Date picker
+    $('#fromDate').datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayHighlight: true,
+        endDate: today // Cannot select future dates
+    }).on('changeDate', function (e) {
+        let selectedFromDate = e.date;
+
+        // The minimum date for To Date can now be the same as From Date
+        $('#toDate').datepicker('setStartDate', selectedFromDate);
+        $('#toDate').datepicker('setEndDate', today); // Cannot select beyond today
+
+        // Reset To Date if it's outside the new range
+        if ($('#toDate').val()) {
+            let toDate = new Date($('#toDate').val());
+            if (toDate < selectedFromDate || toDate > today) {
+                $('#toDate').val('');
+            }
+        }
+
+        checkDateSelection();
+    });
+
+    // Initialize To Date picker
+    $('#toDate').datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayHighlight: true,
+        startDate: today, // Initially set to today
+        endDate: today     // Cannot select beyond today
+    }).on('changeDate', function () {
+        checkDateSelection();
+    });
+
+    function checkDateSelection() {
+        var fromDate = $('#fromDate').val();
+        var toDate = $('#toDate').val();
+
+        if (fromDate && toDate) {
+            $('#dateRangeInputs').hide();
+            if (fromDate === toDate) {
+                $('#dateDisplay').text(`${toDate}`).show();
+            } else {
+                $('#dateDisplay').text(`${fromDate} to ${toDate}`).show();
+            }
+        }
+    }
+});
+    </script>
+    <script>
+        const handleClick = (element) => {
+            const paragraphs = document.querySelectorAll(".delivery-items p");
+
+            // If clicked element already has the class, do nothing
+            if (element.classList.contains('peerj1-clicked')) {
+                return; // keep the class, no change
+            }
+
+            // Remove 'peerj1-clicked' class from all <p> tags
+            paragraphs.forEach((p) => {
+                p.classList.remove("peerj1-clicked");
+            });
+
+            // Add the class to the clicked element
+            element.classList.add("peerj1-clicked");
+        };
+        const handleTableClick = (element) => {
+            const paragraphs = document.querySelectorAll(".peerj-table-items p");
+
+            // If clicked element already has the class, do nothing
+            if (element.classList.contains('peerj1-clicked')) {
+                return; // keep the class, no change
+            }
+
+            // Remove 'peerj1-clicked' class from all <p> tags
+            paragraphs.forEach((p) => {
+                p.classList.remove("peerj1-clicked");
+            });
+
+            // Add the class to the clicked element
+            element.classList.add("peerj1-clicked");
+        };
+    </script>
+
+    <!-- Review Statics graph -->
+
+
+    <script>
+        const margin = { top: 40, right: 20, bottom: 70, left: 60 };
+        const height = 300 - margin.top - margin.bottom;
+
+        const data = [
+            { label: "24hr", "First Proof": 60, "Revised": 90 },
+            { label: "48hr", "First Proof": 50, "Revised": 70 },
+            { label: "72hr", "First Proof": 70, "Revised": 100 },
+            { label: "96hr", "First Proof": 150, "Revised": 100 },
+            { label: "120hr", "First Proof": 70, "Revised": 150 }
+        ];
+
+        const keys = Object.keys(data[0]).filter(d => d !== "label");
+        const barsPerGroup = keys.length;
+
+        const fixedBarWidth = 15;
+        const fixedBarPadding = 5; // between bars in group
+        const minimalGroupPadding = 20; // minimal space between groups
+
+        function drawChart() {
+            d3.select("#chart-container").select("svg").remove();
+
+            const containerWidth = document.getElementById("chart-container").clientWidth;
+
+            const endPadding = 40;  // <-- extra empty space at end of chart
+
+            // Calculate fixed width of one group (bars + bar paddings)
+            const groupBarWidth = barsPerGroup * fixedBarWidth + (barsPerGroup - 1) * fixedBarPadding;
+
+            // Minimal total width including minimal gaps and margins
+            const minimalTotalWidth = margin.left + margin.right +
+                data.length * groupBarWidth +
+                (data.length - 1) * minimalGroupPadding;
+
+            // Calculate extra space, now subtract endPadding as reserved space at right
+            const extraSpace = containerWidth - minimalTotalWidth - endPadding;
+
+            // Gap between groups including extra space distributed
+            const groupGap = minimalGroupPadding + (extraSpace > 0 ? extraSpace / (data.length - 1) : 0);
+
+            // Final svg width = container width (no horizontal scroll)
+            const svgWidth = containerWidth;
+
+            const svg = d3.select("#chart-container")
+                .append("svg")
+                .attr("width", svgWidth)
+                .attr("height", height + margin.top + margin.bottom);
+
+            const g = svg.append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Draw groups with an extra translation for the endPadding — groups stay the same but chart ends early by endPadding
+            groups = g.selectAll("g.layer")
+                .data(data)
+                .join("g")
+                .attr("class", "layer")
+                .attr("transform", (d, i) => {
+                    // X position per group
+                    const x = i * (groupBarWidth + groupGap);
+                    return `translate(${x},0)`;
+                });
+
+            // Y scale
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d3.max(keys, key => d[key]))])
+                .nice()
+                .range([height, 0]);
+
+            // Color scale
+            const color = d3.scaleOrdinal()
+                .domain(keys)
+                .range(["#3771F2", "#EF4444"]);
+
+            // Draw bars inside groups
+            groups.selectAll("rect")
+                .data(d => keys.map(key => ({ key, value: d[key] })))
+                .join("rect")
+                .attr("x", (d, i) => i * (fixedBarWidth + fixedBarPadding))
+                .attr("y", d => y(d.value))
+                .attr("width", fixedBarWidth)
+                .attr("height", d => height - y(d.value))
+                .attr("fill", d => color(d.key));
+
+            // X Axis labels under each group
+            g.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(g => {
+                    data.forEach((d, i) => {
+                        g.append("text")
+                            .attr("x", i * (groupBarWidth + groupGap) + groupBarWidth / 2)
+                            .attr("y", 30)
+                            .attr("text-anchor", "middle")
+                            .style("font-size", "14px")
+                            .style("font-weight", "400")
+                            .style("fill", "#33312F")
+                            .text(d.label);
+                    });
+                    g.select(".domain").remove();
+                    g.selectAll(".tick").remove();
+                });
+
+            // Y Axis
+            const yAxis = d3.axisLeft(y).ticks(5);
+            const yAxisGroup = g.append("g").call(yAxis);
+            yAxisGroup.selectAll(".tick line").remove();
+            yAxisGroup.select(".domain").remove();
+
+            yAxisGroup.selectAll("text")
+                .attr("dx", "-1em")
+                .style("font-size", "14px")
+                .style("font-weight", "400")
+                .style("fill", "#33312F");
+
+            // Horizontal dashed grid lines
+            g.append("g")
+                .attr("class", "grid")
+                .call(d3.axisLeft(y)
+                    .ticks(5)
+                    .tickSize(-svgWidth + margin.left + margin.right)
+                    .tickFormat("")
+                )
+                .call(g => g.selectAll(".tick line")
+                    .attr("stroke", "#999")
+                    .attr("stroke-dasharray", "5,5")
+                )
+                .call(g => g.select(".domain").remove());
+
+            // Legend
+            // const legend = svg.append("g")
+            //   .attr("transform", `translate(${margin.left},${height + margin.top + 50})`);
+
+            // keys.forEach((key, i) => {
+            //   legend.append("rect")
+            //     .attr("x", i * 150)
+            //     .attr("width", 20)
+            //     .attr("height", 20)
+            //     .attr("fill", color(key));
+
+            //   legend.append("text")
+            //     .attr("x", i * 150 + 25)
+            //     .attr("y", 15)
+            //     .text(key)
+            //     .style("font-size", "16px")
+            //     .style("font-weight", "600")
+            //     .style("fill", "#000");
+            // });
+        }
+
+        drawChart();
+        window.addEventListener("resize", drawChart);
+    </script>
+</body>
+
+</html>

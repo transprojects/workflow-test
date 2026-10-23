@@ -1,0 +1,15 @@
+[25-09-2023 17:12:36] LINUX --> 171.79.56.165 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[25-09-2023 17:14:54] LINUX --> 171.79.56.165 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[25-09-2023 17:15:07] LINUX --> 171.79.56.165 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[26-09-2023 12:34:08] FINAL DELIVERY --> LINUX --> 157.46.85.44 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[08-10-2023 08:55:00] FINAL DELIVERY --> LINUX --> 59.92.87.68 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[12-10-2023 00:39:20] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 18:46:05] FINAL DELIVERY --> LINUX --> 77.241.136.67 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[18-10-2023 19:32:51] FINAL DELIVERY --> LINUX --> 77.241.136.44 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[24-10-2023 18:23:34] FINAL DELIVERY --> LINUX --> 77.241.136.41 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[24-10-2023 18:37:11] FINAL CORRECTIONS   --> LINUX --> 77.241.136.41 --> PDF attached for artilce in linux server --> Success
+[24-10-2023 18:37:11] FINAL CORRECTIONS   --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 18:37:11] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 18:37:35] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.41 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-MATH/Vol00000/EJ-MATH_223/REV4/upload completedEmail sent successfully. --> Success
+[27-10-2023 22:30:03] FINAL DELIVERY --> LINUX --> 77.241.136.111 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[27-10-2023 22:43:04] FINAL DELIVERY --> LINUX --> 77.241.136.111 --> PUBLISHED --> published by Ivanna

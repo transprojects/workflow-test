@@ -1,0 +1,4 @@
+[26-04-2024 13:17:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ RE_ _TSP_CMC_48208_ - Proof submitted for your review.msg --> Success
+[26-04-2024 13:18:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_48208_v2.pdf --> Success
+[06-06-2024 13:10:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_48208_pdf revised.msg --> Success
+[06-06-2024 13:10:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_48208.pdf revised.pdf --> Success

@@ -1,0 +1,2 @@
+[01-07-2024 15:56:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JRM_52669 really urgent.msg --> Success
+[01-07-2024 15:56:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JRM_52669.pdf --> Success

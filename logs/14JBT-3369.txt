@@ -1,0 +1,10 @@
+[09-08-2024 11:31:09] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Graphical_Abstract_24_June_2024.jpg --> Success
+[09-08-2024 11:31:10] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Editage.Plagiarism.Check_Report_05_Jun_24.pdf --> Success
+[09-08-2024 11:31:10] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Graphical_Abstract_24_June_2024.png --> Success
+[09-08-2024 11:31:10] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Graphical_Abstract_24_June_2024.pdf --> Success
+[09-08-2024 11:31:11] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Graphical_Abstract_24_June_2024.tif --> Success
+[09-08-2024 11:31:11] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBT copyright transfer form--- blank file.PDF --> Success
+[09-08-2024 11:31:11] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> receipt to journal.pdf --> Success
+[09-08-2024 11:31:12] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Plagiarism_check (3).pdf --> Success
+[09-08-2024 11:31:12] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Required Files of accepted Manuscript of JBT-2024-0062_R1 for Journal of Biomaterials and Tissue Engineering.msg --> Success
+[09-08-2024 11:31:13] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 1717849435415-Amalgam_Review_bio_readyfigsaddedMay25.edited.docx --> Success

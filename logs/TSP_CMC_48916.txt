@@ -1,0 +1,4 @@
+[14-05-2024 13:54:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ Fw_ _TSP_CMC_48916_ - Proof submitted for your review.msg --> Success
+[14-05-2024 13:54:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 48916 Clarifications.docx --> Success
+[14-05-2024 13:54:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Revised Manuscript 48916 (Final. 05-08-2024).pdf --> Success
+[14-05-2024 13:54:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Original TSP_CMC_48916.pdf --> Success

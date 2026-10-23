@@ -1,0 +1,25 @@
+[27-08-2024 16:31:52] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> 3 Papers- Publication fees confirmation.jpg --> Success
+[27-08-2024 16:31:53] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Copyright Transfer Manuscript 2.jpeg --> Success
+[27-08-2024 16:31:53] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Graphical Abstract Manuscript 2.jpg --> Success
+[27-08-2024 16:31:53] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Manuscript 2.docx --> Success
+[27-08-2024 16:31:53] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 1 Manuscript 2.pdf --> Success
+[27-08-2024 16:31:54] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 2 Manuscript 2.pdf --> Success
+[27-08-2024 16:31:54] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 3 Manuscript 2.pdf --> Success
+[27-08-2024 16:31:54] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 4 Manuscript 2.pdf --> Success
+[27-08-2024 16:31:54] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 5 Manuscript 2.pdf --> Success
+[27-08-2024 16:31:55] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Thumbs.db --> Success
+[27-08-2024 16:31:55] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> ~$nuscript 2.docx --> Success
+[27-08-2024 16:32:32] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> 3 Papers- Publication fees confirmation.jpg --> Success
+[27-08-2024 16:32:32] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Copyright Transfer Manuscript 2.jpeg --> Success
+[27-08-2024 16:32:32] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Graphical Abstract Manuscript 2.jpg --> Success
+[27-08-2024 16:32:32] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Manuscript 2.docx --> Success
+[27-08-2024 16:32:33] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 1 Manuscript 2.pdf --> Success
+[27-08-2024 16:32:33] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 2 Manuscript 2.pdf --> Success
+[27-08-2024 16:32:33] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 3 Manuscript 2.pdf --> Success
+[27-08-2024 16:32:33] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 4 Manuscript 2.pdf --> Success
+[27-08-2024 16:32:34] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism-Report 5 Manuscript 2.pdf --> Success
+[27-08-2024 16:32:34] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Thumbs.db --> Success
+[27-08-2024 16:32:34] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> ~$nuscript 2.docx --> Success
+[27-08-2024 16:33:12] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> 3 Papers- Publication fees confirmation.jpg --> Success
+[27-08-2024 16:33:13] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> 4732-Dr. Mazen-2.zip --> Success
+[29-08-2024 10:50:49] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ SAM -- Nanoscale Heat Control___ _16SAM-4732_ - Proof.msg --> Success

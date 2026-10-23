@@ -1,0 +1,2 @@
+[13-06-2024 12:16:16] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_IJMHP_52309_ - Proof submitted for your review.msg --> Success
+[13-06-2024 12:16:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IJMHP_52309(1).pdf --> Success

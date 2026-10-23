@@ -1,0 +1,3 @@
+[11-07-2024 10:41:04] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Ahmad Umar sent you Accepted SAM Ms_ Kindly ack_ via WeTransfer.msg --> Success
+[11-07-2024 10:41:06] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> wetransfer_accepted-sam-ms-kindly-ack_2024-07-10_0002.zip --> Success
+[24-07-2024 10:12:16] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ SAM -- Assessment of Surface Roughness___ _16SAM-4729_ - Proof.msg --> Success

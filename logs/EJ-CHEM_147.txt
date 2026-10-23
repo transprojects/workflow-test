@@ -1,0 +1,6 @@
+[03-10-2023 22:50:25] FP --> LINUX --> 77.241.136.189 --> basic information updated --> Success
+[03-10-2023 22:50:40] FP --> LINUX --> 77.241.136.189 --> Files uploaded --> Manuscript Revised New.doc --> Success
+[03-10-2023 22:50:53] FP --> LINUX --> 77.241.136.189 --> zip created in linux server --> Success
+[03-10-2023 22:50:53] FP --> LINUX --> 77.241.136.189 --> zip file size updated in read me txt file --> Success
+[03-10-2023 22:50:53] FP --> LINUX --> 77.241.136.189 --> Curl function initiated  --> Success
+[03-10-2023 22:51:07] FP --> LINUX --> 77.241.136.189 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success

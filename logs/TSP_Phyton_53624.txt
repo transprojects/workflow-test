@@ -1,0 +1,2 @@
+[28-06-2024 15:14:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_53624.pdf --> Success
+[28-06-2024 15:14:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_53624 author.pdf --> Success

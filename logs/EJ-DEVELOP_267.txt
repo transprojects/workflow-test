@@ -1,0 +1,10 @@
+[03-10-2023 17:31:58] FINAL DELIVERY --> LINUX --> 106.195.37.62 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[04-10-2023 19:15:44] FINAL DELIVERY --> LINUX --> 88.255.99.18 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[04-10-2023 19:19:58] FINAL DELIVERY --> LINUX --> 77.241.128.161 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[04-10-2023 19:55:48] FINAL CORRECTIONS   --> LINUX --> 88.255.99.18 --> PDF attached for artilce in linux server --> Success
+[04-10-2023 19:55:48] FINAL CORRECTIONS   --> LINUX --> 88.255.99.18 --> zip created in linux server --> Success
+[04-10-2023 19:55:48] FINAL CORRECTIONS ".$stage." --> LINUX --> 88.255.99.18 --> Curl function initiated  --> Success
+[04-10-2023 19:56:01] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 88.255.99.18 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-DEVELOP/Vol00000/EJ-DEVELOP_267/REV3/upload completedEmail sent successfully. --> Success
+[05-10-2023 11:10:44] FINAL DELIVERY --> LINUX --> 106.195.36.22 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[06-10-2023 17:02:13] FINAL DELIVERY --> LINUX --> 159.146.57.83 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[06-10-2023 17:26:24] FINAL DELIVERY --> LINUX --> 159.146.57.83 --> PUBLISHED --> published by Hande

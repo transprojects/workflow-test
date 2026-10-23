@@ -1,0 +1,3 @@
+[27-08-2024 16:35:50] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> 3 Papers- Publication fees confirmation.jpg --> Success
+[27-08-2024 16:35:51] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> 4733-Dr. Mazen-3.zip --> Success
+[02-09-2024 17:29:52] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ SAM - Optical Properties and Sensing Characteristics of___ _16SAM-4733_ - Proof.msg --> Success

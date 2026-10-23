@@ -1,0 +1,11 @@
+[10-07-2024 17:38:01] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[10-07-2024 17:38:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec new file uploaded.msg --> Success
+[10-07-2024 17:38:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0150_Oikawa.zip --> Success
+[18-07-2024 11:25:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for revision_ Re_ MassSpec-A0150_Oikawa posted.msg --> Success
+[18-07-2024 11:26:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0150_Oikawa_1_checked.zip --> Success
+[30-07-2024 10:09:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MS request for J-STAGE data.msg --> Success
+[30-07-2024 10:10:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0150_Oikawa_1-2_authorchecked.pdf --> Success
+[31-07-2024 18:06:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MS request for J-STAGE data.msg --> Success
+[31-07-2024 18:06:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0150_Oikawa_1-2_authorchecked.pdf --> Success
+[02-08-2024 12:29:14] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ PAP files  Posted_ MassSpec-A0150_Oikawa.msg --> Success
+[02-08-2024 12:32:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> A0150_supplementalfigure.pdf --> Success

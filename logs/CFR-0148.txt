@@ -1,0 +1,2 @@
+[03-05-2024 23:29:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ CFR-0148 - author corrections on the ftp.msg --> Success
+[03-05-2024 23:31:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CFR-0148_CX3.pdf --> Success

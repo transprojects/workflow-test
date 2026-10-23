@@ -1,0 +1,14 @@
+[13-05-2024 14:42:24] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[13-05-2024 14:43:33] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET new files uploaded.msg --> Success
+[13-05-2024 14:43:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table (1).xlsx --> Success
+[13-05-2024 14:43:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table (2).xlsx --> Success
+[13-05-2024 14:43:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table (3).xlsx --> Success
+[13-05-2024 14:43:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[13-05-2024 14:43:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ~$Refs.docx --> Success
+[13-05-2024 14:43:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1.jpeg --> Success
+[27-05-2024 12:19:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[27-05-2024 12:20:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0007_Ishihara_1_checked.pdf --> Success
+[03-06-2024 11:53:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for J-STAGE.msg --> Success
+[03-06-2024 11:54:55] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0007_Ishihara_1-2_authorchecked.pdf --> Success
+[05-06-2024 10:55:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ JNET request for J-STAGE.msg --> Success
+[05-06-2024 10:57:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0007_Ishihara_2_checked.pdf --> Success

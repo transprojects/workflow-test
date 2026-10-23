@@ -1,0 +1,2 @@
+[28-06-2024 17:34:13] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[28-06-2024 17:34:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JON Unpublished Paper List.xlsx --> Success

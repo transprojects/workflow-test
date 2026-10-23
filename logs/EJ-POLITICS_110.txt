@@ -1,0 +1,38 @@
+[25-09-2023 23:34:36] LINUX --> 88.255.99.20 --> basic information updated --> Success
+[25-09-2023 23:34:45] LINUX --> 88.255.99.20 --> zip created in linux server --> Success
+[25-09-2023 23:34:45] LINUX --> 88.255.99.20 --> zip file size updated in read me txt file --> Success
+[25-09-2023 23:34:45] LINUX --> 88.255.99.20 --> Curl function initiated  --> Success
+[25-09-2023 23:34:54] LINUX --> 88.255.99.20 --> Email sent successfully for file moved to workflow. --> Success
+[28-09-2023 11:21:06] AUTHOR SUBMISSION --> LINUX --> 106.195.40.34 --> FP files from transforma downloaded by TRANSFORMA --> Success
+[28-09-2023 11:21:12] AUTHOR SUBMISSION --> LINUX --> 106.195.40.34 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[01-10-2023 17:36:57] AUTHOR SUBMISSION --> LINUX --> 176.55.129.74 --> Proof zip files from author downloaded by Hande --> Success
+[01-10-2023 18:00:07] AUTHOR SUBMISSION REV1  --> LINUX --> 176.55.129.74 --> Files uploaded --> ejpolitics-110-corrections-2023-10-01.docx --> Success
+[01-10-2023 18:00:08] AUTHOR SUBMISSION REV1  --> LINUX --> 176.55.129.74 --> zip created in linux server --> Success
+[01-10-2023 18:00:08] AUTHOR SUBMISSION REV1 --> LINUX --> 176.55.129.74 --> Curl function initiated  --> Success
+[01-10-2023 18:00:16] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 176.55.129.74 --> EJ-POLITICS_110.zipEmail sent successfully. --> Success
+[04-10-2023 19:07:03] PRODUCTION REIEW --> LINUX --> 88.255.99.18 --> REVISESED PROOF downloaded by Hande --> Success
+[04-10-2023 19:15:08] META FORM  --> LINUX --> 88.255.99.18 --> Files uploaded --> EJ-POLITICS_110+HS.pdf --> Success
+[04-10-2023 19:15:11] META FORM --> LINUX --> 88.255.99.18 --> Correction status updated & form submitted --> Success
+[04-10-2023 19:15:11] META FORM --> LINUX --> 88.255.99.18 --> PDF files exist in the folder --> Success
+[04-10-2023 19:15:11] META FORM --> LINUX --> 88.255.99.18 --> zip created in linux server --> Success
+[04-10-2023 19:15:11] META FORM --> LINUX --> 88.255.99.18 --> Curl function initiated  --> Success
+[04-10-2023 19:15:25] META FORM --> LINUX --> 88.255.99.18 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24480'Email sent successfully. --> Success
+[06-10-2023 12:06:42] FINAL DELIVERY --> LINUX --> 223.187.125.91 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[06-10-2023 16:58:43] FINAL DELIVERY --> LINUX --> 159.146.57.83 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[08-10-2023 08:54:58] FINAL DELIVERY --> LINUX --> 59.92.87.68 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[09-10-2023 16:57:58] FINAL DELIVERY --> LINUX --> 159.146.57.83 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[09-10-2023 17:00:26] FINAL CORRECTIONS   --> LINUX --> 159.146.57.83 --> PDF attached for artilce in linux server --> Success
+[09-10-2023 17:00:26] FINAL CORRECTIONS   --> LINUX --> 159.146.57.83 --> zip created in linux server --> Success
+[09-10-2023 17:00:26] FINAL CORRECTIONS ".$stage." --> LINUX --> 159.146.57.83 --> Curl function initiated  --> Success
+[09-10-2023 17:00:45] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 159.146.57.83 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-POLITICS/Vol00000/EJ-POLITICS_110/REV3/upload completedEmail sent successfully. --> Success
+[11-10-2023 21:52:07] FINAL DELIVERY --> LINUX --> 159.146.75.221 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[11-10-2023 21:55:16] FINAL CORRECTIONS   --> LINUX --> 159.146.75.221 --> PDF attached for artilce in linux server --> Success
+[11-10-2023 21:55:16] FINAL CORRECTIONS   --> LINUX --> 159.146.75.221 --> zip created in linux server --> Success
+[11-10-2023 21:55:16] FINAL CORRECTIONS ".$stage." --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[11-10-2023 21:55:35] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 159.146.75.221 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-POLITICS/Vol00000/EJ-POLITICS_110/REV4/upload completedEmail sent successfully. --> Success
+[12-10-2023 17:26:59] FINAL DELIVERY --> LINUX --> 159.146.75.221 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[12-10-2023 17:38:06] FINAL DELIVERY --> LINUX --> 159.146.75.221 --> PUBLISHED --> published by Hande
+[19-10-2023 17:34:14] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[19-10-2023 17:34:16] FINAL DELIVERY --> LINUX --> 176.235.75.4 --> FP files from transforma downloaded by  --> Failure
+[19-10-2023 18:18:50] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[19-10-2023 18:29:54] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> PUBLISHED --> published by Hande

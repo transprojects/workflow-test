@@ -1,0 +1,7 @@
+[21-08-2024 12:05:22] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> ManuscriptV2.1 (1).doc --> Success
+[21-08-2024 12:05:23] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Fwd_ Paper Publication in JBMBE- Invoice(JBMBE-2024-0054).msg --> Success
+[21-08-2024 12:05:23] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Copyright (1).pdf --> Success
+[21-08-2024 12:05:24] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> ManuscriptV2.1 (1).doc --> Success
+[21-08-2024 12:05:25] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> FW_ Journal of Biobased Materials and Bioenergy - Decision on Manuscript ID JBMBE-2023-0054_R1.msg --> Success
+[21-08-2024 12:05:25] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Plagirisam Report.pdf --> Success
+[23-08-2024 18:11:18] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ MEX -- Synergetic effect of tribological___ _14MEX-2728_ - Proof.msg --> Success

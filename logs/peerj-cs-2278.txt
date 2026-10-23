@@ -1,0 +1,2 @@
+[13-09-2024 09:45:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2278).msg --> Success
+[01-10-2024 10:02:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2278).msg --> Success

@@ -1,0 +1,1 @@
+[12-08-2024 14:32:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_EE_41441 urgent.zip --> Success

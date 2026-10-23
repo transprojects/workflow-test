@@ -1,0 +1,5 @@
+[23-07-2024 14:21:03] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 14:21:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IJMHP_49077.docx --> Success
+[13-08-2024 12:27:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IJMHP_49077.pdf --> Success
+[28-09-2024 15:02:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IJMHP_49077.pdf --> Success
+[28-09-2024 15:03:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

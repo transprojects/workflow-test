@@ -1,0 +1,6 @@
+[24-10-2023 17:44:14] FP --> LINUX --> 77.241.136.41 --> basic information updated --> Success
+[24-10-2023 17:44:21] FP --> LINUX --> 77.241.136.41 --> Files uploaded --> ejece_564.docx --> Success
+[24-10-2023 17:44:22] FP --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 17:44:22] FP --> LINUX --> 77.241.136.41 --> zip file size updated in read me txt file --> Success
+[24-10-2023 17:44:22] FP --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 17:44:33] FP --> LINUX --> 77.241.136.41 --> Email sent successfully for file moved to workflow. --> Success

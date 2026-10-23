@@ -1,0 +1,18 @@
+[01-10-2023 18:54:53] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:54:58] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejmed_1850.docx --> Success
+[01-10-2023 18:54:59] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:54:59] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:54:59] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:55:07] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[05-10-2023 20:12:03] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:12:22] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[06-10-2023 22:04:19] PRODUCTION REIEW --> LINUX --> 59.92.87.210 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[09-10-2023 17:23:40] PRODUCTION REIEW --> LINUX --> 77.241.128.153 --> REVISESED PROOF downloaded by Ivanna --> Success
+[09-10-2023 17:28:45] META FORM  --> LINUX --> 77.241.128.153 --> Files uploaded --> EJ-MED_1850.pdf --> Success
+[09-10-2023 17:28:57] META FORM --> LINUX --> 77.241.128.153 --> Correction status updated & form submitted --> Success
+[09-10-2023 17:28:57] META FORM --> LINUX --> 77.241.128.153 --> PDF files exist in the folder --> Success
+[09-10-2023 17:28:57] META FORM --> LINUX --> 77.241.128.153 --> zip created in linux server --> Success
+[09-10-2023 17:28:57] META FORM --> LINUX --> 77.241.128.153 --> Curl function initiated  --> Success
+[09-10-2023 17:29:08] META FORM --> LINUX --> 77.241.128.153 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24647'Email sent successfully. --> Success
+[11-10-2023 19:56:23] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 20:03:01] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> PUBLISHED --> published by Ivanna

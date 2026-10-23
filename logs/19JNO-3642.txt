@@ -1,0 +1,3 @@
+[02-07-2024 16:08:54] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> Ahmad Umar sent you Accepted JNO Ms_ Kindly ack_ via WeTransfer.msg --> Success
+[02-07-2024 16:08:55] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> manuscriptidjno20240057paymentrecordsarticlemodif.zip --> Success
+[05-07-2024 10:04:56] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_JNO -- A Novel Switch-Coupled Inductor___ _19JNO-3642_ - Proof.msg --> Success

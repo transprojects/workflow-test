@@ -1,0 +1,2 @@
+[04-10-2024 09:44:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Updates to _TSP_OR_43948_.msg --> Success
+[04-10-2024 09:44:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_43948.zip --> Success

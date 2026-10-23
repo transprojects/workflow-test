@@ -1,0 +1,91 @@
+
+
+Program Run at: 2025-12-20 09:33:42.057910
+=========================================
+
+Error: ⚠ Error occur in downloading file JPA/TSP_JPA_71932/REV2/client-files/TSP_JPA_71932.zip to J:\JOURNAL\downloads\JOURNALS\TSP\JPA\Vol00000\TSP_JPA_71932\REV2\TSP_JPA_71932.zip for article ID TSP_JPA_71932 local variable 'messages' referenced before assignment
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 09:33:45.416697
+=========================================
+
+Error: ⚠ Error occur in downloading file JPA/TSP_JPA_71932/REV2/client-files/TSP_JPA_71932.zip to J:\JOURNAL\downloads\JOURNALS\TSP\JPA\Vol00000\TSP_JPA_71932\REV2\TSP_JPA_71932.zip for article ID TSP_JPA_71932 local variable 'messages' referenced before assignment
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 09:53:42.986356
+=========================================
+
+Error: ⚠ Folder doesnot exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 09:53:53.398769
+=========================================
+
+Error: ⚠ Folder doesnot exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 10:34:41.831459
+=========================================
+
+Error: ⚠ Folder doesnot exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 10:34:52.715107
+=========================================
+
+Error: ⚠ Folder doesnot exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 10:36:14.710478
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 10:36:17.743366
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 10:36:50.381329
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 10:36:56.864261
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. JPA/TSP_JPA_71932/REV2/client-files
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-20 10:41:56.921843
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/JPA/TSP_JPA_71932/REV2/client-files/TSP_JPA_71932.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

@@ -1,0 +1,2 @@
+[19-08-2024 12:50:14] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR-32-9 issue draft.msg --> Success
+[19-08-2024 12:50:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR-32-9.zip --> Success

@@ -1,0 +1,731 @@
+<?php include "includes/includes.php";
+include ('includes/paginate.php'); 
+
+
+// Fetch filters
+$filterCustomer = $_REQUEST['customer'] ?? '';
+$filterJournal  = $_REQUEST['journal'] ?? '';
+$filterStage    = $_REQUEST['stage'] ?? '';
+$filterFromDate = $_REQUEST['from_date'] ?? '';
+$filterToDate   = $_REQUEST['to_date'] ?? '';
+$filterMonth    = $_REQUEST['mfrom_dt'] ?? '';
+$dateWise       = $_REQUEST['date_wise'] ?? '';
+
+// Build WHERE conditions
+$where = [];
+
+// Customer
+if ($filterCustomer && $filterCustomer != 'all') {
+    $where[] = "cust_id = ".intval($filterCustomer);
+}
+
+if ($filterJournal && $filterJournal != 'all') {
+    $where[] = "j_id = ".intval($filterJournal);
+}
+// Stage
+if ($filterStage) {
+    if ($filterStage == 'FP') {
+        $where[] = "stage = 'FP'";
+    } else {
+        $where[] = "stage LIKE '".$db->real_escape_string($filterStage)."%' ";
+    }
+}
+
+// Convert day-wise dates
+if ($filterFromDate && $filterToDate) {
+
+    $fromParts = explode('-', $filterFromDate);
+    $toParts   = explode('-', $filterToDate);
+
+    $from = "{$fromParts[2]}-{$fromParts[1]}-{$fromParts[0]}";
+    $to   = "{$toParts[2]}-{$toParts[1]}-{$toParts[0]}";
+
+    $where[] = "DATE(
+        COALESCE(
+            CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+            recv_dt
+        )
+    ) BETWEEN '{$from}' AND '{$to}'";
+}
+
+// Month filter
+if ($dateWise === "m" && !empty($filterMonth)) {
+
+    $monthParts = explode('-', $filterMonth);
+    $month = intval($monthParts[0]);
+    $year  = intval($monthParts[1]);
+
+    $where[] = "
+        MONTH(
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = {$month}
+
+        AND 
+
+        YEAR(
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = {$year}
+    ";
+}
+
+$whereSql = $where ? "WHERE " . implode(" AND ", $where) : "";
+
+
+$baseQuery = "
+
+(
+    /* ARCHIVE DATA (Priority) */
+    SELECT 
+        d.a_id,
+        d.stage,
+        d.sent_date,
+        i.recv_dt,
+        r.received_date,
+        c.id AS cust_id,
+        c.cust_name,
+        j.j_id,
+        j.j_code
+    FROM workflow_archive.inw_dispatch_history d
+    JOIN workflow_archive.inw_inward_dtl i 
+        ON d.a_id = i.id
+    LEFT JOIN workflow_archive.inw_revisions_dtl r 
+        ON d.a_id = r.inw_id
+    JOIN workflow_archive.adm_customer_master c 
+        ON i.cust_id = c.id
+    JOIN workflow_archive.adm_journals j 
+        ON i.j_id = j.j_id
+
+    UNION ALL
+
+    /* LIVE DATA (ONLY IF NOT IN ARCHIVE) */
+    SELECT 
+        d.a_id,
+        d.stage,
+        d.sent_date,
+        i.recv_dt,
+        r.received_date,
+        c.id AS cust_id,
+        c.cust_name,
+        j.j_id,
+        j.j_code
+    FROM workflow.inw_dispatch_history d
+    JOIN workflow.inw_inward_dtl i 
+        ON d.a_id = i.id
+    LEFT JOIN workflow.inw_revisions_dtl r 
+        ON d.a_id = r.inw_id
+    JOIN workflow.adm_customer_master c 
+        ON i.cust_id = c.id
+    JOIN workflow.adm_journals j 
+        ON i.j_id = j.j_id
+
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM workflow_archive.inw_dispatch_history ad
+        WHERE ad.a_id = d.a_id
+    )
+
+) AS dispatch_data
+";
+$sql = "
+
+SELECT 
+    cust_name,
+    j_code,
+
+    CASE 
+        WHEN stage = 'FP' THEN 'First Proof'
+        WHEN stage LIKE 'REV%' THEN stage
+        WHEN stage LIKE 'FIN%' THEN stage
+        WHEN stage LIKE 'PMC%' THEN stage
+        WHEN stage LIKE 'DRAFT%' THEN stage
+        ELSE stage
+    END AS stage_name,
+
+    CASE
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) BETWEEN 0 AND 1 THEN 'Day 1'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 2 THEN 'Day 2'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 3 THEN 'Day 3'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 4 THEN 'Day 4'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 5 THEN 'Day 5'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 6 THEN 'Day 6'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 7 THEN 'Day 7'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 8 THEN 'Day 8'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 9 THEN 'Day 9'
+
+        WHEN DATEDIFF(
+            sent_date,
+            COALESCE(
+                CASE WHEN stage='FP' THEN recv_dt ELSE received_date END,
+                recv_dt
+            )
+        ) = 10 THEN 'Day 10'
+
+        ELSE '>10 Days'
+    END AS dispatch_days_bucket,
+
+    COUNT(*) AS dispatch_count
+
+FROM $baseQuery
+
+$whereSql
+
+GROUP BY 
+    cust_name,
+    j_code,
+    stage_name,
+    dispatch_days_bucket
+
+ORDER BY 
+    cust_name,
+    j_code,
+    stage_name
+
+";
+
+$result = $db->query($sql);
+if (!$result) die("SQL Error: " . $db->error);
+
+// Group data
+$data = [];
+while ($row = $result->fetch_assoc()) {
+    $stage    = $row['stage_name'];
+    $customer = $row['cust_name'];
+    $journal  = $row['j_code'];
+    $bucket   = $row['dispatch_days_bucket'];
+    $count    = $row['dispatch_count'];
+    $data[$stage][$customer][$journal][$bucket] = $count;
+}
+
+$dayBuckets = ['Day 1','Day 2','Day 3','Day 4','Day 5','Day 6','Day 7','Day 8','Day 9','Day 10','>10 Days'];
+
+// Render function
+function renderStageTable($stageGroup, $data, $dayBuckets) {
+    $tableId = strtolower($stageGroup) . "_table";
+    $hasData = false;
+
+    // Check if this stageGroup has any data
+    foreach ($data as $stage => $customers) {
+        if ($stageGroup == 'FP' && $stage == 'First Proof') $hasData = true;
+        if ($stageGroup == 'REV' && strpos($stage, 'REV') === 0) $hasData = true;
+        if ($stageGroup == 'FIN' && strpos($stage, 'FIN') === 0) $hasData = true;
+        if ($stageGroup == 'PMC' && strpos($stage, 'PMC') === 0) $hasData = true;
+        if ($stageGroup == 'DRAFT' && strpos($stage, 'DRAFT') === 0) $hasData = true;
+    }
+
+    if (!$hasData) return;
+
+    echo "<h3 class='mt-5 mb-3 text-primary'>{$stageGroup}</h3>";
+    echo "<table id='{$tableId}' class='table table-bordered table-sticky display nowrap' style='width:100%'>";
+    echo "<thead class='table-dark'><tr><th>Customer</th><th>Journal</th><th>Stage</th>";
+    foreach ($dayBuckets as $bucket) echo "<th>{$bucket}</th>";
+    echo "<th>Total</th></tr></thead><tbody>";
+
+    // Data rows
+    foreach ($data as $stage => $customers) {
+        if ($stageGroup == 'FP' && $stage != 'First Proof') continue;
+        if ($stageGroup == 'REV' && strpos($stage, 'REV') !== 0) continue;
+        if ($stageGroup == 'FIN' && strpos($stage, 'FIN') !== 0) continue;
+        if ($stageGroup == 'PMC' && strpos($stage, 'PMC') !== 0) continue;
+        if ($stageGroup == 'DRAFT' && strpos($stage, 'DRAFT') !== 0) continue;
+
+        foreach ($customers as $cust => $journals) {
+            foreach ($journals as $journal => $buckets) {
+                $rowTotal = 0;
+                echo "<tr><td>{$cust}</td><td>{$journal}</td><td>{$stage}</td>";
+                foreach ($dayBuckets as $bucket) {
+                    $val = $buckets[$bucket] ?? 0;
+                    echo "<td>{$val}</td>";
+                    $rowTotal += $val;
+                }
+                echo "<td>{$rowTotal}</td>";
+                echo "</tr>";
+            }
+        }
+    }
+
+    // Totals row (filtered by stageGroup)
+    $totals = array_fill_keys($dayBuckets, 0);
+    $grandTotal = 0;
+
+    foreach ($data as $stage => $customers) {
+        if ($stageGroup == 'FP' && $stage != 'First Proof') continue;
+        if ($stageGroup == 'REV' && strpos($stage, 'REV') !== 0) continue;
+        if ($stageGroup == 'FIN' && strpos($stage, 'FIN') !== 0) continue;
+        if ($stageGroup == 'PMC' && strpos($stage, 'PMC') !== 0) continue;
+        if ($stageGroup == 'DRAFT' && strpos($stage, 'DRAFT') !== 0) continue;
+
+        foreach ($customers as $cust => $journals) {
+            foreach ($journals as $journal => $buckets) {
+                foreach ($dayBuckets as $bucket) {
+                    $totals[$bucket] += $buckets[$bucket] ?? 0;
+                    $grandTotal += $buckets[$bucket] ?? 0;
+                }
+            }
+        }
+    }
+
+    echo "<tr class='table-secondary fw-bold'><td colspan='3' class='text-end'>Total</td>";
+    foreach ($dayBuckets as $bucket) echo "<td>{$totals[$bucket]}</td>";
+    echo "<td>{$grandTotal}</td>";
+    echo "</tr>";
+
+    echo "</tbody></table><hr>";
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS styles -->
+    <?php include('includes/title.php'); ?>
+    <?php echo styles(); ?>	
+
+
+
+  </head>
+
+  <body>
+    <div class="wholeouter">
+      <!-- Header logo section -->
+     
+
+     <?php include("includes/top-header.php");?>
+	 
+      <!-- Header logo section -->
+      
+      <!-- report section body starts -->
+      <div class="containter-fluid">
+        <div class="container-fluid mt-4">
+          <p class="reportsectionheading ms-4">Delivery Daywise Report</p>
+        </div>
+		<form action="#" id="validation-form" method="post" autocomplete="off">
+        <div class="container d-flex justify-content-center">
+          <div
+            class="col-12 col-sm-8 d-flex justify-content-center flex-column mt-4 monthly1outer"
+          >
+            <div class="d-flex justify-content-center">
+              <div class="radio d-flex col-2 mt-4">
+                <input type="radio"   name="date_wise" <?php if ($_REQUEST['date_wise'] == 'd' || $_REQUEST['date_wise'] != 'm') { ?> checked <?php } ?> id="daywise" value="d" />
+                <label class="ms-2">Day</label>
+              </div>
+              <div class="radio d-flex col-2 mt-4">
+                <input type="radio" name="date_wise" <?php if ($_REQUEST['date_wise'] == 'm') { ?> checked <?php } ?> id="monthwise" value="m" />
+                <label class="ms-2">Month</label>
+              </div>
+            </div>
+            <!-- <div class="container"> -->
+            <div class="row mt-4 m-5">
+              <div class="col-12 col-lg-4">
+                <label class="mb-2">Choose Customer</label>
+                <select class="form-select customer_drop" data-placeholder="Select Customer" name="customer" id="cust_id">
+												    <option value="" <?php if ($filterCustomer == 'all') { ?> selected <?php } ?> >Select All</option>
+
+										  <?php
+										 if($_COOKIE['user_level']=='1')
+										  {
+											$sql_customers = $auth->showCustomerlist();
+
+										  }
+										  else
+										  {
+											$sql_customers = $auth->showCustomerlistbyuser($_COOKIE['cust_id'],$_COOKIE['ocust_id']);
+										  }
+											foreach($sql_customers as $res_customers)
+											{
+												
+									      	if(isset($filterCustomer))
+													{
+										    	?>
+										       <option <?php if ($filterCustomer == $res_customers['id']) { ?> selected <?php } ?> value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
+													<?php
+													}
+													else
+													{
+													?>
+													 <option value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
+													<?php
+													}
+											}
+											?>
+                </select>
+              </div>
+
+              <div class="col-12 col-lg-4">
+                  <label class="mb-2">Choose Journal</label>
+                  <select class="form-select" data-placeholder="Select Journal" name="journal" id="j_id">
+                  <option value="" <?php if ($filterJournal == '') { ?> selected <?php } ?> >Select All</option>
+                    <?php
+											$sql_journals = $auth->showJournallist('0',2);
+											foreach($sql_journals as $res_journals)
+											{
+												
+									      	if(isset($filterJournal))
+													{
+										    	?>
+										       <option <?php if ($filterJournal == $res_journals['j_id']) { ?> selected <?php } ?> value="<?php echo $res_journals['j_id'] ?>"style="font-weight:500;"><?php echo $res_journals['j_code'] ?> </option>
+													<?php
+													}
+													else
+													{
+													?>
+													 <option value="<?php echo $res_journals['j_id'] ?>"style="font-weight:500;"><?php echo $res_journals['j_code'] ?> </option>
+													<?php
+													}
+											}
+											?>
+                </select>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label class="mb-2">Stage</label>
+                  <select class="form-select customer_drop" data-placeholder="Select Stage" name="stage" id="stage">
+                  <option value="" <?php if ($filterStage == '') { ?> selected <?php } ?> >Select All</option>
+                               <?php foreach($project_status_types as $id=>$val){
+                                if(isset($filterStage))
+													{
+										    	?>
+										       <option <?php if ($filterStage== $id) { ?> selected <?php } ?> value="<?php echo $id ?>"style="font-weight:500;"><?php echo $val ?> </option>
+													<?php
+													}
+													else
+													{
+													?>
+													 <option value="<?php echo $id ?>"style="font-weight:500;"><?php echo $val ?> </option>
+													<?php
+													}
+                                   } ?>
+                </select>
+                </div>
+		
+			    <div class="col-12 col-lg-8" id="day_div" style="display:<?php
+                                                                    if ($_REQUEST['date_wise'] == 'd' || $_REQUEST['date_wise'] != 'm') {
+                                                                        echo 'block';
+                                                                    } else {
+                                                                        echo 'none';
+                                                                    }
+                                                                    ?>;">
+                <div class="row">
+              <div class="col-12 col-lg-6">
+                <label class="mb-2">From Date</label>
+                <div class="d-flex">
+                  <input type="text" class="form-control date-picker monthlyinputdate" id="from_date" name="from_date" style="border-color: #dee2e6 !important"  value="<?= htmlspecialchars($filterFromDate) ?>" readonly />
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <label class="mb-2">To Date</label>
+                <div class="d-flex">
+                  <input
+                    type="text" id="to_date" name="to_date" class="form-control monthlyinputdate1" style="border-color: #dee2e6 !important" value="<?= htmlspecialchars($filterToDate) ?>" 
+                  />
+                </div>
+              </div>
+                </div>
+			  </div>
+
+			   <div class="col-12 col-lg-8" id="month_div" style="display:<?php
+                                                                    if ($_REQUEST['date_wise'] == 'm') {
+                                                                        echo 'block';
+                                                                    } else {
+                                                                        echo 'none';
+                                                                    }
+                                                                    ?>;">
+                                                                       
+			<div class="col-12 col-lg-6">
+                <label class="mb-2">Month</label>
+                <div class="d-flex">
+                  <input type="text" id="mfrom_dt" name="mfrom_dt"  placeholder="Select Month"  class="form-control monthlyinputdate2" style="border-color: #dee2e6 !important" value="<?= htmlspecialchars($filterMonth) ?>" />
+                </div>
+              </div>
+                 </div>
+            </div>
+            <!-- </div> -->
+            <div class="col-12 mt-1 mb-4 d-flex justify-content-center">
+			<input type="hidden" name="filter" id="filter" value="1">
+              <button class="resultbtn" type="submit"  name="wgetaction" >Get Result</button>
+              <button class="refreshbtn ms-4">
+               <a href="delivery-report-daywise"> <img src="./assets/images/refresh.svg" /></a>
+              </button>
+            </div>
+          </div>
+        </div>
+	</form>
+
+
+		
+
+        <!-- Table section -->
+		<?php
+		if(isset($_REQUEST['filter']))
+		{
+		?>
+	             <div class="container table-responsive custom-container p-4 " style="box-shadow: 0px 0px 16px 0px rgba(164, 164, 171, 0.25);border-radius: 24px;">
+            <div class="container-fluid table-responsive" style="overflow: auto">
+
+<?php
+renderStageTable('FP', $data, $dayBuckets);
+renderStageTable('REV', $data, $dayBuckets);
+renderStageTable('FIN', $data, $dayBuckets);
+renderStageTable('PMC', $data, $dayBuckets);
+renderStageTable('DRAFT', $data, $dayBuckets);
+?>
+
+   </div>
+            </div>
+			<?php 
+		}
+		?>
+	
+      </div>
+      <!-- Table section ends -->
+      <!-- Footer Section -->
+     
+  
+	
+	 <!-- Footer Section -->
+     <?php echo footer(); ?>
+
+    </div>
+ 
+
+
+
+
+ 
+    
+
+
+
+<!-- Footer Section -->
+<?php echo scripts(); ?>	
+
+<!-- jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
+<!-- jQuery UI (Datepicker) -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
+
+    <!-- Date picker functionality -->
+	
+
+<script>
+<?php
+$tables = ['FP_table','REV_table','FIN_table','PMC_table','DRAFT_table'];
+?>
+<?php foreach ($tables as $tid) { ?>
+//if ($('#<?= $tid ?>').length && ! $.fn.DataTable.isDataTable('#<?= $tid ?>')) {
+    $('#<?= $tid ?>').DataTable({
+        dom: 'Bfrtip',
+        buttons: ['excelHtml5','pdfHtml5','csvHtml5','print'],
+        pageLength: 15,
+        responsive: true
+    });
+//}
+<?php } ?>
+</script>
+
+
+
+
+    <script>
+        $(function () {
+        // var datesForDisable = ["2017-10-14", "2017-10-15", "2017-10-16"];
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
+        var fromdate;
+        $(".monthlyinputdate").datepicker({
+          uiLibrary: "bootstrap5",
+          dateFormat: "dd-mm-yy",
+          autoclose: true,
+         //  minDate: date,
+              onSelect: function (dateText, inst) {
+             fromdate = dateText;
+
+                    $(".monthlyinputdate1").datepicker("option", "minDate", fromdate);
+                }
+        });
+
+        $(".monthlyinputdate1").datepicker({
+          uiLibrary: "bootstrap5",
+          dateFormat: "dd-mm-yy",
+          autoclose: true,
+          todayHighlight: true,
+          // minDate: date, //For disabling date from today
+           onSelect: function (dateText, inst) {
+             todate = dateText;
+                    $(".monthlyinputdate").datepicker("option", "maxDate", todate);
+                }
+        });
+		
+   $(".monthlyinputdate2").datepicker({
+        uiLibrary: "bootstrap5",
+        dateFormat: "mm-yy", // Format to display
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true, // Add this to show the "Done" button
+        beforeShow: function(input, inst) {
+            // Remove the days
+            var datepicker = $(this).datepicker('widget');
+            datepicker.find('.ui-datepicker-calendar').remove();
+        },
+        onClose: function(dateText, inst) {
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1));
+        }
+    });
+      });
+         		// Handle changes in the "countries" select element
+         $(document).ready(function() {
+         
+         $("#cust_id").on("change", function() {
+            var cust_id=$.trim($(this).val());
+         
+         if($(this).val() && $(this).val().indexOf('all') !== -1){
+               // Clear all other selections
+               $('#cust_id').val([]);
+               // Select all options except the "Select All" option
+               $('#cust_id option').not(':first').prop('selected', true);
+           } else {
+               // If any other option is selected, unselect "Select All"
+               if ($(this).val() && $(this).val().length === $('option', this).not(':first').length) {
+                   $('#cust_id option[value=all]').prop('selected', false);
+               }
+           }
+         
+            // Fetch states based on the selected client name and populate the "name" select element
+            $.ajax({
+                url: "get_journal.php",
+                dataType: "json",
+                data: { cust_id:cust_id },
+                success: function(data) {
+                    populateSelecte("j_id",data);
+         
+                }
+            });
+         });
+          function populateSelecte(elementId, data) {
+               var selectElement = $("#" + elementId);
+               selectElement.empty();
+         selectElement.append($("<option>").text("Select All").val("all"));
+         
+               $.each(data, function(index, item) {
+                   selectElement.append($("<option>").text(item.j_code).val(item.j_id));
+               });
+           }
+        
+		 
+		
+            $("#yearwise").click(function () {
+                $("#year_div").show();
+                $("#yfrom_dt").val(<?php echo date('Y');?>);
+                $("#month_div").hide();
+                $("#mfrom_dt").removeAttr('value');
+                $("#day_div").hide();
+                $("#from_dt").removeAttr('value');
+                $("#to_dt").removeAttr('value');				
+            });
+            $("#monthwise").click(function () {
+				$("#month_div").show();
+                $("#year_div").hide();
+				$("#day_div").hide();
+                $("#yfrom_dt").removeAttr('value');
+                $("#from_dt").removeAttr('value');				
+                $("#to_dt").removeAttr('value');				
+				var vals=(date.getMonth()+1)+"-"+date.getFullYear();
+                $("#mfrom_dt").val(vals);
+        
+            });
+            $("#daywise").click(function () {
+                $("#year_div").hide();
+                $("#yfrom_dt").removeAttr('value');
+                $("#month_div").hide();
+                $("#mfrom_dt").removeAttr('value');
+                $("#day_div").show();
+				var vals=date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+				$("#from_dt").attr("value");
+				$("#to_dt").attr("value");
+                $("#from_dt").val(vals);
+                $("#to_dt").val(vals);
+            });
+			
+			 $(".fydatepicker").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years"
+        });
+        $(".mydatepicker").datepicker({
+            format: "mm-yyyy",
+            viewMode: "months",
+            minViewMode: "months"
+        });
+       });
+    </script>

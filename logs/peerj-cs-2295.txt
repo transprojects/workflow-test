@@ -1,0 +1,4 @@
+[27-08-2024 06:46:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2295-corrected-proof.pdf --> Success
+[27-08-2024 06:46:19] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_CS/Vol00000/peerj-cs-2295/REV1//peerj-cs-2295-corrected-proof.pdf --> Failure
+[27-08-2024 06:46:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2295-corrected-proof.pdf --> Success
+[27-08-2024 06:46:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2295).msg --> Success

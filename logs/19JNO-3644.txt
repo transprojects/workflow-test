@@ -1,0 +1,4 @@
+[02-07-2024 16:13:31] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> Ahmad Umar sent you Accepted JNO Ms_ Kindly ack_ via WeTransfer.msg --> Success
+[02-07-2024 16:13:34] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> JNO-2024-0073.zip --> Success
+[09-07-2024 10:09:54] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Galley Proof Review for Journal of Nanoelectronics and Optoelectronics (JNO-2024-0073).msg --> Success
+[09-07-2024 10:10:00] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Galley Proof Review for Journal of Nanoelectronics and Optoelectronics.msg --> Success

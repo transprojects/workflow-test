@@ -1,0 +1,106 @@
+[05-10-2023 20:11:21] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1891.zipEmail sent successfully. --> Success
+[05-10-2023 20:11:57] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-COMPUTE_118.zipEmail sent successfully. --> Success
+[05-10-2023 20:12:32] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1850.zipEmail sent successfully. --> Success
+[05-10-2023 20:13:31] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1896.zipEmail sent successfully. --> Success
+[05-10-2023 20:14:10] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1853.zipEmail sent successfully. --> Success
+[05-10-2023 20:16:47] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1856.zipEmail sent successfully. --> Success
+[05-10-2023 20:17:20] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1892.zipEmail sent successfully. --> Success
+[05-10-2023 20:17:59] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MATH_268.zipEmail sent successfully. --> Success
+[05-10-2023 20:18:33] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1849.zipEmail sent successfully. --> Success
+[05-10-2023 20:19:10] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MED_1911.zipEmail sent successfully. --> Success
+[05-10-2023 20:19:41] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJFOOD_727.zipEmail sent successfully. --> Success
+[05-10-2023 20:22:40] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-MATH_237.zipEmail sent successfully. --> Success
+[06-10-2023 16:58:46] FINAL DELIVERY --> LINUX --> 176.235.75.196 --> FP files from transforma downloaded by  --> Failure
+[17-10-2023 23:24:11] FINAL DELIVERY --> LINUX --> 82.117.119.134 --> FP files from transforma downloaded by  --> Failure
+[18-10-2023 17:53:33] FINAL CORRECTIONS   --> LINUX --> 77.241.136.44 --> PDF attached for artilce in linux server --> Success
+[18-10-2023 17:53:33] FINAL CORRECTIONS   --> LINUX --> 77.241.136.44 --> zip created in linux server --> Success
+[18-10-2023 17:53:33] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.44 --> Curl function initiated  --> Success
+[18-10-2023 17:53:39] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.44 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000///upload completedEmail sent successfully. --> Success
+[20-10-2023 00:26:26] AUTHOR SUBMISSION --> LINUX --> 84.243.4.5 --> Proof zip files from author downloaded by  --> Failure
+[20-10-2023 21:01:12] PRODUCTION REIEW --> LINUX --> 109.228.157.202 --> REVISESED PROOF downloaded by  --> Failure
+[24-10-2023 14:56:02] FINAL CORRECTIONS   --> LINUX --> 77.241.136.41 --> PDF attached for artilce in linux server --> Success
+[24-10-2023 14:56:02] FINAL CORRECTIONS   --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 14:56:02] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 14:56:08] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.41 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000///upload completedEmail sent successfully. --> Success
+[02-12-2023 11:38:14] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-12-01 174524.png --> Success
+[02-12-2023 12:05:57] FP --> LINUX --> ::1 --> basic information updated --> Success
+[02-12-2023 12:19:57] FP --> LINUX --> ::1 --> basic information updated --> Success
+[02-12-2023 12:59:38] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-10-18 114101.png --> Success
+[02-12-2023 12:59:56] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-11-07 182340.png --> Success
+[02-12-2023 13:01:47] FP --> LINUX --> ::1 --> Files removed -->uploads////Screenshot 2023-11-07 182340.png --> Failure
+[02-12-2023 13:01:47] FP --> LINUX --> ::1 --> Files removed -->uploads////Screenshot 2023-10-18 114101.png --> Failure
+[02-12-2023 13:01:51] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-10-31 125142.png --> Success
+[02-12-2023 13:19:44] FP --> LINUX --> ::1 --> zip not created or not existed in linux server --> Failure
+[02-12-2023 13:19:44] FP --> LINUX --> ::1 --> zip file size not updated in read me txt file --> Failure
+[04-12-2023 15:09:52] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-10-18 114206.png --> Success
+[04-12-2023 15:12:05] FP --> LINUX --> ::1 --> Files removed -->uploads////Screenshot 2023-10-18 114206.png --> Failure
+[04-04-2024 12:44:38] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> EJ-TRANSFORMA-TEST_1776.docx --> Success
+[04-04-2024 12:46:30] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> EJ-TRANSFORMA-TEST_1776.docx --> Success
+[04-04-2024 12:50:55] FP --> LINUX --> 10.10.10.80 --> Files removed -->uploads////EJ-TRANSFORMA-TEST_1776.docx --> Failure
+[04-04-2024 12:51:03] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> EJ-TRANSFORMA-TEST_1776.docx --> Success
+[04-04-2024 12:52:50] FP --> LINUX --> 10.10.10.80 --> Files removed -->uploads////EJ-TRANSFORMA-TEST_1776.docx --> Failure
+[04-04-2024 12:53:32] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> EJ-TRANSFORMA-TEST_1776.docx --> Success
+[22-04-2024 11:45:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_IJMHP_48483_ - Proof submitted for your review.msg --> Success
+[22-04-2024 11:45:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IJMHP_48483(1).pdf --> Success
+[22-04-2024 11:51:15] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for J-STAGE data.msg --> Success
+[22-04-2024 11:51:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-OA-24-00026_Inoue_1-2_authorchecked.pdf --> Success
+[22-04-2024 13:22:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR request for revision.msg --> Success
+[22-04-2024 13:22:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR-REF-24-101_1_checked.pdf --> Success
+[22-04-2024 14:05:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-RA-23-00188_Pratomo_1-2_authorchecked.pdf --> Success
+[22-04-2024 14:05:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for J-STAGE data.msg --> Success
+[22-04-2024 18:54:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ RE_ TSP-OR46895-Proof.msg --> Success
+[22-04-2024 18:54:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_46895.pdf --> Success
+[23-04-2024 08:49:34] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 08:52:28] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-17316-corrected-proof.pdf --> Success
+[23-04-2024 08:52:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17316).msg --> Success
+[23-04-2024 08:55:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2007).msg --> Success
+[23-04-2024 09:04:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17273).msg --> Success
+[23-04-2024 09:07:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17268).msg --> Success
+[23-04-2024 09:09:57] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-1987).msg --> Success
+[23-04-2024 09:12:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17216).msg --> Success
+[23-04-2024 09:22:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_CMC_50281_ - Proof submitted for your review.msg --> Success
+[23-04-2024 09:22:52] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_50281.pdf --> Success
+[23-04-2024 10:02:08] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:03:35] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:07:47] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:08:32] FP --> LINUX --> 10.10.10.1 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///////FW_ _peerj_ Forum comment posted (17321).msg --> Failure
+[23-04-2024 10:10:28] FP --> LINUX --> 10.10.10.1 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///////FW_ _peerj_ Forum comment posted (17321).msg --> Failure
+[05-06-2024 07:26:28] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////FW_ _peerj_ Forum comment posted (17502).msg --> Failure
+[07-06-2024 07:39:11] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////FW_ _peerj_ Forum comment posted (17525).msg --> Failure
+[29-06-2024 15:29:18] FP --> LINUX --> 10.10.10.156 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////20JBN10.docx --> Failure
+[10-07-2024 09:50:53] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////JBN-HW-24030201-checking report.pdf --> Failure
+[10-07-2024 09:50:53] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////JBN-HW-24030201-CTA.pdf --> Failure
+[10-07-2024 09:50:54] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////JBN-HW-24030201-Editing Certificate.pdf --> Failure
+[10-07-2024 09:50:54] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////JBN-HW-24030201-payment proof.jpg --> Failure
+[10-07-2024 09:50:55] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////JBN-HW-24030201.doc --> Failure
+[10-07-2024 09:50:56] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Re_RE_ When the coming JBN issue will be online _  It is JBN-HW-24030201.msg --> Failure
+[22-07-2024 06:49:58] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////FW_ _peerj_ Forum comment posted (17822).msg --> Failure
+[06-08-2024 09:31:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Revised article.msg --> Success
+[06-08-2024 09:31:23] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Revised article.msg --> Failure
+[06-08-2024 09:31:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ RE_ TSP_OR-32-9  8_5 - Query.msg --> Success
+[06-08-2024 09:31:31] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_51893 (correction to OR_3220).docx --> Success
+[07-08-2024 12:57:28] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////1. Manuscript.docx --> Failure
+[07-08-2024 12:57:40] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////1. Manuscript.docx --> Failure
+[07-08-2024 12:57:49] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////3. Copyright transfer agreement.jpg --> Failure
+[27-08-2024 16:32:09] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////3 Papers- Publication fees confirmation.jpg --> Failure
+[27-08-2024 16:32:10] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Copyright Transfer Manuscript 2.jpeg --> Failure
+[27-08-2024 16:32:11] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Graphical Abstract Manuscript 2.jpg --> Failure
+[27-08-2024 16:32:11] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Manuscript 2.docx --> Failure
+[27-08-2024 16:32:12] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 1 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:13] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 2 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:13] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 3 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:14] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 4 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:15] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 5 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:15] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Thumbs.db --> Failure
+[27-08-2024 16:32:16] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////~$nuscript 2.docx --> Failure
+[27-08-2024 16:32:38] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////3 Papers- Publication fees confirmation.jpg --> Failure
+[27-08-2024 16:32:38] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Copyright Transfer Manuscript 2.jpeg --> Failure
+[27-08-2024 16:32:39] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Graphical Abstract Manuscript 2.jpg --> Failure
+[27-08-2024 16:32:42] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Manuscript 2.docx --> Failure
+[27-08-2024 16:32:43] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 1 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:43] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 2 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:44] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 3 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:45] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 4 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:45] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Plagiarism-Report 5 Manuscript 2.pdf --> Failure
+[27-08-2024 16:32:46] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////Thumbs.db --> Failure
+[27-08-2024 16:32:46] FP --> LINUX --> 10.10.10.150 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS///Vol00000////~$nuscript 2.docx --> Failure

@@ -1,0 +1,20 @@
+[09-10-2023 17:55:01] FP --> LINUX --> 77.241.128.153 --> basic information updated --> Success
+[09-10-2023 17:55:04] FP --> LINUX --> 77.241.128.153 --> Files uploaded --> EJMED_Nakajima+final.docx --> Success
+[09-10-2023 17:55:05] FP --> LINUX --> 77.241.128.153 --> zip created in linux server --> Success
+[09-10-2023 17:55:05] FP --> LINUX --> 77.241.128.153 --> zip file size updated in read me txt file --> Success
+[09-10-2023 17:55:05] FP --> LINUX --> 77.241.128.153 --> Curl function initiated  --> Success
+[09-10-2023 17:55:14] FP --> LINUX --> 77.241.128.153 --> Email sent successfully for file moved to workflow. --> Success
+[13-10-2023 20:26:47] AUTHOR SUBMISSION --> LINUX --> 77.241.136.67 --> FP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 20:27:13] AUTHOR SUBMISSION --> LINUX --> 77.241.136.67 --> Proof zip files from author downloaded by Ivanna --> Success
+[13-10-2023 20:30:05] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.67 --> Files uploaded --> EJ-MED_1938.pdf --> Success
+[13-10-2023 20:30:08] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 20:30:08] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 20:30:15] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.67 --> EJ-MED_1938.zipEmail sent successfully. --> Success
+[18-10-2023 18:46:52] PRODUCTION REIEW --> LINUX --> 77.241.136.44 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 15:01:13] PRODUCTION REIEW --> LINUX --> 77.241.136.41 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 15:12:54] META FORM  --> LINUX --> 77.241.136.41 --> Files uploaded --> 1938.zip --> Success
+[24-10-2023 15:13:23] META FORM --> LINUX --> 77.241.136.41 --> Correction status updated & form submitted --> Success
+[24-10-2023 15:13:23] META FORM --> LINUX --> 77.241.136.41 --> No PDF files found in the folder --> Failure
+[24-10-2023 15:13:23] META FORM --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 15:13:23] META FORM --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 15:13:36] META FORM --> LINUX --> 77.241.136.41 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24772'Email sent successfully. --> Success

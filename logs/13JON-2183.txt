@@ -1,0 +1,4 @@
+[16-08-2024 11:37:47] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 23-1477-Final Version.docx --> Success
+[16-08-2024 11:37:48] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Plagiarism Report.pdf --> Success
+[16-08-2024 11:37:48] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Signed Copyright Transfer Form.pdf --> Success
+[20-08-2024 17:00:30] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JON -- Framing the Effects of Multiple Slips on___ _13JON-2183_ - Proof.msg --> Success

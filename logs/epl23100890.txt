@@ -1,0 +1,10 @@
+[15-07-2024 10:45:56] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[15-07-2024 10:46:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> fig2.pdf --> Success
+[15-07-2024 10:46:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> fig3.pdf --> Success
+[15-07-2024 10:46:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> fig4.pdf --> Success
+[15-07-2024 10:46:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> fig5.pdf --> Success
+[15-07-2024 10:46:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> main.bib --> Success
+[15-07-2024 10:46:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> epl23100890.tex --> Success
+[15-07-2024 10:46:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ URGENT epl23100890 - new files.msg --> Success
+[15-07-2024 10:46:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> fig1.png --> Success
+[15-07-2024 10:46:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> epl23100890-mscript.pdf --> Success

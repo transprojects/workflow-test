@@ -1,0 +1,16 @@
+[11-10-2023 23:37:18] FP --> LINUX --> 77.241.136.62 --> basic information updated --> Success
+[11-10-2023 23:37:22] FP --> LINUX --> 77.241.136.62 --> Files uploaded --> Determinants of the Choice of BMW for editing.doc --> Success
+[11-10-2023 23:37:23] FP --> LINUX --> 77.241.136.62 --> zip created in linux server --> Success
+[11-10-2023 23:37:23] FP --> LINUX --> 77.241.136.62 --> zip file size updated in read me txt file --> Success
+[11-10-2023 23:37:23] FP --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 23:37:44] FP --> LINUX --> 77.241.136.62 --> <br />
+<b>Warning</b>:  mysqli::__construct(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ in <b>C:\LAMP\Apache\htdocs\workflow\xperttrack_curl_files\conn.php</b> on line <b>9</b><br />
+Connection failed: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ --> Success
+[24-10-2023 14:31:46] FP --> LINUX --> 77.241.136.41 --> basic information updated --> Success
+[24-10-2023 14:44:10] FP --> LINUX --> 77.241.136.41 --> Files uploaded --> Determinants of the Choice of BMW for editing.doc --> Success
+[24-10-2023 14:44:18] FP --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 14:44:18] FP --> LINUX --> 77.241.136.41 --> zip file size updated in read me txt file --> Success
+[24-10-2023 14:44:18] FP --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 14:44:26] FP --> LINUX --> 77.241.136.41 --> Email sent successfully for file moved to workflow. --> Success

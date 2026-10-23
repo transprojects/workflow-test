@@ -1,0 +1,10 @@
+[
+    {
+        "username": "sysadmin",
+        "password": "sysadmin@123"
+    },
+    {
+        "username": "sys",
+        "password": "sys@123"
+    }
+]

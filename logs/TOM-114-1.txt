@@ -1,0 +1,4 @@
+[19-06-2024 16:09:28] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 - author corrections on the ftp.msg --> Success
+[19-06-2024 16:09:28] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-1_CX3.zip --> Success
+[26-06-2024 13:41:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114-1 - author corrections on the ftp.msg --> Success
+[26-06-2024 13:41:32] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-1_CX4.pdf --> Success

@@ -1,0 +1,8 @@
+[01-10-2023 17:49:11] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 17:49:30] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJMATH_249.docx --> Success
+[01-10-2023 17:49:31] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 17:49:31] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 17:49:31] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 17:49:40] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[01-10-2023 17:50:21] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 17:50:38] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJMATH_245.docx --> Success

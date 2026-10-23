@@ -1,0 +1,8 @@
+[07-08-2024 12:57:21] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 1. Manuscript.docx --> Success
+[07-08-2024 12:57:35] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 1. Manuscript.docx --> Success
+[07-08-2024 12:57:48] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 3. Copyright transfer agreement.jpg --> Success
+[07-08-2024 12:57:53] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 4. MS5_Plagiarism after modification_TEM investigation on Al–Fe intermetallic phase particles in Al–Mg alloys containing high Mg contents forged by cold biaxial alternate forging.pdf --> Success
+[07-08-2024 12:58:03] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 3. Copyright transfer agreement.jpg --> Success
+[07-08-2024 12:58:08] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 2. Graphical abstract.doc --> Success
+[07-08-2024 12:58:14] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 1. Manuscript.docx --> Success
+[09-08-2024 16:29:52] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JNO -- TEM investigation on Al-Fe intermetallic phase___ _19JNO-3654-YEOM_ - Proof.msg --> Success

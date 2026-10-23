@@ -1,0 +1,4 @@
+[24-09-2024 07:12:16] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (18250).msg --> Success
+[24-09-2024 07:12:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-18250-corrected-proof.zip --> Success
+[24-09-2024 07:12:45] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_PJ/Vol00000/peerj-18250/REV1//peerj-18250-corrected-proof.zip --> Failure
+[24-09-2024 07:12:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-18250-corrected-proof.zip --> Success

@@ -1,0 +1,19 @@
+[12-10-2023 02:41:48] FP --> LINUX --> 159.146.75.221 --> basic information updated --> Success
+[12-10-2023 02:41:57] FP --> LINUX --> 159.146.75.221 --> Files uploaded --> ejdevelop-316-galley-1.docx --> Success
+[12-10-2023 02:42:31] FP --> LINUX --> 159.146.75.221 --> zip created in linux server --> Success
+[12-10-2023 02:42:31] FP --> LINUX --> 159.146.75.221 --> zip file size updated in read me txt file --> Success
+[12-10-2023 02:42:31] FP --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[12-10-2023 02:42:43] FP --> LINUX --> 159.146.75.221 --> Email sent successfully for file moved to workflow. --> Success
+[16-10-2023 15:09:24] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> FP files from transforma downloaded by Hande --> Success
+[16-10-2023 15:09:27] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> Proof zip files from author downloaded by Hande --> Success
+[16-10-2023 15:09:46] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[16-10-2023 15:10:01] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 159.146.57.216 --> EJ-DEVELOP_316.zipEmail sent successfully. --> Success
+[22-10-2023 18:26:02] PRODUCTION REIEW --> LINUX --> 159.146.73.232 --> REVISESED PROOF downloaded by Hande --> Success
+[22-10-2023 18:31:14] META FORM --> LINUX --> 159.146.73.232 --> Correction status updated & form submitted --> Success
+[22-10-2023 18:31:14] META FORM --> LINUX --> 159.146.73.232 --> No PDF files found in the folder --> Failure
+[22-10-2023 18:31:14] META FORM --> LINUX --> 159.146.73.232 --> zip created in linux server --> Success
+[22-10-2023 18:31:14] META FORM --> LINUX --> 159.146.73.232 --> Curl function initiated  --> Success
+[22-10-2023 18:31:30] META FORM --> LINUX --> 159.146.73.232 --> Email sent successfully. --> Success
+[25-10-2023 15:20:05] FINAL DELIVERY --> LINUX --> 88.255.99.17 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[27-10-2023 18:15:01] FINAL DELIVERY --> LINUX --> 188.3.102.171 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[28-10-2023 14:28:51] FINAL DELIVERY --> LINUX --> 46.106.127.84 --> PUBLISHED --> published by Hande

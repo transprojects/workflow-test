@@ -1,0 +1,110 @@
+
+
+Program Run at: 2026-05-02 15:20:42.950188
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/RIMNI/TSP_RIMNI_76107/transforma-fp-files/TSP_RIMNI_76107.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/RIMNI/TSP_RIMNI_76107/TSP_RIMNI_76107.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FIN/ACG/RNP/RNP-2602-3740/FIN1/RNP-2602-3740.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FP/EOS/EJ-DEVELOP/EJ-DEVELOP_70330/transforma-fp-files/EJ-DEVELOP_70330.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/EOS/EJ-DEVELOP/EJ-DEVELOP_70330/EJ-DEVELOP_70330.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: REV/TSP/CMC/TSP_CMC_70014/REV2/transforma-to-author/TSP_CMC_70014.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FIN/ACG/RNP/RNP-2509-3644/FIN1/RNP-2509-3644.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: REV/TSP/FHMT/TSP_FHMT_80844/REV1/transforma-to-client/TSP_FHMT_80844.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FIN/ACG/RNP/RNP-2509-3645/FIN1/RNP-2509-3645.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-02 15:20:53.259829
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-02 15:20:57.072666
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-02 15:23:21.273448
+=========================================
+
+Success: Uploaded file to FTP: FIN/ACG/RNP/RNP-2509-3648/FIN1/RNP-2509-3648.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-02 15:26:29.893593
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/ZKG/TSP_ZKG_84723/transforma-fp-files/TSP_ZKG_84723.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/ZKG/TSP_ZKG_84723/TSP_ZKG_84723.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-02 15:29:21.254534
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/CJU/TSP_CJU_67267/transforma-fp-files/TSP_CJU_67267.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CJU/TSP_CJU_67267/TSP_CJU_67267.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-02 15:30:57.352549
+=========================================
+
+Success: Uploaded file to FTP: FIN/TSP/EE/TSP_EE_79961/FIN1/TSP_EE_79961.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-02 17:09:58.453003
+=========================================
+
+Success: Uploaded file to FTP: FIN/ACG/RAFC/RAFC-2603-3823/FIN1/RAFC-2603-3823.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FP/TSP/CJU/TSP_CJU_78745/transforma-fp-files/TSP_CJU_78745.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CJU/TSP_CJU_78745/TSP_CJU_78745.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FIN/ACG/RAFC/RAFC-2603-3825/FIN1/RAFC-2603-3825.zip
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: [Errno 11001] getaddrinfo failed.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

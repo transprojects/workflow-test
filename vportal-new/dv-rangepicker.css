@@ -1,0 +1,39 @@
+/* Reusable date-range picker (dv-rangepicker.js) */
+.dvr{--navy:#14304a;--ink:#1d2b3a;--muted:#6b7785;--line:#e6ebf1;--bg:#f4f7fa;--blue:#1b6ca8;--orange:#F56500;
+  position:relative;display:inline-block;min-width:220px;font-family:inherit;}
+.dvr *{box-sizing:border-box;}
+.dvr-trigger{display:flex;align-items:center;gap:9px;width:100%;height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--muted);
+  font-size:14px;font-weight:600;cursor:pointer;text-align:left;transition:border-color .2s,box-shadow .2s;}
+.dvr-trigger:hover,.dvr.open .dvr-trigger{border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,108,168,.12);}
+.dvr-trigger .fa-calendar{color:var(--blue);}
+.dvr-text{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dvr.has .dvr-trigger{color:var(--navy);}
+.dvr-x{display:none;width:20px;height:20px;line-height:20px;text-align:center;border-radius:50%;font-size:11px;color:var(--muted);transition:.2s;}
+.dvr.has .dvr-x{display:inline-block;} .dvr-x:hover{background:#fdeaea;color:#d64545;}
+.dvr-pop{display:none;position:absolute;top:calc(100% + 8px);left:0;z-index:1055;width:340px;max-width:calc(100vw - 24px);padding:16px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 50px rgba(20,48,74,.22);}
+.dvr.open .dvr-pop{display:block;animation:dvrIn .22s both;}
+@keyframes dvrIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.dvr-presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.dvr-presets button{border:1px solid var(--line);background:#fff;color:var(--navy);font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px;cursor:pointer;transition:.2s;}
+.dvr-presets button:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);}
+.dvr-presets button.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.dvr-sel{display:flex;align-items:center;gap:10px;min-height:40px;padding:9px 12px;margin-bottom:12px;border-radius:12px;background:var(--bg);font-size:13px;color:var(--navy);}
+.dvr-sel i{color:var(--orange);} .dvr-sel em{color:var(--muted);font-style:normal;}
+.dvr-head{display:flex;align-items:center;justify-content:space-between;gap:4px;margin-bottom:8px;}
+.dvr-head strong{flex:1;text-align:center;font-size:14px;color:var(--navy);}
+.dvr-head button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;font-size:14px;line-height:1;transition:.2s;}
+.dvr-head button:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.dvr-grid{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px;}
+.dvr-dow{text-align:center;font-size:11px;font-weight:700;color:var(--muted);padding:6px 0;text-transform:uppercase;}
+.dvr-day{position:relative;height:34px;border:0;background:transparent;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;border-radius:9px;transition:background .15s,color .15s,transform .15s;}
+.dvr-day:hover:not(.start):not(.end){background:#e6f1fa;color:var(--blue);transform:scale(1.08);}
+.dvr-day.today:after{content:"";position:absolute;bottom:4px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--orange);}
+.dvr-day.in{background:#e6f1fa;color:var(--blue);border-radius:0;}
+.dvr-day.start,.dvr-day.end{background:var(--navy);color:#fff;box-shadow:0 6px 14px rgba(20,48,74,.28);}
+.dvr-day.start.cap{border-radius:9px 0 0 9px;} .dvr-day.end.cap{border-radius:0 9px 9px 0;}
+.dvr-foot{display:flex;justify-content:space-between;gap:10px;margin-top:12px;}
+.dvr-foot button{height:38px;padding:0 20px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;transition:.2s;border:1px solid var(--line);background:#fff;color:var(--navy);}
+.dvr-foot button:hover{border-color:var(--blue);color:var(--blue);}
+.dvr-foot .dvr-apply{flex:1;background:var(--navy);border-color:var(--navy);color:#fff;} .dvr-foot .dvr-apply:hover{background:#1b4468;color:#fff;}
+@media(max-width:560px){.dvr{display:block;} .dvr-pop{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto;}}
+@media (prefers-reduced-motion:reduce){.dvr *{animation:none !important;transition:none !important;}}

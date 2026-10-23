@@ -1,0 +1,27 @@
+[09-10-2023 17:44:58] FP --> LINUX --> 159.146.57.83 --> basic information updated --> Success
+[09-10-2023 17:45:02] FP --> LINUX --> 159.146.57.83 --> Files uploaded --> ejbmr-2144-galley.docx --> Success
+[09-10-2023 17:45:06] FP --> LINUX --> 159.146.57.83 --> zip created in linux server --> Success
+[09-10-2023 17:45:06] FP --> LINUX --> 159.146.57.83 --> zip file size updated in read me txt file --> Success
+[09-10-2023 17:45:06] FP --> LINUX --> 159.146.57.83 --> Curl function initiated  --> Success
+[09-10-2023 17:45:14] FP --> LINUX --> 159.146.57.83 --> Email sent successfully for file moved to workflow. --> Success
+[12-10-2023 16:53:45] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> FP files from transforma downloaded by Hande --> Success
+[12-10-2023 16:54:03] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> Proof zip files from author downloaded by Hande --> Success
+[12-10-2023 17:04:23] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.75.221 --> Files uploaded --> EJBMR_2144+HS.pdf --> Success
+[12-10-2023 17:04:24] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.75.221 --> zip created in linux server --> Success
+[12-10-2023 17:04:24] AUTHOR SUBMISSION REV1 --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[12-10-2023 17:04:33] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 159.146.75.221 --> EJBMR_2144.zipEmail sent successfully. --> Success
+[16-10-2023 14:56:59] PRODUCTION REIEW --> LINUX --> 159.146.57.216 --> REVISESED PROOF downloaded by Hande --> Success
+[16-10-2023 15:02:14] META FORM  --> LINUX --> 159.146.57.216 --> Files uploaded --> EJBMR_2144+HS.pdf --> Success
+[16-10-2023 15:02:55] META FORM --> LINUX --> 159.146.57.216 --> Correction status updated & form submitted --> Success
+[16-10-2023 15:02:55] META FORM --> LINUX --> 159.146.57.216 --> PDF files exist in the folder --> Success
+[16-10-2023 15:02:55] META FORM --> LINUX --> 159.146.57.216 --> zip created in linux server --> Success
+[16-10-2023 15:02:55] META FORM --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[16-10-2023 15:03:08] META FORM --> LINUX --> 159.146.57.216 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24771'Email sent successfully. --> Success
+[18-10-2023 00:15:50] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[18-10-2023 00:18:30] FINAL CORRECTIONS   --> LINUX --> 88.255.99.39 --> PDF attached for artilce in linux server --> Success
+[18-10-2023 00:18:30] FINAL CORRECTIONS   --> LINUX --> 88.255.99.39 --> zip created in linux server --> Success
+[18-10-2023 00:18:30] FINAL CORRECTIONS ".$stage." --> LINUX --> 88.255.99.39 --> Curl function initiated  --> Success
+[18-10-2023 00:18:44] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 88.255.99.39 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJBMR/Vol00000/EJBMR_2144/REV3/upload completedEmail sent successfully. --> Success
+[19-10-2023 19:57:44] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[20-10-2023 23:31:07] FINAL DELIVERY --> LINUX --> 88.255.99.21 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[20-10-2023 23:53:05] FINAL DELIVERY --> LINUX --> 88.255.99.21 --> PUBLISHED --> published by Hande

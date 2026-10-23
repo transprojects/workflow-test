@@ -1,0 +1,18 @@
+[05-10-2023 17:31:06] FP --> LINUX --> 77.241.128.161 --> basic information updated --> Success
+[05-10-2023 17:35:49] FP --> LINUX --> 77.241.128.161 --> Files uploaded --> Case+report-TB+dactylitis_Final.docx --> Success
+[05-10-2023 17:35:49] FP --> LINUX --> 77.241.128.161 --> zip created in linux server --> Success
+[05-10-2023 17:35:49] FP --> LINUX --> 77.241.128.161 --> zip file size updated in read me txt file --> Success
+[05-10-2023 17:35:49] FP --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[05-10-2023 17:35:58] FP --> LINUX --> 77.241.128.161 --> Email sent successfully for file moved to workflow. --> Success
+[13-10-2023 20:30:21] AUTHOR SUBMISSION --> LINUX --> 77.241.136.67 --> FP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 20:30:57] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 20:31:07] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.136.67 --> EJ-MED_1933.zipEmail sent successfully. --> Success
+[18-10-2023 18:41:37] PRODUCTION REIEW --> LINUX --> 77.241.136.44 --> REVISESED PROOF downloaded by Ivanna --> Success
+[18-10-2023 18:46:05] META FORM  --> LINUX --> 77.241.136.44 --> Files uploaded --> EJ-MED_1933.pdf --> Success
+[18-10-2023 18:46:24] META FORM --> LINUX --> 77.241.136.44 --> Correction status updated & form submitted --> Success
+[18-10-2023 18:46:24] META FORM --> LINUX --> 77.241.136.44 --> PDF files exist in the folder --> Success
+[18-10-2023 18:46:24] META FORM --> LINUX --> 77.241.136.44 --> zip created in linux server --> Success
+[18-10-2023 18:46:24] META FORM --> LINUX --> 77.241.136.44 --> Curl function initiated  --> Success
+[18-10-2023 18:46:43] META FORM --> LINUX --> 77.241.136.44 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24705'Email sent successfully. --> Success
+[23-10-2023 23:00:55] FINAL DELIVERY --> LINUX --> 77.241.136.28 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[23-10-2023 23:11:51] FINAL DELIVERY --> LINUX --> 77.241.136.28 --> PUBLISHED --> published by Ivanna

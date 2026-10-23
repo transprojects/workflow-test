@@ -1,0 +1,3 @@
+[05-08-2024 13:13:18] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[05-08-2024 13:13:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> EPL Editorial epl24100496 - source file.msg --> Success
+[05-08-2024 13:13:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> epl24100496.tex --> Success

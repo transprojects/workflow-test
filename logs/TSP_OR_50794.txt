@@ -1,0 +1,4 @@
+[23-09-2024 12:11:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_50794 need to be modified.pdf --> Success
+[23-09-2024 12:11:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ Updates to _TSP_OR_50794_.msg --> Success
+[24-09-2024 10:04:15] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_50794 need to be modified.pdf --> Success
+[24-09-2024 10:04:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ Re_ Updates to _TSP_OR_50794_.msg --> Success

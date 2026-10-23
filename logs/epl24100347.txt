@@ -1,0 +1,1 @@
+[16-09-2024 09:57:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Files uploaded for article epl24100347.msg --> Success

@@ -1,0 +1,3 @@
+[29-06-2024 15:24:59] FP --> LINUX --> 10.10.10.156 --> basic information updated --> Success
+[29-06-2024 15:25:06] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> 20JBN10.docx --> Success
+[29-06-2024 15:27:37] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> 20JBN10.docx --> Success

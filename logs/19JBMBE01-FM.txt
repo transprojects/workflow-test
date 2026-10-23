@@ -1,0 +1,2 @@
+[24-08-2024 10:18:37] FP --> LINUX --> 10.10.10.80 --> basic information updated --> Success
+[24-08-2024 10:19:08] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBMBE Unpublished Paper List.xlsx --> Success

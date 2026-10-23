@@ -1,0 +1,127 @@
+Options +FollowSymLinks -MultiViews
+DirectoryIndex index.php
+DirectoryIndex index.html
+Options -Indexes
+RewriteEngine on
+# Exclude CSS and JS files from rewriting
+RewriteCond %{REQUEST_URI} !\.(css|js)$
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+# Disable Directory Browsing
+Options All -Indexes
+
+
+
+RewriteRule ^index$ index.php [NC,L]
+RewriteRule ^logout$ logout.php [NC,L]
+RewriteRule ^changepassword change-password.php [NC,L]
+RewriteRule ^settings settings.php [NC,L]
+
+RewriteRule ^addcustomer$ add-customer.php [NC,L]
+RewriteRule ^addjournal$ add-journal.php [NC,L]
+RewriteRule ^addjournaltype$ add-journal-type.php [NC,L]
+RewriteRule ^addfolder$ add-folder.php [NC,L]
+RewriteRule ^adddepartment$ add-department.php [NC,L]
+RewriteRule ^addmovefiles$ add-move-files.php [NC,L]
+RewriteRule ^addworkflow$ add-workflow.php [NC,L]
+RewriteRule ^addchecklist$ add-checklist.php [NC,L]
+RewriteRule ^addemails$ add-emails.php [NC,L]
+RewriteRule ^addclientfeedback$ add-client-feedback.php [NC,L]
+RewriteRule ^addarticletype$ add-article-type.php [NC,L]
+RewriteRule ^addschedulemaildetails$ add_schedule_mail_details.php [NC,L]
+RewriteRule ^addarchiveconfig$ add_archive_config.php [NC,L]
+RewriteRule ^addshiftsettings$ add-shift-settings.php [NC,L]
+RewriteRule ^addusers$ add-users.php [NC,L]
+RewriteRule ^addrole$ add-role.php [NC,L]
+
+RewriteRule ^add-article$ add-article.php [NC,L]
+
+
+
+RewriteRule ^edit-customer/([^/]*)$ edit-customer.php?id=$1 [NC,L]
+RewriteRule ^edit-journal/([^/]*)$ edit-journal.php?id=$1 [NC,L]
+RewriteRule ^edit-article/([^/]*)$ edit_article.php?aid=$1 [NC,L]
+RewriteRule ^edit-journal-type/([^/]*)$ edit-journal-type.php?id=$1 [NC,L]
+RewriteRule ^edit-folder/([^/]*)$ edit-folder.php?id=$1 [NC,L]
+RewriteRule ^edit-department/([^/]*)$ edit-department.php?id=$1 [NC,L]
+RewriteRule ^edit-move-files/([^/]*)$ edit-move-files.php?id=$1 [NC,L]
+RewriteRule ^edit-workflow/([^/]*)$ edit-workflow.php?id=$1 [NC,L]
+RewriteRule ^edit-checklist/([^/]*)$ edit-checklist.php?id=$1 [NC,L]
+RewriteRule ^edit-email/([^/]*)$ edit-emails.php?id=$1 [NC,L]
+RewriteRule ^edit-client-feedback/([^/]*)$ edit-client-feedback.php?id=$1 [NC,L]
+RewriteRule ^edit-article-query/([^/]*)$ edit-article-query.php?id=$1 [NC,L]
+
+RewriteRule ^edit-article-type/([^/]*)$ edit-article-type.php?id=$1 [NC,L]
+RewriteRule ^edit-schedulemail-details/([^/]*)$ edit-schedulemail-details.php?id=$1 [NC,L]
+RewriteRule ^edit-archive-config/([^/]*)$ edit-archive-config.php?id=$1 [NC,L]
+RewriteRule ^edit-shift-settings/([^/]*)$ edit-shift-settings.php?id=$1 [NC,L]
+RewriteRule ^edit-users/([^/]*)$ edit-users.php?id=$1 [NC,L]
+RewriteRule ^edit-role/([^/]*)$ edit-role.php?id=$1 [NC,L]
+
+
+RewriteRule ^articles$ view_articles.php [NC,L]
+RewriteRule ^graphicarticles$ view_graphic_articles.php [NC,L]
+RewriteRule ^customers$ view_customers.php [NC,L]
+RewriteRule ^managejournals$ view_journals.php [NC,L]
+RewriteRule ^journaltype$ view_journal_type.php [NC,L]
+RewriteRule ^managefolder$ view_folder.php [NC,L]
+RewriteRule ^managedepartments$ view_department.php [NC,L]
+RewriteRule ^managemovefiles$ view_move_files.php [NC,L]
+RewriteRule ^workflow$ view_workflow.php [NC,L]
+RewriteRule ^checklist$ view_checklist.php [NC,L]
+RewriteRule ^emails$ view_emails.php [NC,L]
+RewriteRule ^clientfeedback$ view_clientfeedback.php [NC,L]
+RewriteRule ^articlequery$ view_articlequery.php [NC,L]
+RewriteRule ^articletype$ view_articletype.php [NC,L]
+RewriteRule ^schedulemaildetails$ view_schedulemaildetails.php [NC,L]
+RewriteRule ^archiveconfig$ view_archive_config.php [NC,L]
+RewriteRule ^shiftsettings$ view_shift_settings.php [NC,L]
+RewriteRule ^employees$ view_users.php [NC,L]
+RewriteRule ^roles$ view_role.php [NC,L]
+RewriteRule ^holdarticles$ view_hold_articles.php [NC,L]
+RewriteRule ^highpriorityarticles$ view_high_priority_articles.php [NC,L]
+RewriteRule ^underclientreview$ view_client_review_articles.php [NC,L]
+RewriteRule ^underdispatcharticles$ view_dispatch_articles.php [NC,L]
+RewriteRule ^asparticlehistory$ view_asp_article_history.php [NC,L]
+RewriteRule ^manageissues$ manage_issues.php [NC,L]
+RewriteRule ^underdispatchissues$ dispath_issues.php [NC,L]
+RewriteRule ^underclientissues$ clientreview_issues.php [NC,L]
+RewriteRule ^completedissues$ clientreview_issues.php [NC,L]
+RewriteRule ^viewallissues$ view_all_issues.php [NC,L]
+RewriteRule ^volumearchive$ volume_archive.php [NC,L]
+RewriteRule ^masterstatusreport$ master-status-report.php [NC,L]
+RewriteRule ^usertargetreport$ master-status-report.php [NC,L]
+RewriteRule ^daywiseusertargetreport$ master-status-report.php [NC,L]
+RewriteRule ^customerwisereport$ master-status-report.php [NC,L]
+RewriteRule ^dispatchreport$ dispatchreport.php [NC,L]
+RewriteRule ^receivedreport$ receivedreport.php [NC,L]
+RewriteRule ^wipreport$ wipreport.php [NC,L]
+RewriteRule ^dispatchhistory$ dispatchhistory.php [NC,L]
+
+
+RewriteRule ^currentwork$ view_articles.php [NC,L]
+RewriteRule ^addedarticles$ view_all_articles.php [NC,L]
+
+RewriteRule ^uploadfilesissue/([^/]+)/([^/]+)$ upload_process_issue.php?id=$1&issue_id=$2 [NC,L]
+
+
+RewriteRule ^sendinstruction/([^/]+)/([^/]+)$ send_instructions.php?id=$1 [NC,L]
+RewriteRule ^startwork/([^/]+)/([^/]+)$ start_work.php?aid=$1&tid=$2 [NC,L]
+RewriteRule ^graphicstartwork/([^/]+)/([^/]+)$ graphic_start_work.php?id=$1&tid=$2 [NC,L]
+RewriteRule ^sendmailclient/([^/]*)$ sendmail_client.php?id=$1 [NC,L]
+RewriteRule ^jobcard/([^/]*)$ jobcard.php?id=$1 [NC,L]
+RewriteRule ^uploadfiles/([^/]*)$ upload_process.php?id=$1 [NC,L]
+RewriteRule ^sendtoclient/([^/]*)$ send_to_client.php?id=$1 [NC,L]
+RewriteRule ^revarticles/([^/]*)$ rev_project.php?id=$1 [NC,L]
+RewriteRule ^finalarticles/([^/]*)$ fin_project.php?id=$1 [NC,L]
+
+
+
+
+ErrorDocument 404 /workflow-new/404.html
+
+
+

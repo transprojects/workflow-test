@@ -1,0 +1,5 @@
+[01-07-2024 17:13:28] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[01-07-2024 17:13:34] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FDMP Retraction.msg --> Success
+[01-07-2024 17:13:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_FDMP_53146.zip --> Success
+[01-07-2024 17:15:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_FDMP_53146.zip --> Success
+[01-07-2024 17:15:15] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FDMP Retraction.msg --> Success

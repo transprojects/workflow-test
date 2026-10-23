@@ -1,0 +1,1 @@
+python C:/LAMP/Apache/htdocs/workflow-new/python-scripts/auto_pdf_count/jurnl_final.py

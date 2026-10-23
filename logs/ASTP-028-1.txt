@@ -1,0 +1,6 @@
+[07-06-2024 10:06:52] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[07-06-2024 10:06:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028 for Typesetting.msg --> Success
+[07-06-2024 10:07:02] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/Sunrise-NOW/ASTP/Vol00000/ASTP-028-1/FP//FW_ ASTP-028 for Typesetting.msg --> Failure
+[07-06-2024 10:07:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028 for Typesetting.msg --> Success
+[13-08-2024 12:06:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028-1 - author corrections on the FTP.msg --> Success
+[13-08-2024 12:07:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ASTP-028-1_CX2.pdf --> Success

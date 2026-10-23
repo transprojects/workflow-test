@@ -1,0 +1,5 @@
+[23-07-2024 13:05:31] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 13:05:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_17410.docx --> Success
+[13-08-2024 12:15:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_17410.pdf --> Success
+[26-09-2024 14:58:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_17410 doi is incorrect and the id should be changed accordingly.pdf --> Success
+[26-09-2024 14:58:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

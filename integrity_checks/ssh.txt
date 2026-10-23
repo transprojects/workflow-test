@@ -1,0 +1,708 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\mmari> SSH xpertxpresstrans@xpertxpress.transforma.in
+The authenticity of host 'xpertxpress.transforma.in (68.178.166.2)' can't be established.
+ED25519 key fingerprint is SHA256:L28eCATPNTHWp+6I5fw6BPthqhsOcxtZECvdhIHUy+k.
+This host key is known by the following other names/addresses:
+    C:\Users\mmari/.ssh/known_hosts:1: editlatex.transforma.in
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'xpertxpress.transforma.in' (ED25519) to the list of known hosts.
+xpertxpresstrans@xpertxpress.transforma.in's password:
+PS C:\Users\mmari> SSH xpertxpresstrans@xpertxpress.transforma.in
+xpertxpresstrans@xpertxpress.transforma.in's password:
+
+Last login: Wed Jul 30 13:34:49 2025 from 122.173.239.157
+[xpertxpresstrans@2 ~]$ ls
+access-logs  etc  integrity_checks  logs  mail  perl5  public_ftp  public_html  ssl  tmp  www
+[xpertxpresstrans@2 ~]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: active (running) since Wed 2025-07-30 14:04:11 UTC; 1 day 16h ago
+ Main PID: 1377111 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1377111 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1377114 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1681896 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+[xpertxpresstrans@2 ~]$ ls
+access-logs  etc  integrity_checks  logs  mail  perl5  public_ftp  public_html  ssl  tmp  www
+[xpertxpresstrans@2 ~]$ cd integrity_checks/
+[xpertxpresstrans@2 integrity_checks]$ ls
+certs.pem  config.sample.py  key.pem  models.py    requirements.txt  schemas.py  uploads
+config.py  database.py       main.py  __pycache__  run.py            test.db     utils.py
+[xpertxpresstrans@2 integrity_checks]$ cd ..
+[xpertxpresstrans@2 ~]$ cat .config/systemd/user/integrity_checks.service
+[Unit]
+Description=IntegrityChecks
+After=network.target
+
+[Service]
+# Set the working directory to your project root
+WorkingDirectory=/home/xpertxpresstrans/integrity_checks
+
+# Command to execute:
+# Directly call the python executable from your virtual environment
+# and pass run.py as the script to execute.
+ExecStart=python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+
+# Restart the service if it crashes
+Restart=always
+RestartSec=5
+
+# Standard output and error logs
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables (optional, if needed by your app)
+# Environment="MY_APP_SETTING=some_value"
+
+[Install]
+WantedBy=default.target
+[xpertxpresstrans@2 ~]$ journalctl -f
+Hint: You are currently not seeing messages from other users and the system.
+      Users in the 'systemd-journal' group can see all messages. Pass -q to
+      turn off this notice.
+No journal files were opened due to insufficient permissions.
+[xpertxpresstrans@2 ~]$ journalctl -f -q
+No journal files were opened due to insufficient permissions.
+[xpertxpresstrans@2 ~]$ ps
+    PID TTY          TIME CMD
+1912158 pts/0    00:00:00 bash
+1912906 pts/0    00:00:00 ps
+[xpertxpresstrans@2 ~]$ ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  1.5  0.0 241152 13084 ?        Ss   Jul26 125:10 /usr/lib/systemd/systemd --switched-root --system --d
+root           2  0.0  0.0      0     0 ?        S    Jul26   0:01 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   Jul26   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   Jul26   0:00 [rcu_par_gp]
+root           5  0.0  0.0      0     0 ?        I<   Jul26   0:00 [slub_flushwq]
+root           7  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/0:0H-events_highpri]
+root          10  0.0  0.0      0     0 ?        I<   Jul26   0:00 [mm_percpu_wq]
+root          11  0.0  0.0      0     0 ?        S    Jul26   0:00 [rcu_tasks_rude_]
+root          12  0.0  0.0      0     0 ?        S    Jul26   0:00 [rcu_tasks_trace]
+root          13  0.0  0.0      0     0 ?        S    Jul26   0:32 [ksoftirqd/0]
+root          14  0.1  0.0      0     0 ?        I    Jul26  12:49 [rcu_sched]
+root          15  0.0  0.0      0     0 ?        S    Jul26   0:11 [migration/0]
+root          16  0.0  0.0      0     0 ?        S    Jul26   0:02 [watchdog/0]
+root          17  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/0]
+root          18  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/1]
+root          19  0.0  0.0      0     0 ?        S    Jul26   0:02 [watchdog/1]
+root          20  0.0  0.0      0     0 ?        S    Jul26   0:14 [migration/1]
+root          21  0.0  0.0      0     0 ?        S    Jul26   0:59 [ksoftirqd/1]
+root          23  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/1:0H-events_highpri]
+root          24  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/2]
+root          25  0.0  0.0      0     0 ?        S    Jul26   0:02 [watchdog/2]
+root          26  0.0  0.0      0     0 ?        S    Jul26   0:12 [migration/2]
+root          27  0.0  0.0      0     0 ?        S    Jul26   1:18 [ksoftirqd/2]
+root          29  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/2:0H-events_highpri]
+root          30  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/3]
+root          31  0.0  0.0      0     0 ?        S    Jul26   0:02 [watchdog/3]
+root          32  0.0  0.0      0     0 ?        S    Jul26   0:11 [migration/3]
+root          33  0.0  0.0      0     0 ?        S    Jul26   1:27 [ksoftirqd/3]
+root          35  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/3:0H-events_highpri]
+root          36  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/4]
+root          37  0.0  0.0      0     0 ?        S    Jul26   0:02 [watchdog/4]
+root          38  0.0  0.0      0     0 ?        S    Jul26   0:10 [migration/4]
+root          39  0.0  0.0      0     0 ?        S    Jul26   1:08 [ksoftirqd/4]
+root          41  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/4:0H-events_highpri]
+root          42  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/5]
+root          43  0.0  0.0      0     0 ?        S    Jul26   0:02 [watchdog/5]
+root          44  0.0  0.0      0     0 ?        S    Jul26   0:10 [migration/5]
+root          45  0.0  0.0      0     0 ?        S    Jul26   1:05 [ksoftirqd/5]
+root          47  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/5:0H-events_highpri]
+root          48  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/6]
+root          49  0.0  0.0      0     0 ?        S    Jul26   0:03 [watchdog/6]
+root          50  0.0  0.0      0     0 ?        S    Jul26   0:09 [migration/6]
+root          51  0.0  0.0      0     0 ?        S    Jul26   0:49 [ksoftirqd/6]
+root          53  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/6:0H-events_highpri]
+root          54  0.0  0.0      0     0 ?        S    Jul26   0:00 [cpuhp/7]
+root          55  0.0  0.0      0     0 ?        S    Jul26   0:03 [watchdog/7]
+root          56  0.0  0.0      0     0 ?        S    Jul26   0:10 [migration/7]
+root          57  0.0  0.0      0     0 ?        S    Jul26   0:34 [ksoftirqd/7]
+root          59  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/7:0H-events_highpri]
+root          68  0.0  0.0      0     0 ?        S    Jul26   0:00 [kdevtmpfs]
+root          69  0.0  0.0      0     0 ?        I<   Jul26   0:00 [netns]
+root          70  0.0  0.0      0     0 ?        S    Jul26   0:47 [kauditd]
+root          71  0.0  0.0      0     0 ?        S    Jul26   0:00 [khungtaskd]
+root          72  0.0  0.0      0     0 ?        S    Jul26   0:00 [oom_reaper]
+root          73  0.0  0.0      0     0 ?        I<   Jul26   0:00 [writeback]
+root          74  0.0  0.0      0     0 ?        S    Jul26   0:00 [kcompactd0]
+root          75  0.0  0.0      0     0 ?        SN   Jul26   0:00 [ksmd]
+root          76  0.0  0.0      0     0 ?        SN   Jul26   0:15 [khugepaged]
+root          77  0.0  0.0      0     0 ?        I<   Jul26   0:00 [crypto]
+root          78  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kintegrityd]
+root          79  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kblockd]
+root          80  0.0  0.0      0     0 ?        I<   Jul26   0:00 [blkcg_punt_bio]
+root          81  0.0  0.0      0     0 ?        I<   Jul26   0:00 [tpm_dev_wq]
+root          82  0.0  0.0      0     0 ?        I<   Jul26   0:00 [md]
+root          83  0.0  0.0      0     0 ?        I<   Jul26   0:00 [md_bitmap]
+root          84  0.0  0.0      0     0 ?        I<   Jul26   0:00 [edac-poller]
+root          85  0.0  0.0      0     0 ?        S    Jul26   0:00 [watchdogd]
+root          86  0.0  0.0      0     0 ?        I<   Jul26   0:29 [kworker/0:1H-kblockd]
+root         106  0.0  0.0      0     0 ?        S    Jul26   0:04 [kswapd0]
+root         171  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kthrotld]
+root         174  0.0  0.0      0     0 ?        S    Jul26   0:00 [irq/24-aerdrv]
+root         175  0.0  0.0      0     0 ?        S    Jul26   0:00 [irq/25-aerdrv]
+root         176  0.0  0.0      0     0 ?        S    Jul26   0:00 [irq/26-aerdrv]
+root         177  0.0  0.0      0     0 ?        S    Jul26   0:00 [irq/27-aerdrv]
+root         178  0.0  0.0      0     0 ?        S    Jul26   0:00 [irq/28-aerdrv]
+root         179  0.0  0.0      0     0 ?        S    Jul26   0:00 [irq/29-aerdrv]
+root         180  0.0  0.0      0     0 ?        S    Jul26   0:00 [irq/30-aerdrv]
+root         181  0.0  0.0      0     0 ?        I<   Jul26   0:00 [acpi_thermal_pm]
+root         182  0.0  0.0      0     0 ?        S    Jul26   0:00 [hwrng]
+root         183  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kmpath_rdacd]
+root         184  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kaluad]
+root         185  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ipv6_addrconf]
+root         186  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kstrp]
+root         226  0.0  0.0      0     0 ?        I<   Jul26   0:00 [zswap-shrink]
+root         245  0.0  0.0      0     0 ?        I<   Jul26   0:30 [kworker/3:1H-kblockd]
+root         274  0.0  0.0      0     0 ?        I<   Jul26   0:28 [kworker/5:1H-xfs-log/sda1]
+root         276  0.0  0.0      0     0 ?        I<   Jul26   0:28 [kworker/4:1H-kblockd]
+root         278  0.0  0.0      0     0 ?        I<   Jul26   0:27 [kworker/6:1H-xfs-log/sda1]
+root         279  0.0  0.0      0     0 ?        I<   Jul26   0:33 [kworker/2:1H-kblockd]
+root         283  0.0  0.0      0     0 ?        I<   Jul26   0:35 [kworker/1:1H-kblockd]
+root         292  0.0  0.0      0     0 ?        I<   Jul26   0:28 [kworker/7:1H-kblockd]
+root         428  0.0  0.0      0     0 ?        S    Jul26   0:00 [scsi_eh_0]
+root         429  0.0  0.0      0     0 ?        I<   Jul26   0:00 [scsi_tmf_0]
+root         450  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ata_sff]
+root         459  0.0  0.0      0     0 ?        S    Jul26   0:00 [scsi_eh_1]
+root         461  0.0  0.0      0     0 ?        I<   Jul26   0:00 [scsi_tmf_1]
+root         462  0.0  0.0      0     0 ?        S    Jul26   0:00 [scsi_eh_2]
+root         463  0.0  0.0      0     0 ?        I<   Jul26   0:00 [scsi_tmf_2]
+root         465  0.0  0.0      0     0 ?        S    Jul26   0:00 [scsi_eh_3]
+root         466  0.0  0.0      0     0 ?        I<   Jul26   0:00 [scsi_tmf_3]
+root         467  0.0  0.0      0     0 ?        S    Jul26   0:00 [scsi_eh_4]
+root         468  0.0  0.0      0     0 ?        I<   Jul26   0:00 [scsi_tmf_4]
+root         469  0.0  0.0      0     0 ?        S    Jul26   0:00 [scsi_eh_5]
+root         470  0.0  0.0      0     0 ?        I<   Jul26   0:00 [scsi_tmf_5]
+root         471  0.0  0.0      0     0 ?        S    Jul26   0:00 [scsi_eh_6]
+root         472  0.0  0.0      0     0 ?        I<   Jul26   0:00 [scsi_tmf_6]
+root         477  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ttm]
+root         500  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfsalloc]
+root         501  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfs_mru_cache]
+root         502  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfs-buf/sda1]
+root         503  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfs-conv/sda1]
+root         504  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfs-cil/sda1]
+root         505  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfs-reclaim/sda]
+root         506  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfs-blockgc/sda]
+root         507  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xfs-log/sda1]
+root         508  0.0  0.0      0     0 ?        S    Jul26   3:18 [xfsaild/sda1]
+root         737  0.0  0.8 257744 135768 ?       Ss   Jul26   6:18 /usr/lib/systemd/systemd-journald
+rpc          797  0.0  0.0  67332  5472 ?        Ss   Jul26   0:00 /usr/bin/rpcbind -w -f
+root         801  0.0  0.0  57396  2276 ?        S<sl Jul26   1:03 /sbin/auditd
+root         827  0.0  0.0      0     0 ?        I<   Jul26   0:00 [rpciod]
+root         828  0.0  0.0      0     0 ?        I<   Jul26   0:00 [xprtiod]
+root         832  0.0  0.0  97524  8720 ?        Ss   Jul26   0:01 /usr/lib/systemd/systemd-udevd
+root         869  0.0  0.1 109960 20492 ?        Ss   Jul26   0:36 queueprocd - waiting up to 60s to process a task
+root         872  0.0  0.0 135464  6832 ?        Ssl  Jul26   0:00 /usr/bin/qemu-ga --method=virtio-serial --path=/dev/v
+root         878  0.0  0.0  50488  5252 ?        Ss   Jul26   0:00 /usr/sbin/smartd -n -q never
+root         881  0.0  0.0  80244  8048 ?        Ss   Jul26   6:11 /usr/lib/systemd/systemd-logind
+dbus         883  0.1  0.0  57288  6024 ?        Ss   Jul26  14:09 /usr/bin/dbus-daemon --system --address=systemd: --no
+root         886  0.0  0.0 125172  4652 ?        Ssl  Jul26   0:37 /usr/sbin/irqbalance --foreground
+root         890  0.0  0.0  30064  3156 ?        Ss   Jul26   0:01 /usr/sbin/pure-authd -s /var/run/ftpd.sock -r /usr/lo
+nscd         918  0.0  0.0 1226232 7012 ?        Ssl  Jul26   3:57 /usr/sbin/nscd
+chrony       920  0.0  0.0 140184  4544 ?        S    Jul26   0:03 /usr/sbin/chronyd
+mailnull     943  0.0  0.1  88168 18148 ?        Ss   Jul26   0:04 /usr/sbin/exim -ps -bd -q15m -oP /var/spool/exim/exim
+root        1069  0.0  0.0      0     0 ?        S<   Jul26   0:07 [loop0]
+root        1077  0.0  0.0      0     0 ?        S    Jul26   0:02 [jbd2/loop0-8]
+root        1078  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ext4-rsv-conver]
+root        1327  0.0  0.0  10968  1060 ?        Ss   Jul26   0:00 /opt/nydus/bin/nydus-ex
+root        1330  0.0  0.0  27816  5660 ?        Ss   Jul26   0:01 pure-ftpd (SERVER)
+nydus       1333  0.0  0.0  11064  1940 ?        Ss   Jul26   0:00 /opt/nydus/bin/nydus-ex-api
+root        1334  0.0  0.0  75416  7736 ?        Ss   Jul26   0:03 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,ch
+root        1335  0.0  0.0  44944  5020 ?        Ss   Jul26   0:06 /usr/sbin/dovecot -F -c /etc/dovecot/dovecot.conf
+root        1336  0.0  0.0 105180  3560 ?        Ssl  Jul26   0:00 /usr/sbin/gssproxy -D
+root        1339  0.0  0.2 158128 37228 ?        Ss   Jul26   2:50 cpsrvd (SSL) - waiting for connections
+named       1351  0.0  0.3 777572 60108 ?        Ssl  Jul26   1:25 /usr/sbin/pdns_server --socket-dir=/run/pdns --guardi
+root        1358  0.0  0.1 617052 16760 ?        Ssl  Jul26   3:21 /usr/sbin/rsyslogd -n
+dovecot     1365  0.0  0.0  10476  1220 ?        S    Jul26   0:00 dovecot/anvil
+root        1376  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ib-comp-wq]
+root        1378  0.0  0.0      0     0 ?        I<   Jul26   0:00 [kworker/u17:0]
+root        1383  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ib-comp-unb-wq]
+root        1385  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ib_mcast]
+root        1387  0.0  0.0      0     0 ?        I<   Jul26   0:00 [ib_nl_sa_wq]
+root        1396  0.0  0.0  24508  1392 ?        Ss   Jul26   0:00 /usr/sbin/atd -f
+root        1399  0.0  0.0  24128  3236 ?        Ss   Jul26   0:44 /usr/sbin/crond -n
+root        1425  0.0  0.1 134444 30532 ?        S    Jul26   2:19 /opt/nydus/bin/nydus-ex
+root        1428  0.0  0.0  89616 15304 ?        Ss   Jul26   0:00 nginx: master process /usr/sbin/nginx -c /etc/nginx/n
+cpanelc+    1465  0.4  0.0  23300  4208 ?        Ss   Jul26  38:38 /usr/local/cpanel/3rdparty/sbin/p0f -i any -u cpanelc
+mysql       1484  8.3  6.1 4690496 985780 ?      Ssl  Jul26 692:55 /usr/sbin/mysqld
+root        1495  0.0  0.0   7648   540 ttyS0    Ss+  Jul26   0:00 /sbin/agetty -o -p -- \u --keep-baud 115200,38400,960
+root        1496  0.0  0.0   5080   716 tty1     Ss+  Jul26   0:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+root        1514  0.0  0.1 126024 24820 ?        Ss   Jul26   0:13 tailwatchd
+root        1515  0.0  0.0  86688  9516 ?        Ss   Jul26   0:20 dnsadmin - dormant mode
+root        1516  0.0  0.2 167136 40452 ?        Ss   Jul26   0:40 cpdavd - accepting connections on: 2079, 2080, 2091,
+root        1519  0.0  0.1 105084 17156 ?        Ss   Jul26   2:47 cPhulkd - processor
+nydus       1554  0.1  0.2 1028628 43968 ?       Sl   Jul26  15:48 /opt/nydus/bin/nydus-ex-api
+root        1563  0.0  0.0  58324  4860 ?        SN   Jul26   0:04 cpanellogd - sleeping for logs
+root        1779  0.0  0.1 219732 21796 ?        Ss   Jul26   0:41 /usr/sbin/httpd -k start
+polkitd     2194  0.0  0.1 2012580 25728 ?       Ssl  Jul26   3:13 /usr/lib/polkit-1/polkitd --no-debug
+root     1223121  0.4  0.1 409112 24148 ?        Ssl  Jul30  12:16 /usr/libexec/platform-python -Es /usr/sbin/tuned -l -
+editlat+ 1271299  0.0  0.0  89836  9880 ?        Ss   Jul30   0:56 /usr/lib/systemd/systemd --user
+editlat+ 1271302  0.0  0.0 154772  3624 ?        S    Jul30   0:00 (sd-pam)
+editlat+ 1271314 51.1  0.1 111784 27668 ?        Rs   Jul30 1461:53 /home/editlatexdev01/editlatex_python/env/bin/python
+editlat+ 1271317  0.0  0.0  50728 12612 ?        S    Jul30   0:00 /home/editlatexdev01/editlatex_python/env/bin/python
+editlat+ 1271318  0.2  0.7 501484 117264 ?       Sl   Jul30   7:37 /home/editlatexdev01/editlatex_python/env/bin/python
+editlat+ 1325806  0.0  0.0   1036     4 ?        S    Jul30   0:00 catatonit -P
+editlat+ 1325897  0.0  0.0  49440  2352 ?        Ss   Jul30   0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+root     1348669  0.0  0.0 197676 12808 ?        Ss   Jul30   0:10 php-fpm: master process (/usr/local/cpanel/etc/php-fp
+dovenull 1349356  0.0  0.0  27332  7284 ?        S    Jul30   0:00 dovecot/pop3-login
+dovenull 1349357  0.0  0.0  27412  7280 ?        S    Jul30   0:00 dovecot/imap-login
+root     1349358  0.0  0.0  10736  3000 ?        S    Jul30   0:00 dovecot/log
+dovenull 1349359  0.0  0.0  27348  7232 ?        S    Jul30   0:00 dovecot/pop3-login
+dovenull 1349360  0.0  0.0  27408  7460 ?        S    Jul30   0:00 dovecot/imap-login
+root     1349361  0.0  0.0  17180  6204 ?        S    Jul30   0:01 dovecot/config
+dovecot  1349362  0.0  0.0  14236  3272 ?        S    Jul30   0:00 dovecot/stats
+xpertxp+ 1369457  0.0  0.0  89740  9812 ?        Ss   Jul30   0:48 /usr/lib/systemd/systemd --user
+xpertxp+ 1369460  0.0  0.0 156820  5152 ?        S    Jul30   0:00 (sd-pam)
+root     1369735  0.0  0.0  13916  1920 ?        S    Jul30   0:00 /usr/local/cpanel/bin/splitlogs --dir=/etc/apache2/lo
+root     1369736  0.0  0.0  13916  1924 ?        S    Jul30   0:00 /usr/local/cpanel/bin/splitlogs --main=apache-traffic
+root     1369737  0.0  0.0  13916  2044 ?        S    Jul30   0:00 /usr/local/cpanel/bin/splitlogs --dir=/etc/apache2/lo
+nobody   1369738  0.0  0.0 219732  7392 ?        S    Jul30   0:00 /usr/sbin/httpd -k start
+root     1369739  0.0  0.0  82104 15936 ?        S    Jul30   0:00 /usr/local/cpanel/3rdparty/bin/perl /usr/local/cpanel
+nobody   1369740  0.0  0.1 2046220 19100 ?       Sl   Jul30   0:02 /usr/sbin/httpd -k start
+nobody   1369741  0.0  0.1 1980684 19156 ?       Sl   Jul30   0:02 /usr/sbin/httpd -k start
+nobody   1369742  0.0  0.1 2046220 18952 ?       Sl   Jul30   0:02 /usr/sbin/httpd -k start
+nobody   1369744  0.0  0.1 2046220 19080 ?       Sl   Jul30   0:02 /usr/sbin/httpd -k start
+nobody   1369754  0.0  0.1 2046220 19448 ?       Sl   Jul30   0:02 /usr/sbin/httpd -k start
+xpertxp+ 1377111  1.5  0.4 184880 73276 ?        Ss   Jul30  36:46 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_c
+xpertxp+ 1377114  0.0  0.0  53088 11568 ?        S    Jul30   0:00 /usr/bin/python3.9 -c from multiprocessing.resource_t
+wp-tool+ 1548288  0.0  0.4 317268 66400 ?        Ss   Jul31   0:52 /usr/bin/sw-engine /usr/local/cpanel/3rdparty/wp-tool
+root     1548313  0.0  0.2 404152 38324 ?        Ss   Jul31   0:08 php-fpm: master process (/opt/cpanel/ea-php81/root/et
+root     1548336  0.0  0.2 539000 41480 ?        Ss   Jul31   0:07 php-fpm: master process (/opt/cpanel/ea-php82/root/et
+root     1548359  0.0  0.2 352996 42500 ?        Ss   Jul31   0:00 sw-engine-fpm: master process (/etc/sw-engine/sw-engi
+wp-tool+ 1548380  0.0  0.2 298544 48240 ?        Ss   Jul31   0:01 /usr/bin/sw-engine /usr/local/cpanel/3rdparty/wp-tool
+root     1673885  0.0  0.0  89616  9196 ?        S    Jul31   0:04 nginx: logger process
+root     1673886  0.0  0.0  14048  1936 ?        S    Jul31   0:00 /usr/local/cpanel/bin/splitlogs --dir=/var/log/nginx/
+root     1673887  0.0  0.0  14048  1916 ?        S    Jul31   0:00 /usr/local/cpanel/bin/splitlogs --dir=/var/log/nginx/
+root     1673888  0.0  0.0  13916  1832 ?        S    Jul31   0:00 /usr/local/cpanel/bin/splitlogs --main=nginx-traffic.
+nobody   1673889  0.0  0.1  92816 17660 ?        S    Jul31   0:07 nginx: worker process
+nobody   1673890  0.0  0.0  89620 11316 ?        S    Jul31   0:00 nginx: cache manager process
+xpertxp+ 1681896  0.3  0.5 489168 88924 ?        Sl   Jul31   3:18 /usr/bin/python3.9 -c from multiprocessing.spawn impo
+root     1842410  0.0  0.0  24340  2244 ?        S    00:59   0:00 /usr/sbin/CROND -n
+root     1842452  0.0  0.0  12808  3036 ?        Ss   00:59   0:00 /bin/sh -c sleep $((1 + RANDOM % 5))h $((1 + RANDOM %
+root     1842473  0.0  0.0   7392   920 ?        S    00:59   0:00 sleep 5h 8m
+root     1870039  0.0  1.0 315600 169120 ?       Ss   02:57   0:08 /usr/local/cpanel/3rdparty/perl/536/bin/perl -T -w /u
+root     1873373  0.0  1.0 317036 161440 ?       S    03:11   0:02 spamd child
+root     1873374  0.0  0.9 315600 159692 ?       S    03:11   0:00 spamd child
+root     1897162  0.0  0.0      0     0 ?        I    04:57   0:00 [kworker/u16:2-events_unbound]
+root     1899149  0.0  0.0      0     0 ?        I    05:05   0:00 [kworker/u16:3-xfs-blockgc/sda1]
+root     1905300  0.0  0.0  79932 15208 ?        S    05:32   0:00 cPhulkd - dbprocessor
+root     1905807  0.0  0.0      0     0 ?        I    05:35   0:00 [kworker/u16:0-events_unbound]
+root     1905949  0.0  0.0      0     0 ?        I    05:36   0:00 [kworker/2:1-cgroup_pidlist_destroy]
+root     1906262  0.0  0.0      0     0 ?        I    05:38   0:00 [kworker/6:2-cgroup_pidlist_destroy]
+root     1907029  0.0  0.0      0     0 ?        I    05:41   0:00 [kworker/5:0-cgroup_pidlist_destroy]
+root     1907427  0.0  0.0      0     0 ?        I    05:44   0:00 [kworker/7:3-cgroup_pidlist_destroy]
+xpertxp+ 1908111  0.0  0.0  28032  2108 ?        S    05:45   0:00 pure-ftpd (IDLE)
+root     1908112  0.0  0.0  27820   648 ?        S    05:45   0:00 pure-ftpd (PRIV)
+root     1908414  0.0  0.0      0     0 ?        I    05:47   0:00 [kworker/4:3-cgroup_pidlist_destroy]
+root     1908490  0.0  0.0      0     0 ?        I    05:47   0:00 [kworker/2:0-cgroup_pidlist_destroy]
+root     1908972  0.0  0.0      0     0 ?        I    05:50   0:00 [kworker/5:3-mm_percpu_wq]
+root     1909215  0.0  0.0      0     0 ?        I    05:51   0:00 [kworker/7:4-cgroup_destroy]
+root     1909219  0.0  0.0      0     0 ?        I    05:51   0:00 [kworker/1:0-cgroup_destroy]
+root     1909446  0.0  0.0      0     0 ?        I    05:52   0:00 [kworker/4:0-events]
+root     1909693  0.0  0.0      0     0 ?        I    05:53   0:00 [kworker/0:2-cgroup_pidlist_destroy]
+root     1909904  0.0  0.0      0     0 ?        I    05:54   0:00 [kworker/1:1-cgroup_pidlist_destroy]
+root     1910014  0.0  0.0      0     0 ?        I    05:55   0:00 [kworker/2:3-cgroup_pidlist_destroy]
+root     1910029  0.0  0.0      0     0 ?        I    05:55   0:00 [kworker/6:0-cgroup_destroy]
+root     1910246  0.0  0.0      0     0 ?        I    05:56   0:00 [kworker/3:0-events]
+root     1910247  0.0  0.0      0     0 ?        I    05:56   0:00 [kworker/3:1-cgroup_pidlist_destroy]
+root     1910330  0.0  0.0      0     0 ?        I    05:56   0:00 [kworker/6:3-events]
+root     1910645  0.0  0.0      0     0 ?        I    05:58   0:00 [kworker/7:0-events]
+root     1910698  0.0  0.0      0     0 ?        I    05:58   0:00 [kworker/5:2-cgroup_pidlist_destroy]
+root     1910824  0.0  0.0      0     0 ?        I    05:59   0:00 [kworker/4:1-events]
+root     1910865  0.0  0.0      0     0 ?        I    05:59   0:00 [kworker/3:2-cgroup_pidlist_destroy]
+root     1910943  0.0  0.0      0     0 ?        I    05:59   0:00 [kworker/0:3-events]
+root     1911063  0.0  0.0      0     0 ?        I    06:00   0:00 [kworker/1:3-cgroup_pidlist_destroy]
+root     1911803  0.0  0.0      0     0 ?        I    06:01   0:00 [kworker/0:4-events]
+root     1912070  0.0  0.0      0     0 ?        I    06:03   0:00 [kworker/7:1-cgroup_pidlist_destroy]
+root     1912072  0.0  0.0      0     0 ?        I    06:03   0:00 [kworker/7:2-events]
+root     1912149  0.0  0.0      0     0 ?        I    06:03   0:00 [kworker/5:1-cgroup_destroy]
+root     1912150  0.0  0.0 134684  9456 ?        Ss   06:03   0:00 sshd: xpertxpresstrans [priv]
+xpertxp+ 1912156  0.0  0.0 134684  5188 ?        S    06:03   0:00 sshd: xpertxpresstrans@pts/0
+xpertxp+ 1912158  0.0  0.0  13416  4188 pts/0    Ss   06:03   0:00 -bash
+root     1912343  0.0  0.0      0     0 ?        I    06:04   0:00 [kworker/2:2-events_freezable]
+root     1912458  0.0  0.0      0     0 ?        I    06:05   0:00 [kworker/6:1-mm_percpu_wq]
+root     1912480  0.0  0.0      0     0 ?        I    06:05   0:00 [kworker/4:2]
+dovecot  1912537  0.0  0.0  37080  4180 ?        S    06:05   0:00 dovecot/auth
+root     1912571  0.0  0.0  43956  8280 ?        S    06:05   0:00 dovecot/lmtp
+root     1912655  0.0  0.0      0     0 ?        I    06:05   0:00 [kworker/3:3-events]
+root     1912740  0.0  0.0      0     0 ?        I    06:05   0:00 [kworker/1:2-events_power_efficient]
+xpertxp+ 1912907  0.0  0.0  45804  3812 pts/0    R+   06:06   0:00 ps -aux
+[xpertxpresstrans@2 ~]$ ps -aux | grep python
+root     1223121  0.4  0.1 409112 24148 ?        Ssl  Jul30  12:16 /usr/libexec/platform-python -Es /usr/sbin/tuned -l -P
+editlat+ 1271314 51.1  0.1 111784 27668 ?        Ss   Jul30 1461:56 /home/editlatexdev01/editlatex_python/env/bin/pytho run.py
+editlat+ 1271317  0.0  0.0  50728 12612 ?        S    Jul30   0:00 /home/editlatexdev01/editlatex_python/env/bin/python -c from multiprocessing.resource_tracker import main;main(4)
+editlat+ 1271318  0.2  0.7 501484 117264 ?       Sl   Jul30   7:37 /home/editlatexdev01/editlatex_python/env/bin/python -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7) --multiprocessing-fork
+xpertxp+ 1377111  1.5  0.4 184880 73276 ?        Ss   Jul30  36:47 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+xpertxp+ 1377114  0.0  0.0  53088 11568 ?        S    Jul30   0:00 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+xpertxp+ 1681896  0.3  0.5 489168 88924 ?        Sl   Jul31   3:18 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_handle=8) --multiprocessing-fork
+xpertxp+ 1912927  0.0  0.0  12224  1096 pts/0    R+   06:07   0:00 grep --color=auto python
+[xpertxpresstrans@2 ~]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: active (running) since Wed 2025-07-30 14:04:11 UTC; 1 day 16h ago
+ Main PID: 1377111 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1377111 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1377114 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1681896 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+[xpertxpresstrans@2 ~]$ journalctl -user -u integrity_checks.service
+Hint: You are currently not seeing messages from other users and the system.
+      Users in the 'systemd-journal' group can see all messages. Pass -q to
+      turn off this notice.
+No journal files were opened due to insufficient permissions.
+[xpertxpresstrans@2 ~]$ journalctl --user -u integrity_checks.service
+Hint: You are currently not seeing messages from the system.
+      Users in the 'systemd-journal' group can see all messages. Pass -q to
+      turn off this notice.
+No journal files were opened due to insufficient permissions.
+[xpertxpresstrans@2 ~]$ journalctl --user-uint integrity_checks
+journalctl: unrecognized option '--user-uint'
+[xpertxpresstrans@2 ~]$ journalctl --user-unit integrity_checks
+Hint: You are currently not seeing messages from the system.
+      Users in the 'systemd-journal' group can see all messages. Pass -q to
+      turn off this notice.
+No journal files were opened due to insufficient permissions.
+[xpertxpresstrans@2 ~]$ journalctl --user --unit integrity_checks
+Hint: You are currently not seeing messages from the system.
+      Users in the 'systemd-journal' group can see all messages. Pass -q to
+      turn off this notice.
+No journal files were opened due to insufficient permissions.
+[xpertxpresstrans@2 ~]$ systemctl --user stop integrity_checks.service
+[xpertxpresstrans@2 ~]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: inactive (dead)
+[xpertxpresstrans@2 ~]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: inactive (dead)
+[xpertxpresstrans@2 ~]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: inactive (dead)
+[xpertxpresstrans@2 ~]$ ls
+access-logs  etc  integrity_checks  logs  mail  perl5  public_ftp  public_html  ssl  tmp  www
+[xpertxpresstrans@2 ~]$ vim .config/systemd/user/integrity_checks.service
+[xpertxpresstrans@2 ~]$ xs integrity_checks/
+-bash: xs: command not found
+[xpertxpresstrans@2 ~]$ l
+-bash: l: command not found
+[xpertxpresstrans@2 ~]$ ls
+access-logs  etc  integrity_checks  logs  mail  perl5  public_ftp  public_html  ssl  tmp  www
+[xpertxpresstrans@2 ~]$ pwd
+/home/xpertxpresstrans
+[xpertxpresstrans@2 ~]$ vim .config/systemd/user/integrity_checks.service
+[xpertxpresstrans@2 ~]$ systemctl --user start integrity_checks.service
+[xpertxpresstrans@2 ~]$ cd integrity_checks/
+[xpertxpresstrans@2 integrity_checks]$ ls
+certs.pem  config.sample.py  key.pem  models.py    requirements.txt  schemas.py  uploads
+config.py  database.py       main.py  __pycache__  run.py            test.db     utils.py
+[xpertxpresstrans@2 integrity_checks]$ ;s
+-bash: syntax error near unexpected token `;'
+[xpertxpresstrans@2 integrity_checks]$ ls
+certs.pem  config.sample.py  key.pem  models.py    requirements.txt  schemas.py  uploads
+config.py  database.py       main.py  __pycache__  run.py            test.db     utils.py
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: active (running) since Fri 2025-08-01 06:13:20 UTC; 14s ago
+ Main PID: 1914158 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1914158 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1914159 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1914160 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+[xpertxpresstrans@2 integrity_checks]$ ls
+certs.pem  config.sample.py  key.pem  models.py    requirements.txt  schemas.py  uploads
+config.py  database.py       main.py  __pycache__  run.py            test.db     utils.py
+[xpertxpresstrans@2 integrity_checks]$ touch integrity.log
+[xpertxpresstrans@2 integrity_checks]$ ls
+certs.pem  config.sample.py  integrity.log  main.py    __pycache__       run.py      test.db  utils.py
+config.py  database.py       key.pem        models.py  requirements.txt  schemas.py  uploads
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+
+
+
+
+^C
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user daemon-reload
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: active (running) since Fri 2025-08-01 06:13:20 UTC; 2min 27s ago
+ Main PID: 1914158 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1914158 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1914159 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1914160 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+...skipping...
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: active (running) since Fri 2025-08-01 06:13:20 UTC; 2min 27s ago
+ Main PID: 1914158 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1914158 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1914159 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1914160 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user restart integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: active (running) since Fri 2025-08-01 06:15:57 UTC; 1s ago
+ Main PID: 1915130 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1915130 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1915131 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1915132 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+
+
+
+
+
+
+
+
+
+^C
+[xpertxpresstrans@2 integrity_checks]$ ls
+certs.pem  config.sample.py  integrity.log  main.py    __pycache__       run.py      test.db  utils.py
+config.py  database.py       key.pem        models.py  requirements.txt  schemas.py  uploads
+[xpertxpresstrans@2 integrity_checks]$ chmod 664 integrity.log
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+^C
+[xpertxpresstrans@2 integrity_checks]$ ls -la
+total 96
+drwxr-xr-x  4 xpertxpresstrans xpertxpresstrans  4096 Aug  1 06:13 .
+drwx--x--x 20 xpertxpresstrans xpertxpresstrans  4096 Aug  1 06:13 ..
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans  2338 Jul 30 13:44 certs.pem
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans   398 Jul 30 13:32 config.py
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans   120 Jul 30 13:32 config.sample.py
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans   719 Jul 30 13:37 database.py
+-rw-rw-r--  1 xpertxpresstrans xpertxpresstrans     0 Aug  1 06:13 integrity.log
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans  1703 Jul 30 13:44 key.pem
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans 23619 Jul 31 12:43 main.py
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans  3593 Jul 31 12:45 models.py
+drwxr-xr-x  2 xpertxpresstrans xpertxpresstrans  4096 Jul 31 12:45 __pycache__
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans    60 Jul 30 13:32 requirements.txt
+-rw-rw-r--  1 xpertxpresstrans xpertxpresstrans   261 Jul 30 14:04 run.py
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans  1295 Jul 30 13:32 schemas.py
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans 16384 Jul 30 13:32 test.db
+drwxr-xr-x 12 xpertxpresstrans xpertxpresstrans  4096 Aug  1 06:15 uploads
+-rw-r--r--  1 xpertxpresstrans xpertxpresstrans  1169 Jul 30 13:32 utils.py
+[xpertxpresstrans@2 integrity_checks]$ chmod 666 integrity.log
+[xpertxpresstrans@2 integrity_checks]$ ls
+certs.pem  config.sample.py  integrity.log  main.py    __pycache__       run.py      test.db  utils.py
+config.py  database.py       key.pem        models.py  requirements.txt  schemas.py  uploads
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user restart integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user daemon-reload
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user restart integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user restart integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ vim .config/systemd/user/integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ vim ~/.config/systemd/user/integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user daemon-reload
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user restart integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+
+
+
+
+
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: active (running) since Fri 2025-08-01 06:18:11 UTC; 14s ago
+ Main PID: 1915557 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1915557 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1915558 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1915559 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+
+
+
+^C
+[xpertxpresstrans@2 integrity_checks]$ cd ..
+[xpertxpresstrans@2 ~]$ ls
+access-logs  integrity_checks  intergrity.log  mail   public_ftp   ssl  www
+etc          integrity.log     logs            perl5  public_html  tmp
+[xpertxpresstrans@2 ~]$ tail -f inte
+tail: cannot open 'inte' for reading: No such file or directory
+tail: no files remaining
+[xpertxpresstrans@2 ~]$ tail -f inte
+integrity_checks/ integrity.log     intergrity.log
+[xpertxpresstrans@2 ~]$ tail -f integrity.log
+INFO:     Will watch for changes in these directories: ['/home/xpertxpresstrans/integrity_checks']
+INFO:     Uvicorn running on https://0.0.0.0:8445 (Press CTRL+C to quit)
+INFO:     Started reloader process [1915557] using StatReload
+INFO:     Started server process [1915559]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+^C
+[xpertxpresstrans@2 ~]$ ls
+access-logs  integrity_checks  intergrity.log  mail   public_ftp   ssl  www
+etc          integrity.log     logs            perl5  public_html  tmp
+[xpertxpresstrans@2 ~]$ rm integrity.log
+[xpertxpresstrans@2 ~]$ rm intergrity.log
+[xpertxpresstrans@2 ~]$ vim ~/.config/systemd/user/integrity_checks.service
+[xpertxpresstrans@2 ~]$ systemctl --user daemon-reload
+[xpertxpresstrans@2 ~]$ systemctl --user restart integrity_checks.service
+[xpertxpresstrans@2 ~]$ cd integrity_checks/
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+INFO:     Will watch for changes in these directories: ['/home/xpertxpresstrans/integrity_checks']
+INFO:     Uvicorn running on https://0.0.0.0:8445 (Press CTRL+C to quit)
+INFO:     Started reloader process [1915979] using StatReload
+INFO:     Started server process [1915981]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+
+
+
+
+
+
+
+
+
+
+
+INFO:     103.66.12.3:57740 - "GET /docs HTTP/1.1" 200 OK
+INFO:     103.66.12.3:57740 - "GET /openapi.json HTTP/1.1" 200 OK
+^C
+[xpertxpresstrans@2 integrity_checks]$ cat run.py
+import uvicorn
+import main
+
+if __name__ == "__main__":
+    uvicorn.run("main:app",
+                 host="0.0.0.0",
+                 port=8445,
+                 reload=True,
+                 ssl_keyfile="./key.pem",
+                 ssl_certfile="./certs.pem")
+[xpertxpresstrans@2 integrity_checks]$ cd
+[xpertxpresstrans@2 ~]$ cd .config/systemd/user/
+[xpertxpresstrans@2 user]$ ls
+integrity_checks.service
+[xpertxpresstrans@2 user]$ vim integrity_checks.service
+[xpertxpresstrans@2 user]$ systemctl --user daemon-reload
+[xpertxpresstrans@2 user]$ systemctl --user restart integrity_checks.service
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+^C
+[xpertxpresstrans@2 user]$ ls
+integrity_checks.service
+[xpertxpresstrans@2 user]$ cd
+[xpertxpresstrans@2 ~]$ systemctl --user status integrity_checks.service
+● integrity_checks.service - IntegrityChecks
+   Loaded: loaded (/home/xpertxpresstrans/.config/systemd/user/integrity_checks.service; disabled; vendor preset: enabl>
+   Active: deactivating (stop-sigterm) since Fri 2025-08-01 06:22:23 UTC; 24s ago
+ Main PID: 1915979 (python3.9)
+   CGroup: /user.slice/user-1016.slice/user@1016.service/integrity_checks.service
+           ├─1915979 /usr/bin/python3.9 /home/xpertxpresstrans/integrity_checks/run.py
+           ├─1915980 /usr/bin/python3.9 -c from multiprocessing.resource_tracker import main;main(5)
+           └─1915981 /usr/bin/python3.9 -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=6, pipe_>
+[xpertxpresstrans@2 ~]$ systemctl --user restart integrity_checks.service
+^C
+[xpertxpresstrans@2 ~]$ cd integrity_checks/
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+INFO:     Will watch for changes in these directories: ['/home/xpertxpresstrans/integrity_checks']
+INFO:     Uvicorn running on https://0.0.0.0:8445 (Press CTRL+C to quit)
+INFO:     Started reloader process [1915979] using StatReload
+INFO:     Started server process [1915981]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     103.66.12.3:57740 - "GET /docs HTTP/1.1" 200 OK
+INFO:     103.66.12.3:57740 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+
+
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user restart integrity_checks.service
+^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user stop integrity_checks.service
+^[[A^C
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user force stop integrity_checks.service
+Unknown operation force.
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user stop integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ systemctl --user start integrity_checks.service
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+INFO:     103.66.12.3:57740 - "GET /docs HTTP/1.1" 200 OK
+INFO:     103.66.12.3:57740 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+INFO:     Will watch for changes in these directories: ['/home/xpertxpresstrans/integrity_checks']
+INFO:     Uvicorn running on https://0.0.0.0:8445 (Press CTRL+C to quit)
+INFO:     Started reloader process [1916972] using StatReload
+INFO:     Started server process [1916980]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+^C
+[xpertxpresstrans@2 integrity_checks]$ tail -f integrity.log
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+INFO:     Will watch for changes in these directories: ['/home/xpertxpresstrans/integrity_checks']
+INFO:     Uvicorn running on https://0.0.0.0:8445 (Press CTRL+C to quit)
+INFO:     Started reloader process [1916972] using StatReload
+INFO:     Started server process [1916980]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     178.22.24.17:55014 - "GET /remote/login HTTP/1.1" 404 Not Found
+INFO:     178.22.24.17:56455 - "GET /login HTTP/1.1" 405 Method Not Allowed
+^C
+[xpertxpresstrans@2 integrity_checks]$

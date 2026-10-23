@@ -1,0 +1,1 @@
+[12-07-2024 15:06:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_51386.zip --> Success

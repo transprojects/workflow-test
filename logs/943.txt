@@ -1,0 +1,2 @@
+[03-09-2024 09:44:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_52353 need to be modified.pdf --> Success
+[03-09-2024 09:44:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> An update to an article in issue TSP_Phyton-93-8 Re_ RE_ TSP_Phyton_93-8 8_26 - Upload.msg --> Success

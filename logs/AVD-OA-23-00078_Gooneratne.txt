@@ -1,0 +1,2 @@
+[26-04-2024 11:37:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> AVD request for J-STAGE data.msg --> Success
+[26-04-2024 11:37:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> AVD-OA-23-00078_Gooneratne_1-2_authorchecked.pdf --> Success

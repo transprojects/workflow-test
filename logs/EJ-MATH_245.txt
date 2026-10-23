@@ -1,0 +1,11 @@
+[01-10-2023 17:50:59] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 17:51:12] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJMATH_245.docx --> Success
+[01-10-2023 17:51:13] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 17:51:13] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 17:51:13] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 17:51:23] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[13-10-2023 20:31:11] AUTHOR SUBMISSION --> LINUX --> 77.241.136.67 --> FP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 20:31:28] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 20:31:38] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.136.67 --> EJ-MATH_245.zipEmail sent successfully. --> Success
+[20-10-2023 00:51:15] PRODUCTION REIEW --> LINUX --> 77.241.136.75 --> REVISESED PROOF downloaded by Ivanna --> Success
+[20-10-2023 21:01:11] PRODUCTION REIEW --> LINUX --> 77.241.136.132 --> REVISESED PROOF downloaded by Ivanna --> Success

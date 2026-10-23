@@ -1,0 +1,3 @@
+[16-08-2024 11:28:36] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Final Manuscript - 21-1294.docx --> Success
+[16-08-2024 11:28:37] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Signed Copyright Transfer Form.pdf --> Success
+[16-08-2024 11:28:37] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Plagirism Report.docx.pdf --> Success

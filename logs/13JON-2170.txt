@@ -1,0 +1,2 @@
+[12-06-2024 14:30:32] FP --> LINUX --> 10.10.10.200 --> Files uploaded --> Manuscript_ID_JON-2024-0007_(Revised).pdf --> Success
+[26-06-2024 10:25:43] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JON -- Effect of Hematocrit-Dependent Variable___ _13JON-2170_ - Proof.msg --> Success

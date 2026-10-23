@@ -1,0 +1,1 @@
+python C:/LAMP/Apache/htdocs/workflow-new/python_ftp_upload/ftp_uploads_crons.py

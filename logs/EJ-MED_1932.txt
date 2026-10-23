@@ -1,0 +1,22 @@
+[18-10-2023 18:09:29] FP --> LINUX --> 77.241.136.44 --> basic information updated --> Success
+[18-10-2023 18:09:32] FP --> LINUX --> 77.241.136.44 --> Files uploaded --> Zakiyuddin_EJMED.docx --> Success
+[18-10-2023 18:09:33] FP --> LINUX --> 77.241.136.44 --> zip created in linux server --> Success
+[18-10-2023 18:09:33] FP --> LINUX --> 77.241.136.44 --> zip file size updated in read me txt file --> Success
+[18-10-2023 18:09:33] FP --> LINUX --> 77.241.136.44 --> Curl function initiated  --> Success
+[18-10-2023 18:09:42] FP --> LINUX --> 77.241.136.44 --> Email sent successfully for file moved to workflow. --> Success
+[23-10-2023 01:31:05] AUTHOR SUBMISSION --> LINUX --> 176.88.142.249 --> FP files from transforma downloaded by Pelin --> Success
+[24-10-2023 18:41:29] AUTHOR SUBMISSION --> LINUX --> 77.241.136.41 --> Proof zip files from author downloaded by Ivanna --> Success
+[24-10-2023 18:41:31] AUTHOR SUBMISSION --> LINUX --> 77.241.136.41 --> FP files from transforma downloaded by Ivanna --> Success
+[24-10-2023 18:43:05] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.41 --> Files uploaded --> 1932.zip --> Success
+[24-10-2023 18:43:07] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 18:43:07] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 18:46:34] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.41 --> EJ-MED_1932.zipSMTP Error: Could not authenticate.
+Error sending email: SMTP Error: Could not authenticate.<p>SMTP server error: UGFzc3dvcmQ6
+</p>
+<br>The following From address failed: 
+Error sending email: The following From address failed: <p>SMTP server error: 5.7.3 Authentication unsuccessful [MA0PR01CA0077.INDPRD01.PROD.OUTLOOK.COM 2023-10-24T13:16:19.510Z 08DBD2441DA7B22E]
+</p>
+<br>The following From address failed: 
+Error sending email: The following From address failed: <p>SMTP server error: 5.7.57 Client not authenticated to send mail. Error: 535 5.7.3 Authentication unsuccessful [MA0PR01CA0077.INDPRD01.PROD.OUTLOOK.COM 2023-10-24T13:16:29.542Z 08DBD2441DA7B22E]
+</p>
+<br>Email sending failed after maximum retries. --> Success

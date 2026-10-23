@@ -1,0 +1,12 @@
+[01-10-2023 17:25:00] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 17:25:09] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJENERGY_118 (1).docx --> Success
+[01-10-2023 17:25:11] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 17:25:11] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 17:25:11] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 17:25:20] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[20-10-2023 17:44:44] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> Proof zip files from author downloaded by Ivanna --> Success
+[24-10-2023 17:35:26] AUTHOR SUBMISSION --> LINUX --> 77.241.136.41 --> Proof zip files from author downloaded by Ivanna --> Success
+[24-10-2023 17:37:22] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.41 --> Files uploaded --> 118.zip --> Success
+[24-10-2023 17:37:43] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 17:37:43] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 17:37:51] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.41 --> EJ-ENERGY_118.zipEmail sent successfully. --> Success

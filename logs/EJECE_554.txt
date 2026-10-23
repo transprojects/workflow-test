@@ -1,0 +1,18 @@
+[26-09-2023 12:45:13] FINAL DELIVERY --> LINUX --> 157.46.85.44 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[26-09-2023 22:54:47] FINAL DELIVERY --> LINUX --> 77.241.128.113 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[26-09-2023 23:01:21] FINAL CORRECTIONS   --> LINUX --> 77.241.128.113 --> PDF attached for artilce in linux server --> Success
+[26-09-2023 23:01:21] FINAL CORRECTIONS   --> LINUX --> 77.241.128.113 --> zip created in linux server --> Success
+[26-09-2023 23:01:21] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.128.113 --> Curl function initiated  --> Success
+[26-09-2023 23:01:54] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.128.113 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJECE/Vol00000/EJECE_554/REV4/upload completedEmail sent successfully. --> Success
+[27-09-2023 15:30:50] FINAL DELIVERY --> LINUX --> 117.232.75.162 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[29-09-2023 02:01:58] FINAL DELIVERY --> LINUX --> 77.241.136.137 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[29-09-2023 02:02:48] FINAL DELIVERY --> LINUX --> 77.241.136.137 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[29-09-2023 02:02:58] FINAL DELIVERY --> LINUX --> 77.241.136.137 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[03-10-2023 17:32:01] FINAL DELIVERY --> LINUX --> 106.195.37.62 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[04-10-2023 00:15:09] FINAL DELIVERY --> LINUX --> 77.241.136.189 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[04-10-2023 21:05:16] FINAL DELIVERY --> LINUX --> 77.241.128.161 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[04-10-2023 21:32:50] FINAL DELIVERY -->  --> 59.94.153.69 --> PUBLISHED --> published by TRANSFORMA
+[08-10-2023 08:54:59] FINAL DELIVERY --> LINUX --> 59.92.87.68 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[08-10-2023 08:55:13] FINAL DELIVERY --> LINUX --> 59.92.87.68 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[13-10-2023 16:29:38] FINAL DELIVERY --> LINUX --> 77.241.136.67 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 16:37:06] FINAL DELIVERY --> LINUX --> 77.241.136.67 --> PUBLISHED --> published by Ivanna

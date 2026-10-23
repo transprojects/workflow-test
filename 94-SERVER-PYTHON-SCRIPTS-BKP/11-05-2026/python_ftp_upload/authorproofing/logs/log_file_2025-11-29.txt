@@ -1,0 +1,21 @@
+
+
+Program Run at: 2025-11-29 17:49:39.922404
+=============================================================
+Msg: Database workflow in localhost connected Successfully.
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+{'42': [19671]}
+Msg: Working on Customer_id 42
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Connected to FTP server 52.23.135.119
+Msg: Connected to FTP server xperttrack.transforma.in
+Local Path: Out/TSP/JRM_TSP_JRM_52172.zip.zip
+FTP Path: REV/TSP/JRM/TSP_JRM_52172/REV1/transforma-to-client
+Msg: File exists on source FTP: JRM_TSP_JRM_52172.zip
+Msg: Downloading from source FTP: Out/TSP/JRM_TSP_JRM_52172.zip.zip
+Msg: File downloaded successfully from source FTP.
+Msg: Uploading to destination FTP: REV/TSP/JRM/TSP_JRM_52172/REV1/transforma-to-client/TSP_JRM_52172.zip
+Msg: File uploaded successfully to destination FTP.
+['Msg: Database workflow in localhost connected Successfully.', 'Msg: Database workflow in 52.23.135.119 connected Successfully.', "{'42': [19671]}", 'Msg: Working on Customer_id 42', 'Msg: Database workflow in 52.23.135.119 connected Successfully.', 'Msg: Connected to FTP server 52.23.135.119', 'Msg: Connected to FTP server xperttrack.transforma.in', 'Local Path: Out/TSP/JRM_TSP_JRM_52172.zip.zip', 'FTP Path: REV/TSP/JRM/TSP_JRM_52172/REV1/transforma-to-client', 'Msg: File exists on source FTP: JRM_TSP_JRM_52172.zip', 'Msg: Downloading from source FTP: Out/TSP/JRM_TSP_JRM_52172.zip.zip', 'Msg: File downloaded successfully from source FTP.', 'Msg: Uploading to destination FTP: REV/TSP/JRM/TSP_JRM_52172/REV1/transforma-to-client/TSP_JRM_52172.zip', 'Msg: File uploaded successfully to destination FTP.', [...]]
+=============================================================
+END OF LOGS

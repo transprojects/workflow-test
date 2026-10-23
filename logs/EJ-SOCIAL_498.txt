@@ -1,0 +1,18 @@
+[18-10-2023 00:02:12] FP --> LINUX --> 88.255.99.39 --> basic information updated --> Success
+[18-10-2023 00:02:15] FP --> LINUX --> 88.255.99.39 --> Files uploaded --> ejsocial-498-galley-2.docx --> Success
+[18-10-2023 00:02:16] FP --> LINUX --> 88.255.99.39 --> zip created in linux server --> Success
+[18-10-2023 00:02:16] FP --> LINUX --> 88.255.99.39 --> zip file size updated in read me txt file --> Success
+[18-10-2023 00:02:16] FP --> LINUX --> 88.255.99.39 --> Curl function initiated  --> Success
+[18-10-2023 00:02:24] FP --> LINUX --> 88.255.99.39 --> Email sent successfully for file moved to workflow. --> Success
+[22-10-2023 19:09:45] AUTHOR SUBMISSION --> LINUX --> 159.146.73.232 --> Proof zip files from author downloaded by Hande --> Success
+[22-10-2023 19:16:00] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.73.232 --> Files uploaded --> EJ-SOCIAL_498+HS.pdf --> Success
+[22-10-2023 19:16:01] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.73.232 --> zip created in linux server --> Success
+[22-10-2023 19:16:01] AUTHOR SUBMISSION REV1 --> LINUX --> 159.146.73.232 --> Curl function initiated  --> Success
+[22-10-2023 19:16:09] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 159.146.73.232 --> EJ-SOCIAL_498.zipEmail sent successfully. --> Success
+[28-10-2023 17:59:58] PRODUCTION REIEW --> LINUX --> 46.106.127.84 --> REVISESED PROOF downloaded by Hande --> Success
+[28-10-2023 18:09:26] META FORM  --> LINUX --> 46.106.127.84 --> Files uploaded --> EJ-SOCIAL_498+HS.pdf --> Success
+[28-10-2023 18:09:28] META FORM --> LINUX --> 46.106.127.84 --> Correction status updated & form submitted --> Success
+[28-10-2023 18:09:28] META FORM --> LINUX --> 46.106.127.84 --> PDF files exist in the folder --> Success
+[28-10-2023 18:09:28] META FORM --> LINUX --> 46.106.127.84 --> zip created in linux server --> Success
+[28-10-2023 18:09:28] META FORM --> LINUX --> 46.106.127.84 --> Curl function initiated  --> Success
+[28-10-2023 18:09:36] META FORM --> LINUX --> 46.106.127.84 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24954'Email sent successfully. --> Success

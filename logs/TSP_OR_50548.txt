@@ -1,0 +1,3 @@
+[17-08-2024 10:20:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_50548 urgent.pdf --> Success
+[03-09-2024 12:41:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> An update to the TSP_OR_50548_ Re_ RE_ TSP Revised Upload.msg --> Success
+[03-09-2024 12:42:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_50548-need revisions.zip --> Success

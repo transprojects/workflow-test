@@ -1,0 +1,21 @@
+
+
+Program Run at: 2026-05-11 15:48:31.519455
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-11 15:48:31.856142
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-11 15:48:32.182274
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------

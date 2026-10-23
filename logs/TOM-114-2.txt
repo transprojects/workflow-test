@@ -1,0 +1,7 @@
+[04-05-2024 10:48:15] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[04-05-2024 10:48:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-2.zip --> Success
+[04-05-2024 10:48:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Controlled-Keywords-For-Authors-Thema-2024.xlsx --> Success
+[04-05-2024 10:48:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 - special issue.msg --> Success
+[04-05-2024 10:48:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 for typesetting.msg --> Success
+[20-06-2024 15:02:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114-2 - author corrections on the ftp.msg --> Success
+[20-06-2024 15:04:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-2_CX2.zip --> Success

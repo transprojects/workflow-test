@@ -1,0 +1,3 @@
+[12-06-2024 14:38:38] FP --> LINUX --> 10.10.10.200 --> Files uploaded --> Graphical_Abstract.pdf --> Success
+[12-06-2024 14:38:41] FP --> LINUX --> 10.10.10.200 --> Files uploaded --> Manuscript_cylinder.pdf --> Success
+[25-06-2024 13:22:22] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JON -- Thin Au_Ag_Cu-Water Nanoliquid Film___ _13JON-2176_ - Proof.msg --> Success

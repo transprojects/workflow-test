@@ -1,0 +1,14 @@
+[26-04-2024 13:37:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ MKT-080 - author corrections on the FTP - further revises.msg --> Success
+[26-04-2024 13:38:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-080_CX5.zip --> Success
+[08-05-2024 16:46:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ MKT-080 - author corrections on the FTP - further revises.msg --> Success
+[08-05-2024 16:49:34] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-080_CX6.zip --> Success
+[05-06-2024 10:01:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ MKT-080 - author corrections on the FTP - further revises to voucher proof.msg --> Success
+[05-06-2024 10:04:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-080_CX7.pdf --> Success
+[12-06-2024 10:09:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ MKT-080 - author corrections on the FTP - further revises to voucher proof.msg --> Success
+[12-06-2024 10:10:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-080_CX8.pdf --> Success
+[12-06-2024 14:31:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ MKT-080 - author corrections on the FTP - request final files.msg --> Success
+[28-06-2024 10:22:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ MKT-080 - final files - corrections.msg --> Success
+[28-06-2024 10:23:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-080-abstract-page-addition.pdf --> Success
+[28-06-2024 10:23:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-080 He+Rao turnover.docx --> Success
+[28-06-2024 10:23:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-editorialboard.tex --> Success
+[28-06-2024 10:23:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MKT-seriespage.tex --> Success

@@ -1,0 +1,5 @@
+[07-08-2024 12:53:31] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 2. Graphical abstract.docx --> Success
+[07-08-2024 12:53:31] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 1. Manuscript.docx --> Success
+[07-08-2024 12:53:32] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 3. Copyright transfer agreement.pdf --> Success
+[07-08-2024 12:53:32] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 4. Plagiarism MS3_Electromagnetic properties of Y1.5Ba2Cu3O7-y ceramic oxide bulk.pdf --> Success
+[14-08-2024 10:40:05] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JNO -- Electromagnetic properties of___ _19JNO-3652-YEOM_ - Proof.msg --> Success

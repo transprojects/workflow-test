@@ -1,0 +1,6 @@
+[23-07-2024 07:08:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2149).msg --> Success
+[23-07-2024 07:08:31] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2149-corrected-proof.zip --> Success
+[23-07-2024 07:08:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2149).msg --> Success
+[23-07-2024 07:08:48] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_CS/Vol00000/peerj-cs-2149/REV1//FW_ _cs_ Forum comment posted (cs-2149).msg --> Failure
+[23-07-2024 07:09:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ -Forum comment posted (cs-2149).msg --> Success
+[01-08-2024 12:17:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2149).msg --> Success

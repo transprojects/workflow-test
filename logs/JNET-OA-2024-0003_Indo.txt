@@ -1,0 +1,14 @@
+[16-04-2024 14:13:57] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[16-04-2024 14:14:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET new files uploaded.msg --> Success
+[16-04-2024 14:14:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Tables1-2.docx --> Success
+[16-04-2024 14:14:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[16-04-2024 14:14:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[16-04-2024 14:14:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1.jpg --> Success
+[16-04-2024 14:14:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure2.tiff --> Success
+[16-04-2024 14:14:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure3.jpg --> Success
+[16-04-2024 14:14:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure4.tif --> Success
+[25-04-2024 16:14:16] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ JNET request for revision.msg --> Success
+[25-04-2024 16:14:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0003_Indo_1_checked-2.pdf --> Success
+[08-05-2024 12:53:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[13-05-2024 10:23:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for J-STAGE.msg --> Success
+[13-05-2024 10:24:14] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0003_Indo_1-3_authorchecked.pdf --> Success

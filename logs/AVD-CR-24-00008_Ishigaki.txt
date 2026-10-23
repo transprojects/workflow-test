@@ -1,0 +1,2 @@
+[13-05-2024 10:25:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> AVD request for J-STAGE data.msg --> Success
+[13-05-2024 10:25:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> AVD-CR-24-00008_Ishigaki_1_ckd_authorchecked.pdf --> Success

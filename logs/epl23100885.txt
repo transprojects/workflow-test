@@ -1,0 +1,3 @@
+[25-04-2024 17:49:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Files uploaded for article epl23100885 - Authors corrections.msg --> Success
+[26-04-2024 21:39:04] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> EPL paper epl23100885 - further correction.msg --> Success
+[30-04-2024 10:50:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ URGENT epl23100885 - resupply.msg --> Success

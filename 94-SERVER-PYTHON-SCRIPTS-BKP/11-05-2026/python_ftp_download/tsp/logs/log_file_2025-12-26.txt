@@ -1,0 +1,14 @@
+
+
+Program Run at: 2025-12-26 16:06:55.646546
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-26 16:09:27.471852
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------

@@ -1,0 +1,21 @@
+[25-09-2023 17:46:03] LINUX --> 77.241.128.118 --> Proof zip files from author downloaded by Ivanna --> Success
+[25-09-2023 17:51:33] LINUX --> 77.241.128.118 --> Files uploaded --> EJ-MED_1910 Proofing 9_21_2023.pdf --> Success
+[25-09-2023 17:51:41] LINUX --> 77.241.128.118 --> zip created in linux server --> Success
+[25-09-2023 17:51:41] LINUX --> 77.241.128.118 --> Curl function initiated  --> Success
+[25-09-2023 17:51:51] LINUX --> 77.241.128.118 --> EJ-MED_1910.zipEmail sent successfully. --> Success
+[27-09-2023 10:34:46] PRODUCTION REIEW --> LINUX --> 171.79.59.108 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[05-10-2023 20:26:57] PRODUCTION REIEW --> LINUX --> 77.241.128.161 --> REVISESED PROOF downloaded by Ivanna --> Success
+[06-10-2023 22:04:12] PRODUCTION REIEW --> LINUX --> 59.92.87.210 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[09-10-2023 16:25:04] PRODUCTION REIEW --> LINUX --> 77.241.128.153 --> REVISESED PROOF downloaded by Ivanna --> Success
+[09-10-2023 16:25:06] PRODUCTION REIEW --> LINUX --> 109.228.157.201 --> REVISESED PROOF downloaded by  --> Failure
+[09-10-2023 16:32:15] META FORM  --> LINUX --> 77.241.128.153 --> Files uploaded --> HNaji Fig 1 Caloric Restriction.jpg --> Success
+[09-10-2023 16:32:40] META FORM --> LINUX --> 77.241.128.153 --> Correction status updated & form submitted --> Success
+[09-10-2023 16:32:40] META FORM --> LINUX --> 77.241.128.153 --> No PDF files found in the folder --> Failure
+[09-10-2023 16:32:40] META FORM --> LINUX --> 77.241.128.153 --> zip created in linux server --> Success
+[09-10-2023 16:32:40] META FORM --> LINUX --> 77.241.128.153 --> Curl function initiated  --> Success
+[09-10-2023 16:32:53] META FORM --> LINUX --> 77.241.128.153 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24362'Email sent successfully. --> Success
+[11-10-2023 20:25:02] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 00:07:50] FINAL DELIVERY --> LINUX --> 77.241.136.110 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[16-10-2023 15:58:37] FINAL DELIVERY --> LINUX --> 77.241.136.102 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[27-10-2023 18:55:06] FINAL DELIVERY --> LINUX --> 77.241.136.111 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[30-10-2023 16:56:06] FINAL DELIVERY --> LINUX --> ::1 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success

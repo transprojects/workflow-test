@@ -1,0 +1,147 @@
+
+
+Program Run at: 2026-01-05 09:28:33.033704
+=========================================
+
+Error: ⚠ File does not exist on FTP. REV/TSP/CMC/TSP_CMC_74033/REV2/client-files/TSP_CMC_74033.zip
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-05 09:45:00.665529
+=========================================
+
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_74033/REV2/client-files/TSP_CMC_74033.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_64770/REV2/client-files/TSP_EE_64770.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CJU/TSP_CJU_69182/REV2/client-files/TSP_CJU_69182.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_68894/REV2/client-files/TSP_EE_68894.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_73303/REV2/client-files/TSP_EE_73303.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_74667/REV2/client-files/TSP_EE_74667.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/OR/TSP_OR_73455/REV2/client-files/TSP_OR_73455.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/RIMNI/TSP_RIMNI_74195/REV2/client-files/TSP_RIMNI_74195.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73837/REV2/client-files/TSP_CMC_73837.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ The file was already present in the database for 42494 and REV2. 2697. TSP_CMC_73837
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-05 09:54:19.927296
+=========================================
+
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_74033/REV2/client-files/TSP_CMC_74033.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_64770/REV2/client-files/TSP_EE_64770.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CJU/TSP_CJU_69182/REV2/client-files/TSP_CJU_69182.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_68894/REV2/client-files/TSP_EE_68894.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_73303/REV2/client-files/TSP_EE_73303.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_74667/REV2/client-files/TSP_EE_74667.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/OR/TSP_OR_73455/REV2/client-files/TSP_OR_73455.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/RIMNI/TSP_RIMNI_74195/REV2/client-files/TSP_RIMNI_74195.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73837/REV2/client-files/TSP_CMC_73837.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ The file was already present in the database for 42494 and REV2. 2697. TSP_CMC_73837
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/BIOCELL/TSP_BIOCELL_68322/REV3/client-files/TSP_BIOCELL_68322.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/BIOCELL/TSP_BIOCELL_74782/REV1/TSP_BIOCELL_74782.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CJU/TSP_CJU_68588/REV1/TSP_CJU_68588.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/SDHM/TSP_SDHM_74619/REV2/client-files/TSP_SDHM_74619.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/JCS/TSP_JCS_74197/REV2/client-files/TSP_JCS_74197.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_74430/REV2/client-files/TSP_CMC_74430.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73969/REV2/client-files/TSP_CMC_73969.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/MP/RevChim_MP_72653/REV1/RevChim_MP_72653.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_75593/REV1/TSP_CMC_75593.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/ZKG/TSP_ZKG_74711/REV1/TSP_ZKG_74711.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/CMC/TSP_CMC_73188/FIN1/editor/TSP_CMC_73188.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/CMC/TSP_CMC_73330/FIN1/editor/TSP_CMC_73330.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/OR/TSP_OR_71034/FIN1/editor/TSP_OR_71034.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMES/TSP_CMES_74467/REV2/client-files/TSP_CMES_74467.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

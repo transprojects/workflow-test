@@ -1,0 +1,10 @@
+[24-10-2023 20:40:57] FP --> LINUX --> 188.119.21.89 --> basic information updated --> Success
+[24-10-2023 20:41:06] FP --> LINUX --> 188.119.21.89 --> Files uploaded --> EJDENT 303.docx --> Success
+[24-10-2023 20:42:29] FP --> LINUX --> 188.119.21.89 --> Files removed -->uploads/EOS/FP/EOS/EJDENT/EJDENT_303/EJDENT 303.docx --> Failure
+[24-10-2023 20:47:52] FP --> LINUX --> 188.119.21.89 --> Files uploaded --> EJDENT 303.docx --> Success
+[24-10-2023 20:48:03] FP --> LINUX --> 188.119.21.89 --> zip created in linux server --> Success
+[24-10-2023 20:48:03] FP --> LINUX --> 188.119.21.89 --> zip file size updated in read me txt file --> Success
+[24-10-2023 20:48:03] FP --> LINUX --> 188.119.21.89 --> Curl function initiated  --> Success
+[24-10-2023 20:48:15] FP --> LINUX --> 188.119.21.89 --> Email sent successfully for file moved to workflow. --> Success
+[30-10-2023 12:52:45] AUTHOR SUBMISSION --> LINUX --> 176.232.57.187 --> FP files from transforma downloaded by Eda --> Success
+[30-10-2023 12:53:06] AUTHOR SUBMISSION --> LINUX --> 176.232.57.187 --> Proof zip files from author downloaded by Eda --> Success

@@ -1,0 +1,8 @@
+[03-06-2024 14:26:04] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[03-06-2024 14:26:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> _Request for First Proof_ JSIAML-23R025_ for JSIAM Letters.msg --> Success
+[03-06-2024 14:28:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JSIAML-23R025.zip --> Success
+[21-06-2024 10:07:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> _Request for Revise 1_ JSIAML-23R025_ for JSIAM Letters.msg --> Success
+[21-06-2024 10:09:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JSIAML-23R025_instruction_revise_1.pdf --> Success
+[12-07-2024 11:01:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> _Request for Final and XML_ JSIAML-23R025_ for JSIAM Letters.msg --> Success
+[12-07-2024 11:02:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JSIAML-23R025_instruction_revise and final.pdf --> Success
+[30-07-2024 10:12:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for revise Fw_ Received Re_ _Posted_ JSIAML-23R025_ for JSIAM Letters.msg --> Success

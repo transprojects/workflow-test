@@ -1,0 +1,5 @@
+[07-08-2024 12:50:54] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 2. Graphical abstract.docx --> Success
+[07-08-2024 12:50:54] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 3. Copyright transfer agreement.pdf --> Success
+[07-08-2024 12:50:54] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 1. Manuscript.docx --> Success
+[07-08-2024 12:50:55] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 4. Plagiarism MS2_Magnetic properties of improved molar ratio Y1.6Ba2.3Cu3.3O7-y bulk magnet.pdf --> Success
+[14-08-2024 10:41:24] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Final accepted version of your manuscript submission.msg --> Success

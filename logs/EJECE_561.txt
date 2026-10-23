@@ -1,0 +1,12 @@
+[11-10-2023 18:00:39] FP --> LINUX --> 77.241.136.62 --> basic information updated --> Success
+[11-10-2023 18:05:42] FP --> LINUX --> 77.241.136.62 --> Files uploaded --> 561+Modification.docx --> Success
+[11-10-2023 18:05:44] FP --> LINUX --> 77.241.136.62 --> zip created in linux server --> Success
+[11-10-2023 18:05:44] FP --> LINUX --> 77.241.136.62 --> zip file size updated in read me txt file --> Success
+[11-10-2023 18:05:44] FP --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 18:05:51] FP --> LINUX --> 77.241.136.62 --> Email sent successfully for file moved to workflow. --> Success
+[20-10-2023 18:40:59] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> Proof zip files from author downloaded by Ivanna --> Success
+[20-10-2023 18:41:02] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> FP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 20:03:55] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.132 --> Files uploaded --> 561.zip --> Success
+[20-10-2023 20:04:16] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.132 --> zip created in linux server --> Success
+[20-10-2023 20:04:16] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.132 --> Curl function initiated  --> Success
+[20-10-2023 20:04:24] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.132 --> EJECE_561.zipEmail sent successfully. --> Success

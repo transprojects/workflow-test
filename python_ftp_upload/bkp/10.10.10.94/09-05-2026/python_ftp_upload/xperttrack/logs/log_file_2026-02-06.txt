@@ -1,0 +1,17 @@
+
+
+Program Run at: 2026-02-06 11:28:25.764889
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/CJU/TSP_CJU_74814/transforma-fp-files/TSP_CJU_74814.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CJU/TSP_CJU_74814/TSP_CJU_74814.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FP/TSP/FHMT/TSP_FHMT_74926/transforma-fp-files/TSP_FHMT_74926.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/FHMT/TSP_FHMT_74926/TSP_FHMT_74926.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

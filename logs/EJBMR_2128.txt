@@ -1,0 +1,28 @@
+[09-10-2023 18:06:24] FP --> LINUX --> 159.146.57.83 --> basic information updated --> Success
+[09-10-2023 18:06:31] FP --> LINUX --> 159.146.57.83 --> Files uploaded --> ejbmr-2128-galley-1.docx --> Success
+[09-10-2023 18:06:33] FP --> LINUX --> 159.146.57.83 --> zip created in linux server --> Success
+[09-10-2023 18:06:33] FP --> LINUX --> 159.146.57.83 --> zip file size updated in read me txt file --> Success
+[09-10-2023 18:06:33] FP --> LINUX --> 159.146.57.83 --> Curl function initiated  --> Success
+[09-10-2023 18:06:43] FP --> LINUX --> 159.146.57.83 --> Email sent successfully for file moved to workflow. --> Success
+[13-10-2023 10:04:13] AUTHOR SUBMISSION --> LINUX --> 103.66.12.3 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[14-10-2023 01:09:26] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> FP files from transforma downloaded by Hande --> Success
+[14-10-2023 01:09:43] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> Proof zip files from author downloaded by Hande --> Success
+[14-10-2023 01:13:38] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> Proof zip files from author downloaded by Hande --> Success
+[15-10-2023 16:33:06] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> FP files from transforma downloaded by Hande --> Success
+[15-10-2023 17:04:04] AUTHOR SUBMISSION REV1 ERROR --> LINUX --> 159.146.57.216 --> Files Error uploading -->EJBMR_2128+HS.pdf --> Failure
+[15-10-2023 17:04:05] AUTHOR SUBMISSION REV1 FILE REMOVED  --> LINUX --> 159.146.57.216 --> Files removed -->uploads/EOS/REV/EOS/EJBMR/EJBMR_2128/REV1/editor/EJBMR_2128+HS.pdf --> Failure
+[15-10-2023 17:04:08] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.57.216 --> Files uploaded --> EJBMR_2128+HS.pdf --> Success
+[15-10-2023 17:04:10] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.57.216 --> zip created in linux server --> Success
+[15-10-2023 17:04:10] AUTHOR SUBMISSION REV1 --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[15-10-2023 17:04:20] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 159.146.57.216 --> EJBMR_2128.zipEmail sent successfully. --> Success
+[17-10-2023 16:23:01] PRODUCTION REIEW --> LINUX --> 88.239.142.37 --> REVISESED PROOF downloaded by Hande --> Success
+[17-10-2023 16:25:41] META FORM --> LINUX --> 88.239.142.37 --> Correction status updated & form submitted --> Success
+[17-10-2023 16:25:41] META FORM --> LINUX --> 88.239.142.37 --> No PDF files found in the folder --> Failure
+[17-10-2023 16:25:41] META FORM --> LINUX --> 88.239.142.37 --> zip created in linux server --> Success
+[17-10-2023 16:25:41] META FORM --> LINUX --> 88.239.142.37 --> Curl function initiated  --> Success
+[17-10-2023 16:25:57] META FORM --> LINUX --> 88.239.142.37 --> Email sent successfully. --> Success
+[19-10-2023 19:57:25] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[22-10-2023 16:35:58] FINAL DELIVERY --> LINUX --> 159.146.73.232 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[23-10-2023 17:46:48] FINAL DELIVERY --> LINUX --> 159.146.73.232 --> FP files from transforma downloaded by  --> Failure
+[23-10-2023 17:51:09] FINAL DELIVERY --> LINUX --> 159.146.73.232 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[23-10-2023 18:02:26] FINAL DELIVERY --> LINUX --> 159.146.73.232 --> PUBLISHED --> published by Hande

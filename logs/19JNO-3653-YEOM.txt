@@ -1,0 +1,5 @@
+[07-08-2024 12:55:50] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 2. Graphical abstract.doc --> Success
+[07-08-2024 12:55:51] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 3. Copyright transfer agreement.jpg --> Success
+[07-08-2024 12:55:53] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 4. MS4_Plagiarism after modification_Characterization of oxide growth on Al–7mass%Mg alloy melts with different heating rates.pdf --> Success
+[07-08-2024 12:55:53] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 1. Manuscript.docx --> Success
+[09-08-2024 16:29:11] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JNO -- Characterization of oxide growth on___ _19JNO-3653-YEOM_ - Proof.msg --> Success

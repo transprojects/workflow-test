@@ -1,0 +1,2 @@
+[12-06-2024 14:36:02] FP --> LINUX --> 10.10.10.200 --> Files uploaded --> JON-2024-0014_Revised.pdf --> Success
+[25-06-2024 17:33:23] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Reply to Proof reading of 13JON-2174-Reg_.msg --> Success

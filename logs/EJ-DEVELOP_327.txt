@@ -1,0 +1,6 @@
+[25-10-2023 21:50:02] FP --> LINUX --> 88.255.99.17 --> basic information updated --> Success
+[25-10-2023 21:50:08] FP --> LINUX --> 88.255.99.17 --> Files uploaded --> ejdevelop-327-galley-1.docx --> Success
+[25-10-2023 21:50:11] FP --> LINUX --> 88.255.99.17 --> zip created in linux server --> Success
+[25-10-2023 21:50:11] FP --> LINUX --> 88.255.99.17 --> zip file size updated in read me txt file --> Success
+[25-10-2023 21:50:11] FP --> LINUX --> 88.255.99.17 --> Curl function initiated  --> Success
+[25-10-2023 21:50:21] FP --> LINUX --> 88.255.99.17 --> Email sent successfully for file moved to workflow. --> Success

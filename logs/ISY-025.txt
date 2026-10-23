@@ -1,0 +1,10 @@
+[10-06-2024 17:05:05] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[10-06-2024 17:05:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ISY-025 to production.msg --> Success
+[10-06-2024 17:06:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> drive-download-20240610T113618Z-001.zip --> Success
+[02-07-2024 23:17:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ ISY-025 corrections.msg --> Success
+[02-07-2024 23:18:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ISY-025_PR1-Corrections1.pdf --> Success
+[05-08-2024 14:14:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ ISY-025.msg --> Success
+[05-08-2024 14:14:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ISY-025-Author-Responses.xlsx --> Success
+[09-08-2024 09:46:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ Revises Posted_ ISY-025.msg --> Success
+[02-09-2024 21:30:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ ISY-025 Finals.msg --> Success
+[02-09-2024 21:31:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> drive-download-20240902T160110Z-001.zip --> Success

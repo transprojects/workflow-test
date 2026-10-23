@@ -1,0 +1,1 @@
+[15-05-2024 09:23:06] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> EOS FA EJ-CLINICMED_328.pdf --> Success

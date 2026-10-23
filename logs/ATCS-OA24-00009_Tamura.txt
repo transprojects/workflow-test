@@ -1,0 +1,2 @@
+[30-04-2024 14:30:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for PMC data.msg --> Success
+[30-04-2024 14:30:16] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> List for PMC.xlsx --> Success

@@ -1,0 +1,4 @@
+[01-07-2024 17:21:49] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[01-07-2024 17:22:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CSSE Correction and Retraction.msg --> Success
+[01-07-2024 17:25:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CSSE_54179.docx --> Success
+[01-07-2024 17:25:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CSSE Correction and Retraction.msg --> Success

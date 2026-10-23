@@ -1,0 +1,2 @@
+[02-08-2024 10:11:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> epl24100024_resupply.pdf --> Success
+[02-08-2024 10:11:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ URGENT EPL paper epl24100024 - resupply.msg --> Success

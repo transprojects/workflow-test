@@ -1,0 +1,6 @@
+[07-05-2024 12:11:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR-E10283_OA_Koiwa_1_checked.pdf --> Success
+[07-05-2024 12:11:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR request for revision_ E10283_OA_Koiwa.msg --> Success
+[10-05-2024 14:13:57] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR request for revision_ E10283_OA_Koiwa.msg --> Success
+[10-05-2024 14:14:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR-E10283_OA_Koiwa_1-2_checked.pdf --> Success
+[14-05-2024 11:27:55] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR request for J-STAGE data_ E10283_OA_Koiwa.msg --> Success
+[14-05-2024 11:28:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR-E10283_OA_Koiwa_1-3_author checked.pdf --> Success

@@ -1,0 +1,18 @@
+[25-09-2023 17:53:10] LINUX --> 77.241.128.118 --> Proof zip files from author downloaded by Ivanna --> Success
+[25-09-2023 17:54:53] LINUX --> 77.241.128.118 --> Files uploaded --> EJ-MED_1909 Proofing 9_21_2023.pdf --> Success
+[25-09-2023 17:54:55] LINUX --> 77.241.128.118 --> zip created in linux server --> Success
+[25-09-2023 17:54:55] LINUX --> 77.241.128.118 --> Curl function initiated  --> Success
+[25-09-2023 17:55:05] LINUX --> 77.241.128.118 --> EJ-MED_1909.zipEmail sent successfully. --> Success
+[26-09-2023 13:18:38] PRODUCTION REIEW --> LINUX --> 157.46.85.44 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[05-10-2023 19:12:08] PRODUCTION REIEW --> LINUX --> 77.241.128.161 --> REVISESED PROOF downloaded by Ivanna --> Success
+[05-10-2023 20:22:47] PRODUCTION REIEW --> LINUX --> 77.241.128.161 --> REVISESED PROOF downloaded by Ivanna --> Success
+[05-10-2023 20:26:33] META FORM  --> LINUX --> 77.241.128.161 --> Files uploaded --> EJ-MED_1909 (1).pdf --> Success
+[05-10-2023 20:26:35] META FORM --> LINUX --> 77.241.128.161 --> Correction status updated & form submitted --> Success
+[05-10-2023 20:26:35] META FORM --> LINUX --> 77.241.128.161 --> PDF files exist in the folder --> Success
+[05-10-2023 20:26:35] META FORM --> LINUX --> 77.241.128.161 --> zip created in linux server --> Success
+[05-10-2023 20:26:35] META FORM --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[05-10-2023 20:26:49] META FORM --> LINUX --> 77.241.128.161 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24361'Email sent successfully. --> Success
+[06-10-2023 22:04:32] FINAL DELIVERY --> LINUX --> 59.92.87.210 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[08-10-2023 08:54:57] FINAL DELIVERY --> LINUX --> 59.92.87.68 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[09-10-2023 15:08:18] FINAL DELIVERY --> LINUX --> 77.241.128.153 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[09-10-2023 15:30:06] FINAL DELIVERY --> LINUX --> 77.241.128.153 --> PUBLISHED --> published by Ivanna

@@ -1,0 +1,19 @@
+[02-10-2023 21:44:00] FP --> LINUX --> 77.241.136.147 --> basic information updated --> Success
+[02-10-2023 21:44:29] FP --> LINUX --> 77.241.136.147 --> Files uploaded --> ORESTES+MEDARD+R.+PAPER+EXTENSION+AND+ADOPTION+OF+COMMERCIAL+RABBIT (1).docx --> Success
+[02-10-2023 21:44:38] FP --> LINUX --> 77.241.136.147 --> zip created in linux server --> Success
+[02-10-2023 21:44:38] FP --> LINUX --> 77.241.136.147 --> zip file size updated in read me txt file --> Success
+[02-10-2023 21:44:38] FP --> LINUX --> 77.241.136.147 --> Curl function initiated  --> Success
+[02-10-2023 21:44:45] FP --> LINUX --> 77.241.136.147 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[06-10-2023 23:52:05] AUTHOR SUBMISSION --> LINUX --> 59.92.87.210 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[06-10-2023 23:52:08] AUTHOR SUBMISSION --> LINUX --> 59.92.87.210 --> FP files from transforma downloaded by TRANSFORMA --> Success
+[07-10-2023 07:28:23] AUTHOR SUBMISSION --> LINUX --> 223.187.120.197 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[08-10-2023 08:54:42] AUTHOR SUBMISSION --> LINUX --> 59.92.87.68 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[11-10-2023 19:03:22] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> Proof zip files from author downloaded by Ivanna --> Success
+[11-10-2023 19:03:45] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> FP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 19:05:29] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.62 --> Files uploaded --> EJFOOD_737.pdf --> Success
+[11-10-2023 19:05:33] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.62 --> zip created in linux server --> Success
+[11-10-2023 19:05:33] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 19:05:42] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.62 --> EJFOOD_737.zipEmail sent successfully. --> Success
+[13-10-2023 18:20:21] PRODUCTION REIEW --> LINUX --> 77.241.136.67 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 16:41:02] PRODUCTION REIEW --> LINUX --> 77.241.136.41 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 16:41:12] PRODUCTION REIEW --> LINUX --> 77.241.136.41 --> REVISESED PROOF downloaded by Ivanna --> Success

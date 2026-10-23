@@ -1,0 +1,2 @@
+[10-05-2024 10:38:57] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_CSSE_46615_ - Proof submitted for your review.msg --> Success
+[10-05-2024 10:39:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CSSE_46615.pdf --> Success

@@ -1,0 +1,3 @@
+[13-05-2024 12:29:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[13-05-2024 12:31:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> listofrefs_revised.xlsx --> Success
+[13-05-2024 12:31:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-RA-2024-0008_Ota_2_checked.pdf --> Success

@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workflow</title>
+    <!-- CSS styles -->
+
+    <link href="css/main.min.css" rel="stylesheet" />
+    <link
+      href="./assets/css/datepicker.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="./styles.css" rel="stylesheet" />
+    <link href="./assets/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Data Table CSS -->
+  </head>
+
+  <body>
+    <div class="wholeouter">
+      <!-- Header logo section -->
+      <div class="row titlesection">
+        <div class="col-6 col-md-4 col-lg-4">
+          <a href="https://www.transforma.in" target="_blank">
+            <img
+              class="wkfwlogo"
+              alt="transforma-logo"
+              src="assets/images/translogo.png"
+            />
+          </a>
+        </div>
+        <div class="col-6 col-md-4 d-flex justify-content-center">
+          <img
+            class="wkfwlogo1"
+            alt="transforma-logo"
+            src="assets/images/workflowlogo.png"
+          />
+        </div>
+        <div class="col-2 col-md-2 col-lg-3 col-xl-4 d-none d-md-block">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-1 notificationsec">
+              <div class="notiicon">
+                <button class="notibtn">
+                  <img
+                    alt="notification_icon"
+                    src="assets/images/notification.svg"
+                  />
+                </button>
+              </div>
+            </div>
+            <div class="col-1">
+              <div class="vrline1"></div>
+            </div>
+            <div class="col-5 col-md-5 col-lg-2 d-flex align-items-center">
+              <img
+                alt="profileicon"
+                src="assets/images/profileicon.svg"
+              />
+              <div class="dropdown">
+                <button
+                  class="btn userprofilebtn dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Portal Admin
+                </button>
+                <ul
+                  class="dropdown-menu custdropdown"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><a class="dropdown-item" href="#">Email Settings</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">User Report </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">User Work Status</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Send TSP CD Rev E-Mail</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Send TSP RD Rev E-Mail</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Change Password</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navbar section  -->
+      <nav class="navbar navbar-expand-xl d-flex navbar-dark nav-outer">
+        <button class="homebtn" type="button">Home</button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav navtitlelist">
+            <li class="dropdown ddlist nav-item">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn1"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Accounts
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Create Invoice XLS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Create Invoice PDF</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Submit Invoice</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Submitted Invoice</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Company Details Config</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Customer Invoice Config</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn2"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Customers
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Customers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Customers Alert Email</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn3"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Journals
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Journal Type</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Manage Journals</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Manage Folder</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">File Configuration</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >Dispatch File Configuration</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn4"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Departments
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Manage Departments</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Manage Move Files</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Manage Book Service</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn5"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Settings
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Workflow</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Bookflow</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Pages</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Checklist</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Emails</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Client Feedback</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Article Query</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Article Type</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Schedule Mail details</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Archive Config</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn6"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Users
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Award Users</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Roles</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Shift Masters</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Members</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Add Users</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Assign Shift</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">My Account</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn7"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Reports
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Master Status Report</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">User Target Report</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >Daywise User Target Report</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Customerwise Report</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Dispatch History</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn8"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Books
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Add Book</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Added Books</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Current Work</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Overdue Books</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">High Priority Books</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Books Under Dispatch</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Chapters Under Dispatch</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Services Under Dispatch</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >Books Under Client Review</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >Chapters Under Client Review</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Completed Books</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown ddlist">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn9"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Articles
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Added Articles</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Current Work</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Assign Due Date</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Assign to User</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Re-assign to User</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Queried/Hold Article</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">High Priority Articles</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">ASP Article History</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Under Dispatch Articles</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Under Client Review</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >Author Proofing Completed Files</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >GoDaddy Test-Under Dispatch Articles</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >AWS Test-Under Dispatch Articles</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >AWS REV1 Manual Booking Click here</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >AWS Delete FP Files List(Rebooking)</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <!-- <div>
+              <div class="vrline"></div>
+            </div> -->
+            <li class="dropdown">
+              <button
+                class="nav-link dropdown-toggle navlinkbtn navlinkbtn10"
+                id="navbaraccountsdropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Issues
+              </button>
+              <ul
+                class="dropdown-menu custdropdown dropdown-menu-end"
+                aria-labelledby="navbaraccountsdropdown"
+              >
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Manage Issues</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Under Dispatch Issues</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Under Client Issues</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Completed Issues</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">View All Issues</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Volume Archive</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Individual Archive</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#">Upload Excel</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="#"
+                    >Assign Sequence numbers to Issue
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- body section -->
+      <div class="container-fluid">
+        <div class="container d-flex justify-content-center">
+          <div
+            class="col-12 col-sm-8 d-flex justify-content-center flex-column mt-4 monthly1outer"
+          >
+            <div class="d-flex justify-content-center">
+              <div class="radio d-flex col-2 mt-4">
+                <input type="radio" value="Day" name="radio" checked />
+                <label class="ms-2">Day</label>
+              </div>
+              <div class="radio d-flex col-2 mt-4">
+                <input type="radio" value="Month" name="radio" />
+                <label class="ms-2">Month</label>
+              </div>
+            </div>
+            <!-- <div class="container"> -->
+            <div class="row mt-4 m-5">
+              <div class="col-12 col-lg-4">
+                <label class="mb-2">Choose Customer</label>
+                <select
+                  class="form-select customer_drop"
+                  data-placeholder="Select Customer"
+                  multiple="multiple"
+                >
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                  <option value="4">Four</option>
+                </select>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label class="mb-2">From Date</label>
+                <div class="d-flex">
+                  <input
+                    type="text"
+                    class="form-control monthlyinputdate"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <label class="mb-2">To Date</label>
+                <div class="d-flex">
+                  <input
+                    type="text"
+                    class="form-control monthlyinputdate1"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+            <div class="col-12 mt-1 mb-4 d-flex justify-content-center">
+              <button class="resultbtn">Get Result</button>
+              <button class="refreshbtn ms-4">
+                <img src="./assets/images/refresh.svg" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table section -->
+        <div class="container-fluid mt-4 table-responsive">
+          <table class="table table-bordered monthlytable">
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align: middle">Stage</th>
+                <th
+                  colspan="32"
+                  style="color: #f26722; font-weight: 600; text-align: left"
+                >
+                  October
+                  <span style="color: #222; margin-left: 40%"
+                    >01-10-2023 to 31-10-2023</span
+                  >
+                </th>
+              </tr>
+              <tr class="violetclr">
+                <th>01</th>
+                <th>02</th>
+                <th>03</th>
+                <th>04</th>
+                <th>05</th>
+                <th>06</th>
+                <th>07</th>
+                <th>08</th>
+                <th>09</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+                <th>19</th>
+                <th>20</th>
+                <th>21</th>
+                <th>22</th>
+                <th>23</th>
+                <th>24</th>
+                <th>25</th>
+                <th>26</th>
+                <th>27</th>
+                <th>28</th>
+                <th>29</th>
+                <th>30</th>
+                <th>31</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th style="color: #4648b8">First Proof</th>
+                <td>01</td>
+                <td>02</td>
+                <td>03</td>
+                <td>04</td>
+                <td>05</td>
+                <td>06</td>
+                <td>07</td>
+                <td>08</td>
+                <td>09</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td>20</td>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td>25</td>
+                <td>26</td>
+                <td>27</td>
+                <td>28</td>
+                <td>29</td>
+                <td>30</td>
+                <td>31</td>
+                <td>36</td>
+              </tr>
+              <tr>
+                <th style="color: #4648b8">Revises</th>
+                <td>01</td>
+                <td>02</td>
+                <td>03</td>
+                <td>04</td>
+                <td>05</td>
+                <td>06</td>
+                <td>07</td>
+                <td>08</td>
+                <td>09</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td>20</td>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td>25</td>
+                <td>26</td>
+                <td>27</td>
+                <td>28</td>
+                <td>29</td>
+                <td>30</td>
+                <td>31</td>
+                <td>36</td>
+              </tr>
+              <tr class="totalrow">
+                <th>Total</th>
+                <td>01</td>
+                <td>02</td>
+                <td>03</td>
+                <td>04</td>
+                <td>05</td>
+                <td>06</td>
+                <td>07</td>
+                <td>08</td>
+                <td>09</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td>20</td>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td>25</td>
+                <td>26</td>
+                <td>27</td>
+                <td>28</td>
+                <td>29</td>
+                <td>30</td>
+                <td>31</td>
+                <td>36</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Table section starts-->
+
+        <div
+          class="container table-responsive custom-container p-4 mt-3"
+          style="
+            box-shadow: 0px 0px 16px 0px rgba(164, 164, 171, 0.25);
+            border-radius: 24px;
+          "
+        >
+          <div class="row">
+            <div class="col-5 date mb-2">
+              Date:
+              <span style="color: #4648b8; font-weight: 600">18-10-2023</span>
+            </div>
+            <div class="col-7">
+              Stage:
+              <span style="color: #4648b8; font-weight: 600">First Proof</span>
+            </div>
+          </div>
+          <table id="table" class="table table-striped custtable table-primary">
+            <div id="toolbar"></div>
+            <thead>
+              <tr>
+                <th data-sortable="true" scope="col" class="thcolor">Client</th>
+                <th data-sortable="true" scope="col" class="thcolor">
+                  Journal Name
+                </th>
+                <th data-sortable="true" scope="col" class="thcolor">
+                  File Name
+                </th>
+                <th data-sortable="true" scope="col" class="thcolor">Stage</th>
+                <th data-sortable="true" scope="col" class="thcolor">
+                  VolNo/Issue No
+                </th>
+                <th data-sortable="true" scope="col" class="thcolor">
+                  Received Date
+                </th>
+                <th data-sortable="true" scope="col" class="thcolor">
+                  Due Date
+                </th>
+                <th data-sortable="true" scope="col" class="thcolor">Status</th>
+                <th class="thcolor">Graphics</th>
+                <th class="thcolor">Figure Count</th>
+                <th class="thcolor">Manuscript Count</th>
+                <th class="thcolor">Instructions</th>
+                <th class="thcolor">Job Card</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="monthlytablebody">
+                <td>Client</td>
+                <td>Journal Name</td>
+                <td>File Name</td>
+                <td>Stage</td>
+                <td>VolNo/Issue No</td>
+                <td>Received Date</td>
+                <td>Due Date</td>
+                <td>Status</td>
+                <td>Graphics</td>
+                <td>Figure Count</td>
+                <td>Manuscript Count</td>
+                <td>Instructions</td>
+                <td>Job Card</td>
+              </tr>
+              <tr>
+                <td>Client</td>
+                <td>Journal Name</td>
+                <td>File Name</td>
+                <td>Stage</td>
+                <td>VolNo/Issue No</td>
+                <td>Received Date</td>
+                <td>Due Date</td>
+                <td>Status</td>
+                <td>Graphics</td>
+                <td>Figure Count</td>
+                <td>Manuscript Count</td>
+                <td>Instructions</td>
+                <td>Job Card</td>
+              </tr>
+              <tr>
+                <td>Client</td>
+                <td>Journal Name</td>
+                <td>File Name</td>
+                <td>Stage</td>
+                <td>VolNo/Issue No</td>
+                <td>Received Date</td>
+                <td>Due Date</td>
+                <td>Status</td>
+                <td>Graphics</td>
+                <td>Figure Count</td>
+                <td>Manuscript Count</td>
+                <td>Instructions</td>
+                <td>Job Card</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Table section ends -->
+      <!-- Footer Section -->
+      <div class="container-fluid footer">
+        <div class="row footerrow align-items-center">
+          <div class="col d-none d-md-block"></div>
+          <div class="col d-flex justify-content-center">
+            <span style="font-family: Open Sans; color: #f26722"
+              >Transforma Pvt Ltd</span
+            >
+            - Workflow © 2023
+          </div>
+          <div class="col d-flex justify-content-end socialicons">
+            <a href="" target="_blank">
+              <img
+                src="assets/images/twitter.svg"
+                alt="twitter_logo"
+              />
+            </a>
+            <a href="" target="_blank">
+              <img
+                src="assets/images/facebook.svg"
+                alt="twitter_logo"
+              />
+            </a>
+            <a href="" target="_blank">
+              <img
+                src="assets/images/youtube.svg"
+                alt="twitter_logo"
+              />
+            </a>
+            <a href="" target="_blank">
+              <img
+                src="assets/images/linkedin.svg"
+                alt="twitter_logo"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/bootstrap.js"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/select2/select2.min.js"></script>
+    <script
+      src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      $(".customer_drop").select2({
+        placeholder: "Select Customer",
+      });
+    </script>
+    <!-- Date picker functionality -->
+    <script>
+      $(function () {
+        // var datesForDisable = ["2017-10-14", "2017-10-15", "2017-10-16"];
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
+        var fromdate;
+        $(".monthlyinputdate").datepicker({
+          uiLibrary: "bootstrap5",
+
+          format: "dd-mm-yyyy",
+          autoclose: true,
+          weekStart: 1,
+          todayHighlight: true,
+          // minDate: date,
+          onSelect: function (dateText, inst) {
+            fromdate = dateText;
+            console.log(fromdate);
+          },
+        });
+
+        $(".monthlyinputdate1").datepicker({
+          uiLibrary: "bootstrap5",
+          iconsLibrary: "materialicons",
+          format: "dd-mm-yyyy",
+          autoclose: true,
+          weekStart: 1,
+          todayHighlight: true,
+          // minDate: new Date(), //For disabling date from today
+        });
+      });
+    </script>
+
+    <!-- Include DataTables CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
+    />
+
+    <!-- Include DataTables JavaScript -->
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"
+    ></script>
+
+    <!-- Include DataTables Buttons CSS and JS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css"
+    />
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.71/pdfmake.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.71/vfs_fonts.js"
+    ></script>
+
+    <!-- Initialize DataTables -->
+    <script>
+      $(document).ready(function () {
+        var table = $("#table").DataTable({
+          dom: "Bfrtip",
+          buttons: [
+            {
+              extend: "collection", // Use a collection button for the dropdown
+              text: "Export", // The text for the main button
+              buttons: [
+                "copyHtml5",
+                "excelHtml5",
+                "csvHtml5",
+                {
+                  extend: "pdfHtml5",
+                  customize: function (doc) {
+                    // Customize the PDF content here (optional)
+                  },
+                },
+                {
+                  extend: "print",
+                  autoPrint: false, // Disable automatic printing
+                  customize: function (win) {
+                    // Customize the printed content here (optional)
+                  },
+                },
+              ],
+            },
+          ],
+          lengthMenu: [10, 25, 50, 100],
+        });
+
+        // Add a click event to the main button to trigger the dropdown
+        $(".dt-buttons").on("click", function () {
+          $(".dt-button-collection").toggleClass("show");
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<!-- datepicker script to disable array of dates -->
+<!-- <script>
+    $('.monthlyinputdate').datepicker({
+        value: '11/10/2022',
+        disableDates: [new Date(2022,10,11), '11/12/2022']
+    });
+ </script> -->
+
+<!-- datepicker script to disable days of the week -->
+<!-- <script>
+    $('.monthlyinputdate').datepicker({
+        disableDaysOfWeek: [0, 6]
+    });
+ </script> -->
+
+<!-- datepicker script to include maximum value date to the calendar from today-->
+<!-- <script>
+    var today, datepicker;
+    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    datepicker = $('#datepicker').datepicker({
+        maxDate: today
+    });
+ </script> -->
+
+<!-- datepicker script to include maximum value date to the calendar from tomorrow -->
+<!-- <script>
+     $('#datepicker').datepicker({
+        maxDate: function() {
+            var date = new Date();
+            date.setDate(date.getDate()+1);
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        }
+     });
+ </script> -->
+
+<!-- datepicker script to include minumum value upto today -->
+<!-- <script>
+    var today, datepicker;
+    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    datepicker = $('#datepicker').datepicker({
+        minDate: today
+    });
+ </script> -->
+
+<!-- datepicker script to include minumum value until yesterday -->
+<!-- <script>
+  $("#datepicker").datepicker({
+    minDate: function () {
+      var date = new Date();
+      date.setDate(date.getDate() - 1);
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    },
+  });
+</script> -->
+
+<!-- <script>
+     $('#datepicker').datepicker({
+        value: '12/15/2022',
+        minDate: '12/12/2022',
+        uiLibrary: 'bootstrap5'
+     });
+ </script> -->

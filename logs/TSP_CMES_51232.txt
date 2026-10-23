@@ -1,0 +1,2 @@
+[27-05-2024 15:08:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_CMES_51232_ - Proof submitted for your review.msg --> Success
+[27-05-2024 15:08:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMES_51232_with_annotation.pdf --> Success

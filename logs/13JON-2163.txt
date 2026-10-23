@@ -1,0 +1,3 @@
+[29-06-2024 10:47:53] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JON-2023-0192.zip --> Success
+[29-06-2024 10:47:58] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> FW_ JON-2023-0192 (13JON-2163).msg --> Success
+[29-06-2024 10:48:01] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> RE_ JON-2023-0192 (13JON-2163).msg --> Success

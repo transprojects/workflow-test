@@ -1,0 +1,2 @@
+[06-05-2024 12:08:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_EE_46150.pdf --> Success
+[06-05-2024 12:08:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_EE_46150_ - Proof submitted for your review.msg --> Success

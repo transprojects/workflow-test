@@ -1,0 +1,2 @@
+[04-06-2024 14:19:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re__TSP_OR_52244_ - Finalised Proof for your record.msg --> Success
+[04-06-2024 14:19:15] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_52244（0604）.pdf --> Success

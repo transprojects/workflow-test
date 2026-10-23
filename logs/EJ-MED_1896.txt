@@ -1,0 +1,30 @@
+[01-10-2023 18:13:57] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:14:01] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejmed_1896.docx --> Success
+[01-10-2023 18:14:02] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:14:02] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:14:02] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:14:10] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[01-10-2023 18:16:04] FP --> LINUX --> 77.241.136.128 --> Files Error uploading -->ejmed_1911.docx --> Failure
+[05-10-2023 20:12:38] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:13:17] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[09-10-2023 17:52:35] PRODUCTION REIEW --> LINUX --> 77.241.128.153 --> REVISESED PROOF downloaded by Ivanna --> Success
+[12-10-2023 00:18:15] PRODUCTION REIEW --> LINUX --> 77.241.136.62 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 00:50:09] PRODUCTION REIEW --> LINUX --> 77.241.136.110 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 00:56:41] META FORM  --> LINUX --> 77.241.136.110 --> Files uploaded --> 1896.zip --> Success
+[13-10-2023 00:58:42] META FORM --> LINUX --> 77.241.136.110 --> Correction status updated & form submitted --> Success
+[13-10-2023 00:58:42] META FORM --> LINUX --> 77.241.136.110 --> No PDF files found in the folder --> Failure
+[13-10-2023 00:58:43] META FORM --> LINUX --> 77.241.136.110 --> zip created in linux server --> Success
+[13-10-2023 00:58:43] META FORM --> LINUX --> 77.241.136.110 --> Curl function initiated  --> Success
+[13-10-2023 00:59:05] META FORM --> LINUX --> 77.241.136.110 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24640'Email sent successfully. --> Success
+[18-10-2023 17:44:00] FINAL DELIVERY --> LINUX --> 77.241.136.44 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[18-10-2023 17:48:54] FINAL CORRECTIONS   --> LINUX --> 77.241.136.44 --> PDF attached for artilce in linux server --> Success
+[18-10-2023 17:48:54] FINAL CORRECTIONS   --> LINUX --> 77.241.136.44 --> zip created in linux server --> Success
+[18-10-2023 17:48:54] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.44 --> Curl function initiated  --> Success
+[18-10-2023 17:49:18] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.44 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-MED/Vol00000/EJ-MED_1896/REV3/upload completedEmail sent successfully. --> Success
+[19-10-2023 23:25:55] FINAL DELIVERY --> LINUX --> 77.241.136.75 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[19-10-2023 23:33:18] FINAL CORRECTIONS   --> LINUX --> 77.241.136.75 --> PDF attached for artilce in linux server --> Success
+[19-10-2023 23:33:18] FINAL CORRECTIONS   --> LINUX --> 77.241.136.75 --> zip created in linux server --> Success
+[19-10-2023 23:33:18] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.75 --> Curl function initiated  --> Success
+[19-10-2023 23:33:39] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.75 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-MED/Vol00000/EJ-MED_1896/REV4/upload completedEmail sent successfully. --> Success
+[23-10-2023 21:18:34] FINAL DELIVERY --> LINUX --> 77.241.136.28 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[23-10-2023 21:41:54] FINAL DELIVERY --> LINUX --> 77.241.136.28 --> PUBLISHED --> published by Ivanna

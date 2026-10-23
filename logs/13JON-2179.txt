@@ -1,0 +1,6 @@
+[12-06-2024 14:42:58] FP --> LINUX --> 10.10.10.200 --> Files uploaded --> Article_1.docx --> Success
+[27-06-2024 10:41:01] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Untitled.msg --> Success
+[27-06-2024 10:42:29] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> FW_ JON-2179.msg --> Success
+[27-06-2024 10:47:54] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> FW_ JON-2179.msg --> Success
+[27-06-2024 10:47:55] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> FW_ JON-2179 السلام عليكم ورحمه الله وبركاته.msg --> Success
+[09-07-2024 10:02:21] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JON -- Bio-Convection Eyring-Powell Hybrid___ _13JON-2179_ - Proof.msg --> Success

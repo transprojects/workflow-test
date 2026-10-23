@@ -1,0 +1,5 @@
+[23-07-2024 14:33:22] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 14:33:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JIOT_21063.docx --> Success
+[13-08-2024 12:28:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JIOT_21063.pdf --> Success
+[28-09-2024 15:04:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JIOT_21063  need to be modified.pdf --> Success
+[28-09-2024 15:04:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

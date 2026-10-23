@@ -1,0 +1,12 @@
+[11-10-2023 15:30:45] FP --> LINUX --> 77.241.136.62 --> basic information updated --> Success
+[11-10-2023 15:31:22] FP --> LINUX --> 77.241.136.62 --> Files uploaded --> ejeng_Zn_recovery.docx --> Success
+[11-10-2023 15:31:24] FP --> LINUX --> 77.241.136.62 --> zip created in linux server --> Success
+[11-10-2023 15:31:24] FP --> LINUX --> 77.241.136.62 --> zip file size updated in read me txt file --> Success
+[11-10-2023 15:31:24] FP --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 15:31:38] FP --> LINUX --> 77.241.136.62 --> Email sent successfully for file moved to workflow. --> Success
+[20-10-2023 18:14:32] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> Proof zip files from author downloaded by Ivanna --> Success
+[20-10-2023 18:14:35] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> FP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 18:18:04] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.132 --> Files uploaded --> 3106.zip --> Success
+[20-10-2023 18:18:05] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.132 --> zip created in linux server --> Success
+[20-10-2023 18:18:05] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.132 --> Curl function initiated  --> Success
+[20-10-2023 18:18:14] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.132 --> EJ-ENG_3106.zipEmail sent successfully. --> Success

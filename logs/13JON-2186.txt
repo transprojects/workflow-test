@@ -1,0 +1,4 @@
+[16-08-2024 12:00:08] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 24-1494 - Final Version.doc --> Success
+[16-08-2024 12:00:08] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Signed Copyright Transfer Form.pdf --> Success
+[16-08-2024 12:00:08] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Plagiarism Report.pdf --> Success
+[26-08-2024 10:11:12] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 13JON-2186_ - Proof_Query.msg --> Success

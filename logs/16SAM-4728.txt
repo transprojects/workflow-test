@@ -1,0 +1,2 @@
+[11-07-2024 10:39:54] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Ahmad Umar sent you Accepted SAM Ms_ Kindly ack_ via WeTransfer.msg --> Success
+[11-07-2024 10:39:56] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> wetransfer_accepted-sam-ms-kindly-ack_2024-07-09_2355.zip --> Success

@@ -1,0 +1,10 @@
+[01-07-2024 16:39:22] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[01-07-2024 16:39:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec new file uploaded.msg --> Success
+[01-07-2024 16:39:56] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec new file uploaded.msg --> Success
+[01-07-2024 16:39:56] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/MS/Vol00000/MassSpec-A0148_Chen/FP//MassSpec new file uploaded.msg --> Failure
+[01-07-2024 16:41:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0148_Chen.zip --> Success
+[10-07-2024 17:34:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for revision_ Re_ FP Posted_ MassSpec-A0148_Chen.msg --> Success
+[10-07-2024 17:35:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0148_Chen_1_checked.pdf --> Success
+[12-07-2024 13:20:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MS request for J-STAGE data　Re_ Revises posted_ MassSpec-A0148_Chen.msg --> Success
+[12-07-2024 13:20:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0148_Chen_1-2_authorchecked.pdf --> Success
+[16-07-2024 14:12:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for PMC data Re_ MassSpec-A0148_Chen PAP files posted.msg --> Success

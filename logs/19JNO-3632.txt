@@ -1,0 +1,2 @@
+[29-05-2024 10:45:12] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> allfilesjno2024.zip --> Success
+[29-05-2024 10:45:20] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> jnn_asp@gmail_com sent you Accepted JNO Ms_ Kindly ack_ via WeTransfer.msg --> Success

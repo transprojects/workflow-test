@@ -1,0 +1,2 @@
+[27-08-2024 16:30:00] FP --> LINUX --> 10.10.10.80 --> basic information updated --> Success
+[27-08-2024 16:30:24] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> FW_ 15 JON papers.msg --> Success

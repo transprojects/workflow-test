@@ -1,0 +1,5 @@
+[07-06-2024 11:24:55] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> EPL paper epl24100340 - erratum source file.msg --> Success
+[07-06-2024 11:26:27] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[07-06-2024 11:26:32] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> EPL paper epl24100340 - erratum source file.msg --> Success
+[07-06-2024 11:27:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> epl24100340.tex --> Success
+[07-06-2024 11:27:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> epl24100340-corrections.pdf --> Success

@@ -1,0 +1,23 @@
+[07-10-2023 19:45:34] FP --> LINUX --> 159.146.57.83 --> basic information updated --> Success
+[07-10-2023 19:45:42] FP --> LINUX --> 159.146.57.83 --> Files uploaded --> ejedu-749-galley.docx --> Success
+[07-10-2023 19:45:57] FP --> LINUX --> 159.146.57.83 --> zip created in linux server --> Success
+[07-10-2023 19:45:57] FP --> LINUX --> 159.146.57.83 --> zip file size updated in read me txt file --> Success
+[07-10-2023 19:45:57] FP --> LINUX --> 159.146.57.83 --> Curl function initiated  --> Success
+[07-10-2023 19:46:07] FP --> LINUX --> 159.146.57.83 --> Email sent successfully for file moved to workflow. --> Success
+[11-10-2023 22:02:18] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> Proof zip files from author downloaded by Hande --> Success
+[11-10-2023 22:03:06] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> FP files from transforma downloaded by Hande --> Success
+[11-10-2023 22:05:03] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[11-10-2023 22:05:10] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 159.146.75.221 --> EJ-EDU_749.zipEmail sent successfully. --> Success
+[12-10-2023 18:58:24] PRODUCTION REIEW --> LINUX --> 159.146.75.221 --> REVISESED PROOF downloaded by Hande --> Success
+[12-10-2023 19:02:04] META FORM --> LINUX --> 159.146.75.221 --> Correction status updated & form submitted --> Success
+[12-10-2023 19:02:04] META FORM --> LINUX --> 159.146.75.221 --> No PDF files found in the folder --> Failure
+[12-10-2023 19:02:04] META FORM --> LINUX --> 159.146.75.221 --> zip created in linux server --> Success
+[12-10-2023 19:02:04] META FORM --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[12-10-2023 19:02:16] META FORM --> LINUX --> 159.146.75.221 --> Email sent successfully. --> Success
+[16-10-2023 17:43:37] FINAL DELIVERY --> LINUX --> 159.146.57.216 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[16-10-2023 18:24:51] FINAL CORRECTIONS   --> LINUX --> 159.146.57.216 --> NO PDF attached for artilce in linux server --> Success
+[16-10-2023 18:24:51] FINAL CORRECTIONS   --> LINUX --> 159.146.57.216 --> zip created in linux server --> Success
+[16-10-2023 18:24:51] FINAL CORRECTIONS ".$stage." --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[16-10-2023 18:25:04] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 159.146.57.216 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-EDU/Vol00000/EJ-EDU_749/REV3/upload completedEmail sent successfully. --> Success
+[17-10-2023 16:50:56] FINAL DELIVERY --> LINUX --> 88.239.142.37 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[17-10-2023 23:39:24] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> PUBLISHED --> published by Hande

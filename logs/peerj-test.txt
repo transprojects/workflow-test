@@ -1,0 +1,11 @@
+[25-04-2024 16:32:46] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[25-04-2024 16:33:11] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[25-04-2024 16:33:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-17338-corrected-proof.pdf --> Success
+[25-04-2024 16:37:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-17338-corrected-proof.pdf --> Success
+[25-04-2024 16:38:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17338).msg --> Success
+[25-04-2024 16:38:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17338).msg --> Success
+[25-04-2024 16:38:20] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_PJ/Vol00000/peerj-test/REV1//FW_ _peerj_ Forum comment posted (17338).msg --> Failure
+[25-04-2024 16:46:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17283).msg --> Success
+[25-04-2024 16:47:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-17338-corrected-proof.pdf --> Success
+[25-04-2024 16:56:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ _Forum comment posted (cs-1964).msg --> Success
+[25-04-2024 16:56:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-1964).msg --> Success

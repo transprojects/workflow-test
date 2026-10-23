@@ -1,0 +1,5 @@
+[12-09-2024 21:34:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2280).msg --> Success
+[12-09-2024 21:34:54] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2280-corrected-proof.zip --> Success
+[18-09-2024 07:25:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2280).msg --> Success
+[18-09-2024 07:26:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2280-forum--file--2024-09-17-21-05-50.jpeg --> Success
+[18-09-2024 07:26:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ --Forum comment posted (cs-2280).msg --> Success

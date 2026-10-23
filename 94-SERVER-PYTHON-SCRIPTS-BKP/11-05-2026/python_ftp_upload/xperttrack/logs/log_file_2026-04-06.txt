@@ -1,0 +1,9 @@
+
+
+Program Run at: 2026-04-06 13:34:14.229403
+=========================================
+
+Success: Uploaded file to FTP: FP/EOS/EJ-LANG/EJ-LANG_70224/transforma-fp-files/EJ-LANG_70224.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/EOS/EJ-LANG/EJ-LANG_70224/EJ-LANG_70224.zip
+-----------------------------------------------------------------------------------------

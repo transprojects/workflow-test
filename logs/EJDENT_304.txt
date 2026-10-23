@@ -1,0 +1,6 @@
+[24-10-2023 17:16:04] FP --> LINUX --> 188.119.21.89 --> basic information updated --> Success
+[24-10-2023 17:16:14] FP --> LINUX --> 188.119.21.89 --> Files uploaded --> EJDENT 304.docx --> Success
+[24-10-2023 17:16:33] FP --> LINUX --> 188.119.21.89 --> zip created in linux server --> Success
+[24-10-2023 17:16:33] FP --> LINUX --> 188.119.21.89 --> zip file size updated in read me txt file --> Success
+[24-10-2023 17:16:33] FP --> LINUX --> 188.119.21.89 --> Curl function initiated  --> Success
+[24-10-2023 17:16:46] FP --> LINUX --> 188.119.21.89 --> Email sent successfully for file moved to workflow. --> Success

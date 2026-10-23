@@ -1,0 +1,2 @@
+[21-06-2024 09:59:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Proofreading document of TSP_EE_51093.msg --> Success
+[21-06-2024 09:59:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_EE_51093.zip --> Success

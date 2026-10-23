@@ -1,0 +1,54 @@
+
+
+Program Run at: 2026-04-16 19:37:28.982467
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. from_edp/2026-04-16
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-16 19:37:40.992768
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. from_edp/2026-04-16
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Folder does not exists in FTP. for "from_edp/2026-04-16".<br>
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: EDP-Sci and journal ID: 2026-04-16
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-16 19:43:37.186042
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an260036s.zip
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-16 19:44:59.157027
+=========================================
+
+Error: Missing data for customer ID: EDP-Sci and journal ID: 2026-04-16
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-16 19:46:43.557497
+=========================================
+
+Error: File was already present in the workflow database. J:\AUTOMATION-SYSTEM\EDP-Sci --- m2an260036s
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-16 19:46:49.635263
+=========================================
+
+Error: File was already present in the workflow database. J:\AUTOMATION-SYSTEM\EDP-Sci --- m2an260036s
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

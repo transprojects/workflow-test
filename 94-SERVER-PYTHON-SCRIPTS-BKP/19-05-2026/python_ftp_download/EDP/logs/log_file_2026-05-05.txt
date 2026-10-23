@@ -1,0 +1,196 @@
+
+
+Program Run at: 2026-05-05 17:50:29.610754
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an240101.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 18:04:41.855951
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 18:06:51.565581
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 18:21:57.079224
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 18:37:07.423237
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 18:52:14.401112
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 19:07:21.116532
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 19:22:28.718182
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 19:37:38.288381
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 19:52:46.361690
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 20:07:53.632325
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 20:23:00.715256
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 20:38:10.512731
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 20:53:16.390077
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 21:08:22.139035
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 21:23:29.519833
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 21:38:39.379095
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 21:54:31.779530
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an250250.zip
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: [Errno 11001] getaddrinfo failed.
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: [Errno 11001] getaddrinfo failed.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Email notification sent to client is Failed for m2an250250. While Download EDP Files.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: from_edp/m2an/m2an250345.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 22:09:37.498461
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 22:23:46.590224
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 22:38:57.656574
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 22:54:03.230687
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 23:09:09.100847
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 23:24:16.472682
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 23:39:26.102127
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-05-05 23:54:33.522389
+=========================================
+
+No File present to download from FTP (EDP) to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------

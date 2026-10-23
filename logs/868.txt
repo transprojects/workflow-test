@@ -1,0 +1,2 @@
+[26-07-2024 17:16:19] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> sample-file.txt --> Success
+[26-07-2024 17:16:31] FP --> LINUX --> 10.10.10.1 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/TSP/CMC/Vol9991/ISSCOR1//sample-file.txt --> Failure

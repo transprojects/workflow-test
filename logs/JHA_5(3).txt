@@ -1,0 +1,6 @@
+[01-08-2024 14:21:57] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[01-08-2024 14:22:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ Journal of Humanitarian Affairs 5_3.msg --> Success
+[01-08-2024 14:24:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 5 3.zip --> Success
+[04-09-2024 10:32:14] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ FP Posted_ Journal of Humanitarian Affairs 5_3.msg --> Success
+[25-09-2024 22:34:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ Revises Posted_ Journal of Humanitarian Affairs 5_3.msg --> Success
+[25-09-2024 22:37:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> revises corrections.pdf --> Success

@@ -1,0 +1,1 @@
+[06-08-2024 12:17:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 2727-002MEX.zip --> Success

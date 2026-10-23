@@ -1,0 +1,1 @@
+[14-08-2024 22:30:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CSSE_34373+urgent.pdf --> Success

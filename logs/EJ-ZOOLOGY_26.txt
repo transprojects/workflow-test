@@ -1,0 +1,14 @@
+[01-10-2023 18:00:27] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:01:37] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejzoo_26.docx --> Success
+[01-10-2023 18:01:38] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:01:38] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:01:38] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:01:49] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[11-10-2023 19:09:13] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> FP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 19:27:17] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.62 --> Files uploaded --> Downloads.zip --> Success
+[11-10-2023 19:27:20] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.62 --> zip created in linux server --> Success
+[11-10-2023 19:27:20] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 19:27:31] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.62 --> EJ-ZOOLOGY_26.zipEmail sent successfully. --> Success
+[18-10-2023 15:38:43] PRODUCTION REIEW --> LINUX --> 77.241.136.44 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 16:43:04] PRODUCTION REIEW --> LINUX --> 77.241.136.41 --> REVISESED PROOF downloaded by Ivanna --> Success
+[27-10-2023 18:17:56] PRODUCTION REIEW --> LINUX --> 77.241.136.111 --> REVISESED PROOF downloaded by Ivanna --> Success

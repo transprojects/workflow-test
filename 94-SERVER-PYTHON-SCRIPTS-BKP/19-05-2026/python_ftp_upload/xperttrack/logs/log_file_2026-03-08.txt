@@ -1,0 +1,11 @@
+
+
+Program Run at: 2026-03-08 09:33:51.590590
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/ECN/TSP_ECN_78096/transforma-fp-files/TSP_ECN_78096.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/ECN/TSP_ECN_78096/TSP_ECN_78096.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

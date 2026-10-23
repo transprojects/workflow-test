@@ -1,0 +1,282 @@
+
+
+Program Run at: 2026-03-23 11:09:56.134574
+=========================================
+
+Error: Missing data for customer ID: 0 and journal ID: None
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 307
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 307
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 11:12:35.233316
+=========================================
+
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 307
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 307
+-----------------------------------------------------------------------------------------
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 11:22:14.751797
+=========================================
+
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3810/RAFC-2603-3810.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3830/RAFC-2603-3830.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3829/RAFC-2603-3829.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3813/RAFC-2603-3813.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3820/RAFC-2603-3820.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RNP/RNP-2602-3740/RNP-2602-3740.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RNP\Vol00000\RNP-2602-3740\FP\RNP-2602-3740.zip --- RNP-2602-3740
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 11:22:23.865692
+=========================================
+
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3810/RAFC-2603-3810.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3830/RAFC-2603-3830.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3829/RAFC-2603-3829.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3813/RAFC-2603-3813.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3820/RAFC-2603-3820.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RNP/RNP-2602-3740/RNP-2602-3740.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RNP\Vol00000\RNP-2602-3740\FP\RNP-2602-3740.zip --- RNP-2602-3740
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RNP/RNP-2602-3755/RNP-2602-3755.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RNP\Vol00000\RNP-2602-3755\FP\RNP-2602-3755.zip --- RNP-2602-3755
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 11:22:28.068266
+=========================================
+
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3810/RAFC-2603-3810.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3830/RAFC-2603-3830.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3829/RAFC-2603-3829.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3813/RAFC-2603-3813.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3820/RAFC-2603-3820.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RNP/RNP-2602-3740/RNP-2602-3740.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RNP\Vol00000\RNP-2602-3740\FP\RNP-2602-3740.zip --- RNP-2602-3740
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RNP/RNP-2602-3755/RNP-2602-3755.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RNP\Vol00000\RNP-2602-3755\FP\RNP-2602-3755.zip --- RNP-2602-3755
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3818/RAFC-2603-3818.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RAFC\Vol00000\RAFC-2603-3818\FP\RAFC-2603-3818.zip --- RAFC-2603-3818
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 11:22:33.637411
+=========================================
+
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3810/RAFC-2603-3810.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3830/RAFC-2603-3830.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3829/RAFC-2603-3829.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3813/RAFC-2603-3813.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3820/RAFC-2603-3820.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RNP/RNP-2602-3740/RNP-2602-3740.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RNP\Vol00000\RNP-2602-3740\FP\RNP-2602-3740.zip --- RNP-2602-3740
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RNP/RNP-2602-3755/RNP-2602-3755.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RNP\Vol00000\RNP-2602-3755\FP\RNP-2602-3755.zip --- RNP-2602-3755
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3818/RAFC-2603-3818.zip
+-----------------------------------------------------------------------------------------
+Error: File was already present in the workflow database. J:\JOURNAL\downloads\JOURNALS\ACG\RAFC\Vol00000\RAFC-2603-3818\FP\RAFC-2603-3818.zip --- RAFC-2603-3818
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 11:53:28.066562
+=========================================
+
+Error: Missing data for customer ID: 77 and journal ID: 301
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 11:54:00.920954
+=========================================
+
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3823/RAFC-2603-3823.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:34:11.057946
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:43:32.334921
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. FP/ACG/RAFC/RAFC-2603-3827
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:43:46.402868
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. FP/ACG/RAFC/RAFC-2603-3827
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:53:57.023535
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:56:19.602476
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:56:34.738958
+=========================================
+
+Error: ⚠ Error occur in downloading file FP/ACG/RAFC/RAFC-2603-3827/RAFC-2603-3827.zip to J:\JOURNAL\downloads\JOURNALS\ACG\RAFC\Vol00000\RAFC-2603-3827\FP\RAFC-2603-3827.zip for article ID RAFC-2603-3827 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:56:45.792115
+=========================================
+
+Error: ⚠ Error occur in downloading file FP/ACG/RAFC/RAFC-2603-3827/RAFC-2603-3827.zip to J:\JOURNAL\downloads\JOURNALS\ACG\RAFC\Vol00000\RAFC-2603-3827\FP\RAFC-2603-3827.zip for article ID RAFC-2603-3827 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-23 18:57:48.229245
+=========================================
+
+Success: Download file from FTP: FP/ACG/RAFC/RAFC-2603-3827/RAFC-2603-3827.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

@@ -1,0 +1,20 @@
+[01-10-2023 21:04:25] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 21:04:29] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejmath_268.docx --> Success
+[01-10-2023 21:04:32] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 21:04:32] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 21:04:32] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 21:04:41] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[04-10-2023 21:08:29] AUTHOR SUBMISSION --> LINUX --> 59.94.153.69 --> FP files from transforma downloaded by TRANSFORMA --> Success
+[04-10-2023 21:08:30] AUTHOR SUBMISSION --> LINUX --> 59.94.153.69 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[05-10-2023 20:17:24] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:17:52] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[06-10-2023 22:04:23] PRODUCTION REIEW --> LINUX --> 59.92.87.210 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[12-10-2023 11:43:21] PRODUCTION REIEW --> LINUX --> 77.241.136.62 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 18:35:38] PRODUCTION REIEW --> LINUX --> 77.241.136.67 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 18:38:09] META FORM --> LINUX --> 77.241.136.67 --> Correction status updated & form submitted --> Success
+[13-10-2023 18:38:09] META FORM --> LINUX --> 77.241.136.67 --> No PDF files found in the folder --> Failure
+[13-10-2023 18:38:09] META FORM --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 18:38:09] META FORM --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 18:38:21] META FORM --> LINUX --> 77.241.136.67 --> Email sent successfully. --> Success
+[18-10-2023 19:36:54] FINAL DELIVERY --> LINUX --> 77.241.136.44 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[18-10-2023 19:42:43] FINAL DELIVERY --> LINUX --> 77.241.136.44 --> PUBLISHED --> published by Ivanna

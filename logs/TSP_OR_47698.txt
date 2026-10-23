@@ -1,0 +1,4 @@
+[10-05-2024 10:37:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Fw_ _TSP_OR_47698_ - Proof submitted for your review.msg --> Success
+[10-05-2024 10:37:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_47698 revision.pdf --> Success
+[18-09-2024 09:42:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Updates to _TSP_OR_47698_.msg --> Success
+[18-09-2024 09:42:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_47698-Revised-0918.pdf --> Success

@@ -1,0 +1,350 @@
+
+
+Program Run at: 2025-12-08 07:13:12.376601
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:13:42.619421
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:13:55.528384
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Error occur in downloading file. from REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to "E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip".<br>[WinError 3] The system cannot find the path specified: 'E:\\'
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:14:03.233151
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Error occur in downloading file. from REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to "E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip".<br>[WinError 3] The system cannot find the path specified: 'E:\\'
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:14:07.075833
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Error occur in downloading file. from REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to "E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip".<br>[WinError 3] The system cannot find the path specified: 'E:\\'
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMES\Vol00000\TSP_CMES_73896\REV3\TSP_CMES_73896.zip for article ID TSP_CMES_73896 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:14:14.308714
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Error occur in downloading file. from REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to "E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip".<br>[WinError 3] The system cannot find the path specified: 'E:\\'
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMES\Vol00000\TSP_CMES_73896\REV3\TSP_CMES_73896.zip for article ID TSP_CMES_73896 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:18:03.595246
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:18:24.985175
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMES\Vol00000\TSP_CMES_73896\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:18:31.624491
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMES\Vol00000\TSP_CMES_73896\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:18:40.342944
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:19:21.201542
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:19:41.807782
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:20:00.643752
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:20:06.897312
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV2 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:28:44.921101
+=========================================
+
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	✓ The file was successfully download from <a href="file://REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip">REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip</a> in FTP to <a href="file://">J:\JOURNAL\downloads\JOURNALS\TSP\CMES\Vol00000\TSP_CMES_73896\REV3\TSP_CMES_73896.zip</a> in workflow.<br>
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:33:08.332007
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:33:21.558574
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:33:30.343028
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:33:32.737509
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:36:01.260261
+=========================================
+
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	✓ The file was successfully download from <a href="file://REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip">REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip</a> in FTP to <a href="file://">J:\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip</a> in workflow.<br>
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: [Errno 11001] getaddrinfo failed.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:38:35.206849
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:39:46.359730
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

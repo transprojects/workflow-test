@@ -1,0 +1,16 @@
+[13-10-2023 17:20:20] FP --> LINUX --> 77.241.136.67 --> basic information updated --> Success
+[13-10-2023 17:20:34] FP --> LINUX --> 77.241.136.67 --> Files Error uploading -->Artificial+Neural+Networks+A+Promising+Tool+for+Regenerative+Braking+Control+in+Electric+Vehicles.docx --> Failure
+[13-10-2023 17:20:34] FP --> LINUX --> 77.241.136.67 --> Files removed -->uploads/EOS/FP/EOS/EJ-ENG/EJ-ENG_3115/Artificial+Neural+Networks+A+Promising+Tool+for+Regenerative+Braking+Control+in+Electric+Vehicles.docx --> Failure
+[13-10-2023 17:20:39] FP --> LINUX --> 77.241.136.67 --> Files uploaded --> Construction+of+a+solar+still+prototype+to+reduce+extreme+water+hardness+in+the+Mayan+community+Ejido+20+de+Noviembre.docx --> Success
+[13-10-2023 17:20:40] FP --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 17:20:40] FP --> LINUX --> 77.241.136.67 --> zip file size updated in read me txt file --> Success
+[13-10-2023 17:20:40] FP --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 17:20:49] FP --> LINUX --> 77.241.136.67 --> Email sent successfully for file moved to workflow. --> Success
+[20-10-2023 18:18:19] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> Proof zip files from author downloaded by Ivanna --> Success
+[20-10-2023 18:18:20] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> FP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 18:18:22] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> FP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 18:18:39] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> Proof zip files from author downloaded by Ivanna --> Success
+[20-10-2023 18:23:50] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.132 --> Files uploaded --> 3115.zip --> Success
+[20-10-2023 18:23:52] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.132 --> zip created in linux server --> Success
+[20-10-2023 18:23:52] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.132 --> Curl function initiated  --> Success
+[20-10-2023 18:24:03] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.132 --> EJ-ENG_3115.zipEmail sent successfully. --> Success

@@ -1,0 +1,27 @@
+[01-10-2023 18:02:56] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:03:02] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejece_558.docx --> Success
+[01-10-2023 18:03:03] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:03:03] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:03:03] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:03:12] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[10-10-2023 14:09:28] AUTHOR SUBMISSION --> LINUX --> 103.66.12.3 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[11-10-2023 18:16:32] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> FP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 18:17:02] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 18:17:14] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.136.62 --> EJECE_558.zipEmail sent successfully. --> Success
+[13-10-2023 15:55:54] PRODUCTION REIEW --> LINUX --> 77.241.136.67 --> REVISESED PROOF downloaded by Ivanna --> Success
+[17-10-2023 21:43:41] META FORM  --> LINUX --> 77.241.136.102 --> Files uploaded --> EJECE_558.pdf --> Success
+[17-10-2023 21:43:42] META FORM --> LINUX --> 77.241.136.102 --> Correction status updated & form submitted --> Success
+[17-10-2023 21:43:42] META FORM --> LINUX --> 77.241.136.102 --> PDF files exist in the folder --> Success
+[17-10-2023 21:43:42] META FORM --> LINUX --> 77.241.136.102 --> zip created in linux server --> Success
+[17-10-2023 21:43:42] META FORM --> LINUX --> 77.241.136.102 --> Curl function initiated  --> Success
+[17-10-2023 21:44:00] META FORM --> LINUX --> 77.241.136.102 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24636'Email sent successfully. --> Success
+[20-10-2023 18:34:32] FINAL DELIVERY --> LINUX --> 77.241.136.132 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 18:38:06] FINAL CORRECTIONS   --> LINUX --> 77.241.136.132 --> NO PDF attached for artilce in linux server --> Success
+[20-10-2023 18:38:06] FINAL CORRECTIONS   --> LINUX --> 77.241.136.132 --> zip created in linux server --> Success
+[20-10-2023 18:38:06] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.132 --> Curl function initiated  --> Success
+[20-10-2023 18:38:33] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.132 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJECE/Vol00000/EJECE_558/REV3/upload completedEmail sent successfully. --> Success
+[27-10-2023 18:32:51] FINAL DELIVERY --> LINUX --> 77.241.136.111 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[27-10-2023 18:38:50] FINAL CORRECTIONS   --> LINUX --> 77.241.136.111 --> PDF attached for artilce in linux server --> Success
+[27-10-2023 18:38:50] FINAL CORRECTIONS   --> LINUX --> 77.241.136.111 --> zip created in linux server --> Success
+[27-10-2023 18:38:50] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.111 --> Curl function initiated  --> Success
+[27-10-2023 18:39:08] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.111 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJECE/Vol00000/EJECE_558/REV4/upload completedEmail sent successfully. --> Success

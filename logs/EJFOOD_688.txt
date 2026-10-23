@@ -1,0 +1,14 @@
+[01-10-2023 17:45:33] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 17:45:40] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJFOOD-688.docx --> Success
+[01-10-2023 17:45:41] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 17:45:41] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 17:45:41] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 17:45:51] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[13-10-2023 17:26:04] AUTHOR SUBMISSION --> LINUX --> 77.241.136.67 --> FP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 17:27:06] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.67 --> Files uploaded --> EJFOOD_688.pdf --> Success
+[13-10-2023 17:27:14] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 17:27:14] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 17:27:23] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.67 --> EJFOOD_688.zipEmail sent successfully. --> Success
+[20-10-2023 16:42:56] PRODUCTION REIEW --> LINUX --> 77.241.136.132 --> REVISESED PROOF downloaded by Ivanna --> Success
+[23-10-2023 23:23:37] PRODUCTION REIEW --> LINUX --> 77.241.136.28 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 16:06:22] PRODUCTION REIEW --> LINUX --> 77.241.136.41 --> REVISESED PROOF downloaded by Ivanna --> Success

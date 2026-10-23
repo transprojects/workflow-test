@@ -1,0 +1,11 @@
+[24-05-2024 10:44:37] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[24-05-2024 10:44:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec new file uploaded.msg --> Success
+[24-05-2024 10:45:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure_2.tif --> Success
+[24-05-2024 10:45:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[24-05-2024 10:45:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure_1.jpg --> Success
+[04-06-2024 10:25:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for revision_ Re_ FP Posted_ MassSpec-A0146_Gross.msg --> Success
+[04-06-2024 10:32:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0146_Gross_1_checked.pdf --> Success
+[06-06-2024 12:54:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0146_Gross_authorchecked.pdf --> Success
+[06-06-2024 12:54:55] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MS request for J-STAGE data.msg --> Success
+[11-06-2024 13:13:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for PMC data　Re_ PAP Posted_ MassSpec-A0146_Gross.msg --> Success
+[11-06-2024 13:15:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec_A0146_Gross_Supplementary.pdf --> Success

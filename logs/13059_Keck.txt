@@ -1,0 +1,21 @@
+[18-09-2024 11:49:22] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[18-09-2024 11:49:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ Correction and clarification of two previous zip files_ (13059_Keck_7z) & (14823_Jewsbury_zip).msg --> Success
+[18-09-2024 11:49:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 0frame.tex --> Success
+[18-09-2024 11:49:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ Request for conversion from LaTex_ Methodology 20_3.msg --> Success
+[18-09-2024 11:49:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 1intro.tex --> Success
+[18-09-2024 11:49:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 2simulated_example.tex --> Success
+[18-09-2024 11:50:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 13059_Keck_OV.pdf --> Success
+[18-09-2024 11:50:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3empirical_examples.tex --> Success
+[18-09-2024 11:50:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 4discussion.tex --> Success
+[18-09-2024 11:50:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> appendices.tex --> Success
+[18-09-2024 11:50:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> library.bib --> Success
+[18-09-2024 11:50:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> boxplot.pdf --> Success
+[18-09-2024 11:50:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> slopesplot.pdf --> Success
+[18-09-2024 11:50:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 01Anova.R --> Success
+[18-09-2024 11:50:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 02emmeans.R --> Success
+[18-09-2024 11:50:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 03EffectLite.R --> Success
+[18-09-2024 11:50:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 03EffectLite.txt --> Success
+[18-09-2024 11:50:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 04IHTa.R --> Success
+[18-09-2024 11:50:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 04IHTb.R --> Success
+[18-09-2024 11:50:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 04IHT_typeB.R --> Success
+[18-09-2024 11:50:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 05TOST.R --> Success

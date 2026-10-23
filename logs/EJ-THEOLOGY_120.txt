@@ -1,0 +1,28 @@
+[04-10-2023 20:05:53] FP --> LINUX --> 88.255.99.18 --> basic information updated --> Success
+[04-10-2023 20:06:07] FP --> LINUX --> 88.255.99.18 --> Files uploaded --> ejtheology-120-galley.docx --> Success
+[04-10-2023 20:06:09] FP --> LINUX --> 88.255.99.18 --> zip created in linux server --> Success
+[04-10-2023 20:06:09] FP --> LINUX --> 88.255.99.18 --> zip file size updated in read me txt file --> Success
+[04-10-2023 20:06:09] FP --> LINUX --> 88.255.99.18 --> Curl function initiated  --> Success
+[04-10-2023 20:06:20] FP --> LINUX --> 88.255.99.18 --> Email sent successfully for file moved to workflow. --> Success
+[11-10-2023 22:27:47] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> FP files from transforma downloaded by Hande --> Success
+[11-10-2023 22:27:49] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> Proof zip files from author downloaded by Hande --> Success
+[11-10-2023 22:31:18] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.75.221 --> Files uploaded --> EJ-THEOLOGY_120+HS.pdf --> Success
+[11-10-2023 22:31:21] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.75.221 --> zip created in linux server --> Success
+[11-10-2023 22:31:21] AUTHOR SUBMISSION REV1 --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[11-10-2023 22:31:30] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 159.146.75.221 --> EJ-THEOLOGY_120.zipEmail sent successfully. --> Success
+[13-10-2023 23:33:29] PRODUCTION REIEW --> LINUX --> 159.146.57.216 --> REVISESED PROOF downloaded by Hande --> Success
+[13-10-2023 23:37:08] META FORM  --> LINUX --> 159.146.57.216 --> Files uploaded --> EJ-THEOLOGY_120+HS.pdf --> Success
+[13-10-2023 23:38:45] META FORM --> LINUX --> 159.146.57.216 --> Correction status updated & form submitted --> Success
+[13-10-2023 23:38:45] META FORM --> LINUX --> 159.146.57.216 --> PDF files exist in the folder --> Success
+[13-10-2023 23:38:45] META FORM --> LINUX --> 159.146.57.216 --> zip created in linux server --> Success
+[13-10-2023 23:38:45] META FORM --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[13-10-2023 23:39:00] META FORM --> LINUX --> 159.146.57.216 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24689'Email sent successfully. --> Success
+[16-10-2023 14:52:54] FINAL DELIVERY --> LINUX --> 159.146.57.216 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[16-10-2023 14:56:09] FINAL CORRECTIONS   --> LINUX --> 159.146.57.216 --> PDF attached for artilce in linux server --> Success
+[16-10-2023 14:56:09] FINAL CORRECTIONS   --> LINUX --> 159.146.57.216 --> zip created in linux server --> Success
+[16-10-2023 14:56:09] FINAL CORRECTIONS ".$stage." --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[16-10-2023 14:56:31] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 159.146.57.216 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-THEOLOGY/Vol00000/EJ-THEOLOGY_120/REV3/upload completedEmail sent successfully. --> Success
+[17-10-2023 16:50:19] FINAL DELIVERY --> LINUX --> 88.239.142.37 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[18-10-2023 20:18:43] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[19-10-2023 17:35:43] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[19-10-2023 17:44:24] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> PUBLISHED --> published by Hande

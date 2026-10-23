@@ -1,0 +1,4 @@
+[27-07-2024 10:58:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ New Requirement in Issue Creation - Journal WF .msg --> Success
+[27-07-2024 13:02:18] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> sample-file.txt --> Success
+[27-07-2024 13:02:31] FP --> LINUX --> 10.10.10.1 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/Sunrise-NOW/FnT-TOM/Vol01801/ISSCOR1/misc/sample-file.txt --> Failure
+[13-08-2024 13:15:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 - Special Issue -approved - request for final files.msg --> Success

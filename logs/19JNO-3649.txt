@@ -1,0 +1,2 @@
+[30-07-2024 10:57:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Ahmad Umar sent you Accepted JNO Ms_ Kindly ack_ via WeTransfer.msg --> Success
+[30-07-2024 10:57:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> wetransfer_accepted-jno-ms-kindly-ack_2024-07-28_0527.zip --> Success

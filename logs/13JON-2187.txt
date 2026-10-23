@@ -1,0 +1,4 @@
+[16-08-2024 12:01:57] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 24-1518 - Final Version.doc --> Success
+[16-08-2024 12:01:57] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Plagiarism Report.pdf --> Success
+[16-08-2024 12:01:57] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Signed Copyright Transfer Form.pdf --> Success
+[22-08-2024 17:06:40] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Journal of nanofluids Proof reading (13JON-2187)-reg_.msg --> Success

@@ -1,0 +1,450 @@
+[2024-06-26 15:42:58] File exists and its size is 117973 bytes.
+[2024-06-26 15:42:58] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:42:58] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:45:57] File exists and its size is 117973 bytes.
+[2024-06-26 15:45:57] Temporary file created successfully: E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/.tmp
+[2024-06-26 15:45:57] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:45:57] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:45:57] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 15:49:37] File exists and its size is 117973 bytes.
+[2024-06-26 15:49:37] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:49:37] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:49:37] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 15:54:53] Could not connect to FTP server: ftp.xperttrack.transforma.in
+[2024-06-26 15:55:08] Could not connect to FTP server: ftp.xperttrack.transforma.in
+[2024-06-26 15:55:25] File exists and its size is 117973 bytes.
+[2024-06-26 15:55:25] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:55:25] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:55:26] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 15:55:36] File exists and its size is 117973 bytes.
+[2024-06-26 15:55:36] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:55:36] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:55:36] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 15:58:27] File exists and its size is 117973 bytes.
+[2024-06-26 15:58:27] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:58:27] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 15:58:27] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:05:07] File exists and its size is 117973 bytes.
+[2024-06-26 16:05:07] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/filecheck
+[2024-06-26 16:05:07] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/filecheck
+[2024-06-26 16:05:07] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:05:39] File exists and its size is 117973 bytes.
+[2024-06-26 16:05:39] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test
+[2024-06-26 16:05:39] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test
+[2024-06-26 16:05:40] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:06:17] File exists and its size is 117973 bytes.
+[2024-06-26 16:06:17] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\Vol00000\REV6
+[2024-06-26 16:06:17] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\Vol00000\REV6
+[2024-06-26 16:06:17] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:06:44] File exists and its size is 117973 bytes.
+[2024-06-26 16:06:44] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_WorkFlow_Files/JOURNAL/downloads/JOURNALS/Vol00000/REV6
+[2024-06-26 16:06:44] Error message: ftp_get(): Error opening E:/New_WorkFlow_Files/JOURNAL/downloads/JOURNALS/Vol00000/REV6
+[2024-06-26 16:06:44] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:07:41] File exists and its size is 117973 bytes.
+[2024-06-26 16:07:41] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/IAP_FTP_CHECK/
+[2024-06-26 16:07:41] Error message: ftp_get(): Error opening E:/IAP_FTP_CHECK/
+[2024-06-26 16:07:41] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:09:06] File exists and its size is 117973 bytes.
+[2024-06-26 16:09:06] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to C:/IAP_FTP_CHECK/
+[2024-06-26 16:09:06] Error message: ftp_get(): Error opening C:/IAP_FTP_CHECK/
+[2024-06-26 16:09:06] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:10:11] File exists and its size is 117973 bytes.
+[2024-06-26 16:10:11] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 16:10:11] Error message: ftp_get(): Error opening E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 16:10:11] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:16:41] File exists and its size is 117973 bytes.
+[2024-06-26 16:16:41] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:16:41] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:16:41] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:16:58] File exists and its size is 117973 bytes.
+[2024-06-26 16:16:58] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:16:58] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:16:58] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:17:02] File exists and its size is 117973 bytes.
+[2024-06-26 16:17:02] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:02] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:03] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:17:12] File exists and its size is 117973 bytes.
+[2024-06-26 16:17:12] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:12] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:12] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:17:17] File exists and its size is 117973 bytes.
+[2024-06-26 16:17:17] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:17] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:17] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:17:26] File exists and its size is 117973 bytes.
+[2024-06-26 16:17:26] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:26] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:17:26] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:41:02] File exists and its size is 117973 bytes.
+[2024-06-26 16:41:02] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:41:02] Error message: ftp_get(): Error opening E:\New_WorkFlow_Files\JOURNAL\downloads\JOURNALS\IAP\ATCS\Vol00000\ATCS_1242_test\REV6
+[2024-06-26 16:41:02] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 16:43:31] File exists and its size is 117973 bytes.
+[2024-06-26 16:44:44] File exists and its size is 117973 bytes.
+[2024-06-26 16:45:27] File exists and its size is 117973 bytes.
+[2024-06-26 16:46:01] File exists and its size is 117973 bytes.
+[2024-06-26 16:46:39] Could not connect to FTP server: xperttrack.transforma.in
+[2024-06-26 16:46:57] File exists and its size is 117973 bytes.
+[2024-06-26 16:47:12] File exists and its size is 117973 bytes.
+[2024-06-26 16:47:32] File exists and its size is 117973 bytes.
+[2024-06-26 16:47:49] File exists and its size is 117973 bytes.
+[2024-06-26 16:48:35] File exists and its size is 117973 bytes.
+[2024-06-26 16:49:50] File exists and its size is 117973 bytes.
+[2024-06-26 19:00:25] File exists and its size is 117973 bytes.
+[2024-06-26 19:00:41] File exists and its size is 117973 bytes.
+[2024-06-26 19:00:59] File exists and its size is 117973 bytes.
+[2024-06-26 19:02:08] File exists and its size is 117973 bytes.
+[2024-06-26 19:03:39] File exists and its size is 117973 bytes.
+[2024-06-26 19:03:55] File exists and its size is 117973 bytes.
+[2024-06-26 19:04:13] File exists and its size is 117973 bytes.
+[2024-06-26 19:04:14] File exists and its size is 117973 bytes.
+[2024-06-26 19:04:30] File exists and its size is 117973 bytes.
+[2024-06-26 19:04:32] File exists and its size is 117973 bytes.
+[2024-06-26 19:04:45] File exists and its size is 117973 bytes.
+[2024-06-26 19:05:41] File exists and its size is 117973 bytes.
+[2024-06-26 19:05:55] File exists and its size is 117973 bytes.
+[2024-06-26 19:06:12] File exists and its size is 117973 bytes.
+[2024-06-26 19:06:55] File exists and its size is 117973 bytes.
+[2024-06-26 19:08:08] File exists and its size is 117973 bytes.
+[2024-06-26 19:24:31] File exists and its size is 117973 bytes.
+[2024-06-26 19:24:45] File exists and its size is 117973 bytes.
+[2024-06-26 19:24:45] File exists and its size is 117973 bytes.
+[2024-06-26 19:25:06] File exists and its size is 117973 bytes.
+[2024-06-26 19:25:18] File exists and its size is 117973 bytes.
+[2024-06-26 19:25:32] File exists and its size is 117973 bytes.
+[2024-06-26 19:25:46] File exists and its size is 117973 bytes.
+[2024-06-26 19:26:02] File exists and its size is 117973 bytes.
+[2024-06-26 19:26:15] File exists and its size is 117973 bytes.
+[2024-06-26 19:26:29] File exists and its size is 117973 bytes.
+[2024-06-26 19:26:42] File exists and its size is 117973 bytes.
+[2024-06-26 19:26:56] File exists and its size is 117973 bytes.
+[2024-06-26 19:27:11] File exists and its size is 117973 bytes.
+[2024-06-26 19:31:19] File exists and its size is 117973 bytes.
+[2024-06-26 19:31:34] File exists and its size is 117973 bytes.
+[2024-06-26 19:42:04] File exists and its size is 117973 bytes.
+[2024-06-26 19:44:02] File exists and its size is 117973 bytes.
+[2024-06-26 19:50:02] File exists and its size is 117973 bytes.
+[2024-06-26 19:54:04] File exists and its size is 117973 bytes.
+[2024-06-26 19:55:11] File exists and its size is 117973 bytes.
+[2024-06-26 19:56:42] File exists and its size is 117973 bytes.
+[2024-06-26 19:58:16] File exists and its size is 117973 bytes.
+[2024-06-26 20:02:19] File exists and its size is 117973 bytes.
+[2024-06-26 20:17:59] File exists and its size is 117973 bytes.
+[2024-06-26 20:20:45] File does not exist: /uploads/IAP/REV/////editor/.zip
+[2024-06-26 20:24:22] File does not exist: /uploads/IAP/REV/////editor/.zip
+[2024-06-26 20:25:23] File exists and its size is 117973 bytes.
+[2024-06-26 20:25:39] File exists and its size is 117973 bytes.
+[2024-06-26 20:25:55] File exists and its size is 117973 bytes.
+[2024-06-26 20:26:57] File exists and its size is 117973 bytes.
+[2024-06-26 20:27:10] File exists and its size is 117973 bytes.
+[2024-06-26 20:27:31] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 20:27:31] Error message: ftp_get(): 117973
+[2024-06-26 20:27:31] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 20:28:03] File exists and its size is 117973 bytes.
+[2024-06-26 20:28:18] File exists and its size is 117973 bytes.
+[2024-06-26 20:28:37] File exists and its size is 117973 bytes.
+[2024-06-26 20:28:58] Failed to download file: /uploads/IAP/REV/IAP/ATCS/ATCS_1242_test/REV6/editor/ATCS_1242_test.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/ATCS/Vol00000/ATCS_1242_test/REV6/
+[2024-06-26 20:28:58] Error message: ftp_get(): 117973
+[2024-06-26 20:28:58] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack         85 Jun 26 05:14 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 05:11 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     117973 Jun 26 05:14 ATCS_1242_test.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack     123914 Jun 26 05:14 EJ-TRANSFORMA-TEST_969.docx
+    [4] => -rw-r--r--    1 xperttrack xperttrack         67 Jun 26 05:14 readme.txt
+)
+
+[2024-06-26 20:29:24] File exists and its size is 117973 bytes.
+[2024-06-26 20:29:38] File exists and its size is 117973 bytes.
+[2024-06-26 20:29:52] File exists and its size is 117973 bytes.
+[2024-06-26 20:29:58] File exists and its size is 117973 bytes.
+[2024-06-26 20:30:06] File exists and its size is 117973 bytes.
+[2024-06-26 20:30:36] File exists and its size is 117973 bytes.
+[2024-06-26 20:30:51] File exists and its size is 117973 bytes.
+[2024-06-26 20:31:04] File exists and its size is 117973 bytes.
+[2024-06-26 20:31:17] File exists and its size is 117973 bytes.
+[2024-06-26 20:31:31] File exists and its size is 117973 bytes.
+[2024-06-26 20:31:51] File exists and its size is 117973 bytes.
+[2024-06-26 20:32:05] File exists and its size is 117973 bytes.
+[2024-06-26 20:32:21] File exists and its size is 117973 bytes.
+[2024-06-26 20:32:29] File exists and its size is 117973 bytes.
+[2024-06-26 20:32:34] File exists and its size is 117973 bytes.
+[2024-06-26 20:32:38] File exists and its size is 117973 bytes.
+[2024-06-26 20:32:49] File exists and its size is 117973 bytes.
+[2024-06-26 20:32:50] File exists and its size is 117973 bytes.
+[2024-06-26 20:33:06] File exists and its size is 117973 bytes.
+[2024-06-26 20:33:06] File exists and its size is 117973 bytes.
+[2024-06-26 20:33:27] File exists and its size is 117973 bytes.
+[2024-06-26 20:33:41] File exists and its size is 117973 bytes.
+[2024-06-26 20:33:59] File exists and its size is 117973 bytes.
+[2024-06-26 20:34:13] File exists and its size is 117973 bytes.
+[2024-06-26 20:34:27] File exists and its size is 117973 bytes.
+[2024-06-26 20:34:41] File exists and its size is 117973 bytes.
+[2024-06-26 20:35:13] File exists and its size is 117973 bytes.
+[2024-06-26 20:35:14] File exists and its size is 117973 bytes.
+[2024-06-26 20:35:28] File exists and its size is 117973 bytes.
+[2024-06-26 20:36:55] File exists and its size is 117973 bytes.
+[2024-06-26 20:39:04] File exists and its size is 117973 bytes.
+[2024-06-26 20:39:21] File exists and its size is 117973 bytes.
+[2024-06-26 20:40:33] File exists and its size is 117973 bytes.
+[2024-06-26 20:40:41] File exists and its size is 117973 bytes.
+[2024-06-26 20:40:56] File exists and its size is 117973 bytes.
+[2024-06-26 20:41:16] File exists and its size is 117973 bytes.
+[2024-06-26 20:41:24] File exists and its size is 117973 bytes.
+[2024-06-26 20:41:39] File exists and its size is 117973 bytes.
+[2024-06-26 20:41:53] File exists and its size is 117973 bytes.
+[2024-06-26 20:42:10] File exists and its size is 117973 bytes.
+[2024-06-26 20:42:25] File exists and its size is 117973 bytes.
+[2024-06-26 20:42:43] File exists and its size is 117973 bytes.
+[2024-06-26 20:43:26] File exists and its size is 117973 bytes.
+[2024-06-26 20:44:40] File exists and its size is 117973 bytes.
+[2024-06-26 20:47:24] File exists and its size is 117973 bytes.
+[2024-06-26 20:48:19] File exists and its size is 117973 bytes.
+[2024-06-26 20:48:33] File exists and its size is 117973 bytes.
+[2024-06-26 20:48:47] File exists and its size is 117973 bytes.
+[2024-06-26 20:48:56] File exists and its size is 117973 bytes.
+[2024-06-26 20:49:10] File exists and its size is 117973 bytes.
+[2024-06-26 20:49:24] File exists and its size is 117973 bytes.
+[2024-06-26 20:49:43] File exists and its size is 117973 bytes.
+[2024-06-26 20:50:44] File exists and its size is 117973 bytes.
+[2024-06-26 20:50:58] File exists and its size is 117973 bytes.
+[2024-06-26 20:51:41] File exists and its size is 117973 bytes.
+[2024-06-26 20:51:54] File exists and its size is 117973 bytes.
+[2024-06-26 20:52:51] File exists and its size is 117973 bytes.
+[2024-06-26 20:53:33] File exists and its size is 117973 bytes.
+[2024-06-26 20:53:50] File exists and its size is 117973 bytes.
+[2024-06-26 20:54:45] File exists and its size is 117973 bytes.
+[2024-06-27 04:59:40] File exists and its size is 979521 bytes.
+[2024-06-27 05:00:01] Failed to download file: /uploads/IAP/REV/IAP/AVD/AVD-CR-24-00033_Tokuda/REV2/editor/AVD-CR-24-00033_Tokuda.zip to E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/AVD/Vol00000/AVD-CR-24-00033_Tokuda/REV2/
+[2024-06-27 05:00:01] Error message: ftp_get(): 979521
+[2024-06-27 05:00:02] FTP Raw List of Directory: Array
+(
+    [0] => drwxr-xr-x    2 xperttrack xperttrack        125 Jun 26 23:04 .
+    [1] => drwxr-xr-x    3 xperttrack xperttrack         20 Jun 26 23:02 ..
+    [2] => -rw-r--r--    1 xperttrack xperttrack     979521 Jun 26 23:04 AVD-CR-24-00033_Tokuda.zip
+    [3] => -rw-r--r--    1 xperttrack xperttrack    1175198 Jun 26 23:04 AVD-CR-24-00033_Tokuda_1-2_authorchecked.pdf
+    [4] => -rw-r--r--    1 xperttrack xperttrack        118 Jun 26 23:04 pap.txt
+    [5] => -rw-r--r--    1 xperttrack xperttrack         90 Jun 26 23:04 readme.txt
+)
+
+[2024-06-27 05:30:10] File exists and its size is 979521 bytes.
+[2024-06-27 07:59:38] File exists and its size is 568037 bytes.
+[2024-08-02 12:45:02] File does not exist: /uploads/IAP/REV/IAP/ATCS/ATCS-RA-24-00092_Di/REV1/editor/ATCS-RA-24-00092_Di.zip
+[2024-09-03 16:29:54] File does not exist: /uploads/IAP/REV/IAP/JOWHSR/JOWHSR-OA-24-006_Makhtar/REV1/editor/JOWHSR-OA-24-006_Makhtar.zip
+[2024-09-04 12:29:54] File does not exist: /uploads/IAP/REV/IAP/JNET/jnet-CR-2024-0053-Inui/REV1/editor/jnet-CR-2024-0053-Inui.zip
+[2024-09-10 10:59:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 11:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 11:29:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 11:45:09] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 11:59:50] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 12:14:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 12:30:00] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 12:44:50] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 12:59:57] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 13:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 13:30:01] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 13:44:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 13:59:51] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 14:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 14:29:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 14:44:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 14:59:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 15:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 15:29:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 15:44:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 15:59:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 16:14:50] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 16:29:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 16:44:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 16:59:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 17:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 17:29:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 17:44:50] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 17:59:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 18:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 18:29:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 18:44:50] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 18:59:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 19:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 19:29:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 19:44:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 19:59:49] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 20:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 20:29:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 20:44:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 20:59:50] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 21:14:51] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 21:29:50] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 21:44:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 21:59:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 22:14:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 22:29:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 22:44:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 22:59:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 23:14:47] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 23:29:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 23:44:47] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-10 23:59:48] File does not exist: /uploads/IAP/REV////REV3/editor/.zip
+[2024-09-24 12:29:38] File exists and its size is 2461459 bytes.
+[2024-09-25 10:14:37] File does not exist: /uploads/IAP/REV/IAP/JNET/jnet-RA-2024-0062-Koizumi/REV1/editor/jnet-RA-2024-0062-Koizumi.zip

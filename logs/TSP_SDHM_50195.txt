@@ -1,0 +1,2 @@
+[12-06-2024 16:30:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_SDHM_50195 author revision.pdf --> Success
+[12-06-2024 16:30:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_SDHM_50195.pdf --> Success

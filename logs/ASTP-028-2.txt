@@ -1,0 +1,9 @@
+[07-06-2024 10:09:59] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[07-06-2024 10:10:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ASTP-028-2.zip --> Success
+[07-06-2024 10:10:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028 for Typesetting.msg --> Success
+[18-07-2024 09:51:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ AST-028-2 - author corrections on the FTP.msg --> Success
+[18-07-2024 09:52:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ASTP-028-2_CX3.zip --> Success
+[09-08-2024 11:38:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028-2 - corrections.msg --> Success
+[09-08-2024 11:40:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ASTP-028-2_CX4.pdf --> Success
+[13-08-2024 12:07:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028-2 - corrections.msg --> Success
+[13-08-2024 12:07:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ASTP-028-2_CX5.pdf --> Success

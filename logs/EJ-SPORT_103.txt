@@ -1,0 +1,6 @@
+[26-10-2023 00:00:08] FP --> LINUX --> 88.255.99.17 --> basic information updated --> Success
+[26-10-2023 00:00:11] FP --> LINUX --> 88.255.99.17 --> Files uploaded --> ejsport-103.docx --> Success
+[26-10-2023 00:00:15] FP --> LINUX --> 88.255.99.17 --> zip created in linux server --> Success
+[26-10-2023 00:00:15] FP --> LINUX --> 88.255.99.17 --> zip file size updated in read me txt file --> Success
+[26-10-2023 00:00:15] FP --> LINUX --> 88.255.99.17 --> Curl function initiated  --> Success
+[26-10-2023 00:00:25] FP --> LINUX --> 88.255.99.17 --> Email sent successfully for file moved to workflow. --> Success

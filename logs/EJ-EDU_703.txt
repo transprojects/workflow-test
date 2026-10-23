@@ -1,0 +1,21 @@
+[04-10-2023 20:28:13] FP --> LINUX --> 88.255.99.18 --> basic information updated --> Success
+[04-10-2023 20:28:18] FP --> LINUX --> 88.255.99.18 --> Files uploaded --> ejedu-703-galley.docx --> Success
+[04-10-2023 20:28:30] FP --> LINUX --> 88.255.99.18 --> zip created in linux server --> Success
+[04-10-2023 20:28:30] FP --> LINUX --> 88.255.99.18 --> zip file size updated in read me txt file --> Success
+[04-10-2023 20:28:30] FP --> LINUX --> 88.255.99.18 --> Curl function initiated  --> Success
+[04-10-2023 20:28:39] FP --> LINUX --> 88.255.99.18 --> Email sent successfully for file moved to workflow. --> Success
+[18-10-2023 17:46:45] AUTHOR SUBMISSION --> LINUX --> 88.255.99.39 --> Proof zip files from author downloaded by Hande --> Success
+[18-10-2023 17:47:02] AUTHOR SUBMISSION --> LINUX --> 88.255.99.39 --> FP files from transforma downloaded by Hande --> Success
+[18-10-2023 17:54:19] AUTHOR SUBMISSION REV1  --> LINUX --> 88.255.99.39 --> Files uploaded --> EJ-EDU_703+HS.pdf --> Success
+[18-10-2023 17:54:20] AUTHOR SUBMISSION REV1  --> LINUX --> 88.255.99.39 --> zip created in linux server --> Success
+[18-10-2023 17:54:20] AUTHOR SUBMISSION REV1 --> LINUX --> 88.255.99.39 --> Curl function initiated  --> Success
+[18-10-2023 17:54:27] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 88.255.99.39 --> EJ-EDU_703.zipEmail sent successfully. --> Success
+[21-10-2023 19:18:32] PRODUCTION REIEW --> LINUX --> 103.66.12.3 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[22-10-2023 18:35:34] PRODUCTION REIEW --> LINUX --> 159.146.73.232 --> REVISESED PROOF downloaded by Hande --> Success
+[22-10-2023 18:42:21] META FORM --> LINUX --> 159.146.73.232 --> Correction status updated & form submitted --> Success
+[22-10-2023 18:42:21] META FORM --> LINUX --> 159.146.73.232 --> No PDF files found in the folder --> Failure
+[22-10-2023 18:42:21] META FORM --> LINUX --> 159.146.73.232 --> zip created in linux server --> Success
+[22-10-2023 18:42:21] META FORM --> LINUX --> 159.146.73.232 --> Curl function initiated  --> Success
+[22-10-2023 18:42:33] META FORM --> LINUX --> 159.146.73.232 --> Email sent successfully. --> Success
+[25-10-2023 15:19:48] FINAL DELIVERY --> LINUX --> 88.255.99.17 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[28-10-2023 14:58:51] FINAL DELIVERY --> LINUX --> 46.106.127.84 --> PUBLISHED --> published by Hande

@@ -1,0 +1,12 @@
+[19-10-2023 23:55:06] FP --> LINUX --> 176.89.120.38 --> basic information updated --> Success
+[19-10-2023 23:55:17] FP --> LINUX --> 176.89.120.38 --> Files uploaded --> EJ_FOOD_738.docx --> Success
+[19-10-2023 23:56:45] FP --> LINUX --> 176.89.120.38 --> zip created in linux server --> Success
+[19-10-2023 23:56:45] FP --> LINUX --> 176.89.120.38 --> zip file size updated in read me txt file --> Success
+[19-10-2023 23:56:45] FP --> LINUX --> 176.89.120.38 --> Curl function initiated  --> Success
+[19-10-2023 23:56:53] FP --> LINUX --> 176.89.120.38 --> Email sent successfully for file moved to workflow. --> Success
+[23-10-2023 01:31:09] AUTHOR SUBMISSION --> LINUX --> 176.88.142.249 --> FP files from transforma downloaded by Pelin --> Success
+[23-10-2023 01:31:13] AUTHOR SUBMISSION --> LINUX --> 176.88.142.249 --> Proof zip files from author downloaded by Pelin --> Success
+[23-10-2023 02:03:01] AUTHOR SUBMISSION REV1  --> LINUX --> 176.88.142.249 --> Files uploaded --> EJFOOD_738_Corrections by authors.pdf --> Success
+[23-10-2023 02:12:42] AUTHOR SUBMISSION REV1  --> LINUX --> 176.88.142.249 --> zip created in linux server --> Success
+[23-10-2023 02:12:42] AUTHOR SUBMISSION REV1 --> LINUX --> 176.88.142.249 --> Curl function initiated  --> Success
+[23-10-2023 02:12:51] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 176.88.142.249 --> EJFOOD_738.zipEmail sent successfully. --> Success

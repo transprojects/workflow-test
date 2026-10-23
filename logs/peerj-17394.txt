@@ -1,0 +1,3 @@
+[24-05-2024 07:15:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17394).msg --> Success
+[24-05-2024 07:15:44] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_PJ/Vol00000/peerj-17394/REV1//FW_ _peerj_ Forum comment posted (17394).msg --> Failure
+[24-05-2024 07:15:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17394).msg --> Success

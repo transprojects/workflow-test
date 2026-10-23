@@ -1,0 +1,2 @@
+[03-07-2024 14:38:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_52130 urgent artcile.msg --> Success
+[03-07-2024 14:38:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_52130.pdf --> Success

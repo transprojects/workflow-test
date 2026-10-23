@@ -1,0 +1,13 @@
+[13-08-2024 10:37:13] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> JBN-2023-0155.doc --> Success
+[13-08-2024 10:37:13] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Grahical abstract.tif --> Success
+[13-08-2024 10:37:13] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> JBN-2023-0155-cta.pdf --> Success
+[13-08-2024 10:37:14] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Plagiarism_check-JBN-2023-0155 .pdf --> Success
+[13-08-2024 10:37:14] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Scheme 1.tif --> Success
+[13-08-2024 10:37:14] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> .DS_Store --> Success
+[13-08-2024 10:37:15] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Figure 1.tif --> Success
+[13-08-2024 10:37:15] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Figure 2.tif --> Success
+[13-08-2024 10:37:15] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Figure 3.tif --> Success
+[13-08-2024 10:37:15] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Figure 4.tif --> Success
+[13-08-2024 10:37:15] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Figure 5.tif --> Success
+[13-08-2024 10:37:16] FP --> LINUX --> 10.10.10.150 --> Files uploaded --> Figure 6.tif --> Success
+[19-08-2024 10:10:13] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_JBN -- A Novel Antigen Delivery System for___ _20JBN-3923_ - Proof.msg --> Success

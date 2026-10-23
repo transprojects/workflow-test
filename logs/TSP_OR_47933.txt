@@ -1,0 +1,2 @@
+[09-09-2024 12:57:57] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_47933.pdf --> Success
+[09-09-2024 12:58:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Two articles need to revised _TSP_OR_47933_ and _TSP_JIOT_53584_.msg --> Success

@@ -1,0 +1,2 @@
+[07-05-2024 23:11:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ OPT-041 final files.msg --> Success
+[14-05-2024 14:16:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ OPT-041 final files.msg --> Success

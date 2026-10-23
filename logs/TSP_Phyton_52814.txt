@@ -1,0 +1,2 @@
+[27-06-2024 09:59:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_Phyton_52814_ - Proof submitted for your review.msg --> Success
+[27-06-2024 09:59:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PHYTON-52814-Manuscript-proof.zip --> Success

@@ -1,0 +1,4 @@
+[07-08-2024 13:09:15] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 3657-YEOM-ICAE 2023_JNO MS8-Query.zip --> Success
+[16-08-2024 10:47:49] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> ICAE 2023_JNO MS8_f.zip --> Success
+[31-08-2024 09:59:15] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> _답장_ JNO -- Characteristics of palladium carbide thin films___ _19JNO-3657-YEOM_ - Proof.msg --> Success
+[31-08-2024 09:59:20] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JNO -- Characteristics of palladium carbide thin films... [19JNO-3657-YEOM] - Proof.zip --> Success

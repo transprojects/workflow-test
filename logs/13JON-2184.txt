@@ -1,0 +1,4 @@
+[16-08-2024 11:57:06] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Plagiarism Report.pdf --> Success
+[16-08-2024 11:57:07] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Signed Copyright Transfer Form.pdf --> Success
+[16-08-2024 11:57:07] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 23-1480 - Final Version.docx --> Success
+[22-08-2024 17:08:10] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> response to our paper in JON -- Numerical study of Magnetohydrodynamic forced___ _13JON-2184_ - Proof.msg --> Success

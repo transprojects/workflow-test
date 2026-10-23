@@ -1,0 +1,1 @@
+[02-08-2024 10:19:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_BIOCELL_51673.zip --> Success

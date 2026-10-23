@@ -1,0 +1,14 @@
+[25-04-2024 17:39:18] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[25-04-2024 17:39:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT new file uploaded.msg --> Success
+[25-04-2024 17:40:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[25-04-2024 17:40:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Tables1-4.pptx --> Success
+[25-04-2024 17:40:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[25-04-2024 17:40:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figs.1-6.pptx --> Success
+[10-05-2024 14:16:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT request for revision.msg --> Success
+[10-05-2024 14:16:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT-OA-23-0008_Sugiyama_1_checked.pdf --> Success
+[14-05-2024 11:21:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT request for J-STAGE.msg --> Success
+[14-05-2024 11:24:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT request for J-STAGE.msg --> Success
+[14-05-2024 11:24:34] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/JTVT/Vol00000/JTVT-OA-23-0008_Sugiyama/REV2//JTVT request for J-STAGE.msg --> Failure
+[14-05-2024 11:24:35] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP/JTVT/Vol00000/JTVT-OA-23-0008_Sugiyama/REV2//JTVT request for J-STAGE.msg --> Failure
+[14-05-2024 11:24:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT request for J-STAGE.msg --> Success
+[14-05-2024 11:24:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT-OA-23-0008_Sugiyama_1-2_authorchecked.pdf --> Success

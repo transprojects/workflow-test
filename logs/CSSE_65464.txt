@@ -1,0 +1,11 @@
+[02-12-2023 13:18:09] FP --> LINUX --> ::1 --> basic information updated --> Success
+[02-12-2023 13:18:17] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-10-18 114206.png --> Success
+[02-12-2023 13:18:17] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-10-21 124324.png --> Success
+[02-12-2023 13:18:33] FP --> LINUX --> ::1 --> zip created in linux server --> Success
+[02-12-2023 13:18:33] FP --> LINUX --> ::1 --> zip file size updated in read me txt file --> Success
+[02-12-2023 13:20:04] FP --> LINUX --> ::1 --> zip created in linux server --> Success
+[02-12-2023 13:20:04] FP --> LINUX --> ::1 --> zip file size updated in read me txt file --> Success
+[02-12-2023 13:21:21] FP --> LINUX --> ::1 --> zip created in linux server --> Success
+[02-12-2023 13:21:21] FP --> LINUX --> ::1 --> zip file size updated in read me txt file --> Success
+[02-12-2023 13:21:35] FP --> LINUX --> ::1 --> zip created in linux server --> Success
+[02-12-2023 13:21:35] FP --> LINUX --> ::1 --> zip file size updated in read me txt file --> Success

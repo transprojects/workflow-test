@@ -1,0 +1,89 @@
+
+
+Program Run at: 2026-01-14 09:44:10.785874
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. RIMNI/TSP_RIMNI_74881/REV2/client-files. While Download TSP Files
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:46:43.767133
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. RIMNI/TSP_RIMNI_74881/REV2/client-files. While Download TSP Files
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/OR/TSP_OR_70645/REV2/client-files/TSP_OR_70645.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/OR/TSP_OR_74981/REV2/client-files/TSP_OR_74981.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/RIMNI/TSP_RIMNI_76520/REV3/client-files/TSP_RIMNI_76520.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/CMES/TSP_CMES_73292/FIN1/editor/TSP_CMES_73292.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:48:17.423080
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. RIMNI/TSP_RIMNI_74881/REV2/client-files. While Download TSP Files
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:48:25.026211
+=========================================
+
+Error: ⚠ Folder does not exists in FTP. RIMNI/TSP_RIMNI_74881/REV2/client-files. While Download TSP Files
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:49:51.233985
+=========================================
+
+Error: ⚠ File does not exist on FTP. REV/TSP/RIMNI/TSP_RIMNI_74881/REV2/client-files/TSP_RIMNI_74881.zip
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:49:58.638541
+=========================================
+
+Error: ⚠ File does not exist on FTP. REV/TSP/RIMNI/TSP_RIMNI_74881/REV2/client-files/TSP_RIMNI_74881.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:50:56.935175
+=========================================
+
+Error: ⚠ File does not exist on FTP. REV/TSP/RIMNI/TSP_RIMNI_74881/REV2/client-files/TSP_RIMNI_74881.zip
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:51:02.244074
+=========================================
+
+Error: ⚠ File does not exist on FTP. REV/TSP/RIMNI/TSP_RIMNI_74881/REV2/client-files/TSP_RIMNI_74881.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-01-14 09:52:16.241847
+=========================================
+
+Success: Download file from FTP: REV/TSP/RIMNI/TSP_RIMNI_74881/REV2/client-files/TSP_RIMNI_74881.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

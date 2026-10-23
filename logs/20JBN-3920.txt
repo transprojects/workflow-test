@@ -1,0 +1,7 @@
+[10-07-2024 09:50:35] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBN-HW-24030201-CTA.pdf --> Success
+[10-07-2024 09:50:35] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBN-HW-24030201-checking report.pdf --> Success
+[10-07-2024 09:50:36] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBN-HW-24030201-payment proof.jpg --> Success
+[10-07-2024 09:50:38] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBN-HW-24030201-Editing Certificate.pdf --> Success
+[10-07-2024 09:50:39] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_RE_ When the coming JBN issue will be online _  It is JBN-HW-24030201.msg --> Success
+[10-07-2024 09:50:44] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JBN-HW-24030201.doc --> Success
+[10-07-2024 09:51:28] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 001JBN-RUSH.zip --> Success

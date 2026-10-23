@@ -1,0 +1,1 @@
+ALTER TABLE `user_role_master` ADD `menu_id` TEXT NULL AFTER `user_role_description`, ADD `smenu_id` TEXT NULL AFTER `menu_id`, ADD `crud_access` TEXT NULL AFTER `smenu_id`;

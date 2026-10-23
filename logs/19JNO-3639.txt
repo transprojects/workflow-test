@@ -1,0 +1,2 @@
+[02-07-2024 15:54:44] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> Ahmad Umar sent you Accepted JNO Ms_ Kindly ack_ via WeTransfer.msg --> Success
+[02-07-2024 15:54:45] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> productiondocuments.zip --> Success

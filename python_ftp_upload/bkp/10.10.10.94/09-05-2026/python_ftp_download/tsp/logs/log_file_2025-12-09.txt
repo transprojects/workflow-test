@@ -1,0 +1,139 @@
+
+
+Program Run at: 2025-12-09 08:56:02.534904
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/RIMNI/TSP_RIMNI_74380/FIN1/editor/TSP_RIMNI_74380.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/SDHM/TSP_SDHM_70202/FIN1/editor/TSP_SDHM_70202.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/CMC/TSP_CMC_70224/FIN1/editor/TSP_CMC_70224.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/CMES/TSP_CMES_74364/FIN1/editor/TSP_CMES_74364.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/CMC/TSP_CMC_73237/FIN1/editor/TSP_CMC_73237.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CJU/TSP_CJU_72113/REV1/editor/TSP_CJU_72113.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_73233/REV2/client-files/TSP_EE_73233.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/EE/TSP_EE_72773/REV2/client-files/TSP_EE_72773.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_72561/REV2/client-files/TSP_CMC_72561.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_71186/REV2/client-files/TSP_CMC_71186.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_70948/REV3/client-files/TSP_CMC_70948.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_72449/REV3/client-files/TSP_CMC_72449.zip
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: [Errno 11001] getaddrinfo failed.
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: [Errno 11001] getaddrinfo failed.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Email notification sent to client is Failed for TSP_CMC_72449
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_72507/REV3/client-files/TSP_CMC_72507.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_72707/REV3/client-files/TSP_CMC_72707.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_72889/REV3/client-files/TSP_CMC_72889.zip
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent: [Errno 11001] getaddrinfo failed.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73029/REV3/client-files/TSP_CMC_73029.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_73662/REV3/client-files/TSP_CMC_73662.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/OR/TSP_OR_73051/REV3/client-files/TSP_OR_73051.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/RIMNI/TSP_RIMNI_72566/REV3/client-files/TSP_RIMNI_72566.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: FIN/TSP/OR/TSP_OR_72133/FIN1/editor/TSP_OR_72133.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Download file from FTP: REV/TSP/CMC/TSP_CMC_72266/REV2/client-files/TSP_CMC_72266.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

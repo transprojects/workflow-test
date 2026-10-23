@@ -1,0 +1,1 @@
+[06-07-2024 15:28:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3646-001JNO.zip --> Success

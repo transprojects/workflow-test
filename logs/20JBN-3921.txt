@@ -1,0 +1,2 @@
+[10-07-2024 10:01:53] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 24-978.zip --> Success
+[13-07-2024 10:10:07] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_ JBN -- Nanopeptides Stop the Binding___ _20JBN-3921_ - Proof.msg --> Success

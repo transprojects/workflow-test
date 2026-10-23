@@ -1,0 +1,952 @@
+
+
+Program Run at: 2025-12-08 00:04:52.692360
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:04:53.161136
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:04:53.650672
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:04:54.181801
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:19:54.737659
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:19:55.274364
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:19:55.747990
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:19:56.298023
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:34:56.612460
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:34:57.070454
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:34:57.585953
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:34:58.039753
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:49:58.682127
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:49:59.201413
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:49:59.670047
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 00:50:00.239268
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:05:00.657726
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:05:01.115093
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:05:01.587317
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:05:02.040484
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:20:02.674538
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:20:03.194768
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:20:03.666070
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:20:04.220418
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:35:04.682468
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:35:05.152610
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:35:05.621995
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:35:06.059388
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:50:06.691673
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:50:07.139025
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:50:07.607894
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 01:50:08.060916
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:05:08.663821
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:05:09.116974
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:05:09.649902
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:05:10.251933
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:20:10.661452
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:20:11.116019
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:20:11.650256
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:20:12.087838
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:35:12.591150
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:35:13.111993
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:35:13.580635
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:35:14.034394
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:50:14.658693
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:50:15.194005
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:50:15.647220
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 02:50:16.116942
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:05:16.653128
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:05:17.106149
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:05:17.598681
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:05:18.069545
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:20:18.630920
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:20:19.115175
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:20:19.584569
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:20:20.037577
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:35:20.645969
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:35:21.161477
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:35:21.635877
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:35:22.107569
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:50:22.597024
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:50:23.050043
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:50:23.577217
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 03:50:24.092730
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:05:24.656770
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:05:25.109967
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:05:25.658649
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:05:26.131761
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:20:26.629528
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:20:27.088313
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:20:27.635468
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:20:28.074245
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:35:28.687089
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:35:29.249274
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:35:29.708823
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:35:30.161842
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:50:30.627425
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:50:31.106964
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:50:31.653856
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 04:50:32.140562
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:05:32.637493
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:05:33.106146
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:05:33.580356
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:05:34.051953
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:20:34.779794
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:20:35.379136
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:20:35.863385
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:20:36.394289
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:35:36.709694
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:35:37.242313
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:35:37.729736
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:35:38.219202
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:50:38.669279
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:50:39.211666
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:50:39.681472
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 05:50:40.166154
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:05:40.641266
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:05:41.110433
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:05:41.657453
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:05:42.111261
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:20:42.655039
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:20:43.252478
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:20:43.708518
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:20:44.181409
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:35:44.663795
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:35:45.121229
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:35:45.581907
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:35:46.037251
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:50:46.592126
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:50:47.062664
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:50:47.609418
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 06:50:48.064097
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:05:48.649871
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:05:49.091045
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:05:50.310715
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:06:00.640225
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:06:03.561424
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Error occur in downloading file. from REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to "E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip".<br>[WinError 3] The system cannot find the path specified: 'E:\\'
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:06:09.106821
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Error occur in downloading file. from REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to "E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip".<br>[WinError 3] The system cannot find the path specified: 'E:\\'
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMES\Vol00000\TSP_CMES_73896\REV3\TSP_CMES_73896.zip for article ID TSP_CMES_73896 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:06:12.325019
+=========================================
+
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_70224/REV3/client-files/TSP_CMC_70224.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_70224\REV3\TSP_CMC_70224.zip for article ID TSP_CMC_70224 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip for article ID TSP_CMC_73237 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ Error occur in downloading file. from REV/TSP/CMC/TSP_CMC_73237/REV3/client-files/TSP_CMC_73237.zip to "E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73237\REV3\TSP_CMC_73237.zip".<br>[WinError 3] The system cannot find the path specified: 'E:\\'
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMC/TSP_CMC_73700/REV3/client-files/TSP_CMC_73700.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMC\Vol00000\TSP_CMC_73700\REV3\TSP_CMC_73700.zip for article ID TSP_CMC_73700 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Error: ⚠ Error occur in downloading file REV/TSP/CMES/TSP_CMES_73896/REV3/client-files/TSP_CMES_73896.zip to E:\New_Workflow_Files\JOURNAL\downloads\JOURNALS\TSP\CMES\Vol00000\TSP_CMES_73896\REV3\TSP_CMES_73896.zip for article ID TSP_CMES_73896 [WinError 3] The system cannot find the path specified: 'E:\\'
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:06:12.841666
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:21:12.750748
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:21:13.287216
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:21:13.760414
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:21:14.246195
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:36:14.673313
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (ACG)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:36:15.181161
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:36:15.659482
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-08 07:36:16.223176
+=========================================
+
+Error: ⚠ No Article present for mail sent to client from Xperttrack FTP (TSP)
+-----------------------------------------------------------------------------------------

@@ -1,0 +1,1 @@
+[11-09-2024 12:31:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 4734-001SAM.zip --> Success

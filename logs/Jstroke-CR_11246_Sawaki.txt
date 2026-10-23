@@ -1,0 +1,5 @@
+[16-05-2024 14:53:17] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[16-05-2024 14:53:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Jstroke English Check.msg --> Success
+[16-05-2024 14:54:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Jstroke English Check.msg --> Success
+[16-05-2024 14:54:09] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/IAP_Japanese-Journals/jstroke/Vol00000/Jstroke-CR_11246_Sawaki/FP//Jstroke English Check.msg --> Failure
+[16-05-2024 14:57:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CR_11246_Sawaki.zip --> Success

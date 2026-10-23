@@ -1,0 +1,15 @@
+[16-04-2024 14:11:58] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[16-04-2024 14:12:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (4).jpg --> Success
+[16-04-2024 14:12:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table.docx --> Success
+[16-04-2024 14:12:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[16-04-2024 14:12:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[16-04-2024 14:12:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (1).jpg --> Success
+[16-04-2024 14:12:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (2).jpg --> Success
+[16-04-2024 14:12:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (3).jpg --> Success
+[16-04-2024 14:12:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET new files uploaded.msg --> Success
+[26-04-2024 19:44:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-CR-2024-0023_Makino_1_checked.pdf --> Success
+[26-04-2024 19:44:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ JNET request for revision.msg --> Success
+[09-05-2024 21:14:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[09-05-2024 21:17:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-CR-2024-0023_Makino_1-2_checked.pdf --> Success
+[14-05-2024 15:42:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for J-STAGE.msg --> Success
+[14-05-2024 15:42:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-CR-2024-0023_Makino_1-3_authorchecked.pdf --> Success

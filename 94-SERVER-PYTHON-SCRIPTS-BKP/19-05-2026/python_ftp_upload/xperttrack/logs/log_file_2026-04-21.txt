@@ -1,0 +1,28 @@
+
+
+Program Run at: 2026-04-21 17:04:24.788739
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/CMC/TSP_CMC_83414/transforma-fp-files/TSP_CMC_83414.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CMC/TSP_CMC_83414/TSP_CMC_83414.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-21 18:16:56.889340
+=========================================
+
+Success: Uploaded file to FTP: FP/EOS/EJ-ENG/EJ-ENG_70023_CIE/transforma-fp-files/EJ-ENG_70023_CIE.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/EOS/EJ-ENG/EJ-ENG_70023_CIE/EJ-ENG_70023_CIE.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: REV/TSP/CMC/TSP_CMC_79941/REV2/transforma-to-author/TSP_CMC_79941.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: REV/ACG/RNP/RNP-2603-3761/REV3/transforma-to-client/RNP-2603-3761.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

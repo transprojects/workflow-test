@@ -1,0 +1,6 @@
+[18-10-2023 18:10:54] FP --> LINUX --> 77.241.136.44 --> basic information updated --> Success
+[18-10-2023 18:23:57] FP --> LINUX --> 77.241.136.44 --> Files uploaded --> Position+and+Length+of+Appendix+among+Delhi+Population (1).docx --> Success
+[18-10-2023 18:23:58] FP --> LINUX --> 77.241.136.44 --> zip created in linux server --> Success
+[18-10-2023 18:23:58] FP --> LINUX --> 77.241.136.44 --> zip file size updated in read me txt file --> Success
+[18-10-2023 18:23:58] FP --> LINUX --> 77.241.136.44 --> Curl function initiated  --> Success
+[18-10-2023 18:24:06] FP --> LINUX --> 77.241.136.44 --> Email sent successfully for file moved to workflow. --> Success

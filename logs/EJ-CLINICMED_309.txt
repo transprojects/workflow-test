@@ -1,0 +1,30 @@
+[28-09-2023 19:18:19] FP --> LINUX --> 77.241.136.137 --> basic information updated --> Success
+[28-09-2023 19:18:34] FP --> LINUX --> 77.241.136.137 --> Files uploaded --> ejclinicmed_309.docx --> Success
+[28-09-2023 19:18:35] FP --> LINUX --> 77.241.136.137 --> zip created in linux server --> Success
+[28-09-2023 19:18:35] FP --> LINUX --> 77.241.136.137 --> zip file size updated in read me txt file --> Success
+[28-09-2023 19:18:35] FP --> LINUX --> 77.241.136.137 --> Curl function initiated  --> Success
+[28-09-2023 19:18:47] FP --> LINUX --> 77.241.136.137 --> Email sent successfully for file moved to workflow. --> Success
+[04-10-2023 21:08:36] AUTHOR SUBMISSION --> LINUX --> 59.94.153.69 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[05-10-2023 20:19:44] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:20:43] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.128.161 --> Files uploaded --> EJ-CLINICMED_309.pdf --> Success
+[05-10-2023 20:20:44] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.128.161 --> zip created in linux server --> Success
+[05-10-2023 20:20:44] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[05-10-2023 20:20:51] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJ-CLINICMED_309.zipEmail sent successfully. --> Success
+[06-10-2023 12:11:52] PRODUCTION REIEW --> LINUX --> 223.187.125.91 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[06-10-2023 22:04:15] PRODUCTION REIEW --> LINUX --> 59.92.87.210 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[12-10-2023 00:26:52] PRODUCTION REIEW --> LINUX --> 77.241.136.62 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 14:32:34] PRODUCTION REIEW --> LINUX --> 77.241.136.67 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 14:32:36] PRODUCTION REIEW --> LINUX --> 95.209.202.132 --> REVISESED PROOF downloaded by  --> Failure
+[13-10-2023 14:39:41] META FORM  --> LINUX --> 77.241.136.67 --> Files uploaded --> EJ-CLINICMED_309_Revised 2_12-10-2023.pdf --> Success
+[13-10-2023 14:39:43] META FORM --> LINUX --> 77.241.136.67 --> Correction status updated & form submitted --> Success
+[13-10-2023 14:39:43] META FORM --> LINUX --> 77.241.136.67 --> PDF files exist in the folder --> Success
+[13-10-2023 14:39:43] META FORM --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 14:39:43] META FORM --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 14:39:53] META FORM --> LINUX --> 77.241.136.67 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24574'Email sent successfully. --> Success
+[13-10-2023 14:39:53] META FORM --> LINUX --> 77.241.136.67 --> Correction status updated & form submitted --> Success
+[13-10-2023 14:39:53] META FORM --> LINUX --> 77.241.136.67 --> PDF files exist in the folder --> Success
+[13-10-2023 14:39:53] META FORM --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 14:39:53] META FORM --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 14:40:04] META FORM --> LINUX --> 77.241.136.67 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24574'Email sent successfully. --> Success
+[16-10-2023 16:10:43] FINAL DELIVERY --> LINUX --> 77.241.136.102 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[16-10-2023 16:29:42] FINAL DELIVERY --> LINUX --> 77.241.136.102 --> PUBLISHED --> published by Ivanna

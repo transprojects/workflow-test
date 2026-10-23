@@ -1,0 +1,152 @@
+
+
+Program Run at: 2025-12-06 16:33:10.125687
+=========================================
+
+Success: Uploaded file to FTP: REV/TSP/EE/TSP_EE_70501/REV1/transforma-to-client/TSP_EE_70501.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FP/TSP/CMC/TSP_CMC_72799/transforma-fp-files/TSP_CMC_72799.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CMC/TSP_CMC_72799/TSP_CMC_72799.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 17:32:55.053510
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/EE/TSP_EE_73787/transforma-fp-files/TSP_EE_73787.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/EE/TSP_EE_73787/TSP_EE_73787.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 18:25:42.154092
+=========================================
+
+Success: Uploaded file to FTP: FP/TSP/JIOT/TSP_JIOT_72809/transforma-fp-files/TSP_JIOT_72809.zip
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/JIOT/TSP_JIOT_72809/TSP_JIOT_72809.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 18:26:42.499916
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 18:34:45.312745
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 18:41:15.027401
+=========================================
+
+Success: Uploaded file to FTP: REV/TSP/CMES/TSP_CMES_72496/REV1/transforma-to-client/TSP_CMES_72496.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 19:00:33.351072
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 19:15:40.503941
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 19:30:47.893876
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 20:19:02.880743
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 21:52:19.802868
+=========================================
+
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FP/TSP/CMC/TSP_CMC_73442/transforma-fp-files/TSP_CMC_73442.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to xpertproof FTP: In/TSP/CMC/TSP_CMC_73442/TSP_CMC_73442.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 21:52:39.140214
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 21:53:46.948960
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 21:54:55.594518
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 21:57:38.610337
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-12-06 21:58:19.799675
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

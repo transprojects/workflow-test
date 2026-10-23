@@ -1,0 +1,27 @@
+[01-10-2023 18:40:36] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:40:56] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejmed_1868.docx --> Success
+[01-10-2023 18:41:02] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:41:02] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:41:02] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:41:16] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[06-10-2023 09:30:13] AUTHOR SUBMISSION --> LINUX --> 223.187.125.91 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[08-10-2023 08:54:43] AUTHOR SUBMISSION --> LINUX --> 59.92.87.68 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[09-10-2023 15:44:33] AUTHOR SUBMISSION --> LINUX --> 77.241.128.153 --> FP files from transforma downloaded by Ivanna --> Success
+[09-10-2023 15:46:53] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.128.153 --> Files uploaded --> EJ-MED_1868.pdf --> Success
+[09-10-2023 15:47:32] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.128.153 --> zip created in linux server --> Success
+[09-10-2023 15:47:32] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.128.153 --> Curl function initiated  --> Success
+[09-10-2023 15:47:44] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.128.153 --> EJ-MED_1868.zipEmail sent successfully. --> Success
+[12-10-2023 00:14:04] PRODUCTION REIEW --> LINUX --> 77.241.136.62 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 02:09:32] PRODUCTION REIEW --> LINUX --> 77.241.136.110 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 20:17:31] PRODUCTION REIEW --> LINUX --> 77.241.136.67 --> REVISESED PROOF downloaded by Ivanna --> Success
+[18-10-2023 16:54:12] PRODUCTION REIEW --> LINUX --> 77.241.136.44 --> REVISESED PROOF downloaded by Ivanna --> Success
+[18-10-2023 17:05:23] META FORM  --> LINUX --> 77.241.136.44 --> Files uploaded --> 1868.zip --> Success
+[18-10-2023 18:35:19] META FORM  --> LINUX --> 77.241.136.44 --> Files uploaded --> 1868.zip --> Success
+[18-10-2023 18:35:21] META FORM --> LINUX --> 77.241.136.44 --> Correction status updated & form submitted --> Success
+[18-10-2023 18:35:21] META FORM --> LINUX --> 77.241.136.44 --> No PDF files found in the folder --> Failure
+[18-10-2023 18:35:21] META FORM --> LINUX --> 77.241.136.44 --> zip created in linux server --> Success
+[18-10-2023 18:35:21] META FORM --> LINUX --> 77.241.136.44 --> Curl function initiated  --> Success
+[18-10-2023 18:35:46] META FORM --> LINUX --> 77.241.136.44 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24644'Email sent successfully. --> Success
+[21-10-2023 11:00:20] FINAL DELIVERY --> LINUX --> 117.206.120.111 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[23-10-2023 22:41:56] FINAL DELIVERY --> LINUX --> 77.241.136.28 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[23-10-2023 23:00:06] FINAL DELIVERY --> LINUX --> 77.241.136.28 --> PUBLISHED --> published by Ivanna

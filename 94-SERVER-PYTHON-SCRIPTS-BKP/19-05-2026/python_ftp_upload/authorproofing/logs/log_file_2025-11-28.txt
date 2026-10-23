@@ -1,0 +1,119 @@
+
+
+Program Run at: 2025-11-28 15:46:52.586905
+=========================================
+
+Database workflow in 52.23.135.119 connected Successfully.
+-----------------------------------------------------------------------------------------
+Database workflow in localhost connected Successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2025-11-28 15:53:42.113529
+=========================================
+
+Database workflow in 52.23.135.119 connected Successfully.
+Database workflow in localhost connected Successfully.
+Msg: 0 project IDs found
+END OF LOGS
+
+Program Run at: 2025-11-28 15:55:40.161425
+=========================================
+Database workflow in 52.23.135.119 connected Successfully.
+Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found
+=========================================
+END OF LOGS
+
+Program Run at: 2025-11-28 16:00:12.415575
+=========================================
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found
+=========================================
+END OF LOGS
+
+Program Run at: 2025-11-28 16:01:13.967609
+===================================================
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found
+===================================================
+END OF LOGS
+
+Program Run at: 2025-11-28 16:02:00.190181
+=============================================================
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found
+=============================================================
+END OF LOGS
+
+Program Run at: 2025-11-28 16:28:28.496842
+=============================================================
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found with the Constraints
+Msg: Working on Customer_id 66
+Msg: Database xperttrackadmin_eos in 68.178.166.2 connected Successfully.
+Msg: Working on project_id 23598
+Local Path: E:\New_Workflow_Files\JOURNAL\production\JOURNALS\EOS\EJ-MED\Vol00000\EJ-MED_1893_old\FP\Delivery
+FTP Path: REV1/EOS/EJ-MED/EJ-MED_1893_old
+File not present in Local.
+Msg: Connected to FTP server xperttrack.transforma.in
+Err: Error uploading file cannot access local variable 'ftp_file_path' where it is not associated with a value
+=============================================================
+END OF LOGS
+
+Program Run at: 2025-11-28 16:56:49.307200
+=============================================================
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found with the Constraints
+Msg: Working on Customer_id 66
+Msg: Database xperttrackadmin_eos in 68.178.166.2 connected Successfully.
+Msg: Working on project_id 23598
+Local Path: E:\New_Workflow_Files\JOURNAL\production\JOURNALS\EOS\EJ-MED\Vol00000\EJ-MED_1893_old\FP\Delivery
+FTP Path: REV1/EOS/EJ-MED/EJ-MED_1893_old
+Filename EJ-MED_1893_old.zip matched in Local
+FTP-file-path: REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+=============================================================
+END OF LOGS
+
+Program Run at: 2025-11-28 16:57:55.855567
+=============================================================
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found with the Constraints
+Msg: Working on Customer_id 66
+Msg: Database xperttrackadmin_eos in 68.178.166.2 connected Successfully.
+Msg: Working on project_id 23598
+Local Path: E:\New_Workflow_Files\JOURNAL\production\JOURNALS\EOS\EJ-MED\Vol00000\EJ-MED_1893_old\FP\Delivery
+FTP Path: REV1/EOS/EJ-MED/EJ-MED_1893_old
+Filename matched in Local
+FTP-file-path: REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+Msg: Connected to FTP server xperttrack.transforma.in
+Msg: Uploading file to FTP: REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+Msg: Upload complete for REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+Msg: Successfully uploaded file: REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+=============================================================
+END OF LOGS
+
+Program Run at: 2025-11-28 17:19:16.923794
+=============================================================
+Msg: Database workflow in 52.23.135.119 connected Successfully.
+Msg: Database workflow in localhost connected Successfully.
+Msg: 1702 project IDs found with the Constraints
+Msg: Working on Customer_id 66
+Msg: Database xperttrackadmin_eos in 68.178.166.2 connected Successfully.
+Msg: Working on project_id 23598
+Local Path: E:\New_Workflow_Files\JOURNAL\production\JOURNALS\EOS\EJ-MED\Vol00000\EJ-MED_1893_old\FP\Delivery
+FTP Path: REV1/EOS/EJ-MED/EJ-MED_1893_old
+Filename matched in Local
+FTP-file-path: REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+Msg: Connected to FTP server xperttrack.transforma.in
+Msg: Uploading file to FTP: REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+Msg: Upload complete for REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+Msg: Successfully uploaded file: REV1/EOS/EJ-MED/EJ-MED_1893_old/EJ-MED_1893_old.zip
+=============================================================
+END OF LOGS

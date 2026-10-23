@@ -1,0 +1,2 @@
+[01-07-2024 09:46:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_PO_49476_ - Proof submitted for your review.msg --> Success
+[01-07-2024 09:46:31] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_PO_49476 (1).pdf --> Success

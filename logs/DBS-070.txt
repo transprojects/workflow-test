@@ -1,0 +1,7 @@
+[15-05-2024 16:25:28] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[15-05-2024 16:25:34] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ DBS-070 to production.msg --> Success
+[15-05-2024 16:25:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> DBS-070-20240514T181433Z-001.zip --> Success
+[05-06-2024 16:52:16] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ DBS-070 author corrections.msg --> Success
+[05-06-2024 16:53:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> DBS-070-Author-Corrections.pdf --> Success
+[14-06-2024 15:35:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> drive-download-20240614T100449Z-001.zip --> Success
+[14-06-2024 15:35:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ DBS-070 Finals.msg --> Success

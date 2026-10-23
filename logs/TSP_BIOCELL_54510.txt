@@ -1,0 +1,5 @@
+[23-07-2024 12:55:26] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 12:55:32] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_BIOCELL_54510.docx --> Success
+[18-08-2024 20:38:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_BIOCELL_54510.pdf --> Success
+[26-09-2024 14:55:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_BIOCELL_54510.pdf --> Success
+[26-09-2024 14:55:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

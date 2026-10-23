@@ -1,0 +1,7 @@
+[07-08-2024 13:05:56] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 3656-YEOM-ICAE 2023_JNO MS7.zip --> Success
+[16-08-2024 10:44:46] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> ICAE 2023_JNO MS7_f.zip --> Success
+[31-08-2024 09:58:12] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> _답장_ JNO -- Characteristics of palladium carbide thin films___ _19JNO-3657-YEOM_ - Proof.msg --> Success
+[31-08-2024 09:58:23] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> JNO -- Characteristics of palladium carbide thin films... [19JNO-3657-YEOM] - Proof.zip --> Success
+[31-08-2024 09:58:33] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/ASP/JNO/Vol00000/19JNO-YEOM/19JNO-3656-YEOM/REV1//_답장_ JNO -- Characteristics of palladium carbide thin films___ _19JNO-3657-YEOM_ - Proof.msg --> Failure
+[31-08-2024 09:58:34] FP --> LINUX --> 10.10.10.80 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/ASP/JNO/Vol00000/19JNO-YEOM/19JNO-3656-YEOM/REV1//JNO -- Characteristics of palladium carbide thin films... [19JNO-3657-YEOM] - Proof.zip --> Failure
+[31-08-2024 10:00:22] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> _답장_ JNO -- Stability properties of___ _19JNO-3656-YEOM_ - Proof.msg --> Success

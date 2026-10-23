@@ -1,0 +1,9 @@
+[27-10-2023 23:39:29] FP --> LINUX --> 77.241.136.111 --> basic information updated --> Success
+[27-10-2023 23:39:36] FP --> LINUX --> 77.241.136.111 --> Files uploaded --> EJMATH+FINAL+PAPER.docx --> Success
+[27-10-2023 23:39:39] FP --> LINUX --> 77.241.136.111 --> basic information updated --> Success
+[27-10-2023 23:39:51] FP --> LINUX --> 77.241.136.111 --> Files removed -->uploads/EOS/FP/EOS/EJ-MATH/EJ-MATH_300/EJMATH+FINAL+PAPER.docx --> Failure
+[27-10-2023 23:39:58] FP --> LINUX --> 77.241.136.111 --> Files uploaded --> EJMATH+FINAL+PAPER.docx --> Success
+[27-10-2023 23:40:00] FP --> LINUX --> 77.241.136.111 --> zip created in linux server --> Success
+[27-10-2023 23:40:00] FP --> LINUX --> 77.241.136.111 --> zip file size updated in read me txt file --> Success
+[27-10-2023 23:40:00] FP --> LINUX --> 77.241.136.111 --> Curl function initiated  --> Success
+[27-10-2023 23:40:11] FP --> LINUX --> 77.241.136.111 --> Email sent successfully for file moved to workflow. --> Success

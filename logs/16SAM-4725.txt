@@ -1,0 +1,2 @@
+[08-07-2024 10:05:09] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 16SAM-4725-Queries(answer).msg --> Success
+[15-07-2024 09:55:45] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> SAM -- Investigation of Charge Transfer Interaction___ _16SAM-4725_ - Proof.msg --> Success

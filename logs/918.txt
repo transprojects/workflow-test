@@ -1,0 +1,2 @@
+[09-08-2024 10:10:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> An update to TSP_JRM_49392 _an artcile not in the platform_.msg --> Success
+[09-08-2024 10:10:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JRM_49392 update after online.pdf --> Success

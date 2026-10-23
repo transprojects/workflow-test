@@ -1,0 +1,121 @@
+
+
+Program Run at: 2026-03-11 18:03:48.875937
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:04:08.178493
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Error: Email notification Failed to sent for file: <pre>
+Dear Team,<br>
+	⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.<br>
+	Note: This is an auto generated mail, please do not reply to this.<br><br>
+Thanks & Regards,<br>
+FTP Virtual Assistant<br>
+Transforma Pvt. Ltd.</pre>.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:13:16.785604
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:13:27.426202
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:18:14.291106
+=========================================
+
+Error: ⚠ No Article present to download from Xperttrack FTP (REVISES AND FINALS) (TSP)  to Inhouse Journal Workflow Automation Folder. While Download TSP Files
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:18:33.030079
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ The file was already present in the database for 44213 and FIN1. 5009. TSP_ZKG_TEST102
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:18:37.948946
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ The file was already present in the database for 44213 and FIN1. 5009. TSP_ZKG_TEST102
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:24:27.622414
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:24:41.040591
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:25:28.608596
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-03-11 18:25:44.225654
+=========================================
+
+Success: Download file from FTP: FIN/TSP/ZKG/TSP_ZKG_TEST102/FIN1/editor/TSP_ZKG_TEST102.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\JOURNAL\production\JOURNALS\TSP\ZKG\Vol00000\TSP_ZKG_TEST102\REV3 is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

@@ -1,0 +1,7 @@
+[26-09-2023 12:33:54] FINAL DELIVERY --> LINUX --> 157.46.85.44 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[26-09-2023 23:02:53] FINAL DELIVERY --> LINUX --> 77.241.128.113 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[28-09-2023 17:04:47] FINAL DELIVERY --> LINUX --> 106.195.35.135 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[28-09-2023 17:10:29] FINAL CORRECTIONS   --> LINUX --> 106.195.35.135 --> NO PDF attached for artilce in linux server --> Success
+[28-09-2023 17:10:29] FINAL CORRECTIONS   --> LINUX --> 106.195.35.135 --> zip created in linux server --> Success
+[28-09-2023 17:10:29] FINAL CORRECTIONS ".$stage." --> LINUX --> 106.195.35.135 --> Curl function initiated  --> Success
+[28-09-2023 17:11:25] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 106.195.35.135 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJECE/Vol00000/EJECE_557/REV4/upload completedEmail sent successfully. --> Success

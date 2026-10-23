@@ -1,0 +1,2 @@
+[13-06-2024 10:41:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ FW_ _TSP_Phyton_50762_ - Finalised Proof for your record.msg --> Success
+[13-06-2024 10:42:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_50762.pdf --> Success

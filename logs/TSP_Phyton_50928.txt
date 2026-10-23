@@ -1,0 +1,2 @@
+[11-06-2024 09:53:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ _TSP_Phyton_50928_ - Proof submitted for your review.msg --> Success
+[11-06-2024 09:53:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_50928.pdf --> Success

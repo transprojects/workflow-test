@@ -1,0 +1,3 @@
+[26-07-2024 16:50:51] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> sample-file.txt --> Success
+[26-07-2024 16:51:49] FP --> LINUX --> 10.10.10.1 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/ASP/SAM/Vol1609/ISSCOR1//sample-file.txt --> Failure
+[26-07-2024 16:52:39] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> sample-file.txt --> Success

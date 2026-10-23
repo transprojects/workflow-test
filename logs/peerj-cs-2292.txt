@@ -1,0 +1,2 @@
+[24-08-2024 09:54:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2292-corrected-proof.pdf --> Success
+[24-08-2024 09:54:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2292).msg --> Success

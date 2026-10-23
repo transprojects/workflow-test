@@ -1,0 +1,10 @@
+[14-05-2024 15:31:29] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[14-05-2024 15:32:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET new files uploaded.msg --> Success
+[14-05-2024 15:34:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure.pptx --> Success
+[14-05-2024 15:34:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[14-05-2024 15:34:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[14-05-2024 15:34:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ~$Text.docx --> Success
+[23-05-2024 16:39:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[23-05-2024 16:39:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-TN-2024-0017_Kato_1_checked.pdf --> Success
+[03-06-2024 10:14:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for J-STAGE.msg --> Success
+[03-06-2024 10:15:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-TN-2024-0017_Kato_1-2_authorchecked.pdf --> Success

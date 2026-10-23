@@ -1,0 +1,5 @@
+[23-04-2024 16:30:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IASC_43020 author revision.msg --> Success
+[23-04-2024 16:30:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IASC_43020 author revision.zip --> Success
+[06-05-2024 16:53:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Fw_IASC 43020.msg --> Success
+[06-05-2024 16:53:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_IASC_43020(5) (1).pdf --> Success
+[06-05-2024 16:53:33] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Revised version for publication (IASC43020).docx --> Success

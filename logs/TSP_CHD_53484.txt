@@ -1,0 +1,2 @@
+[02-07-2024 09:39:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CHD_53484.pdf --> Success
+[02-07-2024 09:39:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ RES_ RES_ _TSP_CHD_53484_ - Proof submitted for your review.msg --> Success

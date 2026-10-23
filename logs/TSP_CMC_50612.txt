@@ -1,0 +1,2 @@
+[12-06-2024 16:31:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CMC-50612-Tables 3&4, Figs.4&5.docx --> Success
+[12-06-2024 16:31:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CMC_50612 urgent.pdf --> Success

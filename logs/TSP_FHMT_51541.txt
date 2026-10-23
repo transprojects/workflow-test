@@ -1,0 +1,2 @@
+[27-05-2024 11:37:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_FHMT_51541_ - Proof submitted for your review.msg --> Success
+[27-05-2024 11:37:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_FHMT_51541 really urgent.zip --> Success

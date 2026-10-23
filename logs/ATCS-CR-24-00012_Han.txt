@@ -1,0 +1,7 @@
+[30-04-2024 11:50:33] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[30-04-2024 11:50:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS new file uploaded.msg --> Success
+[10-05-2024 14:20:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for revision.msg --> Success
+[10-05-2024 14:23:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-CR-24-00012_Han_1_checked.pdf --> Success
+[15-05-2024 16:32:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for J-STAGE data.msg --> Success
+[15-05-2024 17:04:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-CR-24-00012_Han_1-2_authorchecked.pdf --> Success
+[18-06-2024 16:32:56] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS reqeust for PMC data.msg --> Success

@@ -1,0 +1,2 @@
+[23-07-2024 07:22:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2207).msg --> Success
+[23-07-2024 07:23:58] FP --> LINUX --> 10.10.10.22 --> Files Error uploading -->peerj-cs-2207-corrected-proof.pdf --> Failure

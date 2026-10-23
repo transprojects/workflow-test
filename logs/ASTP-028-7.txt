@@ -1,0 +1,6 @@
+[07-06-2024 11:52:30] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[07-06-2024 11:52:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028 for Typesetting.msg --> Success
+[28-06-2024 10:09:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028 - author corrections on the ftp .msg --> Success
+[28-06-2024 10:09:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ASTP-028-7_CX3.zip --> Success
+[01-08-2024 10:56:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ASTP-028-7_CX4.pdf --> Success
+[01-08-2024 10:56:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ASTP-028 - page numbers to update.msg --> Success

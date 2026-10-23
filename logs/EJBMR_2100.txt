@@ -1,0 +1,20 @@
+[12-10-2023 02:09:50] FP --> LINUX --> 88.255.99.51 --> basic information updated --> Success
+[12-10-2023 02:09:58] FP --> LINUX --> 88.255.99.51 --> Files uploaded --> ejbmr-2100-galley-1.docx --> Success
+[12-10-2023 02:10:05] FP --> LINUX --> 88.255.99.51 --> zip created in linux server --> Success
+[12-10-2023 02:10:05] FP --> LINUX --> 88.255.99.51 --> zip file size updated in read me txt file --> Success
+[12-10-2023 02:10:05] FP --> LINUX --> 88.255.99.51 --> Curl function initiated  --> Success
+[12-10-2023 02:10:19] FP --> LINUX --> 88.255.99.51 --> Email sent successfully for file moved to workflow. --> Success
+[15-10-2023 19:12:40] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> FP files from transforma downloaded by Hande --> Success
+[15-10-2023 19:12:41] AUTHOR SUBMISSION --> LINUX --> 159.146.57.216 --> Proof zip files from author downloaded by Hande --> Success
+[16-10-2023 15:23:24] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.57.216 --> Files uploaded --> EJBMR_2100_TRACK+HS.pdf --> Success
+[16-10-2023 15:23:29] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.57.216 --> zip created in linux server --> Success
+[16-10-2023 15:23:29] AUTHOR SUBMISSION REV1 --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[16-10-2023 15:23:37] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 159.146.57.216 --> EJBMR_2100.zipEmail sent successfully. --> Success
+[22-10-2023 18:31:40] PRODUCTION REIEW --> LINUX --> 159.146.73.232 --> REVISESED PROOF downloaded by Hande --> Success
+[22-10-2023 18:35:09] META FORM --> LINUX --> 159.146.73.232 --> Correction status updated & form submitted --> Success
+[22-10-2023 18:35:09] META FORM --> LINUX --> 159.146.73.232 --> No PDF files found in the folder --> Failure
+[22-10-2023 18:35:09] META FORM --> LINUX --> 159.146.73.232 --> zip created in linux server --> Success
+[22-10-2023 18:35:09] META FORM --> LINUX --> 159.146.73.232 --> Curl function initiated  --> Success
+[22-10-2023 18:35:23] META FORM --> LINUX --> 159.146.73.232 --> Email sent successfully. --> Success
+[25-10-2023 16:45:12] FINAL DELIVERY --> LINUX --> 88.255.99.17 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[28-10-2023 14:58:38] FINAL DELIVERY --> LINUX --> 46.106.127.84 --> PUBLISHED --> published by Hande

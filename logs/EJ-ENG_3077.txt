@@ -1,0 +1,21 @@
+[04-10-2023 20:39:52] FP --> LINUX --> 77.241.128.161 --> basic information updated --> Success
+[04-10-2023 20:41:07] FP --> LINUX --> 77.241.128.161 --> Files uploaded --> Classifying+Memory+Based+Injections+using+Machine+Learning.docx --> Success
+[04-10-2023 20:41:09] FP --> LINUX --> 77.241.128.161 --> zip created in linux server --> Success
+[04-10-2023 20:41:09] FP --> LINUX --> 77.241.128.161 --> zip file size updated in read me txt file --> Success
+[04-10-2023 20:41:09] FP --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[04-10-2023 20:41:19] FP --> LINUX --> 77.241.128.161 --> Email sent successfully for file moved to workflow. --> Success
+[04-10-2023 20:50:35] FP --> LINUX --> 77.241.128.161 --> basic information updated --> Success
+[13-10-2023 17:22:02] AUTHOR SUBMISSION --> LINUX --> 77.241.136.67 --> FP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 17:23:57] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.67 --> Files uploaded --> EJ-ENG_3077.pdf --> Success
+[13-10-2023 17:23:58] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 17:23:58] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 17:24:09] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.136.67 --> EJ-ENG_3077.zipEmail sent successfully. --> Success
+[17-10-2023 23:21:23] PRODUCTION REIEW --> LINUX --> 77.241.136.102 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 16:49:20] PRODUCTION REIEW --> LINUX --> 77.241.136.41 --> REVISESED PROOF downloaded by Ivanna --> Success
+[28-10-2023 00:45:19] PRODUCTION REIEW --> LINUX --> 77.241.136.111 --> REVISESED PROOF downloaded by Ivanna --> Success
+[28-10-2023 00:58:19] META FORM  --> LINUX --> 77.241.136.111 --> Files uploaded --> EJ-ENG_3077.pdf --> Success
+[28-10-2023 01:00:28] META FORM --> LINUX --> 77.241.136.111 --> Correction status updated & form submitted --> Success
+[28-10-2023 01:00:28] META FORM --> LINUX --> 77.241.136.111 --> PDF files exist in the folder --> Success
+[28-10-2023 01:00:28] META FORM --> LINUX --> 77.241.136.111 --> zip created in linux server --> Success
+[28-10-2023 01:00:28] META FORM --> LINUX --> 77.241.136.111 --> Curl function initiated  --> Success
+[28-10-2023 01:00:44] META FORM --> LINUX --> 77.241.136.111 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24691'Email sent successfully. --> Success

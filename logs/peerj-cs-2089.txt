@@ -1,0 +1,3 @@
+[15-07-2024 22:39:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2089).msg --> Success
+[15-07-2024 22:40:37] FP --> LINUX --> 10.10.10.22 --> Files Error uploading -->peerj-cs-2089-corrected-proof.zip --> Failure
+[23-07-2024 07:16:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2089).msg --> Success

@@ -1,0 +1,7 @@
+[09-07-2024 14:37:30] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[09-07-2024 14:37:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for FP (KMJ_OC_2303).msg --> Success
+[09-07-2024 14:37:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> KMJ_OC_2303_Tajima_Table1-2.pptx --> Success
+[09-07-2024 14:37:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> KMJ_OC_2303_Tajima_Figure1-3.pptx --> Success
+[09-07-2024 14:37:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> KMJ_OC_2303_Tajima.docx --> Success
+[08-08-2024 13:33:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Revises Posted 2303.msg --> Success
+[08-08-2024 13:33:52] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 240808_KMJ_OC_2303_Tajima_revise.pdf --> Success

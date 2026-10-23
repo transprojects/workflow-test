@@ -1,0 +1,4 @@
+[17-09-2024 12:21:25] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[17-09-2024 12:21:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3664-003JNO.zip --> Success
+[17-09-2024 13:02:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3664-003JNO.zip --> Success
+[03-10-2024 11:04:47] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Regarding to JNO -- Calculation of Curie Temperature___ _19JNO-3664_.msg --> Success

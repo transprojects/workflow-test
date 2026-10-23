@@ -1,0 +1,17 @@
+[26-09-2023 22:40:42] AUTHOR SUBMISSION --> LINUX --> 223.187.112.134 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[26-09-2023 22:41:18] AUTHOR SUBMISSION --> LINUX --> 223.187.112.134 --> FP files from transforma downloaded by TRANSFORMA --> Success
+[01-10-2023 18:00:39] AUTHOR SUBMISSION --> LINUX --> 176.55.129.74 --> Proof zip files from author downloaded by Hande --> Success
+[01-10-2023 18:01:37] AUTHOR SUBMISSION --> LINUX --> 176.55.129.74 --> FP files from transforma downloaded by Hande --> Success
+[01-10-2023 19:31:37] AUTHOR SUBMISSION REV1  --> LINUX --> 176.55.129.74 --> Files uploaded --> EJ-SOCIAL_501+HS.pdf --> Success
+[01-10-2023 19:31:40] AUTHOR SUBMISSION REV1  --> LINUX --> 176.55.129.74 --> zip created in linux server --> Success
+[01-10-2023 19:31:40] AUTHOR SUBMISSION REV1 --> LINUX --> 176.55.129.74 --> Curl function initiated  --> Success
+[01-10-2023 19:31:47] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 176.55.129.74 --> EJ-SOCIAL_501.zipEmail sent successfully. --> Success
+[03-10-2023 10:37:07] PRODUCTION REIEW --> LINUX --> 106.195.37.62 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[03-10-2023 16:04:44] PRODUCTION REIEW --> LINUX --> 88.255.99.23 --> REVISESED PROOF downloaded by Hande --> Success
+[03-10-2023 16:10:56] META FORM  --> LINUX --> 88.255.99.23 --> Files uploaded --> EJ-SOCIAL_501+HS.pdf --> Success
+[03-10-2023 16:13:00] META FORM --> LINUX --> 88.255.99.23 --> Correction status updated & form submitted --> Success
+[03-10-2023 16:13:00] META FORM --> LINUX --> 88.255.99.23 --> PDF files exist in the folder --> Success
+[03-10-2023 16:13:00] META FORM --> LINUX --> 88.255.99.23 --> zip created in linux server --> Success
+[03-10-2023 16:13:00] META FORM --> LINUX --> 88.255.99.23 --> Curl function initiated  --> Success
+[03-10-2023 16:13:25] META FORM --> LINUX --> 88.255.99.23 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24449'Email sent successfully. --> Success
+[04-10-2023 19:15:42] FINAL DELIVERY --> LINUX --> 88.255.99.18 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success

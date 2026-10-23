@@ -1,0 +1,5 @@
+[23-07-2024 13:04:29] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 13:04:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CHD_31413.docx --> Success
+[13-08-2024 12:14:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CHD_31413.pdf --> Success
+[26-09-2024 14:55:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CHD_31413 need to be modified.pdf --> Success
+[26-09-2024 14:55:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

@@ -1,0 +1,6 @@
+[02-10-2023 21:58:12] FP --> LINUX --> 77.241.136.147 --> basic information updated --> Success
+[02-10-2023 21:59:36] FP --> LINUX --> 77.241.136.147 --> Files uploaded --> Article.1.docx --> Success
+[02-10-2023 21:59:37] FP --> LINUX --> 77.241.136.147 --> zip created in linux server --> Success
+[02-10-2023 21:59:37] FP --> LINUX --> 77.241.136.147 --> zip file size updated in read me txt file --> Success
+[02-10-2023 21:59:37] FP --> LINUX --> 77.241.136.147 --> Curl function initiated  --> Success
+[02-10-2023 21:59:45] FP --> LINUX --> 77.241.136.147 --> Email sent successfully for file moved to workflow. --> Success

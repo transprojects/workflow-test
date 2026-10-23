@@ -1,0 +1,13 @@
+[09-05-2024 21:23:20] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[09-05-2024 21:26:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT new file uploaded.msg --> Success
+[09-05-2024 21:27:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table (3).docx --> Success
+[09-05-2024 21:27:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table (2).docx --> Success
+[09-05-2024 21:27:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table (4).docx --> Success
+[09-05-2024 21:27:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[09-05-2024 21:27:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[09-05-2024 21:27:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fig.1.tif --> Success
+[09-05-2024 21:27:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table (1).docx --> Success
+[20-05-2024 11:54:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT request for revision.msg --> Success
+[20-05-2024 11:55:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT-OA-24-0012_Akashi_1_checked.pdf --> Success
+[24-05-2024 10:53:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT-OA-24-0012_Akashi_1-2_authorchecked.pdf --> Success
+[24-05-2024 10:53:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JTVT request for J-STAGE data.msg --> Success

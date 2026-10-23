@@ -1,0 +1,8 @@
+[23-04-2024 10:08:35] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:10:59] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:11:26] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:12:10] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:12:17] FP --> LINUX --> 10.10.10.1 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_PJ/Vol00000/peerj-17321///FW_ _peerj_ Forum comment posted (17321).msg --> Failure
+[23-04-2024 10:12:53] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success
+[23-04-2024 10:12:56] FP --> LINUX --> 10.10.10.1 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_PJ/Vol00000/peerj-17321/REV2//FW_ _peerj_ Forum comment posted (17321).msg --> Failure
+[23-04-2024 10:13:05] FP --> LINUX --> 10.10.10.1 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17321).msg --> Success

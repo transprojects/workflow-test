@@ -1,0 +1,4 @@
+[13-06-2024 15:02:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_47893.pdf --> Success
+[13-06-2024 15:02:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_OR_47893_ - Proof submitted for your review.msg --> Success
+[06-09-2024 11:15:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_47893.pdf --> Success
+[06-09-2024 11:15:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> An update to TSP_OR_47893.msg --> Success

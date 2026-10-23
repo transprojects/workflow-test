@@ -1,0 +1,6 @@
+[13-10-2023 02:27:49] FP --> LINUX --> 77.241.136.110 --> basic information updated --> Success
+[13-10-2023 02:27:52] FP --> LINUX --> 77.241.136.110 --> Files uploaded --> ARTICEL_FITRIANI_UNIVERSITAS+TEUKU+UMAR_INDONESIA.docx --> Success
+[13-10-2023 02:27:53] FP --> LINUX --> 77.241.136.110 --> zip created in linux server --> Success
+[13-10-2023 02:27:53] FP --> LINUX --> 77.241.136.110 --> zip file size updated in read me txt file --> Success
+[13-10-2023 02:27:53] FP --> LINUX --> 77.241.136.110 --> Curl function initiated  --> Success
+[13-10-2023 02:28:02] FP --> LINUX --> 77.241.136.110 --> Email sent successfully for file moved to workflow. --> Success

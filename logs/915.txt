@@ -1,0 +1,4 @@
+[29-07-2024 12:51:52] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Contents_for revision.pdf --> Success
+[29-07-2024 12:51:52] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 03_PTR-R0030_RA_McGinley_for revision.pdf --> Success
+[29-07-2024 12:51:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 02_PTR-R0032_RA_Oirschot_for revision.pdf --> Success
+[29-07-2024 12:51:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ PTR 27-2 flat plan uploaded.msg --> Success

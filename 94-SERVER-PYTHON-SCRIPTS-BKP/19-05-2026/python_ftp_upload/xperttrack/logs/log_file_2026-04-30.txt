@@ -1,0 +1,13 @@
+
+
+Program Run at: 2026-04-30 11:37:41.091600
+=========================================
+
+Success: Uploaded file to FTP: FIN/ACG/RNP/RNP-2603-3761/FIN1/RNP-2603-3761.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: REV/TSP/FHMT/TSP_FHMT_79464/REV2/transforma-to-author/TSP_FHMT_79464.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

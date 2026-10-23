@@ -1,0 +1,12 @@
+[16-04-2024 14:10:57] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[16-04-2024 14:11:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET new files uploaded.msg --> Success
+[16-04-2024 14:11:11] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (3).tif --> Success
+[16-04-2024 14:11:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[16-04-2024 14:11:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[16-04-2024 14:11:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (1).tif --> Success
+[16-04-2024 14:11:14] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (2).tif --> Success
+[16-04-2024 14:11:16] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure (4).tif --> Success
+[26-04-2024 11:39:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[26-04-2024 11:40:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-CR-2024-0019_Izawa_1_checked.pdf --> Success
+[10-05-2024 17:48:32] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for J-STAGE.msg --> Success
+[10-05-2024 17:49:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-CR-2024-0019_Izawa_1-2_authorchecked.pdf --> Success

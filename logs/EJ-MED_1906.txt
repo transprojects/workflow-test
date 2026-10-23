@@ -1,0 +1,2 @@
+[26-09-2023 12:33:58] FINAL DELIVERY --> LINUX --> 157.46.85.44 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[26-09-2023 23:17:39] FINAL DELIVERY --> LINUX --> 77.241.128.113 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success

@@ -1,0 +1,11 @@
+[25-09-2023 17:12:06] LINUX --> 171.79.56.165 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[26-09-2023 06:47:02] PRODUCTION REIEW --> LINUX --> 117.201.27.196 --> Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[26-09-2023 06:56:18] PRODUCTION REIEW --> LINUX --> 117.201.27.196 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[28-09-2023 19:24:36] PRODUCTION REIEW --> LINUX --> 77.241.136.137 --> REVISESED PROOF downloaded by Ivanna --> Success
+[28-09-2023 19:53:56] META FORM  --> LINUX --> 77.241.136.137 --> Files uploaded --> 293.zip --> Success
+[28-09-2023 19:53:58] META FORM --> LINUX --> 77.241.136.137 --> Correction status updated & form submitted --> Success
+[28-09-2023 19:53:58] META FORM --> LINUX --> 77.241.136.137 --> No PDF files found in the folder --> Failure
+[28-09-2023 19:53:58] META FORM --> LINUX --> 77.241.136.137 --> zip created in linux server --> Success
+[28-09-2023 19:53:58] META FORM --> LINUX --> 77.241.136.137 --> Curl function initiated  --> Success
+[28-09-2023 19:54:15] META FORM --> LINUX --> 77.241.136.137 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='23571'Email sent successfully. --> Success
+[03-10-2023 22:52:10] FINAL DELIVERY --> LINUX --> 77.241.136.189 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success

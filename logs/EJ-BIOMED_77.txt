@@ -1,0 +1,17 @@
+[02-10-2023 21:12:41] FP --> LINUX --> 77.241.136.147 --> basic information updated --> Success
+[02-10-2023 21:23:13] FP --> LINUX --> 77.241.136.147 --> Files uploaded --> EJBIOMED_Letrozol+and+HFD_HG+on+Insulin+and+GDP+(FITRIA+NURUL+HIDAYAH)+(1) (1).docx --> Success
+[02-10-2023 21:23:14] FP --> LINUX --> 77.241.136.147 --> zip created in linux server --> Success
+[02-10-2023 21:23:14] FP --> LINUX --> 77.241.136.147 --> zip file size updated in read me txt file --> Success
+[02-10-2023 21:23:14] FP --> LINUX --> 77.241.136.147 --> Curl function initiated  --> Success
+[02-10-2023 21:23:29] FP --> LINUX --> 77.241.136.147 --> Email sent successfully for file moved to workflow. --> Success
+[20-10-2023 19:40:59] AUTHOR SUBMISSION --> LINUX --> 176.232.59.83 --> FP files from transforma downloaded by Eda --> Success
+[20-10-2023 19:41:54] AUTHOR SUBMISSION --> LINUX --> 176.232.59.83 --> Proof zip files from author downloaded by Eda --> Success
+[20-10-2023 20:23:34] AUTHOR SUBMISSION --> LINUX --> 176.232.59.83 --> Proof zip files from author downloaded by Eda --> Success
+[20-10-2023 20:47:43] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> Proof zip files from author downloaded by Ivanna --> Success
+[20-10-2023 20:48:15] AUTHOR SUBMISSION --> LINUX --> 77.241.136.132 --> FP files from transforma downloaded by Ivanna --> Success
+[20-10-2023 21:39:22] AUTHOR SUBMISSION --> LINUX --> 176.232.59.83 --> Proof zip files from author downloaded by Eda --> Success
+[20-10-2023 22:54:10] AUTHOR SUBMISSION REV1  --> LINUX --> 176.232.59.83 --> Files uploaded --> Corrections EJBIOMED 77.zip --> Success
+[20-10-2023 22:54:26] AUTHOR SUBMISSION REV1  --> LINUX --> 176.232.59.83 --> zip created in linux server --> Success
+[20-10-2023 22:54:26] AUTHOR SUBMISSION REV1 --> LINUX --> 176.232.59.83 --> Curl function initiated  --> Success
+[20-10-2023 22:54:33] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 176.232.59.83 --> EJ-BIOMED_77.zipEmail sent successfully. --> Success
+[25-10-2023 18:49:27] PRODUCTION REIEW --> LINUX --> 176.232.59.83 --> REVISESED PROOF downloaded by Eda --> Success

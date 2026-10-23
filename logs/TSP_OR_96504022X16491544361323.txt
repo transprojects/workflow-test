@@ -1,0 +1,5 @@
+[27-07-2024 10:44:04] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[27-07-2024 10:44:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_96504022X16491544361323.docx --> Success
+[13-08-2024 12:31:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_96504022X16491544361323.pdf --> Success
+[28-09-2024 15:07:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_96504022X16491544361323.pdf --> Success
+[28-09-2024 15:08:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

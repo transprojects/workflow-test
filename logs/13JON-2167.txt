@@ -1,0 +1,1 @@
+[12-06-2024 14:24:24] FP --> LINUX --> 10.10.10.200 --> Files uploaded --> Manuscript.docx --> Success

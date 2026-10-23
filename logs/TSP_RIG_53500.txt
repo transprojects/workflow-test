@@ -1,0 +1,2 @@
+[24-06-2024 09:47:57] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Fw_ _TSP_RIG_53500_ - Proof submitted.msg --> Success
+[24-06-2024 09:48:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_RIG_53500_Corrected Proof.pdf --> Success

@@ -1,0 +1,37 @@
+
+
+Program Run at: 2026-04-22 16:55:34.224540
+=========================================
+
+Error: No articles found in the journal workflow for upload to Xperttrack FTP.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-22 16:56:09.314353
+=========================================
+
+Success: Uploaded file to FTP: REV/TSP/CMES/TSP_CMES_80371/REV1/transforma-to-client/TSP_CMES_80371.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-22 17:11:58.817368
+=========================================
+
+Success: Uploaded file to FTP: REV/TSP/CMES/TSP_CMES_81163/REV1/transforma-to-client/TSP_CMES_81163.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: FIN/TSP/CJU/TSP_CJU_77406/FIN1/TSP_CJU_77406.zip
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: REV/TSP/CMC/TSP_CMC_79895/REV1/transforma-to-client/TSP_CMC_79895.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+Success: Uploaded file to FTP: REV/TSP/CMC/TSP_CMC_83414/REV1/transforma-to-client/TSP_CMC_83414.pdf
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------

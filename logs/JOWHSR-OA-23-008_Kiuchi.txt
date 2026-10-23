@@ -1,0 +1,21 @@
+[12-04-2024 22:55:13] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[12-04-2024 22:55:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fig6.png --> Success
+[12-04-2024 22:55:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[12-04-2024 22:55:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[12-04-2024 22:55:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3-1. Table 1.docx --> Success
+[12-04-2024 22:55:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3-2. Table 2.docx --> Success
+[12-04-2024 22:55:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3-3. Table 3.docx --> Success
+[12-04-2024 22:55:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3-4. Table 4.docx --> Success
+[12-04-2024 22:55:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3-5. Table 5.docx --> Success
+[12-04-2024 22:55:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 3-6. Table 6.docx --> Success
+[12-04-2024 22:55:51] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fig1.png --> Success
+[12-04-2024 22:55:52] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fig2.png --> Success
+[12-04-2024 22:55:55] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fig3.png --> Success
+[12-04-2024 22:55:55] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fig4.png --> Success
+[12-04-2024 22:55:56] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fig5.png --> Success
+[12-04-2024 22:56:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR new files uploaded.msg --> Success
+[02-05-2024 11:29:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR request for revision.msg --> Success
+[02-05-2024 11:29:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[02-05-2024 11:31:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR-OA-23-008_Kiuchi_1_checked.pdf --> Success
+[17-05-2024 14:49:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR request for J-STAGE data.msg --> Success
+[17-05-2024 14:50:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR-OA-23-008_Kiuchi_1-2_authorchecked.pdf --> Success

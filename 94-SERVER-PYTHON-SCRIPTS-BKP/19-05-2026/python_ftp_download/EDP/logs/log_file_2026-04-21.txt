@@ -1,0 +1,25 @@
+
+
+Program Run at: 2026-04-21 17:18:38.367925
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an260036s_corrected.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\EDP-Sci\m2an\Vol00000\m2an260036s\FP is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-21 17:18:44.833501
+=========================================
+
+Success: Download file from FTP: from_edp/m2an/m2an260036s_corrected.zip
+-----------------------------------------------------------------------------------------
+Error: ⚠ J:\New_Workflow_Files\JOURNAL\production\JOURNALS\EDP-Sci\m2an\Vol00000\m2an260036s\FP is does not exists in the workflow. previou stage folder not present in workflow. So does not change files from previous stage to current stage.
+-----------------------------------------------------------------------------------------
+Success: Email notification sent for file: successfully.
+-----------------------------------------------------------------------------------------
+
+
+Program Run at: 2026-04-21 17:19:28.485002
+=========================================
+

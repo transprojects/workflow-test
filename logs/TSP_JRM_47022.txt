@@ -1,0 +1,2 @@
+[14-05-2024 12:28:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Old literature format to the new literature format.msg --> Success
+[14-05-2024 12:28:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JRM_47022.pdf --> Success

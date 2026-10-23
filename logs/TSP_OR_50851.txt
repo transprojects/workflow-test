@@ -1,0 +1,2 @@
+[30-09-2024 10:25:28] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_OR_50851  need to be modified1.pdf --> Success
+[30-09-2024 10:25:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Updates to _TSP_OR_50851_.msg --> Success

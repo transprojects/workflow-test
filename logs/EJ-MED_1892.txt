@@ -1,0 +1,27 @@
+[01-10-2023 18:34:52] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:35:04] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejmed_1892.docx --> Success
+[01-10-2023 18:35:05] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:35:05] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:35:05] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:35:17] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[04-10-2023 22:01:42] AUTHOR SUBMISSION --> LINUX --> 59.94.153.69 --> FP files from transforma downloaded by TRANSFORMA --> Success
+[04-10-2023 22:01:45] AUTHOR SUBMISSION --> LINUX --> 59.94.153.69 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[05-10-2023 20:16:50] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:17:12] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[09-10-2023 17:43:14] PRODUCTION REIEW --> LINUX --> 77.241.128.153 --> REVISESED PROOF downloaded by Ivanna --> Success
+[09-10-2023 17:47:13] META FORM --> LINUX --> 77.241.128.153 --> Files Error uploading -->EJ-MED_1892.pdf --> Failure
+[09-10-2023 17:47:13] META FORM --> LINUX --> 77.241.128.153 --> Files removed -->uploads/EOS/REV/EOS/EJ-MED/EJ-MED_1892/REV2/client-files/EJ-MED_1892.pdf --> Failure
+[09-10-2023 17:49:43] META FORM  --> LINUX --> 77.241.128.153 --> Files uploaded --> EJ-MED_1892.pdf --> Success
+[09-10-2023 17:50:55] META FORM --> LINUX --> 77.241.128.153 --> Correction status updated & form submitted --> Success
+[09-10-2023 17:50:55] META FORM --> LINUX --> 77.241.128.153 --> PDF files exist in the folder --> Success
+[09-10-2023 17:50:55] META FORM --> LINUX --> 77.241.128.153 --> zip created in linux server --> Success
+[09-10-2023 17:50:55] META FORM --> LINUX --> 77.241.128.153 --> Curl function initiated  --> Success
+[09-10-2023 17:51:23] META FORM --> LINUX --> 77.241.128.153 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24642'Email sent successfully. --> Success
+[11-10-2023 20:16:56] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 20:24:19] FINAL CORRECTIONS   --> LINUX --> 77.241.136.62 --> NO PDF attached for artilce in linux server --> Success
+[11-10-2023 20:24:19] FINAL CORRECTIONS   --> LINUX --> 77.241.136.62 --> zip created in linux server --> Success
+[11-10-2023 20:24:19] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 20:24:48] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.62 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-MED/Vol00000/EJ-MED_1892/REV3/upload completedEmail sent successfully. --> Success
+[12-10-2023 11:52:15] FINAL DELIVERY --> LINUX --> 117.232.75.162 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[13-10-2023 00:07:31] FINAL DELIVERY --> LINUX --> 77.241.136.110 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 00:16:00] FINAL DELIVERY --> LINUX --> 77.241.136.110 --> PUBLISHED --> published by Ivanna

@@ -1,0 +1,6 @@
+[17-09-2024 09:46:05] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[17-09-2024 09:46:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> BE47 28249.zip --> Success
+[17-09-2024 09:46:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> BE47 28249.pdf --> Success
+[17-09-2024 09:46:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ WIT Press - Latex files.msg --> Success
+[19-09-2024 10:12:47] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ WIT Press - Latex files.msg --> Success
+[19-09-2024 10:12:53] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> BE47-28249 Corrections.pdf --> Success

@@ -1,0 +1,2 @@
+[23-07-2024 10:25:44] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> wetransfer_accepted-jno-ms-kindly-ack_2024-07-21_0324.zip --> Success
+[02-08-2024 17:10:55] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> 19JNO-3647-Queries ( All replied).msg --> Success

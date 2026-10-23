@@ -1,0 +1,16 @@
+[17-05-2024 21:41:34] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[17-05-2024 21:41:56] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ CGV-102 to production.msg --> Success
+[17-05-2024 21:43:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CGV-102-20240517T161315Z-001.zip --> Success
+[12-06-2024 10:38:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CGV-102_PR1 - Corrections.pdf --> Success
+[12-06-2024 10:38:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ CGV-102 corrections.msg --> Success
+[19-07-2024 17:28:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ Revises Posted_  CGV-102 .msg --> Success
+[19-07-2024 17:28:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CGV-102-Author-Corrections.pdf --> Success
+[07-08-2024 23:58:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ Revises Posted_  CGV-102 .msg --> Success
+[07-08-2024 23:58:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CGV-102-PR3-AdditionalCorrections.pdf --> Success
+[27-08-2024 09:50:23] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ CGV-102 .msg --> Success
+[27-08-2024 09:51:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> CGV-102-Final-Author-Corrections.pdf --> Success
+[11-09-2024 22:22:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ CGV-102 revises posted.msg --> Success
+[11-09-2024 22:22:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> URL changes - CGV-102.docx --> Success
+[16-09-2024 23:11:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ CGV-102 Finals.msg --> Success
+[16-09-2024 23:12:56] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> drive-download-20240916T174123Z-001.zip --> Success
+[30-09-2024 15:03:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ CGV-102 Finals - cover request .msg --> Success

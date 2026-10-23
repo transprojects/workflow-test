@@ -1,0 +1,2 @@
+[23-09-2024 09:45:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2345).msg --> Success
+[23-09-2024 09:45:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2345-corrected-proof.zip --> Success

@@ -1,0 +1,3 @@
+[16-07-2024 09:49:55] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17654).msg --> Success
+[16-07-2024 09:51:57] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-17654-corrected-proof.zip --> Success
+[18-07-2024 09:48:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17654).msg --> Success

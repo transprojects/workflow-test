@@ -1,0 +1,7 @@
+[31-07-2024 07:24:31] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17775).msg --> Success
+[31-07-2024 07:25:00] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ _Forum comment posted (17775).msg --> Success
+[31-07-2024 07:26:04] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17775).msg --> Success
+[31-07-2024 07:26:19] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_PJ/Vol00000/peerj-17775///FW_ _peerj_ Forum comment posted (17775).msg --> Failure
+[31-07-2024 07:26:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17775).msg --> Success
+[31-07-2024 07:26:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ _Forum comment posted (17775).msg --> Success
+[01-08-2024 07:17:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17775).msg --> Success

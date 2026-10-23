@@ -1,0 +1,3 @@
+[02-07-2024 16:02:43] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> Ahmad Umar sent you Accepted JNO Ms_ Kindly ack_ via WeTransfer.msg --> Success
+[02-07-2024 16:02:46] FP --> LINUX --> 10.10.10.156 --> Files uploaded --> newpaperallfiles.zip --> Success
+[06-07-2024 14:29:25] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Re_JNO -- Fabrication and Characterization of___ _19JNO-3640_ - Proof.msg --> Success

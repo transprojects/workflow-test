@@ -1,0 +1,2 @@
+[04-07-2024 07:23:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-cs-2133-corrected-proof.zip --> Success
+[04-07-2024 07:23:56] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _cs_ Forum comment posted (cs-2133).msg --> Success

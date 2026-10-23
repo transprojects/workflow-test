@@ -1,0 +1,138 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertArticle`(IN `cust_id` INT(30), IN `j_id` INT(3), IN `issueorgroup_folder` VARCHAR(30), IN `pub_id` VARCHAR(50), IN `article_title` VARCHAR(1000), IN `recv_dt` DATE, IN `due_dt` DATE, IN `test_article` INT(1), IN `highpriority` TINYINT(1), IN `manuscript_count` VARCHAR(35), IN `fig` INT(11), IN `tab` INT(11), IN `stage` VARCHAR(50), IN `wf_id` INT, IN `inw_type` VARCHAR(20), IN `complexity` VARCHAR(20), IN `corresponding_author` VARCHAR(100), IN `corresponding_mail` VARCHAR(150), IN `location_id` VARCHAR(50), IN `doi` VARCHAR(50), IN `pub_dt` DATE, IN `accpt_dt` DATE, IN `instructions` TEXT, IN `notes` VARCHAR(100), IN `status` VARCHAR(50), OUT `lastID` INT)
+BEGIN 
+  INSERT INTO inw_inward_dtl (cust_id,j_id, issueorgroup_folder, pub_id, article_title, recv_dt, due_dt, test_article, manuscript_count, fig, tab, stage, wf_id, inw_type, complexity, corresponding_author, corresponding_mail, location_id, doi, pub_dt, accpt_dt, instructions,notes,status) VALUES (cust_id,j_id, issueorgroup_folder, pub_id, article_title, recv_dt, due_dt, test_article, manuscript_count, fig, tab, stage, wf_id, inw_type, complexity, corresponding_author, corresponding_mail, location_id, doi, pub_dt, accpt_dt, instructions,notes,status);
+  -- Get the last inserted ID
+    SET lastID = LAST_INSERT_ID();
+  END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertArticleAuthor`(IN `inw_id` INT(11), IN `cust_id` INT(11), IN `j_id` INT(11), IN `journal_title` TEXT, IN `pub_id` TEXT, IN `author_name` TEXT, IN `orcid_id` TEXT, IN `corresponding_author` VARCHAR(255), IN `staff_id` INT(11), IN `created_dt` DATETIME, OUT `calastID` INT)
+BEGIN 
+  INSERT INTO inw_inward_dtl_author (inw_id,cust_id,j_id,journal_title, pub_id, author_name,orcid_id,created_dt,corresponding_author,staff_id) VALUES (inw_id,cust_id,j_id,journal_title, pub_id, author_name,orcid_id,created_dt,corresponding_author,staff_id);
+  -- Get the last inserted ID SET alastID = LAST_INSERT_ID();
+  END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertArticleCAuthor`(IN `inw_id` INT(11), IN `cust_id` INT(11), IN `j_id` INT(11), IN `journal_title` TEXT, IN `pub_id` TEXT, IN `author_name` TEXT, IN `author_email` TEXT, IN `corresponding_author` VARCHAR(255), IN `staff_id` INT(11), IN `created_dt` DATETIME, OUT `calastID` INT)
+BEGIN 
+  INSERT INTO inw_inward_dtl_author (inw_id,cust_id,j_id,journal_title, pub_id, author_name,author_email,created_dt,corresponding_author,staff_id) VALUES (inw_id,cust_id,j_id,journal_title, pub_id, author_name,author_email,created_dt,corresponding_author,staff_id);
+  -- Get the last inserted ID SET calastID = LAST_INSERT_ID();
+  END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectCustomers`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT * FROM  adm_customer_master where (cust_name like '%",sSearch,"%' or email like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectDepartment`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT * FROM  adm_dept_master where (dept_name like '%",sSearch,"%' or dept_sn like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectFolders`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT dm.*,cm.cust_name,j.j_code FROM inw_journal_folders as dm LEFT JOIN adm_customer_master as cm ON dm.cust_id = cm.id LEFT JOIN adm_journals as j ON j.j_id = dm.j_id WHERE (dm.folder_name like '%",sSearch,"%' or cm.cust_name like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectJournals`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT * FROM `adm_journals` as j , adm_customer_master as c WHERE j.j_cust_id = c.id and (j.j_name like '%",sSearch,"%' or j.j_code like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectJournaltype`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT * FROM  journal_type where (jt_name like '%",sSearch,"%' or jt_name like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectMovefiles`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT dm.*,cm.cust_name,j.j_code,d.dept_name,b.book_short_name FROM inw_move_files as dm LEFT JOIN adm_customer_master as cm ON dm.cust_id = cm.id LEFT JOIN adm_journals as j ON j.j_id = dm.j_id 
+LEFT JOIN inw_book_dtl as b ON b.id = dm.b_id LEFT JOIN adm_dept_master as d ON d.dept_code = dm.dept_id WHERE (d.dept_name like '%",sSearch,"%' or j.j_code like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateArticlesdata`(IN `inwid` INT(4), IN `cust_id` INT(30), IN `j_id` INT(3), IN `issueorgroup_folder` VARCHAR(30), IN `pub_id` VARCHAR(50), IN `article_title` VARCHAR(1000), IN `recv_dt` DATE, IN `due_dt` DATE, IN `test_article` INT(1), IN `highpriority` TINYINT(1), IN `manuscript_count` VARCHAR(35), IN `fig` INT(11), IN `tab` INT(11), IN `stage` VARCHAR(50), IN `wf_id` INT, IN `inw_type` VARCHAR(20), IN `complexity` VARCHAR(20), IN `corresponding_author` VARCHAR(100), IN `corresponding_mail` VARCHAR(150), IN `location_id` VARCHAR(50), IN `doi` VARCHAR(50), IN `pub_dt` DATE, IN `accpt_dt` DATE, IN `instructions` TEXT, IN `notes` VARCHAR(100), IN `status` VARCHAR(50))
+BEGIN
+  UPDATE inw_inward_dtl SET cust_id=cust_id, j_id=j_id, issueorgroup_folder=issueorgroup_folder, pub_id=pub_id, article_title=article_title, recv_dt=recv_dt, due_dt=due_dt, test_article=test_article, manuscript_count=manuscript_count, fig=fig, tab=tab, stage=stage, wf_id=wf_id, inw_type=inw_type, complexity=complexity, corresponding_author=corresponding_author, corresponding_mail=corresponding_mail, location_id=location_id, doi=doi, pub_dt=pub_dt, accpt_dt=accpt_dt, instructions=instructions, notes=notes, status=status WHERE id=inwid;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectArticle`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT c.cust_name as cn,journal_title,pub_id,recv_dt,due_dt,highpriority,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,graphics,fig_complete_status,wd.stage,r.received_date,r.due_date,r.correction_pages,r.revision_count, wd.target_due_dt FROM `inw_inward_dtl` as wd LEFT JOIN inw_revisions_dtl as r ON (wd.`id` =r.`inw_id` and r.r_id = (select r_id from inw_revisions_dtl where inw_id = wd.`id` order by r_id DESC limit 1)) , adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id  AND wd.status NOT IN ('Delivery','Client Review','Completed','Query','Hold') and  (pub_id like '%",sSearch,"%' or article_title like '%",sSearch,"%')",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectalogdetails`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT wd.staff_id,lg.stage as lg_stage,lg.cl_id,lg.remarks,lg.servers,lg.cdatetime,lg.file_name,lg.ip,lg.status as lg_status FROM `logs` as lg left join  inw_inward_dtl as wd on wd.pub_id = lg.file_name left join wf_staffs as  s on s.staff_id=wd.staff_id left join adm_customer_master as c on  wd.cust_id = c.id  left join adm_journals as j on wd.j_id = j.j_id left join  article_log_checklist as lgc on lg.cl_id = lgc.lc_id where  wd.cust_id=66  and  (wd.pub_id like '%",sSearch,"%' or wd.article_title like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectalogs`(IN `sSearch` VARCHAR(50), IN `sort_by` VARCHAR(50), IN `sort_type` VARCHAR(50), IN `sstart` INT, IN `length` INT, IN `gSearch` TEXT)
+    NO SQL
+BEGIN
+  SET @sqlv=Concat("SELECT wd.staff_id,wd.stage_with,wd.department_id,wd.assign_department_id,wd.staff_id,c.cust_name,journal_title,fig_complete_status,pub_id,recv_dt,due_dt,highpriority,wd.created_dt,wd.issueorgroup_folder,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,wd.stage,work_dir,wd.notes,wd.corrections,s.staff_name FROM `inw_inward_dtl` as wd left join wf_staffs as  s on s.staff_id=wd.staff_id left join adm_customer_master as c on  wd.cust_id = c.id  left join adm_journals as j on wd.j_id = j.j_id where wd.cust_id=66  and (pub_id like '%",sSearch,"%' or article_title like '%",sSearch,"%') ",gSearch," order by ",sort_by," ", sort_type, " Limit ", sstart, ", ", length);
+  PREPARE stmt FROM @sqlv;
+  EXECUTE stmt;
+  DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateArticle`(IN `inwid` INT(4), IN `corrections` VARCHAR(3), IN `stage_with` VARCHAR(150))
+BEGIN
+  UPDATE inw_inward_dtl SET corrections=corrections, stage_with=stage_with WHERE id=inwid;
+END$$
+DELIMITER ;

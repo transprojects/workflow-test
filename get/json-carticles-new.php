@@ -1,0 +1,544 @@
+<?php
+error_reporting(0);
+include "../includes/Auth.php";
+include "../includes/function.php";
+$auth = new Auth();
+$db_handle = new DBController();
+$start 	= $_REQUEST['iDisplayStart'];
+$length = $_REQUEST['iDisplayLength'];
+$sSearch = $_REQUEST['sSearch'];
+$col = $_REQUEST['iSortCol_0'];
+$col1 = $_REQUEST['iSortCol_1'];
+
+$gSearch="";
+session_start();
+$arr = array(0 => '',1 => '', 2 => 'inw_type', 3 => 'pub_id', 4 => 'stage', 5 => 'created_dt', 6 => 'j_code', 7 => 'status', 8 => 'manuscript_count', 9 => '', 10 => 'highpriority');
+$sort_by = $arr[$col];
+$sort_by_d = $arr[$col1];
+$sort_type = $_REQUEST['sSortDir_0'];
+$sort_type_d = $_REQUEST['sSortDir_1'];
+
+// Build $stage_condition based on $_REQUEST['stage']
+$stage_condition = '';
+if (!empty($_COOKIE['stage_access'])) {
+    $ex_stage = explode(",", $_COOKIE['stage_access']);
+    if (count($ex_stage) == 1) {
+        $stage_condition = ' AND wd.stage LIKE "%' . $ex_stage[0] . '%"';
+    } else {
+        $parts = [];
+        foreach ($ex_stage as $stg) {
+            $parts[] = 'wd.stage LIKE "%' . $stg . '%"';
+        }
+        $stage_condition = ' AND (' . implode(' OR ', $parts) . ')';
+    }
+}
+function buildStartBtn($aid, $tid, $dept, $fs = 0, $labelOverride = "") {
+    $btnId = "startBtn_" . $aid;
+    $label = $labelOverride ?: ($fs ? "Force Start" : "Start");
+
+    return '
+        <a id="'.$btnId.'"
+           class="btn btn-xs btn-primary"
+           style="font-size:0.945em"
+           onclick="return check_work_status('.$aid.','.$tid.','.$dept.','.$fs.', \''.$btnId.'\');">
+            <i class="ace-icon fa fa-tasks bigger-120"></i>&nbsp;'.$label.'
+        </a>';
+}
+
+
+if(($_COOKIE['user_level'] != 1) &&  ($_COOKIE['user_level'] != 5) &&  ($_COOKIE['user_level'] != 14))
+{
+
+
+	if(($_COOKIE['department_id'] == '1' || $_COOKIE['department_id'] == '2') && ($_REQUEST['dept']==''))
+	{
+		$gSearch .= 'and wd.v_issue_id <= 0 and test_article!=1 and assigned_user_id='.$_COOKIE['user_id'].'  and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'"))
+		AND department_id in ('.$_COOKIE['department_id'].')' . $stage_condition;
+	}
+	elseif($_COOKIE['department_id']!= '1' || $_COOKIE['department_id']!= '2' && (isset($_REQUEST['dept']) && $_REQUEST['dept']!=''))
+	{
+		$gSearch .= ' and wd.v_issue_id <= 0  and  (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'")) AND department_id in ('.$_COOKIE['department_id'].','.$_COOKIE['odepartment_id'].')' . $stage_condition;
+	}
+	elseif($_COOKIE['department_id'] == '16')
+	{
+		$gSearch .= 'and wd.v_issue_id <= 0 and test_article!=1 and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'")) AND department_id in ('.$_COOKIE['department_id'].')' . $stage_condition;
+	}
+	else if($_COOKIE['department_id'] == '9')
+	{
+		$gSearch .= 'and wd.v_issue_id <= 0 and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'")) AND (wd.fig_complete_status = 0 OR department_id = '.$_COOKIE['department_id'].') AND (wd.assign_department_id = '.$_COOKIE['department_id'].')';
+
+	}
+	else
+	{
+		$gSearch .= ' and wd.v_issue_id <= 0 and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'")) AND department_id in ('.$_COOKIE['department_id'].','.$_COOKIE['odepartment_id'].')' . $stage_condition;
+	}
+}
+else
+{
+	$gSearch .= 'and wd.v_issue_id <= 0';
+}
+
+if(($_REQUEST['cust_id']!='' || $_REQUEST['j_id']!='' || $_REQUEST['stage']!='' || $_REQUEST['dept']!='' || $_REQUEST['graphics_status']!='' || $_REQUEST['article_id']!='' || $_REQUEST['from_dt']!='' || $_REQUEST['to_dt']!='' || $_REQUEST['allocated']!=''))
+{
+	
+
+	if(isset($_REQUEST['cust_id']) && $_REQUEST['cust_id']!='')
+
+         //$j_id = implode(",",$_REQUEST['j_id']);
+
+		$gSearch .= ' and FIND_IN_SET(wd.cust_id,"'.$_REQUEST['cust_id'].'")';
+        
+
+	if(isset($_REQUEST['j_id']) && $_REQUEST['j_id']!='')
+
+         //$j_id = implode(",",$_REQUEST['j_id']);
+
+		$gSearch .= ' and FIND_IN_SET(wd.j_id,"'.$_REQUEST['j_id'].'")';
+		
+		if(isset($_REQUEST['graphics_status']) && $_REQUEST['graphics_status']!='')
+
+         //$j_id = implode(",",$_REQUEST['j_id']);
+
+		$gSearch .= ' and wd.fig_complete_status in ('.$_REQUEST['graphics_status'].') ';
+        
+
+	if(isset($_REQUEST['stage']) && $_REQUEST['stage']!='')
+	{
+
+		 $ex_stage=explode(",",$_REQUEST['stage']);
+		 if(count($ex_stage)==1)
+		 {
+			$and=' and';
+			$or='';
+		 }
+		 else
+		 {
+			$and=' and (';
+			$orf=' or ';  
+		}
+		$or='';
+		 for($i=0;$i<=count($ex_stage)-1;$i++)
+		 {
+
+			if($i==count($ex_stage)-1)
+			{
+				$or = ')';
+
+			}
+			
+			if($i==0)
+			{
+				$gSearch.=''.$and.' wd.stage LIKE "%'.$ex_stage[$i].'%" ';  
+			}
+			else
+			{
+				$gSearch.=''.$orf.' wd.stage LIKE "%'.$ex_stage[$i].'%" '.$or.' ';  
+
+			}
+			
+		}
+
+	}
+if(isset($_REQUEST['dept']) && $_REQUEST['dept']!='')
+
+         //$dept = implode(",",$_REQUEST['dept']);
+
+		$gSearch .= ' and FIND_IN_SET(wd.department_id,"'.$_REQUEST['dept'].'")';
+		
+	if(isset($_REQUEST['from_dt']) && $_REQUEST['to_dt']!='')
+
+         //$j_id = implode(",",$_REQUEST['j_id']);
+
+		$gSearch .= ' and (DATE_FORMAT(recv_dt,"%Y-%m-%d")>="'.date('Y-m-d', strtotime($_REQUEST['from_dt'])).'" and DATE_FORMAT(recv_dt,"%Y-%m-%d")<="'.date('Y-m-d',strtotime($_REQUEST['to_dt'])).'" OR DATE_FORMAT(received_date,"%Y-%m-%d")>="'.date('Y-m-d', strtotime($_REQUEST['from_dt'])).'" and DATE_FORMAT(received_date,"%Y-%m-%d")<="'.date('Y-m-d',strtotime($_REQUEST['to_dt'])).'")';
+
+
+	if(isset($_REQUEST['article_id']) && $_REQUEST['article_id']!='')
+
+            $gSearch.=' and wd.pub_id LIKE "%'.$_REQUEST['article_id'].'%" ';  
+
+if(isset($_REQUEST['allocated']) && $_REQUEST['allocated']!='')
+
+         //$j_id = implode(",",$_REQUEST['j_id']);
+
+		$gSearch .= 'and assigned_od_user_id="'.$_COOKIE['user_id'].'"';
+	
+
+}
+else
+{
+$gSearch .= 'and wd.v_issue_id <= 0 and test_article!=1 and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'"))
+and department_id in ('.$_COOKIE['department_id'].')';
+}
+
+$_SESSION['varname'] = $gSearch;
+
+//echo $gSearch; exit;
+//echo $sort_by_d;
+//echo $sort_type_d;
+
+// $res_prof = $auth->showArticlelist($sSearch, $sort_by, $sort_type, $sort_by_d, $sort_type_d, $start, $length,$gSearch);
+ $res_prof = $auth->showCArticlelist($sSearch, $sort_by, $sort_type, $start, $length,$_SESSION['varname']);
+ //print_r($res_prof);
+//echo count($res_prof);
+//$rec='';
+$rec = array(
+	'iTotalRecords' => 0,
+	'iTotalDisplayRecords' =>0,
+	'aaData' => array()
+);
+if($res_prof!='')
+{
+
+	if(count($res_prof)>0 && count($res_prof)!='NULL')
+	{
+		foreach($res_prof as $row)
+		{
+			$data[] = $row;
+		}
+	}
+	else {
+		$data[] = '';
+	}
+
+$qry = "";	
+$qry = $auth->countCArticlelist($sSearch,$_SESSION['varname']);
+foreach($qry as $row)
+{	
+	$iTotal = $row['count'];
+}
+//echo $iTotal;
+
+$rec = array(
+	'iTotalRecords' => $iTotal,
+	'iTotalDisplayRecords' => $iTotal,
+	'aaData' => array()
+);
+
+$k=0;
+if (isset($data) && is_array($data)) {
+	foreach ($data as $articles) {		
+
+	$instruction_num=mysqli_num_rows(mysqli_query($db,"select * from inw_dept_comments where inw_id = ".$articles['id']." and DATE_FORMAT(created_on, '%Y-%m-%d') = '".date('Y-m-d')."'"));				
+
+		//$trans_status = $auth->showArticleTransactionlimitr($articles['id'],$articles['stage']);
+//print_r($trans_status);
+$aid=$articles['id'];
+if($articles['fig_complete_status']==1)
+{
+$gs='Yes';
+}
+else
+{ 
+$gs='No';
+}
+		$stage_r=preg_replace("/REV([0-9]+)/","REV",$articles['stage']);
+	$stage_i=preg_replace("/ISSCOR([0-9]+)/","ISSCOR",$articles['stage']);
+		
+	if ($articles['stage'] == "FP") {
+
+    // Determine due date safely
+    if (!empty($articles['target_due_dt'])) {
+        $due_dt = date('d-m-Y', strtotime($articles['target_due_dt']));
+    } elseif (!empty($articles['due_dt'])) {
+        $due_dt = date('d-m-Y', strtotime($articles['due_dt']));
+    } else {
+        $due_dt = "No target date assigned";
+    }
+
+    // Received date (with fallback check)
+    $recv_dt = !empty($articles['created_dt'])
+        ? date('d-m-Y H:i:s', strtotime($articles['created_dt']))
+        : '';
+
+    // Manuscript count safe default
+    $manuscript_count = !empty($articles['manuscript_count'])
+        ? $articles['manuscript_count']
+        : 0;
+
+} elseif ($stage_r == "REV") {
+
+    $due_dt = !empty($articles['due_date'])
+        ? date('d-m-Y', strtotime($articles['due_date']))
+        : '';
+
+    $recv_dt = !empty($articles['created_on'])
+        ? date('d-m-Y H:i:s', strtotime($articles['created_on']))
+        : '';
+
+    $manuscript_count = !empty($articles['page_count'])
+        ? $articles['page_count']
+        : 0;
+
+} elseif ($stage_i == 'ISSCOR') {
+
+    $due_dt = !empty($articles['due_dt'])
+        ? date('d-m-Y', strtotime($articles['due_dt']))
+        : '';
+
+    $recv_dt = !empty($articles['created_dt'])
+        ? date('d-m-Y H:i:s', strtotime($articles['created_dt']))
+        : '';
+
+    $manuscript_count = !empty($articles['page_count'])
+        ? $articles['page_count']
+        : 0;
+
+} else {
+
+    $due_dt = !empty($articles['due_date'])
+        ? date('d-m-Y', strtotime($articles['due_date']))
+        : '';
+
+    $recv_dt = !empty($articles['created_dt'])
+        ? date('d-m-Y H:i:s', strtotime($articles['created_dt']))
+        : '';
+
+    $manuscript_count = !empty($articles['page_count'])
+        ? $articles['page_count']
+        : 0;
+}
+
+		$current_dateTimestamp1 = strtotime(date('d-m-Y')); 
+		$Due_dateTimestamp2 = strtotime($due_dt); 
+		
+		
+		if($articles['highpriority']==1)
+		{
+			$tr_class = 'alert alert-info';
+		}
+		elseif(($articles['status'] == 'Query') || ($articles['status'] == 'Hold'))
+		{
+			$tr_class = 'alert alert-dark';
+		}
+		elseif($current_dateTimestamp1 > $Due_dateTimestamp2)
+		{
+			//$tr_class = 'alert alert-danger';
+			$due_highlight = '1';
+		}
+		elseif($current_dateTimestamp1 <= $Due_dateTimestamp2)
+		{
+			//$tr_class = 'alert alert-danger';
+			$due_highlight = '0';
+		}
+		
+		$xperttrack_sync=$articles['xperttrack_sync'];
+		  if($articles['xperttrack_sync']=="1")
+		{
+			$ppms=" <b style='color:red';>(PPMS)</b>";
+		}
+		elseif($articles['xperttrack_sync']=="0")
+		{
+			$ppms=" ";
+		}
+		if($articles['issueorgroup_folder']!="")
+		{
+			$gf=' <b style="color:red;">('.ltrim($articles['issueorgroup_folder'],"/").')</b>';
+		}
+		else
+		{
+			$gf="";
+		}
+	
+
+
+/* ==============================================
+   START BUTTON LOGIC (FULLY OPTIMIZED)
+   ============================================== */
+
+$start = "";
+
+if ($articles['approved_by'] > 0) {
+
+    $aid  = $articles['id'];
+    $tid  = $articles['last_transaction_id'] ?: 0;
+    $dept = $_COOKIE['department_id'];
+    $uid  = $_COOKIE['user_id'];
+
+    /* -----------------------------------------
+       GRAPHICS DEPARTMENT (ID = 9)
+       ----------------------------------------- */
+    if ($dept == 9) {
+
+        if ($tid > 0) {
+            $start = '
+                <a id="startBtn_'.$aid.'" class="btn btn-xs btn-primary"
+                   style="font-size:0.945em"
+                   onclick="return check_graphics_work_status('.$aid.','.$tid.','.$dept.');">
+                    <i class="ace-icon fa fa-tasks bigger-120"></i>&nbsp;Start
+                </a>';
+        } else {
+            $start = '
+                <a id="startBtn_'.$aid.'" class="btn btn-xs btn-primary"
+                   style="font-size:0.945em"
+                   onclick="return check_graphics_work_status('.$aid.',0,'.$dept.');">
+                    <i class="ace-icon fa fa-tasks bigger-120"></i>&nbsp;Start
+                </a>';
+        }
+
+    } 
+    /* -----------------------------------------
+       NON-GRAPHICS DEPARTMENTS
+       ----------------------------------------- */
+    else {
+
+        // If same user already working -> Resume
+        if ($uid == $articles['present_user_id'] && $tid > 0) {
+
+            $start = '
+                <a id="startBtn_'.$aid.'"
+                   target="_blank"
+                   href="'.$_COOKIE['set_url'].'/startworknew/'.$aid.'/'.$tid.'"
+                   class="btn btn-xs btn-primary"
+                   style="font-size:0.945em">
+                    <i class="ace-icon fa fa-tasks bigger-120"></i>&nbsp;Resume
+                </a>';
+
+        }
+
+        // Dept 10 or 14 → FORCE START logic
+        elseif (($dept == 10 || $dept == 14)) {
+
+            if ($uid == $articles['assigned_od_user_id']) {
+                // Normal start
+                $start = buildStartBtn($aid, $tid, $dept, 0, "Start");
+            } 
+            elseif ($uid != $articles['present_user_id']) {
+                // Force Start
+                $start = buildStartBtn($aid, 0, $dept, 1, "Force Start");
+            } 
+            else {
+                // Default normal start
+                $start = buildStartBtn($aid, $tid, $dept, 0, "Start");
+            }
+
+        }
+
+        // Everyone else → Standard Start
+        else {
+
+            $start = buildStartBtn($aid, $tid, $dept, 0, "Start");
+
+        }
+    }
+}
+
+if(!empty($articles['aq_status'])){  $aq_status='|<span class="label label-sm label bg-secondary text-white">'.$articles['aq_status'].'</span>'; }else{ $aq_status=''; }
+	if($articles['user_working_status']!='' && $articles['user_working_status']!='<span class="label label-sm label-success">Client Review</span>' && $articles['user_working_status']!='<span class="label label-sm label-success">Delivery</span>')
+{
+		
+				$current_status=$articles['user_working_status']."".$aq_status;
+			
+}
+elseif($articles['user_working_status']=='<span class="label label-sm label-success">Client Review</span>')
+{
+		
+				$current_status='<label class="label label-success ams_label">'.$articles['status'].'</label>';	
+			
+}
+elseif($articles['user_working_status']=='<span class="label label-sm label-success">Delivery</span>')
+{
+		
+				$current_status='<label class="label label-success ams_label">'.$articles['status'].'</label>';	
+			
+}
+
+else
+			{
+				$current_status='<label class="label label-success ams_label">'.$articles['status'].'</label>';	
+			}
+if($instruction_num>0)
+{
+	$inst_class="blink";
+	$inst_style="; animation: colorChange 1s infinite alternate;";
+	//$inst_class="";
+	//$inst_style="";
+}
+else
+{
+	$inst_class="";
+	$inst_style="";
+}
+
+if($articles['cn']!='DEV-JRNL')
+{
+	$stage=$articles['stage'];
+}
+else
+{
+	$stage=$articles['file_flow'];
+}
+
+			$instru='<a class="btn btn-sm '.$inst_class.'" style="text-decoration:none;color:red;cursor:pointer;border: 1px solid red;font-size:0.85em;width: fit-content '.$inst_style.'" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+			onclick="return timepopup('.$articles['id'].');">Click Here</a>';
+
+			
+		$rec['aaData'][$k] = array(
+			0 => '<div class="d-flex gap-3">
+			<div class="dropdown">
+                <div
+                  style="border: 1px solid gray; background-color: #141414;color: #fff;padding: 7px;border-radius: 5px;d-flex;"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Actions
+                </div>
+                <ul
+                  class="dropdown-menu" style="font-size: 0.945em;"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <li><a class="dropdown-item" href="'.$_COOKIE['set_url'].'/sendinstruction/'.$articles['id'].'">Add Instruction</a></li>
+                  <li><a class="dropdown-item" href="'.$_COOKIE['set_url'].'/jobcard/'.$articles['id'].'">Job Card</a></li>
+                  <li><a class="dropdown-item" href="'.$_COOKIE['set_url'].'/sendquery/'.$articles['id'].'">Send Query</a></li>
+				  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2" 
+			onclick="return transactionspopup('.$articles['id'].');">Article Transactions</a></li>
+				  <li><a class="dropdown-item" href="'.$_COOKIE['set_url'].'/article-checklist/'.$articles['id'].'">Checklist</a></li>
+                </ul>
+              </div>
+			  </div>',
+			2 => $articles['inw_type'],
+			3 => $articles['pub_id'].$ppms. $gf,
+			4 => $stage,
+			5 => $recv_dt,
+			6 => $due_dt,
+			//6 => '<label class="label label-success ams_label">'.$trans_status[0]['full_name'].'</label> <label class="label label-success ams_label">'.$trans_status[0]['current_status'].'</label>',
+			7 => $current_status,
+			// 8 => $due_dt,
+			8=> $manuscript_count,
+			1 => $gs,
+			9 => $instru,
+
+			// 9 => '<--<div class="hidden-sm hidden-xs action-buttons">'.$start.'
+			// <a title="Send instructions to other Departments" class="btn btn-primary btn-xs" href="'.$_COOKIE['set_url'].'/sendinstruction/'.$articles['id'].'">
+			// <i class="ace-icon fa fa-comments icon-only"></i>
+			// </a>
+			// <!--<a title="Send queries to Account manager" class="btn btn-xs btn-warning" href="'.$_COOKIE['set_url'].'/sendmailclient/'.$articles['id'].'">
+			// <i class="ace-icon fa fa-envelope"></i>
+			// </a>-->
+			// <a title="Job Card" href="'.$_COOKIE['set_url'].'/jobcard/'.$articles['id'].'" target="_blank" class="btn btn-xs btn-info">
+			// <i class="ace-icon fa fa-clock-o bigger-120"></i>
+			// </a>  
+			// <a title="Upload multiple files" class="btn btn-xs btn-pink" href="'.$_COOKIE['set_url'].'/uploadfiles/'.$articles['id'].'">
+			//  <i class="ace-icon fa  fa-cloud-upload bigger-130"></i>
+			//   </a>
+		  	// <a title="Edit Article" class="btn btn-xs btn-warning" href="'.$_COOKIE['set_url'].'/edit-article/'.$articles['id'].'">
+		   	// <i class="ace-icon fa fa-pencil bigger-120"></i>
+		    // </a> <button data-delete="'.$articles['id'].'" class="btn btn-primary demo4   delete-article" type="button"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>
+			// </div>-->
+			10 =>'<div class="d-flex gap-3">
+			<div class="hidden-sm hidden-xs action-buttons">'.$start.'</div>
+			  </div>',
+
+
+		 11 =>$articles['id'],
+		 12 =>$articles['highpriority'],
+		 13 =>$due_highlight
+			//7 => $payment['status'] == '0' ? 'Success' : 'Failed',
+			//6 => $articles['id']
+		);
+		$k++;
+	}
+}
+}
+
+echo json_encode($rec);

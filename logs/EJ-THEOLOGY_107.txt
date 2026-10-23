@@ -1,0 +1,6 @@
+[25-09-2023 17:12:35] LINUX --> 171.79.56.165 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[26-09-2023 12:33:59] FINAL DELIVERY --> LINUX --> 157.46.85.44 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[26-09-2023 17:29:55] FINAL DELIVERY --> LINUX --> 78.188.138.240 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[26-09-2023 17:59:34] FINAL DELIVERY --> LINUX --> 106.195.35.47 --> FINAL PACKAGE ZIP files from transforma downloaded by TRANSFORMA --> Success
+[27-09-2023 15:56:55] FINAL DELIVERY --> LINUX --> 88.255.99.13 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[04-10-2023 19:15:38] FINAL DELIVERY --> LINUX --> 88.255.99.18 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success

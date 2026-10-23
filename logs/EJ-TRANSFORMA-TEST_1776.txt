@@ -1,0 +1,4 @@
+[04-04-2024 12:44:13] FP --> LINUX --> 10.10.10.80 --> basic information updated --> Success
+[04-04-2024 12:44:46] FP --> LINUX --> 10.10.10.80 --> zip created in linux server --> Success
+[04-04-2024 12:44:46] FP --> LINUX --> 10.10.10.80 --> zip file size updated in read me txt file --> Success
+[04-04-2024 12:46:23] FP --> LINUX --> 10.10.10.80 --> basic information updated --> Success

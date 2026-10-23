@@ -1,0 +1,22 @@
+[01-10-2023 20:43:03] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 20:43:03] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 20:43:13] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejarch_34 APA STYLE.docx --> Success
+[01-10-2023 20:43:14] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 20:43:14] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 20:43:14] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 20:43:25] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[09-10-2023 10:52:18] AUTHOR SUBMISSION --> LINUX --> 171.79.55.129 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[11-10-2023 19:02:05] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> FP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 19:02:07] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> Proof zip files from author downloaded by Ivanna --> Success
+[11-10-2023 19:03:05] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 19:03:16] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.136.62 --> EJ-ARCH_34.zipEmail sent successfully. --> Success
+[13-10-2023 16:41:16] PRODUCTION REIEW --> LINUX --> 77.241.136.67 --> REVISESED PROOF downloaded by Ivanna --> Success
+[17-10-2023 20:56:27] PRODUCTION REIEW --> LINUX --> 77.241.136.102 --> REVISESED PROOF downloaded by Ivanna --> Success
+[17-10-2023 21:00:20] META FORM  --> LINUX --> 77.241.136.102 --> Files uploaded --> EJ-ARCH_34.pdf --> Success
+[17-10-2023 21:08:02] META FORM --> LINUX --> 77.241.136.102 --> Correction status updated & form submitted --> Success
+[17-10-2023 21:08:02] META FORM --> LINUX --> 77.241.136.102 --> PDF files exist in the folder --> Success
+[17-10-2023 21:08:03] META FORM --> LINUX --> 77.241.136.102 --> zip created in linux server --> Success
+[17-10-2023 21:08:03] META FORM --> LINUX --> 77.241.136.102 --> Curl function initiated  --> Success
+[17-10-2023 21:08:36] META FORM --> LINUX --> 77.241.136.102 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24653'Email sent successfully. --> Success
+[18-10-2023 18:49:01] FINAL DELIVERY --> LINUX --> 77.241.136.44 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[18-10-2023 18:57:34] FINAL DELIVERY --> LINUX --> 77.241.136.44 --> PUBLISHED --> published by Ivanna

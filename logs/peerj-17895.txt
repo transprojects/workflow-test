@@ -1,0 +1,5 @@
+[23-08-2024 06:59:29] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17895).msg --> Success
+[23-08-2024 06:59:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> peerj-17895-corrected-proof.pdf --> Success
+[27-08-2024 06:52:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17895).msg --> Success
+[27-08-2024 06:53:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ _peerj_ Forum comment posted (17895).msg --> Success
+[27-08-2024 06:53:10] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/PeerJ/PeerJ_PJ/Vol00000/peerj-17895/REV2//FW_ _peerj_ Forum comment posted (17895).msg --> Failure

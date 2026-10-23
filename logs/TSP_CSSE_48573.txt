@@ -1,0 +1,4 @@
+[23-07-2024 13:10:59] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 13:11:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CSSE_48573.docx --> Success
+[28-09-2024 14:48:36] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_CSSE_48573 need to be modified.pdf --> Success
+[28-09-2024 14:48:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

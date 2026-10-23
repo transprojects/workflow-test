@@ -1,0 +1,6 @@
+[18-06-2024 15:36:15] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure 5.TIF --> Success
+[18-06-2024 15:36:22] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure 1.tiff --> Success
+[18-06-2024 15:36:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure 2.TIF --> Success
+[18-06-2024 15:36:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure 3.tif --> Success
+[18-06-2024 15:36:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure 4.tiff --> Success
+[18-06-2024 15:36:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ FW_ _TSP_BIOCELL_52625_ - Proof submitted for your review.msg --> Success

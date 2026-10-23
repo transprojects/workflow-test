@@ -1,0 +1,2 @@
+[07-05-2024 10:13:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Re_ _TSP_JAI_50277_ - Proof submitted for your review.msg --> Success
+[07-05-2024 10:13:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_JAI_50277.pdf --> Success

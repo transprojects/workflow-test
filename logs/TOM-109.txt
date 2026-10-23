@@ -1,0 +1,22 @@
+[08-05-2024 22:34:09] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[08-05-2024 22:34:16] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-109 to production.msg --> Success
+[08-05-2024 22:35:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-109 to production.msg --> Success
+[08-05-2024 22:35:21] FP --> LINUX --> 10.10.10.22 --> Files removed -->E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/NOW-Publisher/TOM/Vol00000/TOM-109/FP//FW_ TOM-109 to production.msg --> Failure
+[08-05-2024 22:37:17] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-109-20240508T170540Z-001.zip --> Success
+[09-05-2024 11:30:20] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[09-05-2024 11:31:34] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-109 to production.msg --> Success
+[10-05-2024 13:48:11] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[10-05-2024 13:49:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-109 to production.msg --> Success
+[10-05-2024 13:57:07] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[10-05-2024 13:57:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-109 to production.msg --> Success
+[10-05-2024 13:59:13] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[10-05-2024 13:59:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-109 to production.msg --> Success
+[22-05-2024 10:19:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ TOM-109 .msg --> Success
+[22-05-2024 10:19:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-109_PR1 - Corrections.pdf --> Success
+[30-05-2024 11:21:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ TOM-109 .msg --> Success
+[30-05-2024 11:22:30] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-109_PR2-corrections-2905.pdf --> Success
+[26-06-2024 15:59:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ TOM-109 author corrections.msg --> Success
+[26-06-2024 16:00:34] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-109-Author-Corrections.pdf --> Success
+[02-07-2024 23:19:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ TOM-109_ revises posted.msg --> Success
+[22-08-2024 14:36:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ TOM-109 Finals.msg --> Success
+[22-08-2024 14:36:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> drive-download-20240822T090548Z-001.zip --> Success

@@ -1,0 +1,11 @@
+[04-05-2024 10:49:31] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[04-05-2024 10:49:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 for typesetting.msg --> Success
+[04-05-2024 10:49:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 - special issue.msg --> Success
+[04-05-2024 10:49:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-3.zip --> Success
+[04-05-2024 10:49:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Controlled-Keywords-For-Authors-Thema-2024.xlsx --> Success
+[28-06-2024 10:07:13] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114-3 - author corrections on the ftp.msg --> Success
+[28-06-2024 10:07:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-3_CX3.pdf --> Success
+[08-07-2024 23:23:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-3_CX4.pdf --> Success
+[08-07-2024 23:23:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 - voucher proof corrections.msg --> Success
+[11-07-2024 10:26:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ TOM-114 - voucher proof corrections - TOM-114-3 - missing figures.msg --> Success
+[11-07-2024 10:29:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TOM-114-3_CX5.zip --> Success

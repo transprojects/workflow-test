@@ -1,0 +1,27 @@
+[08-10-2023 03:05:39] FP --> LINUX --> 159.146.57.83 --> basic information updated --> Success
+[08-10-2023 03:05:46] FP --> LINUX --> 159.146.57.83 --> Files uploaded --> ejsocial-500-galley-1.docx --> Success
+[08-10-2023 03:05:50] FP --> LINUX --> 159.146.57.83 --> zip created in linux server --> Success
+[08-10-2023 03:05:50] FP --> LINUX --> 159.146.57.83 --> zip file size updated in read me txt file --> Success
+[08-10-2023 03:05:50] FP --> LINUX --> 159.146.57.83 --> Curl function initiated  --> Success
+[08-10-2023 03:05:58] FP --> LINUX --> 159.146.57.83 --> Email sent successfully for file moved to workflow. --> Success
+[11-10-2023 22:05:29] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> FP files from transforma downloaded by Hande --> Success
+[11-10-2023 22:05:44] AUTHOR SUBMISSION --> LINUX --> 159.146.75.221 --> Proof zip files from author downloaded by Hande --> Success
+[12-10-2023 02:54:14] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.75.221 --> Files uploaded --> EJ-SOCIAL_500+HS.pdf --> Success
+[12-10-2023 02:54:15] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.75.221 --> zip created in linux server --> Success
+[12-10-2023 02:54:15] AUTHOR SUBMISSION REV1 --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[12-10-2023 02:54:25] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 159.146.75.221 --> EJ-SOCIAL_500.zipEmail sent successfully. --> Success
+[13-10-2023 23:39:08] PRODUCTION REIEW --> LINUX --> 159.146.57.216 --> REVISESED PROOF downloaded by Hande --> Success
+[13-10-2023 23:42:17] META FORM  --> LINUX --> 159.146.57.216 --> Files uploaded --> EJ-SOCIAL_500+HS.pdf --> Success
+[13-10-2023 23:43:46] META FORM --> LINUX --> 159.146.57.216 --> Correction status updated & form submitted --> Success
+[13-10-2023 23:43:46] META FORM --> LINUX --> 159.146.57.216 --> PDF files exist in the folder --> Success
+[13-10-2023 23:43:46] META FORM --> LINUX --> 159.146.57.216 --> zip created in linux server --> Success
+[13-10-2023 23:43:46] META FORM --> LINUX --> 159.146.57.216 --> Curl function initiated  --> Success
+[13-10-2023 23:43:57] META FORM --> LINUX --> 159.146.57.216 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24741'Email sent successfully. --> Success
+[17-10-2023 16:51:03] FINAL DELIVERY --> LINUX --> 88.239.142.37 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[18-10-2023 00:15:32] FINAL CORRECTIONS   --> LINUX --> 88.255.99.39 --> PDF attached for artilce in linux server --> Success
+[18-10-2023 00:15:32] FINAL CORRECTIONS   --> LINUX --> 88.255.99.39 --> zip created in linux server --> Success
+[18-10-2023 00:15:32] FINAL CORRECTIONS ".$stage." --> LINUX --> 88.255.99.39 --> Curl function initiated  --> Success
+[18-10-2023 00:15:44] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 88.255.99.39 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-SOCIAL/Vol00000/EJ-SOCIAL_500/REV3/upload completedEmail sent successfully. --> Success
+[19-10-2023 19:57:47] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[20-10-2023 14:37:15] FINAL DELIVERY --> LINUX --> 88.255.99.39 --> FINAL PACKAGE ZIP files from transforma downloaded by Hande --> Success
+[21-10-2023 00:05:29] FINAL DELIVERY --> LINUX --> 88.255.99.21 --> PUBLISHED --> published by Hande

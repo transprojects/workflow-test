@@ -1,0 +1,19 @@
+[02-10-2023 21:39:19] FP --> LINUX --> 77.241.136.147 --> basic information updated --> Success
+[02-10-2023 21:39:20] FP --> LINUX --> 77.241.136.147 --> basic information updated --> Success
+[02-10-2023 21:39:28] FP --> LINUX --> 77.241.136.147 --> Files uploaded --> MANUSCRIPT_Submitted+August+2023.docx --> Success
+[02-10-2023 21:40:41] FP --> LINUX --> 77.241.136.147 --> zip created in linux server --> Success
+[02-10-2023 21:40:41] FP --> LINUX --> 77.241.136.147 --> zip file size updated in read me txt file --> Success
+[02-10-2023 21:40:41] FP --> LINUX --> 77.241.136.147 --> Curl function initiated  --> Success
+[02-10-2023 21:41:00] FP --> LINUX --> 77.241.136.147 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[23-10-2023 20:33:55] FP --> LINUX --> 46.196.74.119 --> basic information updated --> Success
+[23-10-2023 20:34:40] FP --> LINUX --> 46.196.74.119 --> Files uploaded --> EJFOOD_733.docx --> Success
+[23-10-2023 20:35:38] FP --> LINUX --> 46.196.74.119 --> zip created in linux server --> Success
+[23-10-2023 20:35:38] FP --> LINUX --> 46.196.74.119 --> zip file size updated in read me txt file --> Success
+[23-10-2023 20:35:38] FP --> LINUX --> 46.196.74.119 --> Curl function initiated  --> Success
+[23-10-2023 20:35:49] FP --> LINUX --> 46.196.74.119 --> Email sent successfully for file moved to workflow. --> Success
+[24-10-2023 15:28:24] FP --> LINUX --> 188.58.105.165 --> basic information updated --> Success
+[24-10-2023 15:28:45] FP --> LINUX --> 188.58.105.165 --> Files uploaded --> EJFOOD_733.docx --> Success
+[24-10-2023 15:28:50] FP --> LINUX --> 188.58.105.165 --> zip created in linux server --> Success
+[24-10-2023 15:28:50] FP --> LINUX --> 188.58.105.165 --> zip file size updated in read me txt file --> Success
+[24-10-2023 15:28:50] FP --> LINUX --> 188.58.105.165 --> Curl function initiated  --> Success
+[24-10-2023 15:29:01] FP --> LINUX --> 188.58.105.165 --> Email sent successfully for file moved to workflow. --> Success

@@ -1,0 +1,5 @@
+[09-05-2024 12:09:17] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[09-05-2024 12:09:28] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ Request for English check_ JSRT.msg --> Success
+[09-05-2024 12:13:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> table1-2.pptm --> Success
+[09-05-2024 12:13:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure1-7.pptm --> Success
+[09-05-2024 12:13:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> text.docx --> Success

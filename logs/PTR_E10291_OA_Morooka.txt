@@ -1,0 +1,2 @@
+[25-09-2024 10:23:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR request for revision_ E10291_OA_Morooka.msg --> Success
+[25-09-2024 10:23:15] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> 2024-09-25 120355.jpg --> Success

@@ -1,0 +1,32 @@
+[01-10-2023 18:38:10] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:38:17] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJMED_1891.docx --> Success
+[01-10-2023 18:38:18] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:38:18] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:38:18] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:38:27] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[05-10-2023 16:47:11] AUTHOR SUBMISSION --> LINUX --> 106.195.34.195 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[05-10-2023 20:10:44] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:11:11] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[12-10-2023 00:18:13] PRODUCTION REIEW --> LINUX --> 77.241.136.62 --> REVISESED PROOF downloaded by Ivanna --> Success
+[12-10-2023 00:18:32] PRODUCTION REIEW --> LINUX --> 77.241.136.62 --> REVISESED PROOF downloaded by Ivanna --> Success
+[12-10-2023 00:23:10] META FORM  --> LINUX --> 77.241.136.62 --> Files uploaded --> EJ-MED_1891.pdf --> Success
+[12-10-2023 00:24:22] META FORM --> LINUX --> 77.241.136.62 --> Correction status updated & form submitted --> Success
+[12-10-2023 00:24:22] META FORM --> LINUX --> 77.241.136.62 --> PDF files exist in the folder --> Success
+[12-10-2023 00:24:22] META FORM --> LINUX --> 77.241.136.62 --> zip created in linux server --> Success
+[12-10-2023 00:24:22] META FORM --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[12-10-2023 00:24:41] META FORM --> LINUX --> 77.241.136.62 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24643'Email sent successfully. --> Success
+[13-10-2023 00:02:18] FINAL DELIVERY --> LINUX --> 77.241.136.110 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 00:02:22] FINAL DELIVERY --> LINUX --> 77.241.136.110 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[13-10-2023 00:05:33] FINAL CORRECTIONS   --> LINUX --> 77.241.136.110 --> PDF attached for artilce in linux server --> Success
+[13-10-2023 00:05:33] FINAL CORRECTIONS   --> LINUX --> 77.241.136.110 --> zip created in linux server --> Success
+[13-10-2023 00:05:33] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.110 --> Curl function initiated  --> Success
+[13-10-2023 00:06:01] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.110 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-MED/Vol00000/EJ-MED_1891/REV3/upload completedEmail sent successfully. --> Success
+[16-10-2023 16:09:00] FINAL DELIVERY --> LINUX --> 77.241.136.102 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[18-10-2023 16:56:23] FINAL DELIVERY --> LINUX --> 77.241.136.44 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[19-10-2023 23:17:22] FINAL DELIVERY --> LINUX --> 77.241.136.75 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[23-10-2023 21:42:12] FINAL DELIVERY --> LINUX --> 77.241.136.28 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[24-10-2023 14:48:35] FINAL DELIVERY --> LINUX --> 77.241.136.41 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[24-10-2023 15:43:28] FINAL CORRECTIONS   --> LINUX --> 77.241.136.41 --> PDF attached for artilce in linux server --> Success
+[24-10-2023 15:43:28] FINAL CORRECTIONS   --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 15:43:28] FINAL CORRECTIONS ".$stage." --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 15:43:55] FINAL CORRECTIONS  CURL RESPONSE --> LINUX --> 77.241.136.41 --> E:/New_Workflow_Files/JOURNAL/downloads/JOURNALS/EOS/EJ-MED/Vol00000/EJ-MED_1891/REV4/upload completedEmail sent successfully. --> Success

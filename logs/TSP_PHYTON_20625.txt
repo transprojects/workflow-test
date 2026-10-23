@@ -1,0 +1,5 @@
+[23-07-2024 14:42:58] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 14:43:07] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_PHYTON_20625.docx --> Success
+[13-08-2024 12:32:32] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_20625.pdf --> Success
+[28-09-2024 15:08:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TSP_Phyton_20625  need to be modified.pdf --> Success
+[28-09-2024 15:08:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Fw_ Re_ Request to Update Table of Contents for Retracted Articles - Query.msg --> Success

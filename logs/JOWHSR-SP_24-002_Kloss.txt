@@ -1,0 +1,9 @@
+[13-05-2024 10:40:26] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[13-05-2024 10:40:31] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR new file uploaded.msg --> Success
+[13-05-2024 10:42:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[07-06-2024 11:33:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR request for revision.msg --> Success
+[07-06-2024 11:34:54] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR-SP_24-002_Kloss_1_checked.pdf --> Success
+[24-06-2024 11:45:06] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR request for revision.msg --> Success
+[24-06-2024 11:46:10] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR-SP_24-002_Kloss_1-2_authorchecked.pdf --> Success
+[08-07-2024 16:40:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR request for J-STAGE data.msg --> Success
+[08-07-2024 16:46:34] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JOWHSR-SP_24-002_Kloss_1-3_authorchecked.pdf --> Success

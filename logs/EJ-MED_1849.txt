@@ -1,0 +1,19 @@
+[01-10-2023 18:59:40] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 18:59:44] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> ejmed_1849.docx --> Success
+[01-10-2023 18:59:50] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 18:59:50] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 18:59:50] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 18:59:58] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[04-10-2023 21:08:32] AUTHOR SUBMISSION --> LINUX --> 59.94.153.69 --> Proof zip files from author downloaded by TRANSFORMA --> Success
+[05-10-2023 20:18:05] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:18:24] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[06-10-2023 22:04:22] PRODUCTION REIEW --> LINUX --> 59.92.87.210 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[09-10-2023 17:20:36] PRODUCTION REIEW --> LINUX --> 77.241.128.153 --> REVISESED PROOF downloaded by Ivanna --> Success
+[09-10-2023 17:25:15] META FORM  --> LINUX --> 77.241.128.153 --> Files uploaded --> EJ-MED_1849.pdf --> Success
+[09-10-2023 17:25:22] META FORM --> LINUX --> 77.241.128.153 --> Correction status updated & form submitted --> Success
+[09-10-2023 17:25:22] META FORM --> LINUX --> 77.241.128.153 --> PDF files exist in the folder --> Success
+[09-10-2023 17:25:22] META FORM --> LINUX --> 77.241.128.153 --> zip created in linux server --> Success
+[09-10-2023 17:25:22] META FORM --> LINUX --> 77.241.128.153 --> Curl function initiated  --> Success
+[09-10-2023 17:25:33] META FORM --> LINUX --> 77.241.128.153 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24648'Email sent successfully. --> Success
+[11-10-2023 19:45:14] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 19:56:17] FINAL DELIVERY --> LINUX --> 77.241.136.62 --> PUBLISHED --> published by Ivanna

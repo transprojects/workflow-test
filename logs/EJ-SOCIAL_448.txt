@@ -1,0 +1,11 @@
+[12-10-2023 19:28:38] FP --> LINUX --> 159.146.75.221 --> basic information updated --> Success
+[12-10-2023 19:28:42] FP --> LINUX --> 159.146.75.221 --> Files uploaded --> ejsocial-448-galley-2.docx --> Success
+[12-10-2023 19:28:44] FP --> LINUX --> 159.146.75.221 --> zip created in linux server --> Success
+[12-10-2023 19:28:44] FP --> LINUX --> 159.146.75.221 --> zip file size updated in read me txt file --> Success
+[12-10-2023 19:28:44] FP --> LINUX --> 159.146.75.221 --> Curl function initiated  --> Success
+[12-10-2023 19:28:55] FP --> LINUX --> 159.146.75.221 --> Email sent successfully for file moved to workflow. --> Success
+[22-10-2023 22:36:24] AUTHOR SUBMISSION --> LINUX --> 159.146.73.232 --> Proof zip files from author downloaded by Hande --> Success
+[22-10-2023 22:51:30] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.73.232 --> Files uploaded --> EJ-SOCIAL_448+HS.pdf --> Success
+[22-10-2023 22:51:32] AUTHOR SUBMISSION REV1  --> LINUX --> 159.146.73.232 --> zip created in linux server --> Success
+[22-10-2023 22:51:32] AUTHOR SUBMISSION REV1 --> LINUX --> 159.146.73.232 --> Curl function initiated  --> Success
+[22-10-2023 22:51:41] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 159.146.73.232 --> EJ-SOCIAL_448.zipEmail sent successfully. --> Success

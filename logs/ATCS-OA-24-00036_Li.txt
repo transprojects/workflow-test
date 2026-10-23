@@ -1,0 +1,14 @@
+[09-05-2024 21:29:03] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[09-05-2024 21:29:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS new file uploaded.msg --> Success
+[09-05-2024 21:30:19] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table1.docx --> Success
+[09-05-2024 21:30:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table2.docx --> Success
+[09-05-2024 21:30:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table3.docx --> Success
+[09-05-2024 21:30:20] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Thumbs.db --> Success
+[09-05-2024 21:30:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[09-05-2024 21:30:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure.2.tiff --> Success
+[09-05-2024 21:30:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1.tif --> Success
+[17-05-2024 10:39:08] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for revision.msg --> Success
+[17-05-2024 10:39:14] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-OA-24-00036_Li_1_checked.pdf --> Success
+[27-05-2024 12:13:26] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for J-STAGE data.msg --> Success
+[27-05-2024 12:13:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS-OA-24-00036_Li_1-2_ckd_authorchecked.pdf --> Success
+[31-05-2024 11:32:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS request for PMC data.msg --> Success

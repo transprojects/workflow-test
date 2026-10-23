@@ -1,0 +1,24 @@
+[10-05-2024 14:24:30] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[10-05-2024 14:24:38] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1B.jpg --> Success
+[10-05-2024 14:24:39] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1A.jpg --> Success
+[10-05-2024 14:24:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1D.jpg --> Success
+[10-05-2024 14:24:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1C.jpg --> Success
+[10-05-2024 14:24:41] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1E.jpg --> Success
+[10-05-2024 14:24:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure1F.jpg --> Success
+[10-05-2024 14:24:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure2A.jpg --> Success
+[10-05-2024 14:24:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure2B.jpg --> Success
+[10-05-2024 14:24:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure3A.jpg --> Success
+[10-05-2024 14:24:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure3B.jpg --> Success
+[10-05-2024 14:24:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure3C.jpg --> Success
+[10-05-2024 14:24:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure3D.jpg --> Success
+[10-05-2024 14:24:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure3E.jpg --> Success
+[10-05-2024 14:24:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Figure4.jpg --> Success
+[10-05-2024 14:24:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Table.xlsx --> Success
+[10-05-2024 14:24:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET new files uploaded.msg --> Success
+[10-05-2024 14:24:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Text.docx --> Success
+[23-05-2024 16:35:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[23-05-2024 16:38:25] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0009_Orimoto_1_checked.pdf --> Success
+[28-05-2024 15:27:01] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for revision.msg --> Success
+[28-05-2024 15:28:42] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0009_Orimoto_1-2_checked.pdf --> Success
+[06-06-2024 11:42:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET request for J-STAGE.msg --> Success
+[06-06-2024 11:44:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> JNET-OA-2024-0009_Orimoto_1-3_authorchecked.pdf --> Success

@@ -1,0 +1,8 @@
+[02-10-2023 22:00:36] FP --> LINUX --> 77.241.136.147 --> basic information updated --> Success
+[02-10-2023 22:03:45] FP --> LINUX --> 77.241.136.147 --> Files uploaded --> ARTICLE+BY+AUTHOR+MD.+ABU+OBAYDA (1).docx --> Success
+[02-10-2023 22:03:58] FP --> LINUX --> 77.241.136.147 --> Files removed -->uploads/EOS/FP/EOS/EJ-MED/EJ-MED_1927/ARTICLE+BY+AUTHOR+MD.+ABU+OBAYDA (1).docx --> Failure
+[02-10-2023 22:04:01] FP --> LINUX --> 77.241.136.147 --> Files uploaded --> Artigo+Final.docx --> Success
+[02-10-2023 22:04:18] FP --> LINUX --> 77.241.136.147 --> zip created in linux server --> Success
+[02-10-2023 22:04:18] FP --> LINUX --> 77.241.136.147 --> zip file size updated in read me txt file --> Success
+[02-10-2023 22:04:18] FP --> LINUX --> 77.241.136.147 --> Curl function initiated  --> Success
+[02-10-2023 22:04:28] FP --> LINUX --> 77.241.136.147 --> Email sent successfully for file moved to workflow. --> Success

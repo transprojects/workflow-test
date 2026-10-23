@@ -1,0 +1,19 @@
+[02-10-2023 21:26:51] FP --> LINUX --> 77.241.136.147 --> basic information updated --> Success
+[02-10-2023 21:26:56] FP --> LINUX --> 77.241.136.147 --> Files uploaded --> EJENG_Manuscript_XHAFERAJ+-+2+columms.docx --> Success
+[02-10-2023 21:27:02] FP --> LINUX --> 77.241.136.147 --> zip created in linux server --> Success
+[02-10-2023 21:27:02] FP --> LINUX --> 77.241.136.147 --> zip file size updated in read me txt file --> Success
+[02-10-2023 21:27:02] FP --> LINUX --> 77.241.136.147 --> Curl function initiated  --> Success
+[02-10-2023 21:27:17] FP --> LINUX --> 77.241.136.147 --> Email sent successfully for Zip file not Uploaded To Worklfow. --> Success
+[11-10-2023 18:55:41] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> FP files from transforma downloaded by Ivanna --> Success
+[11-10-2023 18:56:37] AUTHOR SUBMISSION APPROVED ZIP REV1 --> LINUX --> 77.241.136.62 --> Curl function initiated  --> Success
+[11-10-2023 18:56:48] AUTHOR SUBMISSION APPROVED ZIP REV1 CURL RESPONSE --> LINUX --> 77.241.136.62 --> EJ-ENG_3101.zipEmail sent successfully. --> Success
+[11-10-2023 18:56:54] AUTHOR SUBMISSION --> LINUX --> 77.241.136.62 --> Proof zip files from author downloaded by Ivanna --> Success
+[13-10-2023 20:40:53] PRODUCTION REIEW --> LINUX --> 77.241.136.67 --> REVISESED PROOF downloaded by Ivanna --> Success
+[13-10-2023 20:44:44] META FORM  --> LINUX --> 77.241.136.67 --> Files uploaded --> EJ-ENG_3101.pdf --> Success
+[13-10-2023 20:46:09] META FORM --> LINUX --> 77.241.136.67 --> Correction status updated & form submitted --> Success
+[13-10-2023 20:46:09] META FORM --> LINUX --> 77.241.136.67 --> PDF files exist in the folder --> Success
+[13-10-2023 20:46:09] META FORM --> LINUX --> 77.241.136.67 --> zip created in linux server --> Success
+[13-10-2023 20:46:09] META FORM --> LINUX --> 77.241.136.67 --> Curl function initiated  --> Success
+[13-10-2023 20:46:29] META FORM --> LINUX --> 77.241.136.67 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24661'Email sent successfully. --> Success
+[17-10-2023 22:45:31] FINAL DELIVERY --> LINUX --> 77.241.136.102 --> FINAL PACKAGE ZIP files from transforma downloaded by Ivanna --> Success
+[17-10-2023 22:56:39] FINAL DELIVERY --> LINUX --> 77.241.136.102 --> PUBLISHED --> published by Ivanna

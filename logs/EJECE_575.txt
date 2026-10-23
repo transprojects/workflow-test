@@ -1,0 +1,6 @@
+[24-10-2023 17:55:27] FP --> LINUX --> 77.241.136.41 --> basic information updated --> Success
+[24-10-2023 18:09:22] FP --> LINUX --> 77.241.136.41 --> Files uploaded --> EJECE_Analysis of Decoupling Capacitor Performance in Improving Power Integrity in Two Layer-Three Layer Printed Circuit Boards.docx --> Success
+[24-10-2023 18:09:23] FP --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 18:09:23] FP --> LINUX --> 77.241.136.41 --> zip file size updated in read me txt file --> Success
+[24-10-2023 18:09:23] FP --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 18:09:30] FP --> LINUX --> 77.241.136.41 --> Email sent successfully for file moved to workflow. --> Success

@@ -1,0 +1,1 @@
+[18-06-2024 15:06:05] FP --> LINUX --> 10.10.10.80 --> Files uploaded --> Revise Manuscript.msg --> Success

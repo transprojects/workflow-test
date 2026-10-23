@@ -1,0 +1,6 @@
+[02-12-2023 13:02:16] FP --> LINUX --> ::1 --> basic information updated --> Success
+[02-12-2023 13:02:25] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-10-31 125142.png --> Success
+[02-12-2023 13:02:25] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-11-07 182340.png --> Success
+[02-12-2023 13:03:10] FP --> LINUX --> ::1 --> Files removed -->uploads/EOS/EJ-EDU/EJ-EDU_45454/Screenshot 2023-11-07 182340.png --> Failure
+[02-12-2023 13:03:21] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-11-07 202529.png --> Success
+[02-12-2023 13:03:21] FP --> LINUX --> ::1 --> Files uploaded --> Screenshot 2023-11-07 182426.png --> Success

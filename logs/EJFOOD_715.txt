@@ -1,0 +1,21 @@
+[01-10-2023 17:36:33] FP --> LINUX --> 77.241.136.128 --> basic information updated --> Success
+[01-10-2023 17:36:48] FP --> LINUX --> 77.241.136.128 --> Files uploaded --> EJFOOD-715.docx --> Success
+[01-10-2023 17:36:49] FP --> LINUX --> 77.241.136.128 --> zip created in linux server --> Success
+[01-10-2023 17:36:49] FP --> LINUX --> 77.241.136.128 --> zip file size updated in read me txt file --> Success
+[01-10-2023 17:36:49] FP --> LINUX --> 77.241.136.128 --> Curl function initiated  --> Success
+[01-10-2023 17:36:59] FP --> LINUX --> 77.241.136.128 --> Email sent successfully for file moved to workflow. --> Success
+[05-10-2023 20:14:13] AUTHOR SUBMISSION --> LINUX --> 77.241.128.161 --> FP files from transforma downloaded by Ivanna --> Success
+[05-10-2023 20:15:31] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.128.161 --> Files uploaded --> EJFOOD_715.pdf --> Success
+[05-10-2023 20:15:32] AUTHOR SUBMISSION REV1  --> LINUX --> 77.241.128.161 --> zip created in linux server --> Success
+[05-10-2023 20:15:32] AUTHOR SUBMISSION REV1 --> LINUX --> 77.241.128.161 --> Curl function initiated  --> Success
+[05-10-2023 20:15:41] AUTHOR SUBMISSION REV1 CURL RESPONSE --> LINUX --> 77.241.128.161 --> EJFOOD_715.zipEmail sent successfully. --> Success
+[06-10-2023 22:04:16] PRODUCTION REIEW --> LINUX --> 59.92.87.210 --> REVISESED PROOF downloaded by TRANSFORMA --> Success
+[12-10-2023 00:28:02] PRODUCTION REIEW --> LINUX --> 77.241.136.62 --> REVISESED PROOF downloaded by Ivanna --> Success
+[20-10-2023 16:15:32] PRODUCTION REIEW --> LINUX --> 77.241.136.132 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 16:15:23] PRODUCTION REIEW --> LINUX --> 77.241.136.41 --> REVISESED PROOF downloaded by Ivanna --> Success
+[24-10-2023 16:25:55] META FORM  --> LINUX --> 77.241.136.41 --> Files uploaded --> 715.zip --> Success
+[24-10-2023 16:26:42] META FORM --> LINUX --> 77.241.136.41 --> Correction status updated & form submitted --> Success
+[24-10-2023 16:26:42] META FORM --> LINUX --> 77.241.136.41 --> No PDF files found in the folder --> Failure
+[24-10-2023 16:26:42] META FORM --> LINUX --> 77.241.136.41 --> zip created in linux server --> Success
+[24-10-2023 16:26:42] META FORM --> LINUX --> 77.241.136.41 --> Curl function initiated  --> Success
+[24-10-2023 16:27:05] META FORM --> LINUX --> 77.241.136.41 --> UPDATE `inw_inward_dtl` set stage ='REV2',prev_stage ='REV1',status='PAG',department_id=10,wf_id='148' where id='24625'Email sent successfully. --> Success

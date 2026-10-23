@@ -1,0 +1,16 @@
+[11-05-2024 10:37:07] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[11-05-2024 10:37:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ENT-119 to production.msg --> Success
+[11-05-2024 10:42:43] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ENT-119-20240511T051222Z-001.zip --> Success
+[29-05-2024 13:35:09] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ENT-119 .msg --> Success
+[29-05-2024 13:36:28] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ENT-119_PR1 - Corrections.pdf --> Success
+[03-06-2024 14:21:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ ENT-119 corrections - high priority.msg --> Success
+[03-06-2024 14:22:50] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Additional corrections-20240603T085234Z-001.zip --> Success
+[07-06-2024 18:17:03] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ ENT-119 corrections - high priority.msg --> Success
+[07-06-2024 18:18:31] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> drive-download-20240607T124802Z-001.zip --> Success
+[13-06-2024 14:49:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ Revises posted_  ENT-119 corrections - high priority.msg --> Success
+[13-06-2024 14:50:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ENT-119-Revised-final-corrections-13-6.pdf --> Success
+[13-06-2024 17:59:27] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> RE_ Revises Posted_ ENT-119 - high priority.msg --> Success
+[26-06-2024 15:45:18] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ENT-119 Finals.msg --> Success
+[26-06-2024 15:45:21] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> TEN Controlled-Keywords-For-Authors-2024.xlsx --> Success
+[08-07-2024 14:37:59] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ ENT-119 cover correction needed.msg --> Success
+[08-07-2024 14:38:02] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ENT-119 Arend turnover document.docx --> Success

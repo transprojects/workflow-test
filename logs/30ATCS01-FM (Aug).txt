@@ -1,0 +1,2 @@
+[23-07-2024 15:19:27] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[23-07-2024 15:19:48] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> ATCS_30-1_Aug_flatplan.xlsx --> Success

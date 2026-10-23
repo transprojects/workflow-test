@@ -1,0 +1,6 @@
+[27-04-2024 12:11:32] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[27-04-2024 12:11:40] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> FW_ PTR new files uploaded_ E10287_OA_Kimura.msg --> Success
+[13-05-2024 10:48:28] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR request for revision_ E10287_OA_Kimura.msg --> Success
+[13-05-2024 10:49:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR-E10287_OA_Kimura_1_checked.pdf --> Success
+[20-05-2024 09:51:37] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> PTR request for J-STAGE data_ E10287_OA_Kimura.msg --> Success
+[20-05-2024 09:52:52] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Mod_kimura_PTR-E10287_OA_Kimura_1-2_author checked.pdf --> Success

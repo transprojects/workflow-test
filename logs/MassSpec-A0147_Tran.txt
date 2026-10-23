@@ -1,0 +1,16 @@
+[25-06-2024 10:25:59] FP --> LINUX --> 10.10.10.22 --> basic information updated --> Success
+[25-06-2024 10:26:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec new file uploaded.msg --> Success
+[25-06-2024 10:27:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> table_1.docx --> Success
+[25-06-2024 10:27:44] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure_5.pdf --> Success
+[25-06-2024 10:27:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> text.docx --> Success
+[25-06-2024 10:27:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure_1.pdf --> Success
+[25-06-2024 10:27:45] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure_2.pdf --> Success
+[25-06-2024 10:27:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure_3.pdf --> Success
+[25-06-2024 10:27:46] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> figure_4.pdf --> Success
+[02-07-2024 10:01:49] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for revision_ Re_ MassSpec-A0147_Tran Firstproof Posted.msg --> Success
+[02-07-2024 10:03:35] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0147_Tran_1_checked.pdf --> Success
+[08-07-2024 10:41:58] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MS request for J-STAGE data.msg --> Success
+[08-07-2024 10:43:24] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0147_Tran_1-2_authorchecked.pdf --> Success
+[10-07-2024 17:36:12] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> Request for PMC data MassSpec-A0147_Tran.msg --> Success
+[10-07-2024 17:37:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0147_supplementary_figure_01.pdf --> Success
+[10-07-2024 17:37:05] FP --> LINUX --> 10.10.10.22 --> Files uploaded --> MassSpec-A0147_supplementary_table_01.pdf --> Success
