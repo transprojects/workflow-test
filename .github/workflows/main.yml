@@ -1,0 +1,19 @@
+name: Deploy to Windows Server
+
+on:
+  push:
+    branches:
+      - main  # Trigger this workflow on pushes to the main branch
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy Stage
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: '${{ secrets.pull_url }}'
+        method: 'POST'
+        ignoreSsl: true
+        timeout: 60000
+      
