@@ -21,7 +21,7 @@ if ($db->connect_error) {
 $dbhost = '10.10.10.117';
 
 // Database Name
-$dbname = 'workflow';
+$dbname = 'workflow_test';
 
 // Database Username
 $dbuser = 'root';

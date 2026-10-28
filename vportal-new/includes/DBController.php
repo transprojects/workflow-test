@@ -6,7 +6,7 @@ class DBController {
 	
 	private $user = "root";
 	private $password = "root@123";
-	private $database = "workflow";
+	private $database = "workflow_test";
 	//private $database = "trans_workflow_portal";
 	
 
@@ -79,7 +79,7 @@ class DBController {
 $dbhost = 'localhost';
 
 // Database Name
-$dbname = 'workflow';
+$dbname = 'workflow_test';
 //$dbname = 'trans_workflow_portal';
 
 // Database Username

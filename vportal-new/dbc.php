@@ -11,7 +11,7 @@ Note: If you use cpanel, the name will be like account_database
 define ("DB_HOST", "localhost"); // set database host
 define ("DB_USER", "root"); // set database user
 define ("DB_PASS","root@123"); // set database password
-define ("DB_NAME","workflow"); // set database name
+define ("DB_NAME","workflow_test"); // set database name
 
 //Production Folder Structure ///
 // define ("WF_DIR","J:/JOURNAL"); // set WF DIR Path

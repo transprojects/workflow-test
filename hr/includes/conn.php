@@ -12,7 +12,7 @@ date_default_timezone_set('Asia/Kolkata');
 $dbhost = 'localhost';
 
 // Database Name
-$dbname = 'workflow';
+$dbname = 'workflow_test';
 
 // Database Username
 $dbuser = 'root';
