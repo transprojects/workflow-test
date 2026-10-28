@@ -104,7 +104,7 @@ class DBController {
 $dbhost = 'localhost';
 
 // Database Name
-$dbname = 'workflow';
+$dbname = 'workflow_test';
 //$dbname = 'trans_workflow_portal';
 
 // Database Username

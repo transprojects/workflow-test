@@ -1,6 +1,6 @@
 <?php
 $vi_id = ''; // Replace with the actual vi_id you want to delete
-$dsn = 'mysql:host=localhost;dbname=workflow;charset=utf8mb4'; // Update with your database details
+$dsn = 'mysql:host=localhost;dbname=workflow_test;charset=utf8mb4'; // Update with your database details
 $username = 'root'; // Update with your username
 $password = 'root@123'; // Update with your password
 

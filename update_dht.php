@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "root@123";
-$dbname = "workflow";
+$dbname = "workflow_test";
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);

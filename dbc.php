@@ -6,7 +6,7 @@ date_default_timezone_set('Asia/Kolkata');
 define ("DB_HOST", "localhost"); // set database host
 define ("DB_USER", "root"); // set database user
 define ("DB_PASS","root@123"); // set database password
-define ("DB_NAME","workflow"); // set database name
+define ("DB_NAME","workflow_test"); // set database name
 
 
 //Connect with the database
