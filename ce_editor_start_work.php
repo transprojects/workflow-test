@@ -503,7 +503,8 @@ $('#status').on('change',function()
  * @param String $src - Source of files being moved
  * @param String $dest - Destination of files being moved
  */ 
-function rcopy($src, $dest,$accept_files_list){
+require_once __DIR__ . '/includes/move_naming.php';
+function rcopy($src, $dest,$accept_files_list, $name_rules = array(), $pub_id = ''){
 
    // If source is not a directory stop processing
     if(!is_dir($src)) 
@@ -532,6 +533,7 @@ function rcopy($src, $dest,$accept_files_list){
 				$accept_files_list[$i] = trim($accept_files_list[$i]);
 				if (strrpos($filename, $accept_files_list[$i]) === strlen($filename)-strlen($accept_files_list[$i]))
 					{
+						if (!empty($name_rules) && !mfn_file_allowed($filename, $name_rules, $pub_id)) { continue; }   /* Move Files naming rule of this extension */
 						$sfn = $src.$filename;
 						$dfn = $dest.$filename;
 						if(file_exists($sfn))
@@ -555,7 +557,7 @@ function rcopy($src, $dest,$accept_files_list){
 					
 			}
         } else if(!$f->isDot() && $f->isDir()) {
-            rcopy($f->getRealPath(), $dest,$accept_files_list);
+            rcopy($f->getRealPath(), $dest,$accept_files_list, $name_rules, $pub_id);
         }
     }
 }
@@ -857,7 +859,7 @@ $fe_info = $fe_result->fetch_assoc();
 
 //// According to New configuration we are moving the files /////
 $cur_stage = preg_replace('/[0-9]+/', '', $post['stage']);
- $fef_query = "SELECT move_files,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
+ $fef_query = "SELECT move_files,move_name_rules,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
 $fef_result = $db->query($fef_query) or ($db->error);
 while($fef_info = $fef_result->fetch_assoc())
 {
@@ -929,6 +931,8 @@ while($fef_info = $fef_result->fetch_assoc())
 	if($fef_info['move_files']!='')
 	{
 		$accept_files_list = explode("|",$fef_info["move_files"]);
+		$name_rules = mfn_parse_rules($fef_info["move_name_rules"]);   /* per-extension file naming rules; an extension without one moves every file */
+		$pub_id = $post['pub_id'];
 		if(count($accept_files_list)>0)
 		{
 			if(!is_dir($dest))
@@ -939,21 +943,21 @@ while($fef_info = $fef_result->fetch_assoc())
 			
 					if($J_name!='EPL' && $J_name!='NCC' && $post['cust_id']!=33)
 				{
-			rcopy($src,$dest,$accept_files_list);
+			rcopy($src,$dest,$accept_files_list,$name_rules,$pub_id);
 				}
 				elseif($J_name=='EPL' || $J_name=='NCC' || $post['cust_id']==33 || $post['cust_id']==66 || $post['cust_id']==42)
 				{
 						if($post['stage']!='FP' && $post['dept_name']!='PRQC')
 						{	
-						rcopy($src,$dest,$accept_files_list);
+						rcopy($src,$dest,$accept_files_list,$name_rules,$pub_id);
 						}
 						if($stage!='REV' && $post['dept_name']!='XML')
 						{	
-						rcopy($src,$dest,$accept_files_list);
+						rcopy($src,$dest,$accept_files_list,$name_rules,$pub_id);
 						}
 						if($post['stage']!='REV2' && $post['dept_name']!='ePub')
 						{	
-						rcopy($src,$dest,$accept_files_list);
+						rcopy($src,$dest,$accept_files_list,$name_rules,$pub_id);
 						}
 				}
 			

@@ -114,7 +114,8 @@ function sw_ajax_finish()
 /* Looks for a file with one of $exts under $dir (sub-folders included).  Returns
  *   exists  - the server sees the folder          found - an accepted file is there
  *   seen    - up to 8 file names it did see        err   - why it could not look (if it could not) */
-function sw_scan($dir, $exts, $exact_base = null)
+require_once __DIR__ . '/includes/move_naming.php';
+function sw_scan($dir, $exts, $rules = array(), $pub_id = '')
 {
 	$out = array('exists' => false, 'found' => false, 'seen' => array(), 'err' => '', 'dir' => $dir, 'mapped' => false);
 	foreach (sw_path_candidates($dir) as $i => $cand) {
@@ -135,14 +136,14 @@ function sw_scan($dir, $exts, $exact_base = null)
 			if (count($out['seen']) < 8) { $out['seen'][] = $n; }
 			$ext = strtolower(pathinfo($n, PATHINFO_EXTENSION));
 			if (!in_array($ext, $exts, true)) { continue; }
-			if ($exact_base !== null && strtolower(pathinfo($n, PATHINFO_FILENAME)) !== $exact_base) { continue; }
+			if ($rules && !mfn_file_allowed($n, $rules, $pub_id)) { continue; }   /* Move Files naming rule of this extension */
 			$out['found'] = true;
 			return $out;
 		}
 	}
 	return $out;
 }
-function sw_has_file($dir, $exts, $exact_base = null) { $r = sw_scan($dir, $exts, $exact_base); return $r['found']; }
+function sw_has_file($dir, $exts, $rules = array(), $pub_id = '') { $r = sw_scan($dir, $exts, $rules, $pub_id); return $r['found']; }
 
 /* returns array('problems' => [text...], 'checked' => [[dest, exts, found]...]) */
 function sw_required_files($db, $cust_id, $j_id, $dept_id, $stage, $pub_id, $work_dir, $volume_folder, $dept_name, $J_name, $wf_id = 0)
@@ -181,7 +182,7 @@ function sw_required_files($db, $cust_id, $j_id, $dept_id, $stage, $pub_id, $wor
 		|| ($cust_id==53 && $dept_id==5);   /* NOW_Finals_ZIP.py builds the zip during the submit */
 
 	$cur  = preg_replace('/[0-9]+/', '', $stage);
-	$r    = $db->query("SELECT d.move_files, d.dept_id, m.dept_name FROM `inw_move_files_dept_wise` d
+	$r    = $db->query("SELECT d.move_files, d.move_name_rules, d.dept_id, m.dept_name FROM `inw_move_files_dept_wise` d
 	                    LEFT JOIN adm_dept_master m ON m.dept_code = d.dept_id
 	                    WHERE d.mf_id = ".(int)$fe['mf_id']." AND d.stage = '".$db->real_escape_string($cur)."' AND d.move_files <> ''");
 	$src  = $work_dir.$volume_folder."/".$pub_id."/".$stage."/".$dept_name."/";
@@ -197,13 +198,14 @@ function sw_required_files($db, $cust_id, $j_id, $dept_id, $stage, $pub_id, $wor
 		if ($builds_pkg) { $exts = array_values(array_diff($exts, array('zip'))); }
 		if (!$exts) { continue; }
 		$key = implode('|', $exts);
-		$scan  = sw_scan($src, $exts, $cust_id == 82 ? strtolower($pub_id) : null);
+		$rules = mfn_parse_rules($row['move_name_rules']);
+		$scan  = sw_scan($src, $exts, $rules, $pub_id);
 		$found = $scan['found'];
-		$out['checked'][] = array('dest' => $row['dept_name'], 'exts' => $exts, 'found' => $found,
+		$out['checked'][] = array('dest' => $row['dept_name'], 'exts' => $exts, 'rules' => mfn_rules_for_display($rules, $pub_id), 'found' => $found,
 		                          'dir' => $scan['dir'], 'asked' => $src, 'mapped' => $scan['mapped'], 'exists' => $scan['exists'], 'seen' => $scan['seen'], 'err' => $scan['err']);
 		if (!$found && !isset($seen[$key.'|'.$row['dept_name']])) {
 			$seen[$key.'|'.$row['dept_name']] = 1;
-			$out['problems'][] = "Moving to ".$row['dept_name']." needs a .".implode(' / .', $exts)." file in the ".$stage."/".$dept_name." folder"
+			$out['problems'][] = "Moving to ".$row['dept_name']." needs a .".implode(' / .', $exts)." file".mfn_rule_hint($rules)." in the ".$stage."/".$dept_name." folder"
 			                   . (is_dir($src) ? " (none found)" : " (the folder does not exist)");
 		}
 	}
@@ -3811,7 +3813,7 @@ $('#rebuild_epub').on('click',function()
  * @param String $dest - Destination of files being moved
  */ 
 require_once __DIR__ . '/includes/file_move_log.php';   /* v2: file movement log (inw_file_move_log) */
-function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id)
+function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id, $name_rules = array())
 {
     fml_rc_hit();
     if (!is_dir($src)) {
@@ -3855,11 +3857,9 @@ function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id)
                 if ($extension === $ext) {
                     $fml_matched = true;
 
-                    // ✅ ONLY EXACT FILE FOR CUSTOMER 82
-                    if ($customer_id == 82) {
-                        $expected_filename = strtolower($pub_id . '.' . $extension);
-
-                        if (strtolower($filename) !== $expected_filename) {
+                    // file naming rule configured for this extension (Move Files): skip files that do not match it
+                    if (!empty($name_rules)) {
+                        if (!mfn_file_allowed($filename, $name_rules, $pub_id)) {
                             fml_add('FILE', 'SKIPPED', $filename, $file->getRealPath(), $dest, 'Not copied: for this customer only ' . $pub_id . '.' . $extension . ' is moved.', @filesize($file->getRealPath()));
                             continue; // skip unwanted files
                         }
@@ -3915,7 +3915,7 @@ function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id)
             if (!$fml_matched) { fml_add('FILE', 'SKIPPED', $filename, $file->getRealPath(), $dest, 'Not copied: the file type .' . ($extension !== '' ? $extension : '(none)') . ' is not selected for this destination (selected: ' . implode(', ', array_map(function ($x) { return '.' . trim($x, ' .'); }, $accept_files_list)) . ').', @filesize($file->getRealPath())); }
         } 
         else if (!$file->isDot() && $file->isDir()) {
-            rcopy($file->getRealPath(), $dest, $accept_files_list, $suffix, $customer_id, $pub_id);
+            rcopy($file->getRealPath(), $dest, $accept_files_list, $suffix, $customer_id, $pub_id, $name_rules);
         }
     }
 }
@@ -4366,7 +4366,7 @@ if (!$fe_info || empty($fe_info['mf_id'])) { fml_add('NOTE', 'SKIPPED', '', $src
 
 //// According to New configuration we are moving the files /////
 $cur_stage = preg_replace('/[0-9]+/', '', $post['stage']);
- $fef_query = "SELECT move_files,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
+ $fef_query = "SELECT move_files,move_name_rules,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
 $fef_result = $db->query($fef_query) or ($db->error);
 if ($fe_info && !empty($fe_info['mf_id']) && $fef_result && $fef_result->num_rows == 0) { fml_add('NOTE', 'SKIPPED', '', $src, '', 'A file movement exists for this customer / journal / department, but it has no destination for stage ' . $cur_stage . ', so no files were copied to the next department.'); }
 while($fef_info = $fef_result->fetch_assoc())
@@ -4466,6 +4466,7 @@ while($fef_info = $fef_result->fetch_assoc())
 
 
 		$accept_files_list = explode("|",$fef_info["move_files"]);
+		$name_rules = mfn_parse_rules($fef_info["move_name_rules"]);   /* per-extension file naming rules; an extension without one moves every file */
 		$fml_rc0 = fml_rc_count();
 		if(count($accept_files_list)>0)
 		{
@@ -4478,23 +4479,23 @@ while($fef_info = $fef_result->fetch_assoc())
 			
 					 if ($J_name != 'EPL' && $J_name != 'NCC' && $post['cust_id'] != 33)
 					{
-						rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id']);
+						rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id'], $name_rules);
 					}
 					elseif ($J_name == 'EPL' || $J_name == 'NCC' || $post['cust_id'] == 33 || $post['cust_id'] == 66 || $post['cust_id'] == 42)
 					{
 						if ($post['stage'] != 'FP' && $post['dept_name'] != 'PRQC')
 						{	
-							rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id']);
+							rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id'], $name_rules);
 						}
 
 						if ($stage != 'REV' && $post['dept_name'] != 'XML')
 						{	
-							rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id']);
+							rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id'], $name_rules);
 						}
 
 						if ($post['stage'] != 'REV2' && $post['dept_name'] != 'ePub')
 						{	
-							rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id']);
+							rcopy($src, $dest, $accept_files_list, $suffix, $post['cust_id'], $post['pub_id'], $name_rules);
 						}
 					}
 			
@@ -5851,6 +5852,7 @@ $("#Author_Validaion").click(function () {
   .sw-mark{width:24px;height:24px;line-height:24px;border-radius:50%;text-align:center;font-weight:700;font-size:14px;color:#fff;}
   .sw-files li.ok .sw-mark{background:#1e9e61;} .sw-files li.bad .sw-mark{background:#d64545;}
   .sw-ext{padding:3px 11px;border-radius:20px;background:#eaf2fa;color:#1b6ca8;font-weight:700;font-size:13px;}
+  .sw-rule{display:inline-block;margin:2px 8px 2px 0;padding:2px 9px;border-radius:12px;background:#fff7e8;border:1px solid #f2dcae;color:#4a3a14;font-size:12px;}
   .sw-state{margin-left:auto;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;}
   .sw-files li.ok .sw-state{color:#1e9e61;} .sw-files li.bad .sw-state{color:#d64545;}
   @keyframes swFilesIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:none;}}
@@ -6290,14 +6292,15 @@ $("#Author_Validaion").click(function () {
       var miss = (r.problems || []).length, items = '', dbg = '', shown = {};
       $.each(r.checked, function (i, c) {
         var exts = $.map(c.exts, function (e) { return '<span class="sw-ext">.' + esc(e) + '</span>'; }).join('');
+        var rl = $.map(c.rules || {}, function (p, e) { return '<span class="sw-rule" title="Move Files naming rule">.' + esc(e) + ' named <b>' + esc(p) + '</b></span>'; }).join('');
         items += '<li class="' + (c.found ? 'ok' : 'bad') + '"><span class="sw-mark">' + (c.found ? '&#10003;' : '&#10007;') + '</span>' +
-                 '<span class="sw-what">Moving to <b>' + esc(c.dest) + '</b> needs one of</span> ' + exts +
+                 '<span class="sw-what">Moving to <b>' + esc(c.dest) + '</b> needs one of</span> ' + exts + rl +
                  '<span class="sw-state">' + (c.found ? 'found' : 'not found') + '</span></li>';
         if (!c.found && c.dir && !shown[c.dir]) {
           shown[c.dir] = 1;
           dbg += '<div class="sw-dbg">The server looked in <code>' + esc(c.dir) + '</code>' + (c.mapped ? ' <i>(mapped from <code>' + esc(c.asked) + '</code>)</i>' : '') + ' &ndash; ' +
                  (!c.exists ? '<b>it cannot see this folder</b> (wrong path, or the web server has no access to it).'
-                            : (c.seen && c.seen.length ? 'folder found; files it saw: ' + esc(c.seen.join(', ')) + ' &ndash; none with the needed extension.' : 'folder found but it is empty.') +
+                            : (c.seen && c.seen.length ? 'folder found; files it saw: ' + esc(c.seen.join(', ')) + ' &ndash; none with the needed extension' + ($.isEmptyObject(c.rules || {}) ? '' : ' and file name') + '.' : 'folder found but it is empty.') +
                               (c.err ? ' (' + esc(c.err) + ')' : '')) + '</div>';
         }
       });

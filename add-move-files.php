@@ -1,6 +1,7 @@
 <?php include "includes/includes.php";?>
 <?php require_once __DIR__.'/includes/form_ui.php'; ?>
 <?php include_once "includes/change_log_mail.php";?>
+<?php require_once __DIR__.'/includes/move_naming.php'; ?>
 <?php
 $bs = array('BS' => 'BookServices');
 /*$project_status_types = $bs + $project_status_types;
@@ -15,6 +16,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert') {
 	// echo "</br>";
 /* print_r($_POST['files']);
 exit; */
+    $bad_rules = mfn_validate_post(isset($_POST['rules']) ? $_POST['rules'] : array());
+    if ($bad_rules) {
+        echo "<script>alert(" . json_encode("Some file naming rules are not valid:\n" . implode("\n", $bad_rules)) . "); history.back();</script>";
+        die();
+    }
     /* one record per customer + journal + department */
     $dup_dept = (int)$post['dept_id'];
     $dup = $db->query("SELECT mf_id FROM inw_move_files WHERE cust_id = '" . $db->real_escape_string($post['cust_id']) . "' AND j_id = '" . $db->real_escape_string($post['j_id']) . "' AND (dept_id = " . $dup_dept . ($dup_dept == 0 ? " OR dept_id IS NULL" : "") . ") LIMIT 1");
@@ -34,7 +40,9 @@ exit; */
         foreach ($sub_files as $deptid_key => $files_val) {
 			// echo $files_val;
 
-             $insert_query_mov_files = "INSERT INTO `inw_move_files_dept_wise` (`mf_id`, `stage`, `dept_id`,move_files,move_folders,created_by) VALUES ('" . $mf_id . "', '" . $stagekey . "', '" . $deptid_key . "', '" . $files_val . "','" . $_POST['folders'][$stagekey][$deptid_key] . "','" . $_COOKIE['user_id'] . "');"; 
+             $rules_json = mfn_rules_from_post($files_val, isset($_POST['rules'][$stagekey][$deptid_key]) ? $_POST['rules'][$stagekey][$deptid_key] : array());
+             $rules_sql  = $rules_json === null ? 'NULL' : "'" . $db->real_escape_string($rules_json) . "'";
+             $insert_query_mov_files = "INSERT INTO `inw_move_files_dept_wise` (`mf_id`, `stage`, `dept_id`,move_files,move_name_rules,move_folders,created_by) VALUES ('" . $mf_id . "', '" . $stagekey . "', '" . $deptid_key . "', '" . $files_val . "'," . $rules_sql . ",'" . $_POST['folders'][$stagekey][$deptid_key] . "','" . $_COOKIE['user_id'] . "');";
             $db->query($insert_query_mov_files) or die($db->error);
    
   }
@@ -405,5 +413,6 @@ $(function () {
 </script>
 <?php fu_foot('#add_move_files', null, array(), null, fu_ui_basic('Add Move Files', 'Add Move Files &rsaquo; Add')); ?>
   <?php include __DIR__ . '/includes/move-files-stage-depts.php'; ?>
+  <?php include __DIR__ . '/includes/move-name-rules-ui.php'; ?>
 </body>
 </html>

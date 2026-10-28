@@ -295,6 +295,7 @@ function vp_sw_theme($sum)
   .sw-mark{width:24px;height:24px;line-height:24px;border-radius:50%;text-align:center;font-weight:700;font-size:14px;color:#fff;}
   .sw-files li.ok .sw-mark{background:#1e9e61;} .sw-files li.bad .sw-mark{background:#d64545;}
   .sw-ext{padding:3px 11px;border-radius:20px;background:#eaf2fa;color:#1b6ca8;font-weight:700;font-size:13px;}
+  .sw-rule{display:inline-block;margin:2px 8px 2px 0;padding:2px 9px;border-radius:12px;background:#fff7e8;border:1px solid #f2dcae;color:#4a3a14;font-size:12px;}
   .sw-state{margin-left:auto;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;}
   .sw-files li.ok .sw-state{color:#1e9e61;} .sw-files li.bad .sw-state{color:#d64545;}
   @keyframes swFilesIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:none;}}
@@ -429,7 +430,7 @@ function vp_sw_theme($sum)
       var map = {}, order = [];
       $.each(r.checked || [], function (i, c) {
         var k = c.exts.join('|');
-        if (!map[k]) { map[k] = { exts: c.exts, dests: [], found: false }; order.push(k); }
+        if (!map[k]) { map[k] = { exts: c.exts, dests: [], found: false, rules: c.rules || {} }; order.push(k); }
         map[k].dests.push(c.dest); if (c.found) { map[k].found = true; }
       });
       return $.map(order, function (k) { return map[k]; });
@@ -442,7 +443,7 @@ function vp_sw_theme($sum)
       $.each(reqs, function (i, q) {
         var exts = $.map(q.exts, function (e) { return '<span class="sw-ext">.' + esc(e) + '</span>'; }).join('');
         items += '<li class="' + (q.found ? 'ok' : 'bad') + '"><span class="sw-mark">' + (q.found ? '&#10003;' : '&#10007;') + '</span>' +
-                 '<span class="sw-what">Upload one of</span> ' + exts + '<span class="vp-for">needed for ' + esc(q.dests.join(', ')) + '</span>' +
+                 '<span class="sw-what">Upload one of</span> ' + exts + $.map(q.rules || {}, function (p, e) { return '<span class="sw-rule">.' + esc(e) + ' named <b>' + esc(p) + '</b></span>'; }).join('') + '<span class="vp-for">needed for ' + esc(q.dests.join(', ')) + '</span>' +
                  '<span class="sw-state">' + (q.found ? 'uploaded' : 'not uploaded') + '</span></li>';
       });
       $hero.append('<div id="sw-files" class="sw-files ' + (miss ? 'bad' : 'ok') + '" role="alert"><div class="sw-files-head"><span class="sw-files-ico">' + (miss ? '!' : '&#10003;') + '</span><div style="flex:1">' +

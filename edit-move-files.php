@@ -2,6 +2,7 @@
 <?php require_once __DIR__.'/includes/form_ui.php'; ?>
 <?php
 include_once "includes/change_log_mail.php";
+require_once __DIR__ . '/includes/move_naming.php';
 
 /**
  * Build the old -> new diff for a Move Files edit and email it via the shared helper.
@@ -35,6 +36,12 @@ function send_move_files_change_log($mf_id, $old_header, $old_rows, $post, $stag
             $old_d = isset($old_rows[$stage][$dept]['move_folders']) ? $old_rows[$stage][$dept]['move_folders'] : '';
             if ($old_f !== $new_f) {
                 $log .= "  Stage: $stage_label | Dept: $dept | Files  : '$old_f' -> '$new_f'\r\n";
+                $dept_changes++;
+            }
+            $old_r = isset($old_rows[$stage][$dept]['move_name_rules']) ? mfn_describe($old_rows[$stage][$dept]['move_name_rules']) : '';
+            $new_r = mfn_describe(mfn_rules_from_post($new_f, isset($_POST['rules'][$stage][$dept]) ? $_POST['rules'][$stage][$dept] : array()));
+            if ($old_r !== $new_r) {
+                $log .= "  Stage: $stage_label | Dept: $dept | Naming rules : '$old_r' -> '$new_r'\r\n";
                 $dept_changes++;
             }
             if ($old_d !== $new_d) {
@@ -76,6 +83,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
       foreach (array('cust_id', 'j_id', 'b_id', 'dept_id') as $hk) { $post[$hk] = $old_header[$hk]; }
   }
 
+  /// Reject unusable naming rules before anything is deleted ///
+  $bad_rules = mfn_validate_post(isset($_POST['rules']) ? $_POST['rules'] : array());
+  if ($bad_rules) {
+      echo "<script>alert(" . json_encode("Some file naming rules are not valid:\n" . implode("\n", $bad_rules)) . "); history.back();</script>";
+      die();
+  }
+
   /// Delete the existing files values from DB ////
   $delete_qry = "DELETE FROM `inw_move_files_dept_wise` WHERE `mf_id` = '" . $post['id'] . "' ";
   $db->query($delete_qry) or die($db->error);
@@ -85,7 +99,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
 
       foreach ($sub_files as $deptid_key => $files_val) {
 
-          $insert_query_mov_files = "INSERT INTO `inw_move_files_dept_wise` (`mf_id`, `stage`, `dept_id`,move_files,move_folders,created_by) VALUES ('" . $post['id'] . "', '" . $stagekey . "', '" . $deptid_key . "', '" . $files_val . "','" . $_POST['folders'][$stagekey][$deptid_key] . "','" . $_COOKIE['user_id'] . "');";
+          $rules_json = mfn_rules_from_post($files_val, isset($_POST['rules'][$stagekey][$deptid_key]) ? $_POST['rules'][$stagekey][$deptid_key] : array());
+          $rules_sql  = $rules_json === null ? 'NULL' : "'" . $db->real_escape_string($rules_json) . "'";
+          $insert_query_mov_files = "INSERT INTO `inw_move_files_dept_wise` (`mf_id`, `stage`, `dept_id`,move_files,move_name_rules,move_folders,created_by) VALUES ('" . $post['id'] . "', '" . $stagekey . "', '" . $deptid_key . "', '" . $files_val . "'," . $rules_sql . ",'" . $_POST['folders'][$stagekey][$deptid_key] . "','" . $_COOKIE['user_id'] . "');";
           $db->query($insert_query_mov_files) or die($db->error);
       }
   }
@@ -994,5 +1010,10 @@ $(function () {
 </script>
 <?php fu_foot('#edit_move_files', null, array(), null, fu_ui_basic('Edit Move Files', 'Edit Move Files &rsaquo; Edit')); ?>
   <?php include __DIR__ . '/includes/move-files-stage-depts.php'; ?>
+  <?php
+  $mfn_existing = array();
+  foreach ($move_files_folders as $st => $depts) { foreach ($depts as $dp => $mff) { if (!empty($mff['move_name_rules'])) { $mfn_existing[$st][$dp] = $mff['move_name_rules']; } } }
+  include __DIR__ . '/includes/move-name-rules-ui.php';
+  ?>
 </body>
 </html>

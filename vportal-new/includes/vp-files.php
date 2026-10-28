@@ -43,7 +43,8 @@ if (!function_exists('wf_existing_dir')) {
 	}
 }
 
-function sw_scan($dir, $exts, $exact_base = null)
+require_once __DIR__ . '/../../includes/move_naming.php';
+function sw_scan($dir, $exts, $rules = array(), $pub_id = '')
 {
 	$out = array('exists' => false, 'found' => false, 'seen' => array(), 'err' => '', 'dir' => $dir, 'mapped' => false);
 	foreach (sw_path_candidates($dir) as $i => $cand) {
@@ -64,14 +65,14 @@ function sw_scan($dir, $exts, $exact_base = null)
 			if (count($out['seen']) < 8) { $out['seen'][] = $n; }
 			$ext = strtolower(pathinfo($n, PATHINFO_EXTENSION));
 			if (!in_array($ext, $exts, true)) { continue; }
-			if ($exact_base !== null && strtolower(pathinfo($n, PATHINFO_FILENAME)) !== $exact_base) { continue; }
+			if ($rules && !mfn_file_allowed($n, $rules, $pub_id)) { continue; }   /* Move Files naming rule of this extension */
 			$out['found'] = true;
 			return $out;
 		}
 	}
 	return $out;
 }
-function sw_has_file($dir, $exts, $exact_base = null) { $r = sw_scan($dir, $exts, $exact_base); return $r['found']; }
+function sw_has_file($dir, $exts, $rules = array(), $pub_id = '') { $r = sw_scan($dir, $exts, $rules, $pub_id); return $r['found']; }
 
 /* returns array('problems' => [text...], 'checked' => [[dest, exts, found]...]) */
 function sw_required_files($db, $cust_id, $j_id, $dept_id, $stage, $pub_id, $work_dir, $volume_folder, $dept_name, $J_name, $wf_id = 0)
@@ -109,7 +110,7 @@ function sw_required_files($db, $cust_id, $j_id, $dept_id, $stage, $pub_id, $wor
 		|| ($cust_id==53 && $dept_id==5);   /* NOW_Finals_ZIP.py builds the zip during the submit */
 
 	$cur  = preg_replace('/[0-9]+/', '', $stage);
-	$r    = $db->query("SELECT d.move_files, d.dept_id, m.dept_name FROM `inw_move_files_dept_wise` d
+	$r    = $db->query("SELECT d.move_files, d.move_name_rules, d.dept_id, m.dept_name FROM `inw_move_files_dept_wise` d
 	                    LEFT JOIN adm_dept_master m ON m.dept_code = d.dept_id
 	                    WHERE d.mf_id = ".(int)$fe['mf_id']." AND d.stage = '".$db->real_escape_string($cur)."' AND d.move_files <> ''");
 	$src  = $work_dir.$volume_folder."/".$pub_id."/".$stage."/".$dept_name."/";
@@ -125,13 +126,14 @@ function sw_required_files($db, $cust_id, $j_id, $dept_id, $stage, $pub_id, $wor
 		if ($builds_pkg) { $exts = array_values(array_diff($exts, array('zip'))); }
 		if (!$exts) { continue; }
 		$key = implode('|', $exts);
-		$scan  = sw_scan($src, $exts, $cust_id == 82 ? strtolower($pub_id) : null);
+		$rules = mfn_parse_rules($row['move_name_rules']);
+		$scan  = sw_scan($src, $exts, $rules, $pub_id);
 		$found = $scan['found'];
-		$out['checked'][] = array('dest' => $row['dept_name'], 'exts' => $exts, 'found' => $found,
+		$out['checked'][] = array('dest' => $row['dept_name'], 'exts' => $exts, 'rules' => mfn_rules_for_display($rules, $pub_id), 'found' => $found,
 		                          'dir' => $scan['dir'], 'asked' => $src, 'mapped' => $scan['mapped'], 'exists' => $scan['exists'], 'seen' => $scan['seen'], 'err' => $scan['err']);
 		if (!$found && !isset($seen[$key.'|'.$row['dept_name']])) {
 			$seen[$key.'|'.$row['dept_name']] = 1;
-			$out['problems'][] = "Moving to ".$row['dept_name']." needs a .".implode(' / .', $exts)." file in the ".$stage."/".$dept_name." folder"
+			$out['problems'][] = "Moving to ".$row['dept_name']." needs a .".implode(' / .', $exts)." file".mfn_rule_hint($rules)." in the ".$stage."/".$dept_name." folder"
 			                   . (is_dir($src) ? " (none found)" : " (the folder does not exist)");
 		}
 	}

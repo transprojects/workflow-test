@@ -1104,7 +1104,8 @@ $startTime = strtotime($chk_transaction_time['start_time']); // Example start ti
  * @param String $dest - Destination of files being moved
  */ 
 require_once __DIR__ . '/includes/file_move_log.php';   /* file movement log (inw_file_move_log) - same table as the main Start Work */
-function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id)
+require_once __DIR__ . '/../includes/move_naming.php';
+function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id, $name_rules = array())
 {
     if (!is_dir($src)) {
 		fml_add('NOTE', 'FAILED', '', $src, $dest, 'The source folder does not exist or cannot be read, so nothing could be copied.');
@@ -1147,12 +1148,10 @@ function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id)
                 if ($extension === $ext) {
                     $fml_matched = true;
 
-                    // ✅ ONLY EXACT FILE FOR CUSTOMER 82
-                    if ($customer_id == 82) {
-                        $expected_filename = strtolower($pub_id . '.' . $extension);
-
-                        if (strtolower($filename) !== $expected_filename) {
-                            fml_add('FILE', 'SKIPPED', $filename, $file->getRealPath(), $dest, 'Not copied: for this customer only ' . $pub_id . '.' . $extension . ' is moved.', @filesize($file->getRealPath()));
+                    // file naming rule configured for this extension (Move Files): skip files that do not match it
+                    if (!empty($name_rules)) {
+                        if (!mfn_file_allowed($filename, $name_rules, $pub_id)) {
+                            fml_add('FILE', 'SKIPPED', $filename, $file->getRealPath(), $dest, 'Not copied: the file name does not match the naming rule for .' . $extension . ' (' . $name_rules[$extension] . ').', @filesize($file->getRealPath()));
                             continue; // skip unwanted files
                         }
                     }
@@ -1199,7 +1198,7 @@ function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id)
             if (!$fml_matched) { fml_add('FILE', 'SKIPPED', $filename, $file->getRealPath(), $dest, 'Not copied: the file type .' . ($extension !== '' ? $extension : '(none)') . ' is not selected for this destination (selected: ' . implode(', ', array_map(function ($x) { return '.' . trim($x, ' .'); }, $accept_files_list)) . ').', @filesize($file->getRealPath())); }
         } 
         else if (!$file->isDot() && $file->isDir()) {
-            rcopy($file->getRealPath(), $dest, $accept_files_list, $suffix, $customer_id, $pub_id);
+            rcopy($file->getRealPath(), $dest, $accept_files_list, $suffix, $customer_id, $pub_id, $name_rules);
         }
     }
 }
@@ -1323,7 +1322,7 @@ window.location.href = '".$_COOKIE['set_url']."/allocatedarticles';
 		$cur_stage = preg_replace('/[0-9]+/', '', $post['stage']);
 		fml_ctx($db, array('inw_id' => (int)$post['id'], 'pub_id' => $post['pub_id'], 'cust_id' => (int)$artilce_info['cust_id'], 'stage' => $post['stage'], 'from_dept' => $post['dept_name'], 'to_dept' => '', 'src' => $src, 'counts' => array()));
 		if (!$fe_info || empty($fe_info['mf_id'])) { fml_add('NOTE', 'SKIPPED', '', $src, '', 'No file movement is configured for this customer / journal / department, so no files were copied to the next department.'); }
-		$fef_query = "SELECT move_files,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
+		$fef_query = "SELECT move_files,move_name_rules,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
 		$fef_result = $db->query($fef_query) or ($db->error);
 		if ($fe_info && !empty($fe_info['mf_id']) && $fef_result && $fef_result->num_rows == 0) { fml_add('NOTE', 'SKIPPED', '', $src, '', 'A file movement exists for this customer / journal / department, but it has no destination for stage ' . $cur_stage . ', so no files were copied to the next department.'); }
 		while($fef_info = $fef_result->fetch_assoc())
@@ -1342,6 +1341,7 @@ window.location.href = '".$_COOKIE['set_url']."/allocatedarticles';
 			if($fef_info['move_files']!='')
 			{
 				$accept_files_list = explode("|",$fef_info["move_files"]);
+		$name_rules = mfn_parse_rules($fef_info["move_name_rules"]);   /* per-extension file naming rules; an extension without one moves every file */
 				if(count($accept_files_list)>0)
 				{
 					if(!is_dir($dest))
@@ -1350,7 +1350,7 @@ window.location.href = '".$_COOKIE['set_url']."/allocatedarticles';
 						error_clear_last();
 						if (!@mkdir($dest, 0777, true)) { fml_add('NOTE', 'FAILED', '', $src, $dest, 'The destination folder could not be created: ' . fml_why('permission denied or the path is invalid')); }
 					}
-					rcopy($src, $dest, $accept_files_list, $suffix, $artilce_info['cust_id'], $post['pub_id']);
+					rcopy($src, $dest, $accept_files_list, $suffix, $artilce_info['cust_id'], $post['pub_id'], $name_rules);
 					if (is_dir($src) && fml_count('MOVED') + fml_count('SKIPPED') + fml_count('FAILED') == 0) { fml_add('NOTE', 'SKIPPED', '', $src, $dest, 'No file with the configured type(s) (' . implode(', ', array_map('trim', $accept_files_list)) . ') was found in the source folder.'); }
 				}
 				

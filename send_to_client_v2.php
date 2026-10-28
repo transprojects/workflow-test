@@ -78,6 +78,7 @@ function sc_file_info_one($dir, $n, $hash = false) {
 	return $info;
 }
 /* Move Files configuration into the department the article is in now: ext => [source depts], plus what the folder holds */
+require_once __DIR__ . '/includes/move_naming.php';
 function sc_move_config($db, $a, $dir) {
 	$exts = array();
 	$stage = preg_replace('/[0-9]+/', '', $a['stage']);
@@ -86,16 +87,17 @@ function sc_move_config($db, $a, $dir) {
 		$r = $db->query("SELECT wf_code FROM adm_workflow_master WHERE wf_id = " . (int)$a['wf_id']);
 		if ($r && ($w = $r->fetch_assoc())) { $wf = array_map('intval', explode(',', $w['wf_code'])); }
 	}
-	$r = $db->query("SELECT f.dept_id AS src_id, m.dept_name AS src_name, d.move_files FROM inw_move_files f
+	$r = $db->query("SELECT f.dept_id AS src_id, m.dept_name AS src_name, d.move_files, d.move_name_rules FROM inw_move_files f
 		JOIN inw_move_files_dept_wise d ON d.mf_id = f.mf_id
 		LEFT JOIN adm_dept_master m ON m.dept_code = f.dept_id
 		WHERE f.cust_id = " . (int)$a['cust_id'] . " AND f.j_id = " . (int)$a['j_id'] . "
 		AND d.dept_id = " . (int)$a['department_id'] . " AND d.stage = '" . $db->real_escape_string($stage) . "' AND d.move_files <> ''");
-	$configured = false;
+	$configured = false; $lists = array();
 	while ($r && ($row = $r->fetch_assoc())) {
 		if ((int)$row['src_id'] === (int)$a['department_id']) { continue; }
 		if ($wf !== null && !in_array((int)$row['src_id'], $wf, true)) { continue; }
 		$configured = true;
+		mfn_add_to_lists($lists, $row['move_files'], $row['move_name_rules']);   /* naming rule of each source row, per extension */
 		foreach (explode('|', $row['move_files']) as $e) {
 			$e = strtolower(trim($e, " .\t"));
 			if ($e !== '') { $exts[$e][$row['src_name']] = true; }
@@ -106,10 +108,10 @@ function sc_move_config($db, $a, $dir) {
 		foreach (new DirectoryIterator($dir) as $f) {
 			if (!$f->isFile()) { continue; }
 			$x = strtolower($f->getExtension());
-			if (isset($exts[$x])) { $have[$x][] = $f->getFilename(); } else { $other[] = $f->getFilename(); }
+			if (isset($exts[$x]) && mfn_any_allowed($f->getFilename(), $lists, $a['pub_id'])) { $have[$x][] = $f->getFilename(); } else { $other[] = $f->getFilename(); }
 		}
 	}
-	return array('configured' => $configured, 'exts' => $exts, 'have' => $have, 'other' => $other);
+	return array('configured' => $configured, 'exts' => $exts, 'have' => $have, 'other' => $other, 'lists' => $lists);
 }
 
 /* ---------- dispatch report e-mail: one mail per dispatch from the new page (who, what, to whom, which files and what is inside them, how it ended) ---------- */
@@ -2045,7 +2047,7 @@ Note:- Add the Email IDs with comma separated. </div>
                                                                                 if ($mf_auto !== null) {
                                                                                     $mf_x = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
                                                                                     $mf_tick = in_array($mf_x, $mf_auto, true) && !preg_match('/-ori\.pdf$/i', $filename)
-                                                                                        && !($app_res['cust_id'] == 82 && strtolower($filename) !== strtolower($app_res['pub_id'] . '.' . $mf_x));   /* customer 82: only <article id>.<ext> moves */
+                                                                                        && mfn_any_allowed($filename, $mf_pre['lists'], $app_res['pub_id']);   /* the Move Files naming rule of this extension */
                                                                                     if (!$mf_tick) { continue; }   /* not delivered: not listed, not sent */
                                                                                     $mf_shown++;
                                                                                 }
@@ -2056,7 +2058,7 @@ Note:- Add the Email IDs with comma separated. </div>
                                                                                         if ($mf_auto !== null) {
                                                                                             $mf_x = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
                                                                                             $mf_tick = in_array($mf_x, $mf_auto, true) && !preg_match('/-ori\.pdf$/i', $filename)
-                                                                                                && !($app_res['cust_id'] == 82 && strtolower($filename) !== strtolower($app_res['pub_id'] . '.' . $mf_x));   /* customer 82: only <article id>.<ext> moves */
+                                                                                                && mfn_any_allowed($filename, $mf_pre['lists'], $app_res['pub_id']);   /* the Move Files naming rule of this extension */
                                                                                             ?>
                                                                                             <input type="hidden" name="attach_files[]" class="sc-sendfile" data-size="<?php echo $fsize; ?>" value="<?php echo htmlspecialchars($filename, ENT_QUOTES); ?>" /><i class="fa fa-check-circle" style="color:#2e8b57;margin-right:4px"></i>
                                                                                             <?php
@@ -2284,7 +2286,7 @@ Note:- Add the Email IDs with comma separated. </div>
 						<b>.<?php echo htmlspecialchars($mf_x); ?></b>
 						<span class="text-muted">(from <?php echo htmlspecialchars(implode(', ', array_keys($mf_from))); ?>)</span>
 						<?php if ($mf_ok) { echo ' - ' . htmlspecialchars(implode(', ', $mf_have[$mf_x])); } else { ?>
-							<span style="color:#c0392b"> - not found in the <?php echo htmlspecialchars($pdept_res['dept_name']); ?> folder</span>
+							<span style="color:#c0392b"> - not found in the <?php echo htmlspecialchars($pdept_res['dept_name']); ?> folder<?php $mf_pats = array_filter(isset($mf['lists'][$mf_x]) ? $mf['lists'][$mf_x] : array()); if ($mf_pats) { echo ' (name must match: ' . htmlspecialchars(implode(' / ', $mf_pats)) . ')'; } ?></span>
 						<?php } ?>
 					</div>
 					<?php } ?>
