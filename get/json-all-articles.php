@@ -331,7 +331,12 @@ else
 }
 if(!empty($articles['aq_status'])){  $aq_status='|<span class="label label-sm label bg-secondary text-white">'.$articles['aq_status'].'</span>'; } 
 
-	if($articles['user_working_status']=='<span class="label label-sm label-success">Client Review</span>' && $articles['department_id']=='0')
+	if(trim($articles['status'])=='Client Review')
+{
+		/* inw_inward_dtl.status is authoritative: a stale working-status label / old transaction must not hide Client Review */
+		$current_status='<label class="label label-success ams_label">Client Review</label>';
+}
+elseif($articles['user_working_status']=='<span class="label label-sm label-success">Client Review</span>' && $articles['department_id']=='0')
 {
 		
 				$current_status='<label class="label label-success ams_label">Client Review</label>';	
@@ -350,7 +355,7 @@ else
 
 /* status from the latest inw_transactions row, not the stored label */
 require_once __DIR__ . '/../includes/tx_status.php';
-$current_status = tx_status_label($articles['id'], $articles['stage'], $current_status, $articles['department_id']);
+if(trim($articles['status'])!='Client Review') { $current_status = tx_status_label($articles['id'], $articles['stage'], $current_status, $articles['department_id']); }
 			$instru='<a class="btn btn-sm" style="text-decoration:none;color:red;cursor:pointer;border: 1px solid red;font-size:0.85em;width: fit-content" data-bs-toggle="modal" data-bs-target="#exampleModal" 
 			onclick="return timepopup('.$articles['id'].');">Click Here</a>';
 
