@@ -6275,12 +6275,14 @@ $("#Author_Validaion").click(function () {
     $(document).on('click', '.sw-mf-report', function (e) {
       e.preventDefault();
       var $b = $(this); if ($b.hasClass('busy')) { return; }
-      $b.addClass('busy').css('opacity', .6);
+      var orig = $b.html();
+      $b.addClass('busy').css('opacity', .75).html('<i class="fa fa-spinner fa-spin"></i> Sending report&hellip;');
+      $b.after('<div class="sw-mf-wait" style="margin-top:8px;font-size:12.5px;color:#7a5a12;"><i class="fa fa-circle-o-notch fa-spin"></i> Please wait &ndash; the report is being e-mailed to the admin and the department. This can take a few seconds.</div>');
       $.ajax({ url: location.href.split('#')[0], type: 'POST', dataType: 'json', cache: false, global: false, data: { sw_mf_alert: 1 } }).done(function (r) {
         alertBox(r && r.ok ? 'success' : 'error', r && r.ok ? (r.already ? 'Already reported' : 'Admin informed') : 'Not reported', (r && r.message) || 'Unknown response.');
         if (r && r.ok) { $b.replaceWith('<span class="sw-mf-link" style="background:#1e9e61;box-shadow:none;cursor:default;"><i class="fa fa-check"></i> Reported to admin</span>'); }
       }).fail(function () { alertBox('error', 'Not reported', 'The request failed. Please tell the admin directly.'); })
-        .always(function () { $b.removeClass('busy').css('opacity', ''); });
+        .always(function () { $('.sw-mf-wait').remove(); if ($b.closest('body').length) { $b.removeClass('busy').css('opacity', '').html(orig); } });
     });
     function renderFiles(r) {
       $('#sw-files').remove();
