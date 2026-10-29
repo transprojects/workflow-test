@@ -118,6 +118,60 @@ function sw_switch_save($db, $to, $cc, $bcc)
 	return (bool)$db->query("UPDATE wf_settings SET sw_switch_to = '".$to."', sw_switch_cc = '".$cc."', sw_switch_bcc = '".$bcc."' ORDER BY set_id ASC LIMIT 1");
 }
 
+/* ---- Department master: department e-mail + department managers (users.id list) ----
+   Used for department-wise notifications (e.g. "file movement not configured" is also mailed to the CURRENT department and its managers). */
+function sw_dept_ensure($db)
+{
+	static $done = false;
+	if ($done) { return; }
+	$done = true;
+	try {
+		$r = $db->query("SHOW COLUMNS FROM adm_dept_master LIKE 'dept_email'");
+		if ($r && $r->num_rows == 0) {
+			$db->query("ALTER TABLE adm_dept_master ADD COLUMN dept_email VARCHAR(255) NULL, ADD COLUMN manager_ids VARCHAR(255) NULL");
+			foreach (array(16 => 'inward@transforma.in', 1 => 'ananthi@transforma.in', 5 => 'manikandan@transforma.in', 10 => 'gani@transforma.in', 14 => 'journalqc@transforma.in', 9 => 'art@transforma.in') as $code => $mail) {
+				$db->query("UPDATE adm_dept_master SET dept_email = '" . $mail . "' WHERE dept_code = " . (int)$code . " AND (dept_email IS NULL OR dept_email = '')");
+			}
+		}
+	} catch (Exception $e) { /* callers cope with missing columns (no department recipients) */ }
+}
+
+/* array('name' => dept name, 'emails' => [department e-mail(s)], 'managers' => [array('id','name','email')]) */
+function sw_dept_recipients($db, $dept_code)
+{
+	$out = array('name' => '', 'emails' => array(), 'managers' => array());
+	try {
+		sw_dept_ensure($db);
+		$r = $db->query("SELECT dept_name, dept_email, manager_ids FROM adm_dept_master WHERE dept_code = " . (int)$dept_code);
+		$d = $r ? $r->fetch_assoc() : null;
+		if (!$d) { return $out; }
+		$out['name'] = (string)$d['dept_name'];
+		$p = sw_switch_parse_list($d['dept_email']);
+		$out['emails'] = $p['valid'];
+		$ids = array_filter(array_map('intval', explode(',', (string)$d['manager_ids'])));
+		if ($ids) {
+			$u = $db->query("SELECT id, full_name, user_email FROM users WHERE id IN (" . implode(',', $ids) . ") AND banned = 0");
+			while ($u && ($x = $u->fetch_assoc())) {
+				if (filter_var(trim($x['user_email']), FILTER_VALIDATE_EMAIL)) { $out['managers'][] = array('id' => (int)$x['id'], 'name' => (string)$x['full_name'], 'email' => strtolower(trim($x['user_email']))); }
+			}
+		}
+	} catch (Exception $e) { /* no department recipients */ }
+	return $out;
+}
+
+/* <option>s of the users that can be picked as department managers: the department's own users first, then everybody else */
+function sw_dept_manager_options($db, $dept_code, $selected)
+{
+	$sel = array_filter(array_map('intval', explode(',', (string)$selected)));
+	$own = ''; $rest = '';
+	$u = $db->query("SELECT id, full_name, user_email, department_id, access_other_depts FROM users WHERE banned = 0 AND (approved = 1 OR id IN (" . ($sel ? implode(',', $sel) : '0') . ")) ORDER BY full_name ASC");
+	while ($u && ($x = $u->fetch_assoc())) {
+		$in = $dept_code > 0 && ((int)$x['department_id'] === (int)$dept_code || in_array((string)$dept_code, explode(',', (string)$x['access_other_depts'])));
+		$o = '<option value="' . (int)$x['id'] . '"' . (in_array((int)$x['id'], $sel) ? ' selected' : '') . '>' . htmlspecialchars(trim($x['full_name']) . ($x['user_email'] !== '' ? ' (' . $x['user_email'] . ')' : '')) . '</option>';
+		if ($in) { $own .= $o; } else { $rest .= $o; }
+	}
+	return ($own !== '' ? '<optgroup label="Users of this department">' . $own . '</optgroup>' : '') . '<optgroup label="Other users">' . $rest . '</optgroup>';
+}
 /* ---- attachments (screenshots etc.) sent along with the reason ---- */
 define('SW_SWITCH_MAX_FILES', 5);
 define('SW_SWITCH_MAX_BYTES', 5 * 1024 * 1024);   /* per file */

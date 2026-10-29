@@ -1,5 +1,6 @@
 <?php include "includes/includes.php";
 include_once 'includes/list_ui.php';
+require_once __DIR__.'/sw_switch_lib.php'; sw_dept_ensure($db);   /* department e-mail / managers columns */
 $id = isset($_REQUEST['del']) ? (int)$_REQUEST['del'] : 0;   /* used by the dependency checks */
 lu_delete($db, 'adm_dept_master', 'dept_code', 'Department', array('auto:dept_code,dept_id,department_id', array("SELECT COUNT(*) FROM users WHERE department_id = $id", 'employee(s)')), 'managedepartments');
 ?>
@@ -58,6 +59,8 @@ lu_delete($db, 'adm_dept_master', 'dept_code', 'Department', array('auto:dept_co
 												 <th>Department Code</th>
 												 <th> <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>  Created On</th>
 												 <th>Parent Department</th>
+												 <th>Department E-mail</th>
+												 <th>Managers</th>
                      						    <th>Action</th>
 											</tr>
 										</thead>
@@ -121,13 +124,15 @@ lu_delete($db, 'adm_dept_master', 'dept_code', 'Department', array('auto:dept_co
 				},
 
        
-				"aaSorting": [[4, 'desc']],
+				"aaSorting": [[6, 'desc']],
 				"columns": [
 					{ "data": "0" },
 					{ "data": "1" },
 					{ "data": "2" },
 					{ "data": "3" },
-					{ "data": "4" }
+					{ "data": "4" },
+					{ "data": "5" },
+					{ "data": "6" }
 				],
         "initComplete": function(settings, json) {
         // Hide the loader once the DataTable is initialized
@@ -137,7 +142,7 @@ lu_delete($db, 'adm_dept_master', 'dept_code', 'Department', array('auto:dept_co
 					 "<'row'<'col-sm-12'tr>>" +
 					 "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'p>>",
 				 "columnDefs": [
-					{ "orderable": false, "targets": 4 }
+					{ "orderable": false, "targets": [5, 6] }
 					//{ "orderable": false, "targets": 9 }
 				],
 				dom: 'Blfr<"table-wrapper"t>ip',

@@ -11,7 +11,7 @@ $sSearch = $_REQUEST['sSearch'];
 $col = $_REQUEST['iSortCol_0'];
 $gSearch="";
 
-$arr = array(0 => 'dept_name', 1 => 'dept_sn', 2 => 'created_dt', 3 => 'parent_id', 4 => 'dept_code');
+$arr = array(0 => 'dept_name', 1 => 'dept_sn', 2 => 'created_dt', 3 => 'parent_id', 4 => 'dept_email', 5 => 'manager_ids', 6 => 'dept_code');
 
 $sort_by = $arr[$col];
 $sort_type = $_REQUEST['sSortDir_0'];
@@ -72,12 +72,21 @@ if (isset($data) && is_array($data)) {
 		}
 
 
+		$mgr_names = array();
+		$mids = array_filter(array_map('intval', explode(',', (string)$department['manager_ids'])));
+		if ($mids) {
+			$mr = $db_handle->runBaseQuery("SELECT full_name FROM users WHERE id IN (".implode(',', $mids).") ORDER BY full_name");
+			if ($mr) { foreach ($mr as $m) { $mgr_names[] = htmlspecialchars(trim($m['full_name'])); } }
+		}
+
 		$rec['aaData'][$k] = array(
 			0 => $department['dept_name'],
 			1 => $department['dept_sn'],
 			2=> $department['created_dt'],
 			3 => $parent_name,
-			4 => '<div class="hidden-sm hidden-xs action-buttons">
+			4 => htmlspecialchars((string)$department['dept_email']),
+			5 => implode(', ', $mgr_names),
+			6 => '<div class="hidden-sm hidden-xs action-buttons">
 		  <a title="Edit Article" class="btn btn-xs btn-warning" href="'.$_COOKIE['set_url'].'/edit-department/'.$department['dept_code'].'">
 		   <i class="ace-icon fa fa-pencil bigger-120"></i>
 		    </a> <button data-delete="'.$department['dept_code'].'" class="btn btn-danger demo4   delete-article" type="button"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>

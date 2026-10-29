@@ -1,6 +1,7 @@
 <?php include "includes/includes.php";?>
 <?php require_once __DIR__.'/includes/form_ui.php'; ?>
 <?php include_once "includes/change_log_mail.php";?>
+<?php require_once __DIR__.'/sw_switch_lib.php'; sw_dept_ensure($db); ?>
 <?php
 if(isset($_POST['action']) && $_POST['action']=='update')
 {
@@ -12,12 +13,14 @@ if(isset($_POST['action']) && $_POST['action']=='update')
 	$res_old_d = $db->query("SELECT * FROM adm_dept_master WHERE dept_code = ".$log_dept_code);
 	$old_d = ($res_old_d && $res_old_d->num_rows > 0) ? $res_old_d->fetch_assoc() : array();
 
-	$update_query="UPDATE adm_dept_master SET `dept_name` ='". $post['dept_name']."',dept_sn ='". $post['dept_sn']."',parent_id ='". $post['parent_id']."',`stage_order` ='". $post['stage_order']."',`accept_files` ='". $post['accept_files']."' WHERE dept_code = ".$post['id']." ";	
+	$post['manager_ids'] = (isset($_POST['manager_ids']) && is_array($_POST['manager_ids'])) ? implode(',', array_filter(array_map('intval', $_POST['manager_ids']))) : '';
+	$post['dept_email'] = implode(', ', sw_switch_parse_list($post['dept_email'])['valid']);
+	$update_query="UPDATE adm_dept_master SET `dept_email` ='".$db->real_escape_string($post['dept_email'])."',`manager_ids` ='".$post['manager_ids']."',`dept_name` ='". $post['dept_name']."',dept_sn ='". $post['dept_sn']."',parent_id ='". $post['parent_id']."',`stage_order` ='". $post['stage_order']."',`accept_files` ='". $post['accept_files']."' WHERE dept_code = ".$post['id']." ";	
 	if($db->query($update_query))
 	{
 		/// Email the change log (text attachment); a mail failure must not block the save ///
 		try {
-			$dept_fields = array('dept_name', 'dept_sn', 'parent_id', 'stage_order', 'accept_files');
+			$dept_fields = array('dept_name', 'dept_sn', 'parent_id', 'stage_order', 'accept_files', 'dept_email', 'manager_ids');
 			$d_log = "[Department changes]\r\n";
 			$d_changes = 0;
 			foreach ($dept_fields as $f) {
@@ -236,6 +239,18 @@ $sql = "SELECT wf_code FROM adm_workflow_master";
                  <input type="text" class="form-control" name="stage_order" id="stage_order" placeholder="Enter department order" value="<?php echo $app_res['stage_order']; ?>" required>
                 </input>
                 </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                 <label class="mb-2">Department E-mail</label>
+                 <input type="text" class="form-control" name="dept_email" id="dept_email" placeholder="dept@transforma.in (several: separate with comma)" value="<?php echo htmlspecialchars($app_res['dept_email']); ?>">
+                </div>
+                <div class="col-12 col-sm-6 col-lg-8">
+                 <label class="mb-2">Department Managers (reporting)</label>
+                 <select class="form-select manager_drop" multiple name="manager_ids[]" id="manager_ids" data-placeholder="Select managers" style="width:100%">
+                 <option value="all">Select All</option>
+                 <?php echo sw_dept_manager_options($db, (int)$app_res['dept_code'], $app_res['manager_ids']); ?>
+                 </select>
+                 <small style="color:#6b7a89;">The department e-mail is the To address and the managers are CC'd on department-wise notifications, e.g. "file movement not configured" for an article that is in this department.</small>
+                </div>
 				</div>
     </div>
                 <div class="meta_nxtbtn container-fluid mt-5 mb-5" >
@@ -263,6 +278,77 @@ $sql = "SELECT wf_code FROM adm_workflow_master";
  <!-- Date picker functionality -->
 
  <script src="assets/js/select2/select2.min.js"></script>
+<style>
+.mgr-dd{position:relative;width:100%}
+.mgr-box{min-height:44px;border:1px solid #cfd8e3;border-radius:10px;background:#fbfcfe;padding:4px 30px 4px 8px;cursor:pointer;display:flex;flex-wrap:wrap;gap:4px;align-items:center;position:relative}
+.mgr-box:after{content:"";position:absolute;right:12px;top:50%;margin-top:-3px;border:5px solid transparent;border-top-color:#667;}
+.mgr-box.open{border-color:#1b6ca8}
+.mgr-ph{color:#8793a0;font-size:14px}
+.mgr-tag{background:#eaf2fa;border:1px solid #c5d8ea;color:#14304a;border-radius:8px;padding:2px 6px 2px 8px;font-size:13px;display:inline-flex;gap:6px;align-items:center}
+.mgr-tag b{cursor:pointer;font-weight:700;color:#5b7a95}
+.mgr-panel{display:none;position:absolute;z-index:1000;left:0;right:0;top:100%;margin-top:4px;background:#fff;border:1px solid #cfd8e3;border-radius:10px;box-shadow:0 8px 24px rgba(20,48,74,.15);overflow:hidden}
+.mgr-panel.open{display:block}
+.mgr-panel input.mgr-search{width:100%;border:0;border-bottom:1px solid #e3e9f0;padding:9px 12px;outline:0;font-size:14px}
+.mgr-list{max-height:260px;overflow-y:auto}
+.mgr-grp{padding:6px 12px;font-size:11px;font-weight:700;text-transform:uppercase;color:#667b8f;background:#f4f7fa}
+.mgr-opt{padding:8px 12px;font-size:14px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.mgr-opt:hover{background:#eef4fa}
+.mgr-opt.all{background:#1b2f4b;color:#fff;font-weight:700}
+.mgr-opt.all:hover{background:#243b5c}
+</style>
+<script>
+(function () {
+  var sel = document.getElementById("manager_ids");
+  if (!sel) { return; }
+  sel.style.display = "none";
+  var wrap = document.createElement("div"); wrap.className = "mgr-dd";
+  var box = document.createElement("div"); box.className = "mgr-box";
+  var panel = document.createElement("div"); panel.className = "mgr-panel";
+  var search = document.createElement("input"); search.type = "text"; search.className = "mgr-search"; search.placeholder = "Search";
+  var list = document.createElement("div"); list.className = "mgr-list";
+  panel.appendChild(search); panel.appendChild(list);
+  wrap.appendChild(box); wrap.appendChild(panel);
+  sel.parentNode.insertBefore(wrap, sel.nextSibling);
+  var opts = [].slice.call(sel.options).filter(function (o) { return o.value !== "all"; });
+
+  function renderBox() {
+    box.innerHTML = "";
+    var chosen = opts.filter(function (o) { return o.selected; });
+    if (!chosen.length) { box.innerHTML = '<span class="mgr-ph">Select managers</span>'; return; }
+    chosen.forEach(function (o) {
+      var t = document.createElement("span"); t.className = "mgr-tag";
+      t.appendChild(document.createTextNode(o.text.replace(/\s*\(.*\)$/, "")));
+      var x = document.createElement("b"); x.textContent = "\u00d7";
+      x.onclick = function (e) { e.stopPropagation(); o.selected = false; renderBox(); renderList(); };
+      t.appendChild(x); box.appendChild(t);
+    });
+  }
+  function row(label, cls, checked, fn) {
+    var d = document.createElement("div"); d.className = "mgr-opt " + cls;
+    var c = document.createElement("input"); c.type = "checkbox"; c.checked = checked;
+    d.appendChild(c); d.appendChild(document.createTextNode(label));
+    d.onclick = function (e) { fn(); renderBox(); renderList(); };
+    return d;
+  }
+  function renderList() {
+    var q = search.value.toLowerCase(), top = list.scrollTop, lastGrp = null;
+    list.innerHTML = "";
+    var all = opts.every(function (o) { return o.selected; });
+    list.appendChild(row("Select All", "all", all && opts.length > 0, function () { opts.forEach(function (o) { o.selected = !all; }); }));
+    opts.forEach(function (o) {
+      if (q && o.text.toLowerCase().indexOf(q) === -1) { return; }
+      var g = o.parentNode.tagName === "OPTGROUP" ? o.parentNode.label : "";
+      if (g !== lastGrp) { lastGrp = g; if (g) { var h = document.createElement("div"); h.className = "mgr-grp"; h.textContent = g; list.appendChild(h); } }
+      list.appendChild(row(o.text, "", o.selected, function () { o.selected = !o.selected; }));
+    });
+    list.scrollTop = top;
+  }
+  box.onclick = function () { var o = !panel.classList.contains("open"); panel.classList.toggle("open", o); box.classList.toggle("open", o); if (o) { search.value = ""; renderList(); search.focus(); } };
+  search.oninput = renderList;
+  document.addEventListener("click", function (e) { if (!wrap.contains(e.target)) { panel.classList.remove("open"); box.classList.remove("open"); } });
+  renderBox();
+})();
+</script>
    
    <script>
      $(".customer_drop").select2({

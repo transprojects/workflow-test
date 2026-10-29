@@ -394,13 +394,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sw_mf_alert'])) {
 			: 'No file movement record exists for this customer / journal / department.';
 		$result = 'No file will be copied to the next department when the user submits this article as Completed; the next department would start without the files.';
 		$uname = isset($_COOKIE['full_name']) ? $_COOKIE['full_name'] : ''; $uid = isset($_COOKIE['user_id']) ? (int)$_COOKIE['user_id'] : 0;
+		$dr = sw_dept_recipients($db, $a['department_id']);   /* the CURRENT department: its e-mail (To) and its managers (CC) */
+		$dr_txt = implode(', ', array_merge($dr['emails'], array_map(function ($m) { return $m['name'] . ' <' . $m['email'] . '>'; }, $dr['managers'])));
 		$tr = function ($k, $v) { return '<tr><td style="padding:4px 14px 4px 0;color:#5b6b7b;vertical-align:top;white-space:nowrap;"><b>' . $k . '</b></td><td style="padding:4px 0;">' . $v . '</td></tr>'; };
 		$body = '<div style="font-family:Segoe UI,Arial,sans-serif;font-size:14px;color:#22303f;"><p>Hi Team,</p>'
 			. '<p><b>' . $h($uname) . '</b> opened <b>' . $h($a['pub_id']) . '</b> in Start Work and the page reports that <b>file movement is not configured</b>. Please set up the file movement for this customer / journal / department and stage.</p>'
 			. '<table cellpadding="0" cellspacing="0" border="0" style="font-size:14px;">'
 			. $tr('Article', $h($a['pub_id']) . ' (ID ' . (int)$a['id'] . ')') . $tr('Customer', $h($cust)) . $tr('Journal', $h($jcode !== '' ? $jcode : $jname) . ($jcode !== '' && $jname !== '' ? ' - ' . $h($jname) : ''))
 			. $tr('Stage', $h($a['stage'])) . $tr('Current department', $h($dept)) . $tr('Workflow', $h(isset($wf['wf_name']) ? $wf['wf_name'] : '-') . ($wf_order !== '' ? '<br><span style="color:#5b6b7b;">' . $h($wf_order) . '</span>' : ''))
-			. $tr('What happened', $what) . $tr('Effect', $result) . $tr('Reported by', $h($uname) . ' (ID ' . $uid . ', ' . $h($_SERVER['REMOTE_ADDR']) . ')') . $tr('Reported on', date('d-M-Y h:i A'))
+			. $tr('What happened', $what) . $tr('Effect', $result) . $tr('Reported by', $h($uname) . ' (ID ' . $uid . ', ' . $h($_SERVER['REMOTE_ADDR']) . ')') . $tr('Reported on', date('d-M-Y h:i A')) . ($dr_txt !== '' ? $tr('Department notified', $h($dept) . ': ' . $h($dr_txt)) : '')
 			. '</table>'
 			. '<h3 style="margin:18px 0 6px;font-size:15px;color:#14304a;">Department-wise file movement for stage ' . $h($stage_key) . ' (from ' . $h($dept) . ')</h3>'
 			. ($rows !== '' ? '<table cellpadding="0" cellspacing="0" border="0" style="font-size:13.5px;"><tr style="color:#5b6b7b;"><td style="padding:4px 12px 4px 0;"><b>Department</b></td><td style="padding:4px 12px 4px 0;"><b>Files to move</b></td><td style="padding:4px 0;"><b>Folder</b></td></tr>' . $rows . '</table>' : '<p style="color:#c0392b;">No workflow departments could be read for this article.</p>')
@@ -412,6 +414,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sw_mf_alert'])) {
 		$mc = sw_mail_get($db, 'filemove');
 		if ($mc['to'] === '' && $mc['cc'] === '' && $mc['bcc'] === '') { $mc = sw_switch_get($db); }   /* nothing saved for this report yet: the Start Work switch addresses */
 		$to = sw_switch_parse_list($mc['to']); $cc = sw_switch_parse_list($mc['cc']); $bcc = sw_switch_parse_list($mc['bcc']);
+		$to['valid'] = array_values(array_unique(array_merge($to['valid'], $dr['emails'])));   /* department-wise: current department e-mail */
+		$cc['valid'] = array_values(array_unique(array_merge($cc['valid'], array_map(function ($m) { return $m['email']; }, $dr['managers']))));   /* ... and its managers */
 		if (!$to['valid'] && !$cc['valid'] && !$bcc['valid']) { $mail = 'Not sent - no recipients configured'; }
 		else {
 			require_once __DIR__ . '/email-functions.php';
@@ -429,7 +433,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sw_mf_alert'])) {
 		$db->query("INSERT INTO `inw_file_move_log` (batch_id, inw_id, pub_id, cust_id, stage, from_dept, to_dept, kind, result, file_name, reason, user_id, user_name, created_on)
 			VALUES ('" . $e('CFG-' . date('YmdHis') . '-' . substr(md5(uniqid('', true)), 0, 6)) . "', " . (int)$a['id'] . ", '" . $e($a['pub_id']) . "', " . (int)$a['cust_id'] . ", '" . $e($a['stage']) . "', '" . $e($dept) . "', '" . $e(substr(implode(', ', $wf_names), 0, 120)) . "',
 			'CONFIG', '" . ($mail === 'Sent' ? 'ALERT' : 'ALERTFAIL') . "', '', '" . $e($reason) . "', " . $uid . ", '" . $e($uname) . "', NOW())");
-		echo json_encode(array('ok' => ($mail === 'Sent'), 'mail' => $mail, 'message' => $mail === 'Sent' ? 'The admin has been informed by e-mail.' : 'The report was logged, but the e-mail could not be sent (' . $mail . '). Please tell the admin directly.'));
+		echo json_encode(array('ok' => ($mail === 'Sent'), 'mail' => $mail, 'message' => $mail === 'Sent' ? ($dr_txt !== '' ? 'The admin and the ' . $dept . ' department have been informed by e-mail.' : 'The admin has been informed by e-mail.') : 'The report was logged, but the e-mail could not be sent (' . $mail . '). Please tell the admin directly.'));
 	} catch (Throwable $ex) { echo json_encode(array('ok' => false, 'message' => 'Could not send the report: ' . substr($ex->getMessage(), 0, 150))); }
 	exit;
 }
