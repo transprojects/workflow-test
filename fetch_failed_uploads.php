@@ -107,6 +107,11 @@ if ($row['status'] == 'FAILED' || $row['mail_send'] == 'FAILED') {
         '.$buttonLabel.'
     </button>
 ';
+    /* the upload itself is fine / done but the client mail failed: offer to send just the mail again */
+    if ($row['mail_send'] == 'FAILED' && $row['status'] != 'YET_TO_UPLOAD') {
+        $nestedData['action'] .= ' <button class="btn btn-sm btn-warning send-mail" data-id="'.$row['id'].'" title="Send the client mail again"><i class="fa fa-envelope"></i> Send Mail</button>';
+        if ($row['status'] != 'FAILED') { $status = '<span class="badge bg-danger">MAIL FAILED</span>'; $nestedData['action'] = str_replace('btn-success retry-upload', 'btn-secondary retry-upload', $nestedData['action']); }
+    }
 
     $nestedData['customer'] = $row['cust_name'] ?? '-';
     $nestedData['journal'] = $row['j_name'] ?? '-';

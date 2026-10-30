@@ -645,6 +645,24 @@ function populateSelecte(elementId, data) {
                 selectElement.append($("<option>").text(item.j_code).val(item.j_id));
             });
         }
+
+/* Send Mail: re-send the client notification of an upload whose mail failed */
+$(document).on('click', '.send-mail', function () {
+    let button = $(this), id = button.data('id');
+    Swal.fire({ title: 'Send the mail?', text: 'The client notification for this article will be sent again.', icon: 'question', showCancelButton: true, confirmButtonText: 'Yes, send it' }).then((result) => {
+        if (!result.isConfirmed) { return; }
+        button.prop('disabled', true);
+        $.ajax({
+            url: 'send_failed_mail.php', type: 'POST', dataType: 'json', data: { id: id },
+            success: function (response) {
+                if (response.status === 'success') { Swal.fire({ icon: 'success', title: 'Mail sent', text: response.msg, timer: 2000, showConfirmButton: false }); }
+                else { Swal.fire({ icon: response.status === 'warning' ? 'warning' : 'error', title: response.status === 'warning' ? 'Notice' : 'Mail failed', text: response.msg }); button.prop('disabled', false); }
+                $('#articles').DataTable().ajax.reload();
+            },
+            error: function () { Swal.fire({ icon: 'error', title: 'Server Error', text: 'Unable to process request' }); button.prop('disabled', false); }
+        });
+    });
+});
 </script>
 
   <?php af_foot(); ?>
