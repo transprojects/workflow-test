@@ -3,6 +3,8 @@
 <?php
 include_once "includes/change_log_mail.php";
 require_once __DIR__ . '/includes/move_naming.php';
+require_once __DIR__ . '/includes/mf_cut.php';
+mf_cut_ensure($db);
 
 /**
  * Build the old -> new diff for a Move Files edit and email it via the shared helper.
@@ -101,7 +103,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
 
           $rules_json = mfn_rules_from_post($files_val, isset($_POST['rules'][$stagekey][$deptid_key]) ? $_POST['rules'][$stagekey][$deptid_key] : array());
           $rules_sql  = $rules_json === null ? 'NULL' : "'" . $db->real_escape_string($rules_json) . "'";
-          $insert_query_mov_files = "INSERT INTO `inw_move_files_dept_wise` (`mf_id`, `stage`, `dept_id`,move_files,move_name_rules,move_folders,created_by) VALUES ('" . $post['id'] . "', '" . $stagekey . "', '" . $deptid_key . "', '" . $files_val . "'," . $rules_sql . ",'" . $_POST['folders'][$stagekey][$deptid_key] . "','" . $_COOKIE['user_id'] . "');";
+          $insert_query_mov_files = "INSERT INTO `inw_move_files_dept_wise` (`mf_id`, `stage`, `dept_id`,move_files,move_name_rules,move_folders,cut_move,created_by) VALUES ('" . $post['id'] . "', '" . $stagekey . "', '" . $deptid_key . "', '" . $files_val . "'," . $rules_sql . ",'" . $_POST['folders'][$stagekey][$deptid_key] . "'," . (empty($_POST['cutmove'][$stagekey][$deptid_key]) ? 0 : 1) . ",'" . $_COOKIE['user_id'] . "');";
           $db->query($insert_query_mov_files) or die($db->error);
       }
   }
@@ -342,6 +344,9 @@ if (isset($_REQUEST['id'])) {
                         </div>
                         <div class="col-6 col-lg-4">
                             Folder<input name="folders[<?php echo $id; ?>][<?php echo $row['dept_code']; ?>]" id="form-field-icon-1" type="text" class="form-control" style="height: 30px;" value="<?php echo $move_files_folders[$id][$row['dept_code']]['move_folders']; ?>">
+                        </div>
+                        <div class="col-6 col-lg-4">
+                            <label style="font-weight:normal;margin:0;" title="Move instead of copy: the files and folders of this movement are removed from the source folder once they are in the destination"><input type="checkbox" name="cutmove[<?php echo $id; ?>][<?php echo $row['dept_code']; ?>]" value="1" <?php echo !empty($move_files_folders[$id][$row['dept_code']]['cut_move']) ? 'checked' : ''; ?>> Cut (move, leave no copy)</label>
                         </div>
                     </div>
 				<?php } ?>

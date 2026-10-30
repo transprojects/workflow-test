@@ -3913,6 +3913,7 @@ function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id, 
                             touch($dfn, $dt);
                         }
                         fml_add('FILE', 'MOVED', $new_filename, $sfn, $dfn, '', @filesize($dfn));
+                        mf_cut_source($sfn, $dfn);
                     }
                 }
             }
@@ -3952,6 +3953,7 @@ function frcopy($src, $dest){
 			{ 
 				touch("$dest/" . $f->getFilename(), $dt);
 			}
+			mf_cut_source($f->getRealPath(), "$dest/" . $f->getFilename());
 						
         } else if(!$f->isDot() && $f->isDir()) {
             frcopy($f->getRealPath(), "$dest/$f");
@@ -4369,8 +4371,9 @@ if (!$fe_info || empty($fe_info['mf_id'])) { fml_add('NOTE', 'SKIPPED', '', $src
 
 
 //// According to New configuration we are moving the files /////
+require_once __DIR__ . '/includes/mf_cut.php'; mf_cut_ensure($db);
 $cur_stage = preg_replace('/[0-9]+/', '', $post['stage']);
- $fef_query = "SELECT move_files,move_name_rules,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
+ $fef_query = "SELECT move_files,move_name_rules,move_folders,cut_move,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
 $fef_result = $db->query($fef_query) or ($db->error);
 if ($fe_info && !empty($fe_info['mf_id']) && $fef_result && $fef_result->num_rows == 0) { fml_add('NOTE', 'SKIPPED', '', $src, '', 'A file movement exists for this customer / journal / department, but it has no destination for stage ' . $cur_stage . ', so no files were copied to the next department.'); }
 while($fef_info = $fef_result->fetch_assoc())
@@ -4384,6 +4387,7 @@ while($fef_info = $fef_result->fetch_assoc())
 	elseif (!is_dir($src)) { fml_add('NOTE', 'FAILED', '', $src, '', 'The source folder does not exist, so nothing could be copied.'); }
 	
 	$dest = $_POST['work_dir'].$post['volume_folder']."/".$post['pub_id']."/".$post['stage']."/".$dept_name['dept_name']."/";   // destination folder or file 
+	mf_cut_set(!empty($fef_info['cut_move']));   /* Move Files option Cut: files / folders of this movement are moved, not copied */
 	//mkdir($dest, 0777, true);
 	//echo $dest.'<br>';
 	
@@ -4529,6 +4533,8 @@ while($fef_info = $fef_result->fetch_assoc())
 		
 	}
 	
+	/* Move Files option "Cut" for this destination: files of the listed types leave the current department's folder */
+
 	///////// Moving Folders ///////
 	if($fef_info['move_folders']!='')
 	{
@@ -4562,6 +4568,7 @@ while($fef_info = $fef_result->fetch_assoc())
 	
 	
 		//zip directory check validation //	
+		mf_cut_set(false);
 		$dest_errc = $_POST['work_dir'].$post['volume_folder']."/".$post['pub_id']."/".$post['stage']."/Delivery/";   // destination folder or file 
 		
 		 $dests=$dest_errc.$post['pub_id'].".zip";//exit;

@@ -1201,6 +1201,7 @@ function rcopy($src, $dest, $accept_files_list, $suffix, $customer_id, $pub_id, 
                             touch($dfn, $dt);
                         }
                         fml_add('FILE', 'MOVED', $new_filename, $sfn, $dfn, '', @filesize($dfn));
+                        mf_cut_source($sfn, $dfn);
                     }
                 }
             }
@@ -1331,7 +1332,8 @@ window.location.href = '".$_COOKIE['set_url']."/allocatedarticles';
 		$cur_stage = preg_replace('/[0-9]+/', '', $post['stage']);
 		fml_ctx($db, array('inw_id' => (int)$post['id'], 'pub_id' => $post['pub_id'], 'cust_id' => (int)$artilce_info['cust_id'], 'stage' => $post['stage'], 'from_dept' => $post['dept_name'], 'to_dept' => '', 'src' => $src, 'counts' => array()));
 		if (!$fe_info || empty($fe_info['mf_id'])) { fml_add('NOTE', 'SKIPPED', '', $src, '', 'No file movement is configured for this customer / journal / department, so no files were copied to the next department.'); }
-		$fef_query = "SELECT move_files,move_name_rules,move_folders,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
+		require_once __DIR__ . '/includes/mf_cut.php'; mf_cut_ensure($db);
+		$fef_query = "SELECT move_files,move_name_rules,move_folders,cut_move,dept_id FROM `inw_move_files_dept_wise` WHERE mf_id = '".$fe_info['mf_id']."' AND stage = '".$cur_stage."';";
 		$fef_result = $db->query($fef_query) or ($db->error);
 		if ($fe_info && !empty($fe_info['mf_id']) && $fef_result && $fef_result->num_rows == 0) { fml_add('NOTE', 'SKIPPED', '', $src, '', 'A file movement exists for this customer / journal / department, but it has no destination for stage ' . $cur_stage . ', so no files were copied to the next department.'); }
 		while($fef_info = $fef_result->fetch_assoc())
@@ -1345,6 +1347,7 @@ window.location.href = '".$_COOKIE['set_url']."/allocatedarticles';
 			elseif (!is_dir($src)) { fml_add('NOTE', 'FAILED', '', $src, '', 'The source folder does not exist, so nothing could be copied.'); }
 			
 			$dest = $_POST['work_dir'].$post['volume_folder']."/".$post['pub_id']."/".$post['stage']."/".$dept_name['dept_name']."/";   // 
+				mf_cut_set(!empty($fef_info['cut_move']));   /* Move Files option Cut: files of this movement are moved, not copied */
 			
 			///// Moving Files ////////	
 			if($fef_info['move_files']!='')
@@ -1362,7 +1365,7 @@ window.location.href = '".$_COOKIE['set_url']."/allocatedarticles';
 					rcopy($src, $dest, $accept_files_list, $suffix, $artilce_info['cust_id'], $post['pub_id'], $name_rules);
 					if (is_dir($src) && fml_count('MOVED') + fml_count('SKIPPED') + fml_count('FAILED') == 0) { fml_add('NOTE', 'SKIPPED', '', $src, $dest, 'No file with the configured type(s) (' . implode(', ', array_map('trim', $accept_files_list)) . ') was found in the source folder.'); }
 				}
-				
+				mf_cut_set(false);
 			}
 		}
 	

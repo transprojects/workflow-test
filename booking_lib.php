@@ -244,7 +244,11 @@ function bk_move_files($src, $dest)
 	foreach (new DirectoryIterator($src) as $f) {
 		if ($f->isDot()) { continue; }
 		if ($f->isFile()) { @rename($f->getRealPath(), rtrim($dest, '/\\').'/'.$f->getFilename()); }
-		elseif ($f->isDir() && !in_array($f->getFilename(), $skip, true)) { bk_move_files($f->getRealPath(), rtrim($dest, '/\\').'/'.$f->getFilename()); }
+		elseif ($f->isDir()) {
+			$to = rtrim($dest, '/\\').'/'.$f->getFilename();
+			if (in_array($f->getFilename(), $skip, true)) { if (!is_dir($to)) { @mkdir($to, 0777, true); } }	/* skipped folder: files stay behind, empty folder is created */
+			else { bk_move_files($f->getRealPath(), $to); }
+		}
 	}
 	return true;
 }
