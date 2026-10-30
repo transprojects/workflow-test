@@ -3,7 +3,7 @@
 /* tidy table-like layout for the department rows (Add / Edit Move Files) */
 #accordion .panel-body{padding:4px 2px 10px;}
 #accordion .panel-body > .col-lg-12{max-width:100%;}
-#accordion .mf-head,#accordion .d-md-flex.mf-row:not(.mf-hidden){display:grid !important;grid-template-columns:190px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;margin-bottom:0 !important;padding:7px 10px;border-bottom:1px solid #eef1f5;}
+#accordion .mf-head,#accordion .d-md-flex.mf-row:not(.mf-hidden){display:grid !important;grid-template-columns:190px minmax(0,1fr) minmax(0,1fr) 110px;gap:12px;align-items:center;margin-bottom:0 !important;padding:7px 10px;border-bottom:1px solid #eef1f5;}
 #accordion .mf-head{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6b7785;border-bottom:2px solid #dfe5ec;padding-bottom:9px;}
 #accordion .d-md-flex.mf-row:hover{background:#f7f9fc;}
 #accordion .d-md-flex.mf-row > label{width:auto !important;max-width:none;margin:0;font-size:13px !important;font-weight:600;color:#1f2d3d;text-transform:none !important;}
@@ -13,6 +13,9 @@
 #accordion .d-md-flex.mf-row.mf-filled input.form-control:not(:placeholder-shown){border-color:#9fd8b8;background:#f4fbf7;}
 .mf-toggle-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 10px !important;}
 .mf-toggle-bar .mf-note{font-size:12px;color:#6b7785;}
+/* Cut (move) switch: last column, label only on the next department of the workflow */
+#accordion .mf-cutbox label{font-size:12px;line-height:1.3;font-weight:600;text-transform:none;color:#55657a;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer;}
+#accordion .mf-cutbox.mf-cut-off{visibility:hidden;}
 @media (max-width:767px){#accordion .mf-head{display:none !important;}#accordion .d-md-flex.mf-row{grid-template-columns:1fr;gap:6px;padding:10px 4px;}}
 /* stages as tabs instead of a stacked accordion: one line, pill style */
 #accordion > h3.ui-accordion-header{display:none !important;}
@@ -144,6 +147,15 @@
         .insertAfter($('#dept_id').closest('[class*="col-"]'));
     }
   }
+  /* the Cut switch is offered on the NEXT department of the workflow only (the one the files move to), plus any row that already has it on */
+  function applyNext() {
+    var src = parseInt($('#dept_id').val(), 10);
+    $('#accordion .mf-cutbox').each(function () {
+      var $c = $(this), k = $c.closest('.d-md-flex').data('mf'); if (!k) { return; }
+      var allowed = map[k.stage] || [], i = allowed.indexOf(src), on = $c.find('input:checked').length > 0;
+      $c.toggleClass('mf-cut-off', !(on || !allowed.length || i === -1 || allowed[i + 1] === k.dept));
+    });
+  }
   function stageOf(name) { var m = /^files\[([^\]]+)\]\[(\d+)\]$/.exec(name); return m ? { stage: m[1], dept: parseInt(m[2], 10) } : null; }
   function apply() {
     var j = $('#j_id').val();
@@ -155,7 +167,7 @@
     });
     $.each(rows, function (stage, list) {
       var $panel = list[0].closest('.panel-body'), $bar = $panel.find('.mf-toggle-bar');
-      if (!$panel.find('.mf-head').length) { $panel.find('.col-lg-12').first().prepend('<div class="mf-head"><span>Department</span><span>Files to move (e.g. tex|pdf|zip)</span><span>Folder</span></div>'); }
+      if (!$panel.find('.mf-head').length) { $panel.find('.col-lg-12').first().prepend('<div class="mf-head"><span>Department</span><span>Files to move (e.g. tex|pdf|zip)</span><span>Folder</span><span>Cut</span></div>'); }
       $.each(list, function (i, $r) { $r.addClass('mf-row').toggleClass('mf-filled', $r.find('input[type=text]').filter(function () { return $.trim(this.value) !== ''; }).length > 0); });
       var allowed = map[stage];
       if (!allowed || !allowed.length) {
@@ -201,9 +213,9 @@
   });
   function load() {
     var j = $('#j_id').val();
-    if (!j) { map = {}; apply(); applySelf(); markExisting(); return; }
-    $.getJSON(<?php echo json_encode(rtrim(str_replace(chr(92), '/', dirname($_SERVER['SCRIPT_NAME'])), '/') . '/get_move_stage_depts.php'); ?>, { j_id: j, cust_id: $('#cust_id').val() }, function (d) { map = d || {}; apply(); applySelf(); markExisting(); }).fail(function () { map = {}; apply(); applySelf(); });
+    if (!j) { map = {}; apply(); applySelf(); markExisting(); applyNext(); return; }
+    $.getJSON(<?php echo json_encode(rtrim(str_replace(chr(92), '/', dirname($_SERVER['SCRIPT_NAME'])), '/') . '/get_move_stage_depts.php'); ?>, { j_id: j, cust_id: $('#cust_id').val() }, function (d) { map = d || {}; apply(); applySelf(); markExisting(); applyNext(); }).fail(function () { map = {}; apply(); applySelf(); });
   }
-  $(function () { fitAccordion(); buildTabs(); lockHeader(); $('#dept_id').on('change', function () { apply(); applySelf(); }); setTimeout(load, 300); $('#j_id').on('change', function () { setTimeout(load, 300); }); });
+  $(function () { fitAccordion(); buildTabs(); lockHeader(); $('#dept_id').on('change', function () { apply(); applySelf(); applyNext(); }); setTimeout(load, 300); $('#j_id').on('change', function () { setTimeout(load, 300); }); });
 })(window.jQuery);
 </script>

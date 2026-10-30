@@ -280,8 +280,8 @@ exit; */
                         <div class="col-6 col-lg-4">
                             Folder<input name="folders[<?php echo $id; ?>][<?php echo $row['dept_code']; ?>]" id="form-field-icon-1" type="text" class="form-control" style="height: 30px">
                         </div>
-                        <div class="col-6 col-lg-4">
-                            <label style="font-weight:normal;margin:0;" title="Move instead of copy: the files and folders of this movement are removed from the source folder once they are in the destination"><input type="checkbox" name="cutmove[<?php echo $id; ?>][<?php echo $row['dept_code']; ?>]" value="1"> Cut (move, leave no copy)</label>
+                        <div class="col-6 col-lg-4 mf-cutbox">
+                            <label style="font-weight:normal;margin:0;" title="Move instead of copy: the files and folders of this movement are removed from the source folder once they are in the destination"><input type="checkbox" name="cutmove[<?php echo $id; ?>][<?php echo $row['dept_code']; ?>]" value="1"> Cut (move)</label>
                         </div>
                     </div>
 				<?php } ?>
