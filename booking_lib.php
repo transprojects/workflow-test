@@ -7,7 +7,7 @@ require_once __DIR__.'/sw_switch_lib.php';
 function bk_h($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8'); }
 
 /* folders that stay behind when the previous stage's files are moved (same list rmove() uses) */
-function bk_skip_folders() { return array('Delivery', 'CE', 'PRQC', 'DELIVERY-ELX', 'CE-ELX', 'PRQC-ELX'); }
+function bk_skip_folders() { return array('Delivery', 'CE', 'PRQC', 'DELIVERY-ELX', 'CE-ELX', 'PRQC-ELX', 'XML-ELX', 'XML'); }
 
 function bk_count_files($dir)
 {
