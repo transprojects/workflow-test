@@ -13,7 +13,7 @@
 #accordion .d-md-flex.mf-row.mf-filled input.form-control:not(:placeholder-shown){border-color:#9fd8b8;background:#f4fbf7;}
 .mf-toggle-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 10px !important;}
 .mf-toggle-bar .mf-note{font-size:12px;color:#6b7785;}
-/* Cut (move) switch: last column, label only on the next department of the workflow */
+/* Cut (move) switch: last column, shown once the row has a Files / Folder entry */
 #accordion .mf-cutbox label{font-size:12px;line-height:1.3;font-weight:600;text-transform:none;color:#55657a;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer;}
 #accordion .mf-cutbox.mf-cut-off{visibility:hidden;}
 @media (max-width:767px){#accordion .mf-head{display:none !important;}#accordion .d-md-flex.mf-row{grid-template-columns:1fr;gap:6px;padding:10px 4px;}}
@@ -147,13 +147,12 @@
         .insertAfter($('#dept_id').closest('[class*="col-"]'));
     }
   }
-  /* the Cut switch is offered on the NEXT department of the workflow only (the one the files move to), plus any row that already has it on */
+  /* the Cut switch is offered on a row once something is entered in its Files or Folder box (or it is already on) */
   function applyNext() {
-    var src = parseInt($('#dept_id').val(), 10);
     $('#accordion .mf-cutbox').each(function () {
-      var $c = $(this), k = $c.closest('.d-md-flex').data('mf'); if (!k) { return; }
-      var allowed = map[k.stage] || [], i = allowed.indexOf(src), on = $c.find('input:checked').length > 0;
-      $c.toggleClass('mf-cut-off', !(on || !allowed.length || (i !== -1 && allowed[i + 1] === k.dept)));
+      var $c = $(this), $row = $c.closest('.d-md-flex');
+      var filled = $row.find('input[type=text]').filter(function () { return $.trim(this.value) !== ''; }).length > 0;
+      $c.toggleClass('mf-cut-off', !(filled || $c.find('input:checked').length > 0));
     });
   }
   function stageOf(name) { var m = /^files\[([^\]]+)\]\[(\d+)\]$/.exec(name); return m ? { stage: m[1], dept: parseInt(m[2], 10) } : null; }
@@ -202,7 +201,7 @@
       $b.text(hidden ? 'Show other departments (' + hidden + ')' : 'All departments are in the workflow').prop('disabled', !hidden);
     });
   }
-  $(document).on('input change', '#accordion input[type=text]', function () { syncTabs(); });
+  $(document).on('input change', '#accordion input[type=text], #accordion .mf-cutbox input', function () { syncTabs(); applyNext(); });
   $(document).on('click', '.mf-toggle', function () {
     var $b = $(this), $bar = $b.closest('.mf-toggle-bar'), show = !$bar.data('shown');
     $bar.data('shown', show);
