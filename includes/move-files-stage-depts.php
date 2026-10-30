@@ -153,7 +153,7 @@
     $('#accordion .mf-cutbox').each(function () {
       var $c = $(this), k = $c.closest('.d-md-flex').data('mf'); if (!k) { return; }
       var allowed = map[k.stage] || [], i = allowed.indexOf(src), on = $c.find('input:checked').length > 0;
-      $c.toggleClass('mf-cut-off', !(on || !allowed.length || i === -1 || allowed[i + 1] === k.dept));
+      $c.toggleClass('mf-cut-off', !(on || !allowed.length || (i !== -1 && allowed[i + 1] === k.dept)));
     });
   }
   function stageOf(name) { var m = /^files\[([^\]]+)\]\[(\d+)\]$/.exec(name); return m ? { stage: m[1], dept: parseInt(m[2], 10) } : null; }
@@ -216,6 +216,9 @@
     if (!j) { map = {}; apply(); applySelf(); markExisting(); applyNext(); return; }
     $.getJSON(<?php echo json_encode(rtrim(str_replace(chr(92), '/', dirname($_SERVER['SCRIPT_NAME'])), '/') . '/get_move_stage_depts.php'); ?>, { j_id: j, cust_id: $('#cust_id').val() }, function (d) { map = d || {}; apply(); applySelf(); markExisting(); applyNext(); }).fail(function () { map = {}; apply(); applySelf(); });
   }
-  $(function () { fitAccordion(); buildTabs(); lockHeader(); $('#dept_id').on('change', function () { apply(); applySelf(); applyNext(); }); setTimeout(load, 300); $('#j_id').on('change', function () { setTimeout(load, 300); }); });
+  $(function () { fitAccordion(); buildTabs(); lockHeader(); $('#dept_id').on('change', function () { apply(); applySelf(); applyNext(); }); setTimeout(load, 300);
+    /* the department dropdown can be filled after the page script ran (no change event): follow its value so the source row / next department stay right */
+    var lastSrc; setInterval(function () { var v = $('#dept_id').val(); if (v !== lastSrc) { lastSrc = v; applySelf(); applyNext(); } }, 400);
+    $('#j_id').on('change', function () { setTimeout(load, 300); }); });
 })(window.jQuery);
 </script>
