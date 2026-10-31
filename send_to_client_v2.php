@@ -1169,6 +1169,27 @@ if($customer_info['cust_name'] == "Sunrise-NOW" || $customer_info['cust_name'] =
 		
 	}
 	
+	/// IAP (57/58): Subject and Body come only from inw_dispatch_mail_master (no built-in text). A REV article flagged pap uses the JSTAGE entry ///
+	$iap_fill = function($r) use ($app_res)
+	{
+		foreach(array('subject','message') as $__f)
+		{
+			$r[$__f] = str_replace(array('##ARTICLEID##','##FileName##'),$app_res['pub_id'],$r[$__f]);
+			$r[$__f] = str_replace('##AuthorNames##',$app_res['corresponding_author'],$r[$__f]);
+			$r[$__f] = str_replace('##Stage##',$app_res['stage'],$r[$__f]);
+		}
+		return $r;
+	};
+	$iap_tpl = function($st) use ($db, $app_res, $iap_fill)
+	{
+		$r = $db->query("SELECT subject, message FROM `inw_dispatch_mail_master` WHERE j_id = " . (int)$app_res['j_id'] . " AND cust_id = " . (int)$app_res['cust_id'] . " AND stage = '" . $st . "'")->fetch_assoc();
+		return ($r && $r['subject'] !== '') ? $iap_fill($r) : null;
+	};
+	if(($app_res['cust_id']==57 || $app_res['cust_id']==58) && $d_mail_info)
+	{
+		$d_mail_info = $iap_fill($d_mail_info);
+	}
+
 	$sub_mail= $journal_info['j_code']."--".substr($app_res['article_title'],0,40)."... [".$app_res['pub_id']."]";
 
 	
@@ -1801,34 +1822,8 @@ Note:- Add the Email IDs with comma separated. </div>
 																		}
 																		elseif($app_res['cust_id']==57 || $app_res['cust_id']==58)
 																		{
-																			if($app_res['stage']=='FP')
-																			{
-																			$subject_iap='[##ARTICLEID##] - Firstproof Uploaded';
-																			}
-																			elseif($stage_check_fin=='FIN')
-																			{
-																			$subject_iap='[##ARTICLEID##] - Final Delivery';
-																			}
-																			elseif($stage_check_pmc=='PMC')
-																			{
-																			$subject_iap='[##ARTICLEID##] - PMC Data Files Uploaded';
-																			}
-																			elseif($stage_check_rev=='REV' && ((is_null($inwed_run['pap'])) || $inwed_run['pap']=='no' && ($journal_info['j_code']=='JSIAML') ))
-																			{
-																			$subject_iap='[##ARTICLEID##] - Revised Proof Uploaded';
-																			}
-																			elseif($stage_check_rev=='REV' && ((is_null($inwed_run['pap'])) || $inwed_run['pap']=='no' ))
-																			{
-																			$subject_iap='[##ARTICLEID##] - Revised Proof Uploaded';
-																			}
-																			elseif($stage_check_rev=='REV' && $inwed_run['pap']=='yes')
-																			{
-																			$subject_iap='[##ARTICLEID##] – Jstage Data Files Uploaded';
-																			}
-																			else
-																			{
-																			$subject_iap='[##ARTICLEID##] – Jstage Data Files Uploaded';
-																			}
+											$subject_iap = $d_mail_info['subject'];
+											if($stage_check_rev=='REV' && $inwed_run['pap']=='yes' && ($__t=$iap_tpl('JSTAGE'))){ $subject_iap=$__t['subject']; }
 																		?>
 																		 <div class="form-group d-flex">
                                                                             <label class="col-sm-3 control-label no-padding-right">Subject</label>
@@ -1929,31 +1924,8 @@ Note:- Add the Email IDs with comma separated. </div>
 																		}
 																		  elseif($app_res['cust_id']==57 || $app_res['cust_id']==58)
 																		{
-																			
-																			if($app_res['stage']=='FP')
-																			{
-																			$message_iap='Dear Editor,<br/><br/>We have uploaded the firstproof for '.$app_res['pub_id'].' to the portal.<br/><br/>Best regards,<br/>Transforma';
-																			}
-																			elseif($stage_check_fin=='FIN')
-																			{
-																			$message_iap='Dear Editor,<br/><br/>Final Package for the above mentioned article has been uploaded to the portal with xml,pdf and Epub File.<br/><br/>Best regards,<br/>Transforma';
-																			}
-																			elseif($stage_check_pmc=='PMC')
-																			{
-																			$message_iap='Dear Editor,<br/><br/>We have uploaded the PMC Data Package of '.$app_res['pub_id'].' to the portal. If you encounter any difficulties in reviewing the package or need further revisions, please let us know.<br/><br/>Best regards,<br/>Transforma';
-																			}
-																		elseif($stage_check_rev=='REV' && ((is_null($inwed_run['pap'])) ||  $inwed_run['pap']=='no' && ($journal_info['j_code']=='JSIAML') ))
-																			{
-																			$message_iap='Dear Editors,<br/><br/>We have uploaded the Revised Proof of '.$app_res['pub_id'].' to the portal. If you encounter any difficulties in downloading or reviewing the PDF, please feel free to reach out to us<br/><br/>Best regards,<br/>Transforma';
-																			}
-																			elseif($stage_check_rev=='REV' && ((is_null($inwed_run['pap'])) ||  $inwed_run['pap']=='no' ))
-																			{
-																			$message_iap='Dear Editors,<br/><br/>We have uploaded the revised proof of '.$app_res['pub_id'].' to the portal. If you encounter any difficulties in downloading or reviewing the PDF, please feel free to reach out to us<br/><br/>Best regards,<br/>Transforma';
-																			}
-																			elseif($stage_check_rev=='REV' && $inwed_run['pap']=='yes')
-																			{
-																			$message_iap='Dear Editor,<br/><br/>We have uploaded the J-stage Data Files of '.$app_res['pub_id'].' to the portal. If you encounter any difficulties in reviewing the package or need further revisions, please let us know.<br/><br/>Best regards,<br/>Transforma';
-																			}
+											$message_iap = $d_mail_info['message'];
+											if($stage_check_rev=='REV' && $inwed_run['pap']=='yes' && ($__t=$iap_tpl('JSTAGE'))){ $message_iap=$__t['message']; }
 																			
 																		?>
                                                                         <div class="form-group d-flex">
