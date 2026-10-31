@@ -31,10 +31,39 @@ def write_status(status_file, **data):
 
     temp_file = Path(str(status_file) + ".tmp")
 
-    with open(temp_file, "w", encoding="utf-8") as f:
-        json.dump(payload, f)
+    try:
+        with open(temp_file, "w", encoding="utf-8") as f:
+            json.dump(payload, f)
+    except OSError:
+        temp_file = None
 
-    os.replace(temp_file, status_file)
+    # On Windows os.replace raises PermissionError while the status page
+    # (PHP) has status.json open, so retry and finally fall back to a
+    # direct write instead of failing the whole comparison.
+    if temp_file is not None:
+        for attempt in range(10):
+            try:
+                os.replace(temp_file, status_file)
+                return
+            except PermissionError:
+                time.sleep(0.05 * (attempt + 1))
+
+    for attempt in range(10):
+        try:
+            with open(status_file, "w", encoding="utf-8") as f:
+                json.dump(payload, f)
+            break
+        except PermissionError:
+            if attempt == 9:
+                logging.warning("Could not update %s", status_file)
+            else:
+                time.sleep(0.05 * (attempt + 1))
+
+    if temp_file is not None:
+        try:
+            os.remove(temp_file)
+        except OSError:
+            pass
 
 
 class PDFComparator:
