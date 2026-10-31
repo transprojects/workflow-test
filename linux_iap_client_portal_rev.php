@@ -228,20 +228,9 @@ ftp_close($conn_id);
     $mail->FromName = $mail_from;
     $mail->isHTML(true);
     //$mail->Subject = $Subject;
-	if ($inwed_run['pap'] == 'yes') {
+	//Subject comes from the Subject box on the send-to-client page (dispatch mail master)
+	$subject_raw = str_replace(array('[##ARTICLEID##]','##ARTICLEID##'), array('['.$_POST['article_id'].']',$_POST['article_id']), $_POST['txtSub']);
 
-	$subject_raw = $app_res['pub_id'] . " - J-stage Data Files Uploaded";
-
-	} elseif ($_POST['j_code'] == 'JSIAML') {
-
-	$subject_raw = $app_res['pub_id'] . " - Final Proof Uploaded";
-
-	} else {
-
-	$subject_raw = $app_res['pub_id'] . " - Revised Proof Uploaded";
-	}
-
-// Encode subject with UTF-8 fallback for all special characters
 	$mail->Subject = mb_encode_mimeheader($subject_raw, "UTF-8", "B");
     $mail->Body = $body;
 

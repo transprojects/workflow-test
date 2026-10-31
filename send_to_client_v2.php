@@ -914,6 +914,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
 					
             $stage_check=preg_replace("/FIN([0-9]+)/","FIN",$app_res['stage']);
             $stage_pmc=preg_replace("/PMC([0-9]+)/","PMC",$app_res['stage']);
+            $stage_jstage=preg_replace("/JSTAGE([0-9]+)/","JSTAGE",$app_res['stage']);
 			
 			if($app_res['stage']=='FP')
 			{
@@ -922,6 +923,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
 			elseif($stage_check=='FIN')
             {
                 include ('linux_iap_client_portal_fin.php');
+            }
+			elseif($stage_jstage=='JSTAGE')
+            {
+                include ('linux_iap_client_portal_jstage.php');
             }
 			elseif($stage_pmc=='PMC')
             {
@@ -1169,7 +1174,7 @@ if($customer_info['cust_name'] == "Sunrise-NOW" || $customer_info['cust_name'] =
 		
 	}
 	
-	/// IAP (57/58): Subject and Body come only from inw_dispatch_mail_master (no built-in text). A REV article flagged pap uses the JSTAGE entry ///
+	/// IAP (57/58): Subject and Body come only from inw_dispatch_mail_master (no built-in text). a REV article uses the REV entry ///
 	$iap_fill = function($r) use ($app_res)
 	{
 		foreach(array('subject','message') as $__f)
@@ -1179,11 +1184,6 @@ if($customer_info['cust_name'] == "Sunrise-NOW" || $customer_info['cust_name'] =
 			$r[$__f] = str_replace('##Stage##',$app_res['stage'],$r[$__f]);
 		}
 		return $r;
-	};
-	$iap_tpl = function($st) use ($db, $app_res, $iap_fill)
-	{
-		$r = $db->query("SELECT subject, message FROM `inw_dispatch_mail_master` WHERE j_id = " . (int)$app_res['j_id'] . " AND cust_id = " . (int)$app_res['cust_id'] . " AND stage = '" . $st . "'")->fetch_assoc();
-		return ($r && $r['subject'] !== '') ? $iap_fill($r) : null;
 	};
 	if(($app_res['cust_id']==57 || $app_res['cust_id']==58) && $d_mail_info)
 	{
@@ -1823,7 +1823,6 @@ Note:- Add the Email IDs with comma separated. </div>
 																		elseif($app_res['cust_id']==57 || $app_res['cust_id']==58)
 																		{
 											$subject_iap = $d_mail_info['subject'];
-											if($stage_check_rev=='REV' && $inwed_run['pap']=='yes' && ($__t=$iap_tpl('JSTAGE'))){ $subject_iap=$__t['subject']; }
 																		?>
 																		 <div class="form-group d-flex">
                                                                             <label class="col-sm-3 control-label no-padding-right">Subject</label>
@@ -1925,7 +1924,6 @@ Note:- Add the Email IDs with comma separated. </div>
 																		  elseif($app_res['cust_id']==57 || $app_res['cust_id']==58)
 																		{
 											$message_iap = $d_mail_info['message'];
-											if($stage_check_rev=='REV' && $inwed_run['pap']=='yes' && ($__t=$iap_tpl('JSTAGE'))){ $message_iap=$__t['message']; }
 																			
 																		?>
                                                                         <div class="form-group d-flex">
