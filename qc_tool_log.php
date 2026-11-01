@@ -1,4 +1,5 @@
 <?php include "includes/includes.php";
+// 2026-11-01: TSP CE Style Validator / Bypass Validation enabled; QC tool log added.
 include_once 'includes/list_ui.php';
 
 /* QC Tool Log: the first validator report per article + tool (qc_tool_first_report) and every bypass (qc_tool_bypass_log),

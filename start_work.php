@@ -1,4 +1,5 @@
 <?php /* Start Work v2 rollout switch.
+// 2026-11-01: TSP CE Style Validator / Bypass Validation enabled; QC tool log added.
    - Everybody ($SW_V2_ALL) or only the pilot users are sent to start_work_v2.php.
    - The old page opens ONLY after the user used "Use old version" on the new page and gave a reason (that step leaves a ticket in the session
      for the article and adds &legacy=1). Anybody who types start_work.php?aid=..  (with or without legacy=1) without that ticket is sent to the

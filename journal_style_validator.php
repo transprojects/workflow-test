@@ -1,4 +1,5 @@
 <?php
+// 2026-11-01: TSP CE Style Validator / Bypass Validation enabled; QC tool log added.
 require_once('dbc.php');
 require_once('email-functions.php');
 require_once __DIR__ . '/includes/path_map.php';   // wf_existing_dir(): J:/ <-> E:/New_Workflow_Files/

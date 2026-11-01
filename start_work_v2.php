@@ -1,4 +1,5 @@
 <?php
+// 2026-11-01: TSP CE Style Validator / Bypass Validation enabled; QC tool log added.
 require_once __DIR__ . '/includes/path_map.php';   /* J:/ -> E:/New_Workflow_Files/ for server-side folder checks */
 /* Login-token cache (this page only). includes/check.php validates the auth cookies on every request: one scan of
    wf_token_auth plus two bcrypt checks. Once that has passed, remember it in the session for 5 minutes and hide the

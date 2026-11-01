@@ -1,4 +1,5 @@
 <?php
+// 2026-11-01: TSP CE Style Validator / Bypass Validation enabled; QC tool log added.
 /* Emergency off switch: an empty file named start_work_v3.disabled next to this script sends everybody to start_work_v2.php (same query string). */
 if (is_file(__DIR__ . '/start_work_v3.disabled')) { header('Location: start_work_v2.php' . (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] !== '' ? '?' . $_SERVER['QUERY_STRING'] : '')); exit; }
 require_once __DIR__ . '/includes/path_map.php';   /* J:/ -> E:/New_Workflow_Files/ for server-side folder checks */
