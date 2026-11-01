@@ -18,11 +18,93 @@ $style_validator_notify = array(
 	),
 );
 
-// Journal Style Validator (WMS) gate — PeerJ/CE and IAP/XML.
+// Journal Style Validator (WMS) gate — PeerJ/CE, TSP/CE and IAP/XML.
 // action=run    -> (re)runs the customer's quality-checker exe on the article's XML and shows the result.
 // action=bypass -> records a manual override (mandatory reason) for exceptional cases.
 // action=check  -> lightweight gate used by the Complete/Submit handler: echoes 1 if the
 //                  most recent pass/bypass is not older than the XML file, else an error string.
+
+// First-report archive: one row per article + tool in `qc_tool_first_report`, with the HTML report (later runs: HTML file only)
+// kept as a separate file under E:/Tool_Reports/ (served by action=first_report).
+function sv_reports_dir()
+{
+	$dir = 'E:/Tool_Reports/';   // outside the web root, so reports are only reachable through action=first_report
+	if (!is_dir($dir)) {
+		@mkdir($dir, 0777, true);
+	}
+	return $dir;
+}
+
+// Copies a report into E:/Tool_Reports/<tool>/<YYYY-MM-DD>/<tool>_<pub_id>_<stage>_<dept>_<prefix>_<HHMMSS>.html and returns the path relative to
+// E:/Tool_Reports/ (what the tables store in report_file), or null when the copy failed.
+function sv_store_html($row, $dept_name, $tool, $prefix, $src)
+{
+	$clean = function ($s) { $s = str_replace('..', '_', preg_replace('/[^A-Za-z0-9._-]+/', '_', trim((string)$s))); return trim($s, '._') === '' ? '_' : $s; };
+	$rel_dir = $clean($tool) . '/' . date('Y-m-d') . '/';
+	$abs_dir = sv_reports_dir() . $rel_dir;
+	if (!is_dir($abs_dir) && !@mkdir($abs_dir, 0777, true)) { return null; }
+	$name = $clean($tool) . '_' . $clean($row['pub_id']) . '_' . $clean($row['stage']) . '_' . $clean($dept_name) . '_' . $prefix . '_' . date('His') . '.html';
+	return @copy($src, $abs_dir . $name) ? $rel_dir . $name : null;
+}
+
+function sv_store_first_report($db, $row, $tool, $dept_name, $xml_file, $status, $report_file, $counts)
+{
+	$db->query("CREATE TABLE IF NOT EXISTS `qc_tool_first_report` (
+		`id` int(11) NOT NULL AUTO_INCREMENT, `a_id` int(11) NOT NULL, `pub_id` varchar(100) DEFAULT NULL, `cust_id` int(11) DEFAULT NULL,
+		`tool` varchar(20) NOT NULL, `stage` varchar(25) DEFAULT NULL, `dept` varchar(50) DEFAULT NULL, `xml_file` varchar(255) DEFAULT NULL,
+		`status` varchar(10) NOT NULL, `error_count` int(11) DEFAULT NULL, `warning_count` int(11) DEFAULT NULL,
+		`report_file` varchar(255) DEFAULT NULL, `report_size` int(11) DEFAULT NULL,
+		`run_by` varchar(100) DEFAULT NULL, `run_at` datetime NOT NULL,
+		PRIMARY KEY (`id`), UNIQUE KEY `uq_article_tool` (`a_id`, `tool`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+	$a_id = (int)$row['id'];
+	$exists = $db->query("SELECT id FROM qc_tool_first_report WHERE a_id = " . $a_id . " AND tool = '" . $db->real_escape_string($tool) . "'");
+	if (!$exists) { return; }   // table problem
+	if ($exists->num_rows > 0) {
+		// Not the first run: no table row, but keep the HTML as a file next to the first one.
+		if ($report_file !== '' && is_file($report_file)) { sv_store_html($row, $dept_name, $tool, 'rerun', $report_file); }
+		return;
+	}
+
+	$stored_name = null;
+	$size = null;
+	if ($report_file !== '' && is_file($report_file)) {
+		$stored_name = sv_store_html($row, $dept_name, $tool, 'first', $report_file);
+		if ($stored_name !== null) { $size = filesize($report_file); }
+	}
+	$by = isset($_COOKIE['full_name']) ? $_COOKIE['full_name'] : (isset($_COOKIE['user_id']) ? 'user #' . $_COOKIE['user_id'] : '');
+	$q = function ($v) use ($db) { return $v === null ? 'NULL' : "'" . $db->real_escape_string($v) . "'"; };
+	$n = function ($v) { return $v === null ? 'NULL' : (int)$v; };
+	$db->query("INSERT IGNORE INTO qc_tool_first_report
+		(a_id, pub_id, cust_id, tool, stage, dept, xml_file, status, error_count, warning_count, report_file, report_size, run_by, run_at)
+		VALUES (" . $a_id . ", " . $q($row['pub_id']) . ", " . $n($row['cust_id']) . ", " . $q($tool) . ", " . $q($row['stage']) . ", " . $q($dept_name) . ", "
+		. $q(basename($xml_file)) . ", " . $q($status) . ", " . $n($counts[0]) . ", " . $n($counts[1]) . ", " . $q($stored_name) . ", " . $n($size) . ", " . $q($by) . ", NOW())");
+}
+
+// Every bypass is logged (not only the first): who skipped the validator, why, and the failing report that existed at that moment (if any).
+function sv_log_bypass($db, $row, $tool, $dept_name, $xml_file, $qc_file, $reason, $bypassed_by)
+{
+	$db->query("CREATE TABLE IF NOT EXISTS `qc_tool_bypass_log` (
+		`id` int(11) NOT NULL AUTO_INCREMENT, `a_id` int(11) NOT NULL, `pub_id` varchar(100) DEFAULT NULL, `cust_id` int(11) DEFAULT NULL,
+		`tool` varchar(20) NOT NULL, `stage` varchar(25) DEFAULT NULL, `dept` varchar(50) DEFAULT NULL, `xml_file` varchar(255) DEFAULT NULL,
+		`had_failing_report` tinyint(1) NOT NULL DEFAULT 0, `report_file` varchar(255) DEFAULT NULL,
+		`reason` text, `bypassed_by` varchar(100) DEFAULT NULL, `user_id` varchar(20) DEFAULT NULL, `ip` varchar(45) DEFAULT NULL, `bypassed_at` datetime NOT NULL,
+		PRIMARY KEY (`id`), KEY `a_id` (`a_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+	$a_id = (int)$row['id'];
+	$had_report = is_file($qc_file);
+	$stored_name = null;
+	if ($had_report) {
+		$stored_name = sv_store_html($row, $dept_name, $tool, 'bypass', $qc_file);
+	}
+	$q = function ($v) use ($db) { return $v === null ? 'NULL' : "'" . $db->real_escape_string($v) . "'"; };
+	$uid = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : null;
+	$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+	$db->query("INSERT INTO qc_tool_bypass_log
+		(a_id, pub_id, cust_id, tool, stage, dept, xml_file, had_failing_report, report_file, reason, bypassed_by, user_id, ip, bypassed_at)
+		VALUES (" . $a_id . ", " . $q($row['pub_id']) . ", " . (int)$row['cust_id'] . ", " . $q($tool) . ", " . $q($row['stage']) . ", " . $q($dept_name) . ", "
+		. $q(basename($xml_file)) . ", " . ($had_report ? 1 : 0) . ", " . $q($stored_name) . ", " . $q($reason) . ", " . $q($bypassed_by) . ", " . $q($uid) . ", " . $q($ip) . ", NOW())");
+}
 
 $a_id = isset($_REQUEST['a_id']) ? intval($_REQUEST['a_id']) : 0;
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'check';
@@ -54,7 +136,7 @@ $journal_label = $journal_row ? trim($journal_row['j_code'] . ' - ' . $journal_r
 // the verdict as data-well-formed/data-base-errors/data-base-warnings on <body> — so for
 // IAP we parse that report ourselves and write the pass marker PHP-side.
 $tools_dir = 'C:\\LAMP\\Apache\\htdocs\\workflow-tools' . DIRECTORY_SEPARATOR;
-if ($cust_name === 'PeerJ' && $dept_name === 'CE') {
+if (($cust_name === 'PeerJ' || $cust_name === 'TSP') && $dept_name === 'CE') {
 	$validator_exe = $tools_dir . 'XMLQualityChecker.exe';
 	$validator_kind = 'peerj';
 } elseif ($cust_name === 'IAP' && $dept_name === 'XML') {
@@ -167,15 +249,22 @@ if ($action == 'run') {
 		}
 	}
 
+	$sv_counts = array(null, null);   // error / warning counts (IAP: read from its report; PeerJ: not available)
 	if ($validator_kind === 'iap' && file_exists($qc_file)) {
 		$report_html = file_get_contents($qc_file);
 		$passed = false;
 		if (preg_match('/data-well-formed="(\d)"\s+data-base-errors="(\d+)"\s+data-base-warnings="(\d+)"/', $report_html, $m)) {
 			$passed = ($m[1] === '1' && (int)$m[2] === 0 && (int)$m[3] === 0);
+			$sv_counts = array((int)$m[2], (int)$m[3]);
 		}
 		if ($passed) {
 			file_put_contents($pass_file, date('Y-m-d H:i:s') . "\n");
 		}
+	}
+
+	// Keep the FIRST report ever generated for this article + tool (later re-runs are stored as HTML files only).
+	if (file_exists($pass_file) || file_exists($qc_file)) {
+		sv_store_first_report($db, $row, $validator_kind, $dept_name, $xml_file, file_exists($pass_file) ? 'PASS' : 'FAIL', file_exists($qc_file) ? $qc_file : '', $sv_counts);
 	}
 
 	if (file_exists($pass_file)) {
@@ -217,11 +306,7 @@ if ($action == 'bypass') {
 	}
 	file_put_contents($bypass_file, $bypass_note, FILE_APPEND);
 
-	$escaped_reason = $db->real_escape_string($reason);
-	$escaped_by = $db->real_escape_string($bypassed_by);
-	$article_transactions_sql = "INSERT INTO article_transactions(article_id, action, department, status, assigned_to, notes)
-		VALUES ('" . intval($a_id) . "', 'Journal Style Validator bypassed by " . $escaped_by . "', '" . $dept_name . "', 'Bypassed', '', '" . $escaped_reason . "')";
-	$db->query($article_transactions_sql);
+	sv_log_bypass($db, $row, $validator_kind, $dept_name, $xml_file, $qc_file, $reason, $bypassed_by);   // bypass is recorded in qc_tool_bypass_log (not article_transactions)
 
 	// Email the bypass remarks + report + XML to this tool's notify list, best-effort.
 	$email_settings = $db->query("SELECT * FROM email_settings WHERE id = 2");
@@ -274,7 +359,7 @@ if ($action == 'bypass') {
 		);
 	}
 
-	echo '<div class="alert alert-warning"><strong>Journal Style Validator:</strong> Bypassed by ' . htmlspecialchars($bypassed_by) . '. This has been recorded in the article history and reported by email — you can now complete this stage.' . ($folder_created ? ' <em>(The work folder did not exist yet, so it was created.)</em>' : '') . '</div>';
+	echo '<div class="alert alert-warning"><strong>Journal Style Validator:</strong> Bypassed by ' . htmlspecialchars($bypassed_by) . '. This has been recorded in the QC bypass log and reported by email — you can now complete this stage.' . ($folder_created ? ' <em>(The work folder did not exist yet, so it was created.)</em>' : '') . '</div>';
 	exit;
 }
 
@@ -288,6 +373,20 @@ if ($action == 'check') {
 		echo "Journal Style Validator has not passed for this article. Please click \"Style Validator\" and fix all issues, or use \"Bypass Validation\" for exceptional cases, before completing this stage.";
 	} else {
 		echo "Journal Style Validator has not been run for this article yet. Please click \"Style Validator\" and get a passing report, or use \"Bypass Validation\" for exceptional cases, before completing this stage.";
+	}
+	exit;
+}
+
+// Shows the stored first report for this article and the tool that applies to it.
+if ($action == 'first_report') {
+	$r = $db->query("SELECT report_file, status, run_at FROM qc_tool_first_report WHERE a_id = " . $a_id . " AND tool = '" . $db->real_escape_string($validator_kind) . "'");
+	$fr = $r ? $r->fetch_assoc() : null;
+	if (!$fr) {
+		echo "No first report stored for this article.";
+	} elseif (empty($fr['report_file']) || strpos($fr['report_file'], '..') !== false || !is_file(sv_reports_dir() . $fr['report_file'])) {
+		echo "First run: " . htmlspecialchars($fr['status']) . " at " . htmlspecialchars($fr['run_at']) . " (no HTML report was generated).";
+	} else {
+		echo file_get_contents(sv_reports_dir() . $fr['report_file']);
 	}
 	exit;
 }

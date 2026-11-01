@@ -820,9 +820,10 @@ else
 		$pdept_res = $presult->fetch_assoc();
 	}
 
-	//// Journal Style Validator (WMS) gate — PeerJ/CE and IAP/XML ////
+	//// Journal Style Validator (WMS) gate — PeerJ/CE, TSP/CE and IAP/XML ////
 	$style_validator_required = (
 		($customer_info['cust_name'] == 'PeerJ' && $pdept_res['dept_name'] == 'CE')
+		|| ($customer_info['cust_name'] == 'TSP' && $pdept_res['dept_name'] == 'CE')
 		|| ($customer_info['cust_name'] == 'IAP' && $pdept_res['dept_name'] == 'XML')
 	);
 						?>
