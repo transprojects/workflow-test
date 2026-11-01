@@ -11,12 +11,25 @@ $tool_names = array('peerj' => 'PeerJ / TSP CE (XMLQualityChecker)', 'iap' => 'I
 $has_first  = ($r = $db->query("SHOW TABLES LIKE 'qc_tool_first_report'")) && $r->num_rows > 0;
 $has_bypass = ($r = $db->query("SHOW TABLES LIKE 'qc_tool_bypass_log'")) && $r->num_rows > 0;
 
+/* A row can have report_file NULL even though the HTML is on disk (older code / a race between two runs): look for the file the
+   logger would have written - <tool>/<run date>/<tool>_<pub>_<stage>_<dept>_<first|bypass>_<time>.html - and use the newest match. */
+function qc_find_report($dir, $r, $kind, $when)
+{
+	if (!empty($r['report_file'])) { return $r['report_file']; }
+	$clean = function ($s) { $s = str_replace('..', '_', preg_replace('/[^A-Za-z0-9._-]+/', '_', trim((string)$s))); return trim($s, '._') === '' ? '_' : $s; };
+	$rel = $clean($r['tool']) . '/' . date('Y-m-d', strtotime($when)) . '/';
+	$hits = glob($dir . $rel . $clean($r['tool']) . '_' . $clean($r['pub_id']) . '_' . $clean($r['stage']) . '_' . $clean($r['dept']) . '_' . $kind . '_*.html');
+	if (!$hits) { return null; }
+	sort($hits);
+	return $rel . basename($kind === 'first' ? $hits[0] : end($hits));
+}
+
 /* Stored report viewer */
 if (isset($_GET['view'])) {
 	$v = $_GET['view'] === 'bypass' ? 'bypass' : 'first';
 	$tbl = $v === 'bypass' ? 'qc_tool_bypass_log' : 'qc_tool_first_report';
 	$f = null;
-	if (($v === 'bypass' ? $has_bypass : $has_first) && ($r = $db->query("SELECT report_file FROM $tbl WHERE id = " . (int)$_GET['id'])) && ($x = $r->fetch_assoc())) { $f = $x['report_file']; }
+	if (($v === 'bypass' ? $has_bypass : $has_first) && ($r = $db->query("SELECT * FROM $tbl WHERE id = " . (int)$_GET['id'])) && ($x = $r->fetch_assoc())) { $f = qc_find_report($reports_dir, $x, $v, $v === 'bypass' ? $x['bypassed_at'] : $x['run_at']); }
 	if (!$f || strpos($f, '..') !== false || !is_file($reports_dir . $f)) { echo 'No HTML report is stored for this entry.'; exit; }
 	header('Content-Type: text/html; charset=utf-8');
 	readfile($reports_dir . $f);
@@ -62,7 +75,11 @@ if ($pg > $pages) { $pg = $pages; }
 $offset = ($pg - 1) * $per;
 if ($tbl_ok) {
 	$r = $db->query("SELECT t.*, c.cust_name FROM $tbl t LEFT JOIN adm_customer_master c ON c.id = t.cust_id WHERE $W ORDER BY t.$datecol DESC, t.id DESC LIMIT $offset, $per");
-	while ($r && ($x = $r->fetch_assoc())) { $rows[] = $x; }
+	while ($r && ($x = $r->fetch_assoc())) {
+		$x['report_file'] = qc_find_report($reports_dir, $x, $tab, $x[$datecol]);
+		if ($x['report_file'] && empty($x['report_size']) && is_file($reports_dir . $x['report_file'])) { $x['report_size'] = filesize($reports_dir . $x['report_file']); }
+		$rows[] = $x;
+	}
 }
 
 $e = function ($s) { return htmlspecialchars((string)$s, ENT_QUOTES); };

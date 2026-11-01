@@ -80,6 +80,11 @@ function sv_store_first_report($db, $row, $tool, $dept_name, $xml_file, $status,
 		(a_id, pub_id, cust_id, tool, stage, dept, xml_file, status, error_count, warning_count, report_file, report_size, run_by, run_at)
 		VALUES (" . $a_id . ", " . $q($row['pub_id']) . ", " . $n($row['cust_id']) . ", " . $q($tool) . ", " . $q($row['stage']) . ", " . $q($dept_name) . ", "
 		. $q(basename($xml_file)) . ", " . $q($status) . ", " . $n($counts[0]) . ", " . $n($counts[1]) . ", " . $q($stored_name) . ", " . $n($size) . ", " . $q($by) . ", NOW())");
+	// A second request that raced this one can win the INSERT with an empty report_file: fill it in from the file this request stored.
+	if ($stored_name !== null) {
+		$db->query("UPDATE qc_tool_first_report SET report_file = " . $q($stored_name) . ", report_size = " . $n($size)
+			. " WHERE a_id = " . $a_id . " AND tool = '" . $db->real_escape_string($tool) . "' AND report_file IS NULL");
+	}
 }
 
 // Every bypass is logged (not only the first): who skipped the validator, why, and the failing report that existed at that moment (if any).
