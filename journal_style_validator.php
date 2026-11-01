@@ -145,9 +145,12 @@ $tools_dir = 'C:\\LAMP\\Apache\\htdocs\\workflow-tools' . DIRECTORY_SEPARATOR;
 if (($cust_name === 'PeerJ' || $cust_name === 'TSP') && $dept_name === 'CE') {
 	$validator_exe = $tools_dir . 'XMLQualityChecker.exe';
 	$validator_kind = 'peerj';
+	// Same exe and notify list, but TSP gets its own tool key so its reports/log rows go under Tool_Reports/tsp/ and are labelled TSP.
+	$qc_tool_key = ($cust_name === 'TSP') ? 'tsp' : 'peerj';
 } elseif ($cust_name === 'IAP' && $dept_name === 'XML') {
 	$validator_exe = $tools_dir . 'IAPQualityChecker.exe';
 	$validator_kind = 'iap';
+	$qc_tool_key = 'iap';
 } else {
 	echo "Journal Style Validator is not applicable for this article.";
 	exit;
@@ -270,7 +273,7 @@ if ($action == 'run') {
 
 	// Keep the FIRST report ever generated for this article + tool (later re-runs are stored as HTML files only).
 	if (file_exists($pass_file) || file_exists($qc_file)) {
-		sv_store_first_report($db, $row, $validator_kind, $dept_name, $xml_file, file_exists($pass_file) ? 'PASS' : 'FAIL', file_exists($qc_file) ? $qc_file : '', $sv_counts);
+		sv_store_first_report($db, $row, $qc_tool_key, $dept_name, $xml_file, file_exists($pass_file) ? 'PASS' : 'FAIL', file_exists($qc_file) ? $qc_file : '', $sv_counts);
 	}
 
 	if (file_exists($pass_file)) {
@@ -312,7 +315,7 @@ if ($action == 'bypass') {
 	}
 	file_put_contents($bypass_file, $bypass_note, FILE_APPEND);
 
-	sv_log_bypass($db, $row, $validator_kind, $dept_name, $xml_file, $qc_file, $reason, $bypassed_by);   // bypass is recorded in qc_tool_bypass_log (not article_transactions)
+	sv_log_bypass($db, $row, $qc_tool_key, $dept_name, $xml_file, $qc_file, $reason, $bypassed_by);   // bypass is recorded in qc_tool_bypass_log (not article_transactions)
 
 	// Email the bypass remarks + report + XML to this tool's notify list, best-effort.
 	$email_settings = $db->query("SELECT * FROM email_settings WHERE id = 2");
@@ -385,7 +388,7 @@ if ($action == 'check') {
 
 // Shows the stored first report for this article and the tool that applies to it.
 if ($action == 'first_report') {
-	$r = $db->query("SELECT report_file, status, run_at FROM qc_tool_first_report WHERE a_id = " . $a_id . " AND tool = '" . $db->real_escape_string($validator_kind) . "'");
+	$r = $db->query("SELECT report_file, status, run_at FROM qc_tool_first_report WHERE a_id = " . $a_id . " AND tool = '" . $db->real_escape_string($qc_tool_key) . "'");
 	$fr = $r ? $r->fetch_assoc() : null;
 	if (!$fr) {
 		echo "No first report stored for this article.";

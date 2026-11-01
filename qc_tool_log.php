@@ -7,7 +7,7 @@ include_once 'includes/list_ui.php';
    only served through ?view=first|bypass&id=<row id> below.
    Filters: ?t=first|bypass ?pub= ?tool= ?status=PASS|FAIL ?user= ?from_dt=dd-mm-yyyy&to_dt=dd-mm-yyyy ?per=25|50|100 ?pg= */
 $reports_dir = 'E:/Tool_Reports/';
-$tool_names = array('peerj' => 'PeerJ / TSP CE (XMLQualityChecker)', 'iap' => 'IAP XML (IAPQualityChecker)', 'tsp' => 'TSP XML QC (TSPXmlQC)');
+$tool_names = array('peerj' => 'PeerJ CE (XMLQualityChecker)', 'iap' => 'IAP XML (IAPQualityChecker)', 'tsp' => 'TSP CE (XMLQualityChecker)');
 $has_first  = ($r = $db->query("SHOW TABLES LIKE 'qc_tool_first_report'")) && $r->num_rows > 0;
 $has_bypass = ($r = $db->query("SHOW TABLES LIKE 'qc_tool_bypass_log'")) && $r->num_rows > 0;
 
