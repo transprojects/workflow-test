@@ -14,13 +14,20 @@ server:
 
     {work_dir}{volume_folder}/{pub_id}/{stage}/PRQC/
 
+The article lookup (live / archive, status, stage,
+folder access) is shared with the page's article
+check: includes/compare_pdf_lookup.php.
+
 The outcome of that auto-file attempt is reported
 back via response headers (read by the frontend)
 since the response body itself is the file.
 ==================================================
 */
 
-require_once __DIR__ . '/includes/DBController.php';
+$ag_json = true;
+require_once __DIR__ . '/includes/ajax_guard.php';      // signed-in users only (401 otherwise)
+include_once __DIR__ . '/dbc.php';                       // $db (mysqli)
+require_once __DIR__ . '/includes/compare_pdf_lookup.php';
 
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
@@ -123,110 +130,74 @@ if (file_exists($metaFile)) {
 }
 
 
-function findArticleByPubIdCandidate($dbc, $candidate)
-{
+$report = [];
+$article = null;
+$destFile = '';
 
-    $candidate = trim($candidate);
+foreach ($candidateNames as $candidate) {
 
-    if ($candidate === '') {
-        return null;
+    $info = cmp_article_lookup($db, $candidate);
+
+    $report[] = $info;
+
+    /* prefer a live article over an archived one */
+    if (
+        $info['found_in'] === 'Live' &&
+        ($article === null || $article['found_in'] !== 'Live')
+    ) {
+        $article = $info;
+    } elseif ($article === null && $info['found_in'] !== '') {
+        $article = $info;
     }
-
-
-    /*
-    Exact match first — this is the standard
-    convention (PDF is literally named
-    "{pub_id}.pdf").
-    */
-
-    $rows = $dbc->runQuery(
-        "SELECT work_dir, volume_folder, pub_id, stage
-         FROM inw_inward_dtl
-         WHERE pub_id = ?
-         LIMIT 1",
-        's',
-        [$candidate]
-    );
-
-    if (!empty($rows)) {
-        return $rows[0];
-    }
-
-
-    /*
-    Fallback: strip a trailing " (1)" style
-    duplicate-download suffix and try again.
-    */
-
-    $stripped =
-        preg_replace(
-            '/\s*\(\d+\)$/',
-            '',
-            $candidate
-        );
-
-    if ($stripped !== $candidate && $stripped !== '') {
-
-        $rows = $dbc->runQuery(
-            "SELECT work_dir, volume_folder, pub_id, stage
-             FROM inw_inward_dtl
-             WHERE pub_id = ?
-             LIMIT 1",
-            's',
-            [$stripped]
-        );
-
-        if (!empty($rows)) {
-            return $rows[0];
-        }
-
-    }
-
-
-    return null;
 
 }
 
 
 if (!empty($candidateNames)) {
 
-    $dbc = new DBController();
+    if ($article === null) {
 
-    $article = null;
+        $prqcMessage =
+            'No matching article (pub_id) found for the compared files (' .
+            implode(', ', $candidateNames) .
+            '). Name the PDFs exactly as the article Pub ID.';
 
-    foreach ($candidateNames as $candidate) {
-
-        $article = findArticleByPubIdCandidate($dbc, $candidate);
-
-        if ($article !== null) {
-            break;
+        if (!empty($report[0]['suggestions'])) {
+            $prqcMessage .= ' Did you mean: ' . implode(', ', $report[0]['suggestions']) . '?';
         }
 
-    }
+    } else {
 
+        $prqcPath = $article['prqc_path'];
 
-    if (
-        $article !== null &&
-        !empty($article['work_dir']) &&
-        !empty($article['volume_folder']) &&
-        !empty($article['pub_id']) &&
-        !empty($article['stage'])
-    ) {
+        $facts =
+            'Article ' . $article['pub_id'] .
+            ' - ' . $article['state'] .
+            ' (found in ' . $article['found_in'] .
+            ', stage ' . $article['stage'] .
+            ', status ' . $article['status'] . '). ';
 
+        if ($article['found_in'] === 'Archive') {
 
-        $prqcPath =
-            $article['work_dir'] .
-            $article['volume_folder'] .
-            '/' .
-            $article['pub_id'] .
-            '/' .
-            $article['stage'] .
-            '/PRQC/';
+            $prqcMessage =
+                $facts .
+                'Archived articles are not filed into a PRQC folder.';
 
+        } elseif ($article['state'] === 'Withdrawn') {
 
-        if (
+            $prqcMessage =
+                $facts .
+                'Withdrawn articles are not filed into a PRQC folder.';
+
+        } elseif ($prqcPath === '') {
+
+            $prqcMessage =
+                $facts .
+                implode(' ', $article['notes']);
+
+        } elseif (
             is_dir($prqcPath) ||
-            mkdir($prqcPath, 0777, true)
+            @mkdir($prqcPath, 0777, true)
         ) {
 
             $destFile =
@@ -242,36 +213,33 @@ if (!empty($candidateNames)) {
                 $prqcSaved = true;
 
                 $prqcMessage =
+                    $facts .
                     'Report saved to PRQC folder: ' .
                     $destFile;
 
             } else {
 
+                $lastErr = error_get_last();
+
                 $prqcMessage =
-                    'Found article ' .
-                    $article['pub_id'] .
-                    ' but could not write the report to its PRQC folder (check server path/permissions). Server said: ' .
-                    (($lastErr = error_get_last()) ? $lastErr['message'] : 'no details');
+                    $facts .
+                    'Could not write the report to its PRQC folder (check server path/permissions). Server said: ' .
+                    ($lastErr ? $lastErr['message'] : 'no details');
 
             }
 
         } else {
 
+            $lastErr = error_get_last();
+
             $prqcMessage =
-                'Found article ' .
-                $article['pub_id'] .
-                ' but its PRQC folder could not be created: ' .
+                $facts .
+                'Its PRQC folder could not be created: ' .
                 $prqcPath .
                 ' Server said: ' .
-                (($lastErr = error_get_last()) ? $lastErr['message'] : 'no details');
+                ($lastErr ? $lastErr['message'] : 'no details');
 
         }
-
-    } else {
-
-        $prqcMessage =
-            'No matching article (pub_id) found for the compared files. Names tried: ' .
-            implode(', ', $candidateNames);
 
     }
 
@@ -284,6 +252,37 @@ if (!empty($candidateNames)) {
 STREAM THE REPORT TO THE BROWSER
 ==================================================
 */
+
+/*
+==================================================
+LOG THE FILING ATTEMPT (shown in compare-pdf-log.php)
+==================================================
+*/
+
+$workLink = $article !== null ? $article['work_link'] : '';
+$sourceLink = $article !== null ? $article['source_link'] : '';
+
+cmp_log_filing($db, [
+    'user_id'        => $_COOKIE['user_id'] ?? '',
+    'job_id'         => $jobId,
+    'file1_name'     => $meta['file1_name'] ?? '',
+    'file2_name'     => $meta['file2_name'] ?? '',
+    'file1_size'     => $meta['file1_size'] ?? 0,
+    'file2_size'     => $meta['file2_size'] ?? 0,
+    'pub_id'         => $article['pub_id'] ?? '',
+    'found_in'       => $article['found_in'] ?? '',
+    'article_state'  => $article['state'] ?? 'Not found',
+    'stage'          => $article['stage'] ?? '',
+    'article_status' => $article['status'] ?? '',
+    'prqc_path'      => $prqcPath,
+    'saved_file'     => $prqcSaved ? ($destFile ?? '') : '',
+    'saved'          => $prqcSaved,
+    'message'        => $prqcMessage,
+    'work_link'      => $workLink,
+    'source_link'    => $sourceLink
+]);
+
+
 
 $downloadName =
     'PDF_Comparison_Report_' .
@@ -302,7 +301,9 @@ header('Content-Length: ' . filesize($reportFile));
 header('X-Prqc-Saved: ' . ($prqcSaved ? '1' : '0'));
 header('X-Prqc-Path: ' . rawurlencode($prqcPath));
 header('X-Prqc-Message: ' . rawurlencode($prqcMessage));
-header('Access-Control-Expose-Headers: X-Prqc-Saved, X-Prqc-Path, X-Prqc-Message');
+header('X-Prqc-Link: ' . rawurlencode($workLink));
+header('X-Source-Link: ' . rawurlencode($sourceLink));
+header('Access-Control-Expose-Headers: X-Prqc-Saved, X-Prqc-Path, X-Prqc-Message, X-Prqc-Link, X-Source-Link');
 
 readfile($reportFile);
 exit;
