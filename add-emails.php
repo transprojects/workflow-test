@@ -29,6 +29,21 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 }
 
 ?>
+<?php
+/* Clone: prefill the form from an existing config (clone-email/<dm_id>) */
+$app_res = array();
+$is_clone = false;
+if(isset($_REQUEST['clone']))
+{
+	$result = $db->query("SELECT * FROM inw_dispatch_mail_master WHERE dm_id = ".(int)$_REQUEST['clone']);
+	if($result && $result->num_rows > 0)
+	{
+		$app_res = $result->fetch_assoc();
+		$is_clone = true;
+	}
+}
+$page_title = $is_clone ? 'Clone Dispatch Mail Config' : 'Add Dispatch Mail Config';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -102,7 +117,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
     <div class="container-fluid" style="justify-content: space-between;">
     <div div class="row pt-4 d-flex align-items-center flex-wrap">
           <div class="col-8 col-lg-10">
-            <p class="articleheading ms-4">Add Dispatch Mail Config</p>
+            <p class="articleheading ms-4"><?php echo $page_title; ?></p>
           </div>
           <div class="col-4 col-lg-2">
             <div class="row d-flex justify-content-end pe-2">
@@ -116,12 +131,12 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
         </div> 
   </div>
 
-      <?php fu_hero(fu_ui_basic('Add Dispatch Mail Config', 'Add Dispatch Mail Config &rsaquo; Add')); ?>
+      <?php fu_hero(fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
       <div class="container addarticleformouter">
         <div class="container addarticleforminner m-5">
           <form action="" method="post" name="add-emails" id="add-emails" enctype="multipart/form-data">
             <div class="container mt-4 ">
-              <div class="formcont1heading">Add Dispatch Mail Config</div>
+              <div class="formcont1heading"><?php echo $page_title; ?></div>
               <div class="row mt-1 g-4 ">
               <!-- <div class="col-12 col-sm-6 col-lg-4">
                  <label class="mb-2">Cutomer Name</label>
@@ -137,7 +152,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 											foreach($sql_customers as $res_customers)
 											{
 											?>
-													 <option value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
+													 <option value="<?php echo $res_customers['id'] ?>"style="font-weight:500;" <?php if($app_res['cust_id'] ==$res_customers['id']){?> selected <?php } ?>><?php echo $res_customers['cust_name'] ?> </option>
 													<?php
 													
 											}
@@ -154,7 +169,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 											foreach($sql_journals as $res_journals)
 											{
 											?>
-													 <option value="<?php echo $res_journals['j_id'] ?>" style="font-weight:500;" data-id="<?php echo $res_journals['j_code'] ?>_0000" data-previous="<?php echo $res_journals['j_code'] ?>_0000"><?php echo $res_journals['j_code'] ?> </option>
+													 <option value="<?php echo $res_journals['j_id'] ?>" style="font-weight:500;" data-id="<?php echo $res_journals['j_code'] ?>_0000" data-previous="<?php echo $res_journals['j_code'] ?>_0000" <?php if($app_res['j_id'] ==$res_journals['j_id']){?> selected <?php } ?>><?php echo $res_journals['j_code'] ?> </option>
 													<?php
 													
 											}
@@ -179,13 +194,13 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 
                 <div class="col-12 col-sm-6 col-lg-6">
               <label class="mb-2">Subject<span style="color: red">*</span></label>
-              <input type="text" class="form-control" name="subject" id="subject"  value="" placeholder="Enter Subject" required>
+              <input type="text" class="form-control" name="subject" id="subject"  value="<?php echo htmlspecialchars($app_res['subject']); ?>" placeholder="Enter Subject" required>
               </input>
                 </div>
 
                 <div class="col-12  col-lg-12">
               <label class="mb-2">Message<span style="color: red">*</span></label>
-              <textarea name="message" id="message" class="form-control" rows="10" placeholder="Comments" style=" min-height: 100px;"></textarea>
+              <textarea name="message" id="message" class="form-control" rows="10" placeholder="Comments" style=" min-height: 100px;"><?php echo htmlspecialchars($app_res['message']); ?></textarea>
 
               </input>
                 </div>
@@ -287,6 +302,6 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
     </script>
 
 
-<?php fu_foot('#add-emails', null, array(), null, fu_ui_basic('Add Dispatch Mail Config', 'Add Dispatch Mail Config &rsaquo; Add')); ?>
+<?php fu_foot('#add-emails', null, array(), null, fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
   </body>
 </html>
