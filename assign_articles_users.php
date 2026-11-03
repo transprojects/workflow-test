@@ -428,13 +428,41 @@ else
                 </tbody>
               </table>
 			  
-			   <div style="display: flex; gap:50px; align-items: end">
-			   
-									
-		<div class="col-12 col-sm-6 col-md-3 col-lg-2">
-
-                            <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="name" style="color: #000">Select Users:</label>
-	               <?php
+			   <style>.assign-panel{margin-top:18px;border:1px solid #e3e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}
+.assign-panel .ap-head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#f7f9fc;border-bottom:1px solid #e3e8ef}
+.assign-panel .ap-title{font-weight:700;color:#1f2d3d;font-size:15px}
+.assign-panel .ap-count{background:#e8eefc;color:#1d4ed8;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:600}
+.assign-panel .ap-count.zero{background:#f1f3f5;color:#6b7280}
+.assign-panel .ap-body{display:grid;grid-template-columns:1.1fr 1.6fr 1.1fr auto;gap:18px;padding:18px;align-items:start}
+.assign-panel label.ap-label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6675;margin:0 0 6px}
+.assign-panel .ap-label i{color:#d9534f;font-style:normal}
+.assign-panel select,.assign-panel textarea,.assign-panel input.ap-date{width:100%;border:1px solid #cfd6e0;border-radius:8px;padding:9px 12px;font-size:14px;background:#fff;box-sizing:border-box}
+.assign-panel textarea{resize:vertical;min-height:40px;height:40px}
+.assign-panel select:focus,.assign-panel textarea:focus,.assign-panel input.ap-date:focus{outline:0;border-color:#f08a24;box-shadow:0 0 0 3px rgba(240,138,36,.18)}
+.assign-panel .ap-datewrap{position:relative}
+.assign-panel .ap-datewrap i{position:absolute;right:12px;top:11px;color:#6b7280;pointer-events:none}
+.assign-panel .ap-quick{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.assign-panel .ap-quick button{border:1px solid #d5dbe5;background:#f7f9fc;border-radius:14px;font-size:12px;padding:2px 10px;color:#374151;cursor:pointer}
+.assign-panel .ap-quick button:hover{background:#fff1e0;border-color:#f08a24}
+.assign-panel .ap-go{align-self:end}
+.assign-panel .ap-go button{height:42px;padding:0 22px;border:0;border-radius:8px;background:#f08a24;color:#fff;font-weight:700;cursor:pointer;white-space:nowrap}
+.assign-panel .ap-go button:disabled{background:#d6dae1;cursor:not-allowed}
+.assign-panel .ap-hint{font-size:12px;color:#6b7280;margin-top:6px;text-align:center}
+#dynamic-table tbody tr.row-selected td{background:#fff6ea !important}
+#dynamic-table tbody tr{cursor:pointer}
+@media(max-width:992px){.assign-panel .ap-body{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.assign-panel .ap-body{grid-template-columns:1fr}}
+.assign-panel.ap-3 .ap-body{grid-template-columns:1.6fr 1fr auto}
+</style>
+<div class="assign-panel ap-3">
+	<div class="ap-head">
+		<span class="ap-title">Assign to User</span>
+		<span class="ap-count zero" id="ap_count"><b id="ap_count_n">0</b> article(s) selected</span>
+	</div>
+	<div class="ap-body">
+		<div>
+			<label class="ap-label" for="user_id">User <i>*</i></label>
+			<?php
 				   if($_REQUEST['dept_id']!="")
 				   {
 $dept_id = intval($_REQUEST['dept_id']); // Ensure it's an integer to prevent SQL injection
@@ -452,32 +480,34 @@ $query = "SELECT full_name, id, user_name
     $users = $db->query($query) or ($db->error);		
     
     ?>
-	<select id="user_id" name="user_id" class="form-select"  data-placeholder="Choose"   required>
-    <option value="">-Select-</option>
+	<select id="user_id" name="user_id" required>
+    <option value="">Select user</option>
     <?php while($row = $users->fetch_assoc()){
 		$logged_users=mysqli_num_rows(mysqli_query($db,"select * from wf_token_auth where DATE_FORMAT(start_date,'%Y-%m-%d')='".date('Y-m-d')."' and username='".$row['user_name']."'"));
 		?>
     <option value="<?php echo $row['id']; ?>" <?php if($logged_users==0){?> style="color:red;" <?php }else{?>style="color:green;"<?php } ?>><?php echo $row['full_name']; ?></option>
     <?php } ?>
     </select>
-	</div>
-                              
-								<input type="hidden" name="dep_id" id="" value="<?php echo $_REQUEST['dept_id'];?>">
-								
-       
-
-			<div class="form-group">
-                            <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="name" style="color: #000">Date:</label>
-                            <div class="col-xs-12">
-                              <div class="input-group">
-                                <input type="text" id="ce_pe_due_date" name="ce_pe_due_date" class="required col-xs-12 col-sm-12 date-picker" value="" style="width: 70%">
-                                <span class="input-group-addon"> <i class="ace-icon fa fa-calendar bigger-110"></i> </span> </div>
-                            </div>
-                          </div>
-						  
-                            <button type="submit" id="assign" value="Assign" name="assign" class="btn btn-sm btn-warning" style="height:40px">Assign <i class="ace-icon fa fa-plus icon-on-right"></i></button>
-                                    
+		</div>
+		<div>
+			<label class="ap-label" for="ce_pe_due_date">Due date <i>*</i></label>
+			<div class="ap-datewrap">
+				<input type="text" id="ce_pe_due_date" name="ce_pe_due_date" class="ap-date required date-picker" value="" placeholder="dd-mm-yyyy" autocomplete="off">
+				<i class="ace-icon fa fa-calendar"></i>
 			</div>
+			<div class="ap-quick">
+				<button type="button" data-days="1">Tomorrow</button>
+				<button type="button" data-days="3">+3 days</button>
+				<button type="button" data-days="7">+7 days</button>
+			</div>
+		</div>
+		<div class="ap-go">
+			<button type="submit" id="assign" value="Assign" name="assign" disabled>Assign <i class="ace-icon fa fa-plus icon-on-right"></i></button>
+			<div class="ap-hint" id="ap_hint">Tick articles above to enable</div>
+		</div>
+	</div>
+	<input type="hidden" name="dep_id" id="" value="<?php echo $_REQUEST['dept_id'];?>
+</div>
 			  <input type="hidden" name="aa_count" id="aa_count" value="">
 			  </form>
 		
@@ -582,6 +612,28 @@ jQuery(function($) {
 
 			})
 		</script> 
+<script type="text/javascript">
+$(function(){
+  function refreshSel(){
+    var n=$('input[name="aids[]"]:checked').length;
+    $('#ap_count_n').text(n); $('#ap_count').toggleClass('zero',n===0);
+    $('.ap-go button').prop('disabled',n===0);
+    $('#ap_hint').text(n===0?'Tick articles above to enable':'Ready for '+n+' article(s)');
+    $('.aids').each(function(){ $(this).closest('tr').toggleClass('row-selected',this.checked); });
+  }
+  $(document).on('click change','.aids,#checkAll',function(){ setTimeout(refreshSel,0); });
+  $('#dynamic-table tbody').on('click','tr',function(e){
+    if($(e.target).is('input,label,span.lbl,a,button')) return;
+    var cb=$(this).find('.aids')[0]; if(cb) cb.click();
+  });
+  $('.ap-quick button').on('click',function(){
+    var d=new Date(); d.setDate(d.getDate()+parseInt($(this).data('days'),10));
+    var p=function(x){return ('0'+x).slice(-2)};
+    $('.ap-date').val(p(d.getDate())+'-'+p(d.getMonth()+1)+'-'+d.getFullYear()).trigger('change');
+  });
+  refreshSel();
+});
+</script>
   <?php af_foot(); ?>
   </body>
 
