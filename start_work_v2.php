@@ -1,4 +1,6 @@
 <?php
+/* Assign Department only counts when the status is Assign (6). The dropdown is merely hidden for other statuses and is still posted, so a stale choice (e.g. Graphics picked and then the status changed to Pending / Completed) must not route the article. */
+if (isset($_POST['assign_department']) && (string)(isset($_POST['status']) ? $_POST['status'] : '') !== '6') { $_POST['assign_department'] = ''; if (isset($_POST['a_user_id'])) { $_POST['a_user_id'] = ''; } }
 // 2026-11-01: TSP CE Style Validator / Bypass Validation enabled; QC tool log added.
 require_once __DIR__ . '/includes/path_map.php';   /* J:/ -> E:/New_Workflow_Files/ for server-side folder checks */
 /* Login-token cache (this page only). includes/check.php validates the auth cookies on every request: one scan of
@@ -3476,6 +3478,9 @@ $('#status').on('change',function()
   else
   {
           $('#assign_department_div').hide();
+          /* only hidden is not enough: clear it, or its old choice (e.g. Graphics) is still submitted with Pending / Completed */
+          $('#assign_department').val('').trigger('change.select2');
+          $('#a_user_id').val('');
     //$('#assign_user').hide();
           
       }

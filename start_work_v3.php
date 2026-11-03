@@ -1,4 +1,6 @@
 <?php
+/* Assign Department only counts when the status is Assign (6). The dropdown is merely hidden for other statuses and is still posted, so a stale choice (e.g. Graphics picked and then the status changed to Pending / Completed) must not route the article. */
+if (isset($_POST['assign_department']) && (string)(isset($_POST['status']) ? $_POST['status'] : '') !== '6') { $_POST['assign_department'] = ''; if (isset($_POST['a_user_id'])) { $_POST['a_user_id'] = ''; } }
 // 2026-11-01: TSP CE Style Validator / Bypass Validation enabled; QC tool log added.
 /* Emergency off switch: an empty file named start_work_v3.disabled next to this script sends everybody to start_work_v2.php (same query string). */
 if (is_file(__DIR__ . '/start_work_v3.disabled')) { header('Location: start_work_v2.php' . (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] !== '' ? '?' . $_SERVER['QUERY_STRING'] : '')); exit; }
@@ -4065,6 +4067,9 @@ $('#status').on('change',function()
   else
   {
           $('#assign_department_div').hide();
+          /* only hidden is not enough: clear it, or its old choice (e.g. Graphics) is still submitted with Pending / Completed */
+          $('#assign_department').val('').trigger('change.select2');
+          $('#a_user_id').val('');
     //$('#assign_user').hide();
           
       }
