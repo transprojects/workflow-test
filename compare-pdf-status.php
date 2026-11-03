@@ -5,6 +5,11 @@ header('Content-Type: application/json');
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
+$ag_json = true;
+require_once __DIR__ . '/includes/ajax_guard.php';                 // signed-in users only (401 otherwise)
+include_once __DIR__ . '/dbc.php';                                  // $db (mysqli)
+require_once __DIR__ . '/includes/compare_pdf_lookup.php';
+
 
 
 /*
@@ -50,11 +55,7 @@ JOB DIRECTORY
 ==================================================
 */
 
-$jobDir =
-    __DIR__ .
-    '/pdf_compare_jobs/' .
-    $jobId .
-    '/';
+$jobDir = cmp_jobs_dir() . $jobId . '/';
 
 
 
@@ -132,6 +133,50 @@ DEFAULT RESPONSE
 ==================================================
 */
 
+/*
+==================================================
+STUCK JOB: the worker never started or crashed
+(missing Python libraries, wrong Python path ...).
+Show the real reason instead of "queued" forever.
+==================================================
+*/
+
+if (($status['status'] ?? '') === 'queued') {
+
+    $pyLog = $jobDir . 'python.log';
+    $logText = is_file($pyLog) ? (string)file_get_contents($pyLog) : '';
+    $age = time() - (int)filemtime($statusFile);
+
+    if (preg_match('/Traceback|ModuleNotFoundError|ImportError|is not recognized|No such file|not found/i', $logText)) {
+
+        $tail = array_slice(array_filter(array_map('trim', explode("\n", $logText))), -4);
+
+        echo json_encode([
+            'success' => true,
+            'status' => 'error',
+            'message' => 'The comparison could not start on the server: ' . implode(' | ', $tail)
+        ]);
+
+        exit;
+
+    }
+
+    if ($age > 120) {
+
+        echo json_encode([
+            'success' => true,
+            'status' => 'error',
+            'message' => 'The comparison did not start within 2 minutes. Ask IT to check that Python (py.exe) and its libraries (pymupdf, opencv, numpy) are installed for the web server. Details: ' .
+                ($logText !== '' ? trim(substr($logText, -300)) : 'python.log is empty.')
+        ]);
+
+        exit;
+
+    }
+
+}
+
+
 $response = [
 
     'success' =>
@@ -198,12 +243,14 @@ if (
         ------------------------------------------
         */
 
-        $response['report'] =
-            'pdf_compare_jobs/' .
-            rawurlencode(
-                $jobId
-            ) .
-            '/compare_report.html';
+        $response['report'] = 'compare-pdf-view.php?job_id=' . rawurlencode($jobId);
+
+        /* file the report into the article's PRQC folder now (once), so it is safe even if this job folder is cleaned */
+        $filing = cmp_file_report($db, $jobDir, $jobId);
+
+        if ($filing !== null) {
+            $response['filing'] = $filing;
+        }
 
     } else {
 

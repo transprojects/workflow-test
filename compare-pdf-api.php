@@ -78,6 +78,10 @@ if (
 }
 error_reporting(E_ALL);
 
+$ag_json = true;
+require_once __DIR__ . '/includes/ajax_guard.php';                 // signed-in users only (401 otherwise)
+require_once __DIR__ . '/includes/compare_pdf_lookup.php';
+
 
 /*
 ==================================================
@@ -93,8 +97,7 @@ $uploadDir =
     $baseDir . '/uploads/';
 
 
-$jobsDir =
-    $baseDir . '/pdf_compare_jobs/';
+$jobsDir = cmp_jobs_dir();
 
 
 
@@ -431,8 +434,22 @@ $python = '/home/user/venv/bin/python';
 ==================================================
 */
 
+/*
+Live server: C:\Windows\py.exe. On any other machine (a developer PC, Linux)
+fall back to the interpreter on PATH instead of leaving the job queued forever.
+*/
+
 $python =
     'C:\\Windows\\py.exe';
+
+if (!file_exists($python)) {
+
+    $python =
+        (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+            ? 'py'
+            : 'python3';
+
+}
 
 
 $pythonScript =

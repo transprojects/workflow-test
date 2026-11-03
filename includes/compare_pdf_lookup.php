@@ -10,6 +10,24 @@ if (!defined('TOOL_DIR')) {
 	include_once __DIR__ . '/global_variables.php';
 }
 
+/* Where the compare jobs (uploads, status, report) live.  Like the other QC tools this is E:/Tool_Reports/ (outside the web root,
+   only reachable through PHP); on a machine without that folder it falls back to pdf_compare_jobs/ in the application folder. */
+function cmp_jobs_dir()
+{
+	$base = 'E:/Tool_Reports/';
+	if (is_dir($base) && is_writable($base)) {
+		$dir = $base . 'pdf_compare/jobs/';
+		if (is_dir($dir) || @mkdir($dir, 0777, true)) {
+			return $dir;
+		}
+	}
+	$dir = dirname(__DIR__) . '/pdf_compare_jobs/';
+	if (!is_dir($dir)) {
+		@mkdir($dir, 0777, true);
+	}
+	return $dir;
+}
+
 /* Windows Explorer link, as on the Start Work page: the server drive (WF_DIR) is the user's mapped drive (TOOL_DIR) */
 function cmp_explorer_link($serverPath)
 {
@@ -67,6 +85,202 @@ function cmp_log_filing($db, $row)
 		$val .= ", '" . $db->real_escape_string(substr((string)($row[$c] ?? ''), 0, $c === 'message' ? 2000 : 490)) . "'";
 	}
 	$db->query($sql . ")" . $val . ")");
+}
+
+/* The generated report points at Images/comparison_page_N.png beside it, so a copy taken out of the job folder (the download,
+   the copy filed in the PRQC folder) loses its pictures.  Build a self-contained copy: the page images are embedded (shrunk to
+   JPEG when GD is available, to keep the file a sensible size) and the original file names replace file1.pdf / file2.pdf. */
+function cmp_standalone_report($jobDir, $reportFile, $meta)
+{
+	$out = $jobDir . 'compare_report_standalone.html';
+	if (is_file($out) && filemtime($out) >= filemtime($reportFile)) {
+		return $out;
+	}
+
+	$html = file_get_contents($reportFile);
+	if ($html === false) {
+		return $reportFile;
+	}
+
+	$memRaw = trim((string)ini_get('memory_limit'));
+	$memBytes = (int)$memRaw;
+	switch (strtolower(substr($memRaw, -1))) {
+		case 'g': $memBytes *= 1024;
+		case 'm': $memBytes *= 1024;
+		case 'k': $memBytes *= 1024;
+	}
+
+	$imgDir = realpath($jobDir . 'Images');
+
+	$html = preg_replace_callback('/src="Images\/([^"]+)"/', function ($m) use ($imgDir, $memBytes) {
+		$path = $imgDir ? realpath($imgDir . DIRECTORY_SEPARATOR . basename(rawurldecode($m[1]))) : false;
+		if (!$path || strpos($path, $imgDir) !== 0 || !is_file($path)) {
+			return $m[0];
+		}
+		$data = null;
+		$mime = 'image/png';
+		if (function_exists('imagecreatefrompng') && function_exists('imagejpeg')) {
+			$info = @getimagesize($path);
+			$need = $info ? $info[0] * $info[1] * 5 : 0;
+			if ($info && ($memBytes <= 0 || $need < $memBytes * 0.5)) {
+				$im = @imagecreatefrompng($path);
+				if ($im) {
+					if (imagesx($im) > 2200 && function_exists('imagescale')) {
+						$small = imagescale($im, 2200);
+						if ($small) {
+							imagedestroy($im);
+							$im = $small;
+						}
+					}
+					ob_start();
+					imagejpeg($im, null, 80);
+					$data = ob_get_clean();
+					imagedestroy($im);
+					$mime = 'image/jpeg';
+				}
+			}
+		}
+		if ($data === null || $data === '') {
+			$data = file_get_contents($path);
+			$mime = 'image/png';
+		}
+		return 'src="data:' . $mime . ';base64,' . base64_encode($data) . '"';
+	}, $html);
+
+	if ($html === null) {
+		return $reportFile;
+	}
+
+	foreach (array('file1_name' => 'file1.pdf', 'file2_name' => 'file2.pdf') as $key => $placeholder) {
+		if (is_array($meta) && !empty($meta[$key])) {
+			$html = str_replace('<strong>' . $placeholder . '</strong>', '<strong>' . htmlspecialchars($meta[$key], ENT_QUOTES, 'UTF-8') . '</strong>', $html);
+		}
+	}
+
+	return @file_put_contents($out, $html) !== false ? $out : $reportFile;
+}
+
+/* File the finished report into the article's PRQC folder, ONCE per job, and log the outcome.
+   Called as soon as a comparison completes (compare-pdf-status.php), so the report is already in the work folder if the
+   pdf_compare_jobs folder is cleaned later.  filing.json remembers the outcome; Download and the viewer reuse it. */
+function cmp_file_report($db, $jobDir, $jobId)
+{
+	$marker = $jobDir . 'filing.json';
+	$read = function () use ($marker) {
+		if (!is_file($marker)) { return null; }
+		$r = json_decode((string)file_get_contents($marker), true);
+		return is_array($r) ? $r : null;
+	};
+
+	if (($r = $read()) !== null) { return $r; }
+
+	$reportFile = $jobDir . 'compare_report.html';
+	if (!is_file($reportFile)) { return null; }
+
+	$lock = @fopen($jobDir . 'filing.lock', 'x');
+	if (!$lock) {                                   // another request is filing it right now: wait for its result
+		for ($i = 0; $i < 40; $i++) {
+			usleep(250000);
+			if (($r = $read()) !== null) { return $r; }
+		}
+		return null;
+	}
+
+	$meta = is_file($jobDir . 'meta.json') ? json_decode((string)file_get_contents($jobDir . 'meta.json'), true) : null;
+	$names = array();
+	foreach (array('file1_name', 'file2_name') as $k) {
+		if (is_array($meta) && !empty($meta[$k])) { $names[] = pathinfo($meta[$k], PATHINFO_FILENAME); }
+	}
+
+	$standalone = cmp_standalone_report($jobDir, $reportFile, $meta);
+
+	$article = null;
+	foreach ($names as $n) {
+		$info = cmp_article_lookup($db, $n);
+		if ($info['found_in'] === 'Live' && ($article === null || $article['found_in'] !== 'Live')) {
+			$article = $info;
+		} elseif ($article === null && $info['found_in'] !== '') {
+			$article = $info;
+		}
+	}
+
+	$res = array('saved' => false, 'message' => 'Could not determine the source article automatically.', 'prqc_path' => '',
+	             'saved_file' => '', 'work_link' => '', 'source_link' => '', 'pub_id' => '');
+
+	if ($names) {
+		if ($article === null) {
+			$res['message'] = 'No matching article (pub_id) found for the compared files (' . implode(', ', $names) . '). Name the PDFs exactly as the article Pub ID.';
+			$sug = cmp_article_lookup($db, $names[0]);
+			if (!empty($sug['suggestions'])) { $res['message'] .= ' Did you mean: ' . implode(', ', $sug['suggestions']) . '?'; }
+		} else {
+			$res['prqc_path'] = $article['prqc_path'];
+			$res['work_link'] = $article['work_link'];
+			$res['source_link'] = $article['source_link'];
+			$res['pub_id'] = $article['pub_id'];
+			$facts = 'Article ' . $article['pub_id'] . ' - ' . $article['state'] . ' (found in ' . $article['found_in'] .
+			         ', stage ' . $article['stage'] . ', status ' . $article['status'] . '). ';
+			$dest = $article['prqc_path'] . $article['pub_id'] . '_Compare_Report_' . date('Ymd_His') . '.html';
+
+			if ($article['found_in'] === 'Archive') {
+				$res['message'] = $facts . 'Archived articles are not filed into a PRQC folder.';
+			} elseif ($article['state'] === 'Withdrawn') {
+				$res['message'] = $facts . 'Withdrawn articles are not filed into a PRQC folder.';
+			} elseif ($article['prqc_path'] === '') {
+				$res['message'] = $facts . implode(' ', $article['notes']);
+			} elseif (is_dir($article['prqc_path']) || @mkdir($article['prqc_path'], 0777, true)) {
+				if (@copy($standalone, $dest)) {
+					$res['saved'] = true;
+					$res['saved_file'] = $dest;
+					$res['message'] = $facts . 'Report saved to PRQC folder: ' . $dest;
+				} else {
+					$e = error_get_last();
+					$res['message'] = $facts . 'Could not write the report to its PRQC folder (check server path/permissions). Server said: ' . ($e ? $e['message'] : 'no details');
+				}
+			} else {
+				$e = error_get_last();
+				$res['message'] = $facts . 'Its PRQC folder could not be created: ' . $article['prqc_path'] . ' Server said: ' . ($e ? $e['message'] : 'no details');
+			}
+		}
+	}
+
+	cmp_log_filing($db, array(
+		'user_id' => $_COOKIE['user_id'] ?? '', 'job_id' => $jobId,
+		'file1_name' => $meta['file1_name'] ?? '', 'file2_name' => $meta['file2_name'] ?? '',
+		'file1_size' => $meta['file1_size'] ?? 0, 'file2_size' => $meta['file2_size'] ?? 0,
+		'pub_id' => $article['pub_id'] ?? '', 'found_in' => $article['found_in'] ?? '',
+		'article_state' => $article['state'] ?? 'Not found', 'stage' => $article['stage'] ?? '', 'article_status' => $article['status'] ?? '',
+		'prqc_path' => $res['prqc_path'], 'saved_file' => $res['saved_file'], 'saved' => $res['saved'], 'message' => $res['message'],
+		'work_link' => $res['work_link'], 'source_link' => $res['source_link']
+	));
+
+	file_put_contents($marker, json_encode($res));
+
+	/* the comparison is done and the report is self-contained: the two uploaded PDFs (up to hundreds of MB) and the loose
+	   page images are no longer needed.  Only when the self-contained copy exists, so the report can always be shown. */
+	if ($standalone !== $reportFile && is_file($standalone) && filesize($standalone) > 0) {
+		@unlink($jobDir . 'file1.pdf');
+		@unlink($jobDir . 'file2.pdf');
+		foreach ((array)glob($jobDir . 'Images/*') as $img) {
+			@unlink($img);
+		}
+		@rmdir($jobDir . 'Images');
+	}
+	fclose($lock);
+	@unlink($jobDir . 'filing.lock');
+	return $res;
+}
+
+/* a job folder that was cleaned away: say where the report was filed (from the log) */
+function cmp_filed_note($db, $jobId)
+{
+	cmp_ensure_log_table($db);
+	$e = $db->real_escape_string($jobId);
+	$r = $db->query("SELECT saved, saved_file, message FROM compare_pdf_filing_log WHERE job_id = '$e' ORDER BY id DESC LIMIT 1");
+	$row = $r ? $r->fetch_assoc() : null;
+	if (!$row) {
+		return 'This comparison was removed from the server and there is no filing record for it. Please run the comparison again.';
+	}
+	return 'This comparison was already cleaned from the server. ' . ($row['saved'] ? 'The report was filed at: ' . $row['saved_file'] : $row['message']);
 }
 
 function cmp_article_lookup($db, $name)

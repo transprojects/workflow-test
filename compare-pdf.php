@@ -1148,7 +1148,7 @@ error_reporting(E_ALL);
         }
         h += '<div style="margin-top:6px"><a class="cmp-lnk" href="comparepdflog">View filing log</a></div></div>';
         filingBanner.innerHTML = h;
-        filingBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
     }
 
     /* tick / warning under each file box once the workflow check is back */
@@ -1558,7 +1558,11 @@ error_reporting(E_ALL);
                         setTimeout(
                             function() {
 
-                                resultBox.scrollIntoView({
+                                if (status.filing) {
+                            showFiling(!!status.filing.saved, status.filing.message || '', status.filing.work_link || '', status.filing.source_link || '');
+                        }
+
+                        resultBox.scrollIntoView({
                                     behavior: 'smooth',
                                     block: 'start'
                                 });
@@ -1788,7 +1792,7 @@ error_reporting(E_ALL);
 
                             reject(
                                 new Error(
-                                    response.message ||
+                                    response.message || response.error ||
                                     'Unable to start PDF comparison.'
                                 )
                             );
