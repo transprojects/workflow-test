@@ -283,6 +283,7 @@ if($flt['user_id']!=='') { $f_var .= " and wd.allocate_to = ".intval($flt['user_
                     <th data-sortable="true" scope="col" class="thcolor">Journal</th>
                     <th data-sortable="true" scope="col" class="thcolor">Article</th>
                     <th data-sortable="true" scope="col" class="thcolor">Freelancer</th>
+                    <th data-sortable="true" scope="col" class="thcolor">Allocated On</th>
                     <th data-sortable="true" scope="col" class="thcolor"> Received Date </th>
                     <th data-sortable="true" scope="col" class="thcolor">Due Date </th>
                     <th data-sortable="true" scope="col" class="thcolor">Manuscript</th>
@@ -299,7 +300,7 @@ if($flt['user_id']!=='') { $f_var .= " and wd.allocate_to = ".intval($flt['user_
 
 	
 				$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in('1','22','32')  and wd.allocate_to IN (SELECT id FROM users WHERE user_level = 4)  ".$f_status." ".$f_var." ";
-		    $query = "SELECT (SELECT full_name FROM users WHERE id = wd.allocate_to) AS fl_name, wd.allocate_to AS owner_id,c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in ('1','32') and wd.allocate_to IN (SELECT id FROM users WHERE user_level = 4) ".$f_status."  ".$f_var."";
+		    $query = "SELECT (SELECT full_name FROM users WHERE id = wd.allocate_to) AS fl_name, wd.allocate_to AS owner_id, COALESCE(NULLIF(wd.vendor_assign_date,'0000-00-00 00:00:00'), wd.allocate_time) AS alloc_at,c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in ('1','32') and wd.allocate_to IN (SELECT id FROM users WHERE user_level = 4) ".$f_status."  ".$f_var."";
 
 		$customers = $db->query($query) or ($db->error);				
 		while($row = $customers->fetch_assoc()){ 
@@ -311,6 +312,8 @@ if($flt['user_id']!=='') { $f_var .= " and wd.allocate_to = ".intval($flt['user_
                     <td><?php echo $row['j_code']; ?></td>
                     <td class="hidden-480"><?php echo $row['pub_id']; echo ($row['notes']!='') ? ' <span class="label label-sm label-info">'.substr($row['notes'],0,10).'</span>' : '';?></td>
                     <td><span class="label label-sm label-info"><?php echo htmlspecialchars($row['fl_name']); ?></span></td>
+                    <?php $alloc_ts = !empty($row['alloc_at']) ? strtotime($row['alloc_at']) : 0; ?>
+                    <td data-order="<?php echo (int)$alloc_ts; ?>"><?php echo $alloc_ts ? '<b>'.date('d-m-Y', $alloc_ts).'</b> <span style="color:#64748b">'.date('h:i A', $alloc_ts).'</span>' : '-'; ?></td>
                     <td><?php echo (date('d-m-Y',strtotime($row['recv_dt']))); ?></td>
                     <td><?php echo (date('d-m-Y',strtotime($row['due_dt']))); ?></td>
                     <td><?php echo $row['manuscript_count']; ?></td>
