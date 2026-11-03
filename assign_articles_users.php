@@ -1,5 +1,12 @@
 <?php include "includes/includes.php";
 session_start();
+include_once("includes/assign-modern.php");
+$rqs = '';
+if(!empty($_POST['return_qs'])) {
+	parse_str($_POST['return_qs'], $rq_);
+	$rq_ = array_intersect_key($rq_, array_flip(array('cust_id','stage_id','j_id','pub_id','from_dt','to_dt','user_id','dept_id','dep_id','r_user_id')));
+	if($rq_) { $rqs = '&'.http_build_query($rq_); }
+}
 ?>
 <?php
 if(isset($_POST['assign']))
@@ -38,63 +45,24 @@ if(isset($_POST['assign']))
 			
 			$insert_reason=mysqli_query($db,"insert into assigned_article_user(`user_id`,`dept_id`,`total`,`a_date`,`cdate`) values ('".$_REQUEST['user_id']."','".$_REQUEST['dep_id']."','".$_REQUEST['aa_count']."','".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."','".date('Y-m-d H:i:s')."')");
 
-	header("location:".$_COOKIE['set_url']."/assigntouser?msg=Successfully Allocated");
+	header("location:".$_COOKIE['set_url']."/assigntouser?msg=Successfully Allocated".$rqs);
 }
 
 
 
-if(isset($_REQUEST['getaction']) && $_REQUEST['getaction']!='')
-{
-	
-$_SESSION['cust_id'] = $_POST['cust_id'];
-$_SESSION['stage_id'] = $_POST['stage_id'];
-$_SESSION['j_id'] = $_POST['j_id'];
-$_SESSION['pub_id'] = $_POST['pub_id'];
-$_SESSION['from_dt'] = $_POST['from_dt'];
-$_SESSION['to_dt'] = $_POST['to_dt'];
-$_SESSION['inpt_status'] = $_POST['inpt_status'];
-$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query','Hold') ";
-
-if($_SESSION['inpt_status']!=''){
-	if (in_array("Query", (array)($_SESSION['inpt_status'] ?? [])) && in_array("Hold", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed') ";
-	}
-	else if(in_array("Query", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Hold') ";
-	}
-	else if(in_array("Hold", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query') ";
-	}
-     
-}
-$var = '';
-if($_SESSION['cust_id']!='' && $_SESSION['cust_id']!='all'){
-	
-	
-     $var.= "and c.id = '".$_SESSION['cust_id']."' ";
-}
-if($_SESSION['stage_id']!=''){
-	
-      $var.= "and wd.stage LIKE '".$_SESSION['stage_id']."%' ";
-}
-if($_SESSION['j_id']!=''){
-	
-     $var.= "and j.j_id = '".$_SESSION['j_id']."' ";
-}
-if($_SESSION['pub_id']!=''){
-	
-     $var.= "and pub_id LIKE '%".$_SESSION['pub_id']."%' ";
-}
-if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
-	
-   $var.="and recv_dt BETWEEN '".date('Y-m-d',strtotime($_SESSION['from_dt']))."' and '".date('Y-m-d',strtotime($_SESSION['to_dt']))."'";
+// Filters come from the query string only (nothing is kept in the session). No filter = everything.
+$flt = am_request_filters();
+$f_status = am_status_sql($flt['inpt_status']);
+$f_var = am_where($db, $flt, 'wd.stage');
+$_REQUEST['dept_id'] = preg_replace('/\D/', '', (string)$flt['dept_id']);
+if($_REQUEST['dept_id']==='') { $_REQUEST['dept_id'] = '1'; }
+$flt['dept_id'] = $_REQUEST['dept_id'];
+if($_COOKIE['user_level']=='3') {
+	$am_cust = array();
+	foreach($auth->showCustomerlistbyuser($_COOKIE['cust_id'],$_COOKIE['ocust_id']) as $am_r) { $am_cust[] = (int)$am_r['id']; }
+	$f_var .= $am_cust ? " and c.id in (".implode(',', $am_cust).") " : " and 1=0 ";
 }
 
-	$_SESSION['varname'] = $var;
-}
 
 
 ?>
@@ -106,7 +74,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
     <!-- CSS styles -->
     <?php include('includes/title.php'); ?>
     <?php echo styles(); ?>
-    <?php include_once 'includes/modern-ui.php'; include_once 'includes/article-filter-ui.php'; mu_head(); af_head(); ?>
+    <?php include_once 'includes/modern-ui.php'; include_once 'includes/article-filter-ui.php'; mu_head(); af_head(); am_head(); ?>
 
     <!-- Data Table CSS- -->
 
@@ -175,7 +143,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
       </div>
 
       <div class="af-page"><div class="af-wrap">
-        <form action="" name="articles" class="formouter" method="post">
+        <form action="" name="articles" class="formouter" method="get">
 					<div class="af-bar">
 	
 			<h5 class="widget-title" style="flex:1 1 100%;margin:0;font-size:13px;font-weight:700;color:#14304a;">Get Customer wise FP Articles</h5>
@@ -199,7 +167,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 									      	if(isset($_REQUEST['cust_id']))
 													{
 										    	?>
-										       <option <?php if ($_SESSION['cust_id'] == $res_customers['id']) { echo ' selected="selected"'; } ?> value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
+										       <option <?php if ($flt['cust_id'] == $res_customers['id']) { echo ' selected="selected"'; } ?> value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
 													<?php
 													}
 													else
@@ -243,7 +211,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
                           else
                           {
                           ?>
-                         <option value="<?php echo $id; ?>" <?php if($val=="FirstProof"){?>selected<?php }?> ><?php echo $val; ?></option>
+                         <option value="<?php echo $id; ?>"  ><?php echo $val; ?></option>
 
                           <?php 
                           }
@@ -258,19 +226,17 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 			  <label class="control-label" style="color: #222">Choose Status</label>
 			  <div class="d-flex gap-3 mt-3">
 					<div class="inline">
-					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Query" <?php if (in_array("Query", (array)($_SESSION['inpt_status'] ?? []))) { echo 'checked'; } ?>  />
+					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Query" <?php if (in_array("Query", (array)($flt['inpt_status'] ?? []))) { echo 'checked'; } ?>  />
 					<span class="lbl"> Query</span>
 					</div>
 					<div class="inline">
-					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Hold" <?php if (in_array("Hold", (array)($_SESSION['inpt_status'] ?? []))) { echo 'checked'; } ?> />
+					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Hold" <?php if (in_array("Hold", (array)($flt['inpt_status'] ?? []))) { echo 'checked'; } ?> />
 					<span class="lbl"> Hold</span>
 					</div>
 				  </div>
 					</div>
-						</div>
-						<div class="af-actions" style="margin:12px 0 4px;justify-content:flex-end;">
-       <input type="submit" value="Get Articles" name="getaction" class="af-btn primary">
-                 </div>
+<div class="af-actions"><input type="submit" value="Get Articles" name="getaction" class="af-btn primary"></div>
+</div>
        </form></div>
 					
       <!-- Table section -->
@@ -283,6 +249,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 				  </div>
 
 		<form action="assign_articles_users.php" id="assign_due_date_form" method="post" autocomplete="off">
+		<input type="hidden" name="return_qs" value="<?php echo htmlspecialchars(http_build_query(array_filter(array_diff_key($flt, array('inpt_status'=>1)), 'strlen'))); ?>">
 		
 	
 											
@@ -309,9 +276,9 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
                 <tbody>
                   <?php
 
-if(isset($_REQUEST['getaction']))
+if(true)
 {
-	$var="and department_id='".$_REQUEST['dept_id']."' ".$_SESSION['inpt_status_qry']." ".$_SESSION['varname']."";
+	$var="and department_id='".$_REQUEST['dept_id']."' ".$f_status." ".$f_var."";
 }
 else
 {
@@ -428,33 +395,7 @@ else
                 </tbody>
               </table>
 			  
-			   <style>.assign-panel{margin-top:18px;border:1px solid #e3e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}
-.assign-panel .ap-head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#f7f9fc;border-bottom:1px solid #e3e8ef}
-.assign-panel .ap-title{font-weight:700;color:#1f2d3d;font-size:15px}
-.assign-panel .ap-count{background:#e8eefc;color:#1d4ed8;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:600}
-.assign-panel .ap-count.zero{background:#f1f3f5;color:#6b7280}
-.assign-panel .ap-body{display:grid;grid-template-columns:1.1fr 1.6fr 1.1fr auto;gap:18px;padding:18px;align-items:start}
-.assign-panel label.ap-label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6675;margin:0 0 6px}
-.assign-panel .ap-label i{color:#d9534f;font-style:normal}
-.assign-panel select,.assign-panel textarea,.assign-panel input.ap-date{width:100%;border:1px solid #cfd6e0;border-radius:8px;padding:9px 12px;font-size:14px;background:#fff;box-sizing:border-box}
-.assign-panel textarea{resize:vertical;min-height:40px;height:40px}
-.assign-panel select:focus,.assign-panel textarea:focus,.assign-panel input.ap-date:focus{outline:0;border-color:#f08a24;box-shadow:0 0 0 3px rgba(240,138,36,.18)}
-.assign-panel .ap-datewrap{position:relative}
-.assign-panel .ap-datewrap i{position:absolute;right:12px;top:11px;color:#6b7280;pointer-events:none}
-.assign-panel .ap-quick{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
-.assign-panel .ap-quick button{border:1px solid #d5dbe5;background:#f7f9fc;border-radius:14px;font-size:12px;padding:2px 10px;color:#374151;cursor:pointer}
-.assign-panel .ap-quick button:hover{background:#fff1e0;border-color:#f08a24}
-.assign-panel .ap-go{align-self:end}
-.assign-panel .ap-go button{height:42px;padding:0 22px;border:0;border-radius:8px;background:#f08a24;color:#fff;font-weight:700;cursor:pointer;white-space:nowrap}
-.assign-panel .ap-go button:disabled{background:#d6dae1;cursor:not-allowed}
-.assign-panel .ap-hint{font-size:12px;color:#6b7280;margin-top:6px;text-align:center}
-#dynamic-table tbody tr.row-selected td{background:#fff6ea !important}
-#dynamic-table tbody tr{cursor:pointer}
-@media(max-width:992px){.assign-panel .ap-body{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.assign-panel .ap-body{grid-template-columns:1fr}}
-.assign-panel.ap-3 .ap-body{grid-template-columns:1.6fr 1fr auto}
-</style>
-<div class="assign-panel ap-3">
+			   <div class="assign-panel ap-3">
 	<div class="ap-head">
 		<span class="ap-title">Assign to User</span>
 		<span class="ap-count zero" id="ap_count"><b id="ap_count_n">0</b> article(s) selected</span>
@@ -485,7 +426,7 @@ $query = "SELECT full_name, id, user_name
     <?php while($row = $users->fetch_assoc()){
 		$logged_users=mysqli_num_rows(mysqli_query($db,"select * from wf_token_auth where DATE_FORMAT(start_date,'%Y-%m-%d')='".date('Y-m-d')."' and username='".$row['user_name']."'"));
 		?>
-    <option value="<?php echo $row['id']; ?>" <?php if($logged_users==0){?> style="color:red;" <?php }else{?>style="color:green;"<?php } ?>><?php echo $row['full_name']; ?></option>
+    <option value="<?php echo $row['id']; ?>" data-online="<?php echo $logged_users>0 ? 1 : 0; ?>"><?php echo ($logged_users>0 ? '● ' : '○ ').$row['full_name']; ?></option>
     <?php } ?>
     </select>
 		</div>
@@ -506,7 +447,7 @@ $query = "SELECT full_name, id, user_name
 			<div class="ap-hint" id="ap_hint">Tick articles above to enable</div>
 		</div>
 	</div>
-	<input type="hidden" name="dep_id" id="" value="<?php echo $_REQUEST['dept_id'];?>
+	<input type="hidden" name="dep_id" id="" value="<?php echo $_REQUEST['dept_id'];?>">
 </div>
 			  <input type="hidden" name="aa_count" id="aa_count" value="">
 			  </form>
@@ -612,28 +553,18 @@ jQuery(function($) {
 
 			})
 		</script> 
-<script type="text/javascript">
-$(function(){
-  function refreshSel(){
-    var n=$('input[name="aids[]"]:checked').length;
-    $('#ap_count_n').text(n); $('#ap_count').toggleClass('zero',n===0);
-    $('.ap-go button').prop('disabled',n===0);
-    $('#ap_hint').text(n===0?'Tick articles above to enable':'Ready for '+n+' article(s)');
-    $('.aids').each(function(){ $(this).closest('tr').toggleClass('row-selected',this.checked); });
-  }
-  $(document).on('click change','.aids,#checkAll',function(){ setTimeout(refreshSel,0); });
-  $('#dynamic-table tbody').on('click','tr',function(e){
-    if($(e.target).is('input,label,span.lbl,a,button')) return;
-    var cb=$(this).find('.aids')[0]; if(cb) cb.click();
-  });
-  $('.ap-quick button').on('click',function(){
-    var d=new Date(); d.setDate(d.getDate()+parseInt($(this).data('days'),10));
-    var p=function(x){return ('0'+x).slice(-2)};
-    $('.ap-date').val(p(d.getDate())+'-'+p(d.getMonth()+1)+'-'+d.getFullYear()).trigger('change');
-  });
-  refreshSel();
-});
-</script>
+<div class="cm-back" id="cm_back"><div class="cm-box" role="dialog" aria-modal="true">
+	<div class="cm-head"><span id="cm_title">Confirm assignment</span><small id="cm_sub"></small></div>
+	<div class="cm-body">
+		<div class="cm-row"><span id="cm_who_l">Assign to</span><span id="cm_who"></span></div>
+		<div class="cm-row"><span>Due date</span><span id="cm_due"></span></div>
+		<div class="cm-row" id="cm_msg_row"><span>Instructions</span><span id="cm_msg"></span></div>
+		<div class="cm-list">Articles (<span id="cm_n">0</span>)</div>
+		<div class="cm-chips" id="cm_chips"></div>
+	</div>
+	<div class="cm-foot"><button type="button" class="cm-cancel" id="cm_cancel">Cancel</button><button type="button" class="cm-ok" id="cm_ok">Confirm &amp; Assign</button></div>
+</div></div>
+  <?php am_foot(); ?>
   <?php af_foot(); ?>
   </body>
 

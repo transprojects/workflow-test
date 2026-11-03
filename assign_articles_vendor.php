@@ -1,6 +1,13 @@
 <?php 
 include "includes/includes.php";
 session_start();
+include_once("includes/assign-modern.php");
+$rqs = '';
+if(!empty($_POST['return_qs'])) {
+	parse_str($_POST['return_qs'], $rq_);
+	$rq_ = array_intersect_key($rq_, array_flip(array('cust_id','stage_id','j_id','pub_id','from_dt','to_dt','user_id','dept_id','dep_id','r_user_id')));
+	if($rq_) { $rqs = '&'.http_build_query($rq_); }
+}
 include_once("smtpmail/phpmailer/class.phpmailer.php");
 include_once("assign_mail_template.php");
 //$mail_from = "inward@transforma.in";
@@ -87,7 +94,7 @@ if(isset($_POST['assign']))
 
 	}//exit;
 	if(!empty($assign_failed)) {
-		header("location:".$_COOKIE['set_url']."/assigntovendor?msg=Assignment FAILED for: ".implode(', ',$assign_failed).". No mail sent.");
+		header("location:".$_COOKIE['set_url']."/assigntovendor?msg=Assignment FAILED for: ".implode(', ',$assign_failed).". No mail sent.".$rqs);
 		exit;
 	}
 			
@@ -106,7 +113,8 @@ $mail_aids = array_filter(array_map('trim', (array)$_POST['aids']));
 	'due_date'   => $_REQUEST['ce_pe_due_date'],
 	'portal_url' => 'http://103.66.12.3:8010/workflow-new/vportal-new/index.php',
 	'reassign'   => false,
-	'articles'   => assign_mail_articles($db, $mail_aids)
+	'articles'   => assign_mail_articles($db, $mail_aids),
+	'logo_cid'   => file_exists(dirname(__FILE__).'/assets/images/translogo.png') ? 'transforma_logo' : ''
 ));
 $mail_ids = implode(', ', $mail_aids);
 @$subject = (count($mail_aids) > 1 ? 'Articles ' : 'Article ') . (strlen($mail_ids) > 70 ? substr($mail_ids, 0, 67) . '...' : $mail_ids) . ' Assign Notification';	
@@ -125,6 +133,7 @@ $mail_ids = implode(', ', $mail_aids);
         $mail->isHTML(true);
         $mail->Subject =$subject;
         $mail->Body = $body;
+        if(file_exists(dirname(__FILE__).'/assets/images/translogo.png')) { $mail->AddEmbeddedImage(dirname(__FILE__).'/assets/images/translogo.png', 'transforma_logo', 'translogo.png', 'base64', 'image/png'); }
 		$to=$userdetails['user_email'];
 		$cc="uma@transforma.in,inward@transforma.in,viji@transforma.in,trans2@transforma.in,indesign@transforma.in,journalqc@transforma.in,art@transforma.in,ananthi@transforma.in,jeyapriya@transforma.in ";
 		$bcc="marimuthu@transforma.in";
@@ -158,73 +167,22 @@ $mail_ids = implode(', ', $mail_aids);
 
 		 if(!$mail->Send()) {
 
-			header("location:".$_COOKIE['set_url']."/assigntovendor?msg=Successfully Allocated But Mail not Sent");
+			header("location:".$_COOKIE['set_url']."/assigntovendor?msg=Successfully Allocated But Mail not Sent".$rqs);
     } else {
-			header("location:".$_COOKIE['set_url']."/assigntovendor?msg=Successfully Allocated and Mail sent");
+			header("location:".$_COOKIE['set_url']."/assigntovendor?msg=Successfully Allocated and Mail sent".$rqs);
     }
 		
 }
 
-if(isset($_SESSION['inpt_status_qry']) || $_SESSION['inpt_status_qry'] =='' )
-{
-	$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query','Hold') ";
-}
+// Filters come from the query string only (nothing is kept in the session). No filter = everything.
+$flt = am_request_filters();
+$f_status = am_status_sql($flt['inpt_status']);
+$f_var = am_where($db, $flt, 'stage');
+$cust_list = ($_COOKIE['user_level']=='3') ? $auth->showCustomerlistbyuser($_COOKIE['cust_id'],$_COOKIE['ocust_id']) : $auth->showCustomerlistbyuser('57','58,68,69,80,82,33');
+$am_cust = array();
+foreach($cust_list as $am_r) { $am_cust[] = (int)$am_r['id']; }
+$f_var .= $am_cust ? " and c.id in (".implode(',', $am_cust).") " : " and 1=0 ";
 
-if(isset($_REQUEST['getaction']) && $_REQUEST['getaction']!='')
-{
-	
-$_SESSION['cust_id'] = $_POST['cust_id'];
-$_SESSION['stage_id'] = $_POST['stage_id'];
-$_SESSION['j_id'] = $_POST['j_id'];
-$_SESSION['pub_id'] = $_POST['pub_id'];
-$_SESSION['from_dt'] = $_POST['from_dt'];
-$_SESSION['to_dt'] = $_POST['to_dt'];
-$_SESSION['inpt_status'] = $_POST['inpt_status'];
-$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query','Hold') ";
-
-if($_SESSION['inpt_status']!=''){
-	if (in_array("Query", (array)($_SESSION['inpt_status'] ?? [])) && in_array("Hold", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed') ";
-	}
-	else if(in_array("Query", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Hold') ";
-	}
-	else if(in_array("Hold", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query') ";
-	}
-     
-}
-$var = '';
-if($_SESSION['cust_id']!='' && $_SESSION['cust_id']!='all' ){
-	
-     $var.= "and c.id = '".$_SESSION['cust_id']."' ";
-}
-if($_SESSION['cust_id']!='' && $_SESSION['cust_id']=='all' ){
-	
-     $var.= "and c.id in('69','68','57','58','82')";
-}
-if($_SESSION['stage_id']!=''){
-	
-      $var.= "and stage LIKE '".$_SESSION['stage_id']."%' ";
-}
-if($_SESSION['j_id']!=''){
-	
-     $var.= "and j.j_id = '".$_SESSION['j_id']."' ";
-}
-if($_SESSION['pub_id']!=''){
-	
-     $var.= "and pub_id LIKE '%".$_SESSION['pub_id']."%' ";
-}
-if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
-	
-   $var.="and recv_dt BETWEEN '".date('Y-m-d',strtotime($_SESSION['from_dt']))."' and '".date('Y-m-d',strtotime($_SESSION['to_dt']))."'";
-}
-
-	$_SESSION['varname'] = $var;
-}
 
 
 ?>
@@ -236,7 +194,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
     <!-- CSS styles -->
     <?php include('includes/title.php'); ?>
     <?php echo styles(); ?>
-    <?php include_once 'includes/modern-ui.php'; include_once 'includes/article-filter-ui.php'; mu_head(); af_head(); ?>
+    <?php include_once 'includes/modern-ui.php'; include_once 'includes/article-filter-ui.php'; mu_head(); af_head(); am_head(); ?>
 
     <!-- Data Table CSS- -->
 
@@ -294,7 +252,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
       </div>
 
       <div class="af-page"><div class="af-wrap">
-        <form action="" name="articles" class="formouter" method="post">
+        <form action="" name="articles" class="formouter" method="get">
 					<div class="af-bar">
 	
 			<h5 class="widget-title" style="flex:1 1 100%;margin:0;font-size:13px;font-weight:700;color:#14304a;">Get Customer wise FP Articles</h5>
@@ -320,7 +278,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 									      	if(isset($_REQUEST['cust_id']))
 													{
 										    	?>
-										       <option <?php if ($_SESSION['cust_id'] == $res_customers['id']) { echo ' selected="selected"'; } ?> value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
+										       <option <?php if ($flt['cust_id'] == $res_customers['id']) { echo ' selected="selected"'; } ?> value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
 													<?php
 													}
 													else
@@ -336,10 +294,8 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 			  
 			 
 			
-						</div>
-						<div class="af-actions" style="margin:12px 0 4px;justify-content:flex-end;">
-       <input type="submit" value="Get Articles" name="getaction" class="af-btn primary">
-                 </div>
+<div class="af-actions"><input type="submit" value="Get Articles" name="getaction" class="af-btn primary"></div>
+</div>
        </form></div>
 					
       <!-- Table section -->
@@ -352,6 +308,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 				  </div>
 
 		<form action="<?php echo $_COOKIE['set_url'];?>/assigntovendor" id="assign_due_date_form" method="post" autocomplete="off">
+		<input type="hidden" name="return_qs" value="<?php echo htmlspecialchars(http_build_query(array_filter(array_diff_key($flt, array('inpt_status'=>1)), 'strlen'))); ?>">
 		
 	
 											
@@ -379,16 +336,21 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
                   <?php
 
 
-		if($_REQUEST['cust_id']=='68')
+		if($flt['cust_id']=='68')
 		{
-			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in('2')  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$_SESSION['inpt_status_qry']." ".$_SESSION['varname']." ";
-		     $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id='2' and (wd.allocate_to =0 OR allocate_to IS NULL) ".$_SESSION['inpt_status_qry']."  ".$_SESSION['varname']."";
+			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in('2')  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$f_status." ".$f_var." ";
+		     $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id='2' and (wd.allocate_to =0 OR allocate_to IS NULL) ".$f_status."  ".$f_var."";
 
+		}
+		elseif($flt['cust_id']==='' || $flt['cust_id']==='all')
+		{
+				$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and ((c.id='68' AND department_id='2') OR (c.id<>'68' AND department_id in ('1','22','32')))  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$f_status." ".$f_var." ";
+		    $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and ((c.id='68' AND department_id='2') OR (c.id<>'68' AND department_id in ('1','22','32'))) and (wd.allocate_to =0 OR allocate_to IS NULL) ".$f_status."  ".$f_var."";
 		}
 		else
 		{
-				$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in('1','22','32')  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$_SESSION['inpt_status_qry']." ".$_SESSION['varname']." ";
-		    $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in ('1','32') and (wd.allocate_to =0 OR allocate_to IS NULL) ".$_SESSION['inpt_status_qry']."  ".$_SESSION['varname']."";
+				$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in('1','22','32')  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$f_status." ".$f_var." ";
+		    $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in ('1','32') and (wd.allocate_to =0 OR allocate_to IS NULL) ".$f_status."  ".$f_var."";
 		}
 
 		$customers = $db->query($query) or ($db->error);				
@@ -415,33 +377,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
                 </tbody>
               </table>
 			  
-			   <style>.assign-panel{margin-top:18px;border:1px solid #e3e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}
-.assign-panel .ap-head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#f7f9fc;border-bottom:1px solid #e3e8ef}
-.assign-panel .ap-title{font-weight:700;color:#1f2d3d;font-size:15px}
-.assign-panel .ap-count{background:#e8eefc;color:#1d4ed8;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:600}
-.assign-panel .ap-count.zero{background:#f1f3f5;color:#6b7280}
-.assign-panel .ap-body{display:grid;grid-template-columns:1.1fr 1.6fr 1.1fr auto;gap:18px;padding:18px;align-items:start}
-.assign-panel label.ap-label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6675;margin:0 0 6px}
-.assign-panel .ap-label i{color:#d9534f;font-style:normal}
-.assign-panel select,.assign-panel textarea,.assign-panel input.ap-date{width:100%;border:1px solid #cfd6e0;border-radius:8px;padding:9px 12px;font-size:14px;background:#fff;box-sizing:border-box}
-.assign-panel textarea{resize:vertical;min-height:40px;height:40px}
-.assign-panel select:focus,.assign-panel textarea:focus,.assign-panel input.ap-date:focus{outline:0;border-color:#f08a24;box-shadow:0 0 0 3px rgba(240,138,36,.18)}
-.assign-panel .ap-datewrap{position:relative}
-.assign-panel .ap-datewrap i{position:absolute;right:12px;top:11px;color:#6b7280;pointer-events:none}
-.assign-panel .ap-quick{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
-.assign-panel .ap-quick button{border:1px solid #d5dbe5;background:#f7f9fc;border-radius:14px;font-size:12px;padding:2px 10px;color:#374151;cursor:pointer}
-.assign-panel .ap-quick button:hover{background:#fff1e0;border-color:#f08a24}
-.assign-panel .ap-go{align-self:end}
-.assign-panel .ap-go button{height:42px;padding:0 22px;border:0;border-radius:8px;background:#f08a24;color:#fff;font-weight:700;cursor:pointer;white-space:nowrap}
-.assign-panel .ap-go button:disabled{background:#d6dae1;cursor:not-allowed}
-.assign-panel .ap-hint{font-size:12px;color:#6b7280;margin-top:6px;text-align:center}
-#dynamic-table tbody tr.row-selected td{background:#fff6ea !important}
-#dynamic-table tbody tr{cursor:pointer}
-@media(max-width:992px){.assign-panel .ap-body{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.assign-panel .ap-body{grid-template-columns:1fr}}
-.assign-panel.ap-3 .ap-body{grid-template-columns:1.6fr 1fr auto}
-</style>
-<div class="assign-panel">
+			   <div class="assign-panel">
 	<div class="ap-head">
 		<span class="ap-title">Assign to Freelancer</span>
 		<span class="ap-count zero" id="ap_count"><b id="ap_count_n">0</b> article(s) selected</span>
@@ -483,7 +419,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 		</div>
 	</div>
 	<input type="hidden" name="dep_id" id="" value="1">
-	<input type="hidden" name="cust_id" id="" value="<?php echo $_REQUEST['cust_id'];?>
+	<input type="hidden" name="cust_id" id="" value="<?php echo $_REQUEST['cust_id'];?>">
 </div>
 <input type="hidden" name="pub_id" id="pub_id" value="">
 			  <input type="hidden" name="aa_count" id="aa_count" value="">
@@ -601,28 +537,18 @@ jQuery(function($) {
       });
     });
 		</script> 
-<script type="text/javascript">
-$(function(){
-  function refreshSel(){
-    var n=$('input[name="aids[]"]:checked').length;
-    $('#ap_count_n').text(n); $('#ap_count').toggleClass('zero',n===0);
-    $('.ap-go button').prop('disabled',n===0);
-    $('#ap_hint').text(n===0?'Tick articles above to enable':'Ready for '+n+' article(s)');
-    $('.aids').each(function(){ $(this).closest('tr').toggleClass('row-selected',this.checked); });
-  }
-  $(document).on('click change','.aids,#checkAll',function(){ setTimeout(refreshSel,0); });
-  $('#dynamic-table tbody').on('click','tr',function(e){
-    if($(e.target).is('input,label,span.lbl,a,button')) return;
-    var cb=$(this).find('.aids')[0]; if(cb) cb.click();
-  });
-  $('.ap-quick button').on('click',function(){
-    var d=new Date(); d.setDate(d.getDate()+parseInt($(this).data('days'),10));
-    var p=function(x){return ('0'+x).slice(-2)};
-    $('.ap-date').val(p(d.getDate())+'-'+p(d.getMonth()+1)+'-'+d.getFullYear()).trigger('change');
-  });
-  refreshSel();
-});
-</script>
+<div class="cm-back" id="cm_back"><div class="cm-box" role="dialog" aria-modal="true">
+	<div class="cm-head"><span id="cm_title">Confirm assignment</span><small id="cm_sub"></small></div>
+	<div class="cm-body">
+		<div class="cm-row"><span id="cm_who_l">Assign to</span><span id="cm_who"></span></div>
+		<div class="cm-row"><span>Due date</span><span id="cm_due"></span></div>
+		<div class="cm-row" id="cm_msg_row"><span>Instructions</span><span id="cm_msg"></span></div>
+		<div class="cm-list">Articles (<span id="cm_n">0</span>)</div>
+		<div class="cm-chips" id="cm_chips"></div>
+	</div>
+	<div class="cm-foot"><button type="button" class="cm-cancel" id="cm_cancel">Cancel</button><button type="button" class="cm-ok" id="cm_ok">Confirm &amp; Assign</button></div>
+</div></div>
+  <?php am_foot(); ?>
   <?php af_foot(); ?>
   </body>
 

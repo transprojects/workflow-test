@@ -32,7 +32,7 @@ function assign_mail_date($d)
 }
 
 /**
- * $o: full_name, user_name, password, message, due_date (any strtotime string), portal_url, reassign (bool), articles (rows from assign_mail_articles)
+ * $o: logo_cid (optional), full_name, user_name, password, message, due_date (any strtotime string), portal_url, reassign (bool), articles (rows from assign_mail_articles)
  */
 function assign_mail_body($o)
 {
@@ -61,11 +61,20 @@ function assign_mail_body($o)
 		? '<tr><td style="padding:0 32px 22px"><div style="background:#fff7ed;border-left:4px solid #f08a24;padding:12px 16px;border-radius:4px;color:#7c4a03;font-size:14px;line-height:1.5"><b>Instructions</b><br/>' . nl2br($h($o['message'])) . '</div></td></tr>'
 		: '';
 
+	if (!empty($o['logo_cid'])) {
+		$header = '<tr><td style="background:#ffffff;padding:22px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
+			. '<td align="left"><img src="cid:' . $h($o['logo_cid']) . '" width="200" alt="Transforma" style="display:block;border:0;outline:none;height:auto;width:200px"></td>'
+			. '<td align="right" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;font-weight:700">Workflow</td>'
+			. '</tr></table></td></tr>';
+	} else {
+		$header = '<tr><td style="background:#14304a;padding:22px 32px"><span style="color:#ffffff;font-size:20px;font-weight:700;letter-spacing:.3px">TRANSFORMA</span> <span style="color:#f08a24;font-size:20px;font-weight:700">Workflow</span></td></tr>';
+	}
+
 	return '<!doctype html><html><body style="margin:0;padding:0;background:#eef2f7;font-family:Segoe UI,Arial,Helvetica,sans-serif">'
 	. '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef2f7;padding:24px 12px"><tr><td align="center">'
 	. '<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;background:#ffffff;border-radius:10px;overflow:hidden;border:1px solid #e1e6ee">'
-	// header
-	. '<tr><td style="background:#14304a;padding:22px 32px"><span style="color:#ffffff;font-size:20px;font-weight:700;letter-spacing:.3px">TRANSFORMA</span> <span style="color:#f08a24;font-size:20px;font-weight:700">Workflow</span></td></tr>'
+	// header (logo is embedded in the mail as cid:<logo_cid>; falls back to text when no logo is given)
+	. $header
 	. '<tr><td style="background:#f08a24;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>'
 	// intro
 	. '<tr><td style="padding:28px 32px 8px"><div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#f08a24;font-weight:700">Assignment notification</div>'

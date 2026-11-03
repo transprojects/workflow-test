@@ -1,8 +1,28 @@
 <?php include "includes/includes.php";
 session_start();
+include_once("includes/assign-modern.php");
+$rqs = '';
+if(!empty($_POST['return_qs'])) {
+	parse_str($_POST['return_qs'], $rq_);
+	$rq_ = array_intersect_key($rq_, array_flip(array('cust_id','stage_id','j_id','pub_id','from_dt','to_dt','user_id','dept_id','dep_id','r_user_id')));
+	if($rq_) { $rqs = '&'.http_build_query($rq_); }
+}
 
 if(isset($_POST['reassign']))
 {
+	// An article cannot be re-assigned to the user who already holds it: check before changing anything.
+	$od_dept = !($_REQUEST['dept_id']=='1' || $_REQUEST['dept_id']=='22' || $_REQUEST['dep_id']=='24' || $_REQUEST['dep_id']=='32');
+	$owner_col = $od_dept ? 'assigned_od_user_id' : 'assigned_user_id';
+	$same_owner = array();
+	foreach((array)$_POST['aids'] as $chk_id) {
+		if((int)$chk_id <= 0) { continue; }
+		$chk = mysqli_fetch_array(mysqli_query($db, "select pub_id, $owner_col as owner_id from inw_inward_dtl where id=".(int)$chk_id));
+		if($chk && (int)$chk['owner_id'] === (int)$_POST['re_user_id']) { $same_owner[] = $chk['pub_id']; }
+	}
+	if($same_owner) {
+		header("location:re-assigntouser?msg=Already assigned to the selected user: ".implode(', ', $same_owner).". Nothing was changed.".$rqs);
+		exit;
+	}
 	//print_r($_POST);
 	//print_r($_POST['aids']);exit;
 	foreach($_POST['aids'] as $key => $a_id) {
@@ -17,11 +37,11 @@ if(isset($_POST['reassign']))
 			
 			if($_REQUEST['dept_id']=='1' || $_REQUEST['dept_id']=='22' || $_REQUEST['dep_id']=='24' || $_REQUEST['dep_id']=='32')
 			{
-				$reassigned="`assigned_user_id` ='".$_POST['re_user_id']."',ce_pe_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
+				$reassigned="`assigned_user_id` ='".$_POST['re_user_id']."',ce_pe_due_date='".date('Y-m-d',strtotime(isset($_REQUEST['target_due_dt']) ? $_REQUEST['target_due_dt'] : $_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
 			}
 			else
 			{
-				$reassigned="`assigned_od_user_id` ='".$_POST['re_user_id']."',od_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
+				$reassigned="`assigned_od_user_id` ='".$_POST['re_user_id']."',od_due_date='".date('Y-m-d',strtotime(isset($_REQUEST['target_due_dt']) ? $_REQUEST['target_due_dt'] : $_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
 			}
 			
 			
@@ -33,84 +53,25 @@ if(isset($_POST['reassign']))
 		}
 		
 	}//exit;
-	header("location:re-assigntouser?msg=Successfully Re-Allocated");
+	header("location:re-assigntouser?msg=Successfully Re-Allocated".$rqs);
 }
 
-if(isset($_SESSION['inpt_status_qry']) || $_SESSION['inpt_status_qry'] =='' )
-{
-	$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query','Hold') ";
+// Filters come from the query string only (nothing is kept in the session). No filter = everything.
+$flt = am_request_filters();
+$f_status = am_status_sql($flt['inpt_status']);
+$f_var = am_where($db, $flt, 'stage');
+$_REQUEST['dep_id'] = preg_replace('/\D/', '', (string)$flt['dep_id']);
+if($_REQUEST['dep_id']==='') { $_REQUEST['dep_id'] = '1'; }
+$flt['dep_id'] = $_REQUEST['dep_id'];
+if($_COOKIE['user_level']=='3') {
+	$am_cust = array();
+	foreach($auth->showCustomerlistbyuser($_COOKIE['cust_id'],$_COOKIE['ocust_id']) as $am_r) { $am_cust[] = (int)$am_r['id']; }
+	$f_var .= $am_cust ? " and c.id in (".implode(',', $am_cust).") " : " and 1=0 ";
+}
+if($flt['r_user_id']!=='') {
+	$f_var .= ($flt['dep_id']==10 || $flt['dep_id']==14) ? " and assigned_od_user_id='".intval($flt['r_user_id'])."' " : " and assigned_user_id='".intval($flt['r_user_id'])."' ";
 }
 
-if(isset($_REQUEST['getaction']) && $_REQUEST['getaction']!='')
-{
-	
-$_SESSION['cust_id'] = $_POST['cust_id'];
-$_SESSION['stage_id'] = $_POST['stage_id'];
-$_SESSION['r_user_id'] = $_POST['r_user_id'];
-$_SESSION['j_id'] = $_POST['j_id'];
-$_SESSION['pub_id'] = $_POST['pub_id'];
-$_SESSION['from_dt'] = $_POST['from_dt'];
-$_SESSION['to_dt'] = $_POST['to_dt'];
-$_SESSION['inpt_status'] = $_POST['inpt_status'];
-$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query','Hold') ";
-
-if($_SESSION['inpt_status']!=''){
-	if (in_array("Query", (array)($_SESSION['inpt_status'] ?? [])) && in_array("Hold", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed') ";
-	}
-	else if(in_array("Query", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Hold') ";
-	}
-	else if(in_array("Hold", (array)($_SESSION['inpt_status'] ?? [])))
-	{
-		$_SESSION['inpt_status_qry'] = " AND wd.status NOT IN ('Delivery','Client Review','Completed','Query') ";
-	}
-     
-}
-$var = '';
-if($_SESSION['cust_id']!=''){
-	
-	if($_SESSION['cust_id']!="all")
-	{
-     $var.= "and c.id = '".$_SESSION['cust_id']."' ";
-	}
-	else
-	{
-     $var.= "";
-	}
-}
-if($_SESSION['stage_id']!=''){
-	
-      $var.= "and stage LIKE '".$_SESSION['stage_id']."%' ";
-}
-if($_SESSION['r_user_id']!=''){
-	
-	if($_REQUEST['dep_id']==10 || $_REQUEST['dep_id']==14 )
-	{
-	$var.= "and assigned_od_user_id='".$_SESSION['r_user_id']."' ";
-	}
-	else
-	{
-      $var.= "and assigned_user_id='".$_SESSION['r_user_id']."' ";
-	}
-}
-if($_SESSION['j_id']!=''){
-	
-     $var.= "and j.j_id = '".$_SESSION['j_id']."' ";
-}
-if($_SESSION['pub_id']!=''){
-	
-     $var.= "and pub_id LIKE '%".$_SESSION['pub_id']."%' ";
-}
-if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
-	
-   $var.="and recv_dt BETWEEN '".date('Y-m-d',strtotime($_SESSION['from_dt']))."' and '".date('Y-m-d',strtotime($_SESSION['to_dt']))."'";
-}
-
-	$_SESSION['varname'] = $var;
-}
 
 
 ?>
@@ -122,7 +83,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
     <!-- CSS styles -->
     <?php include('includes/title.php'); ?>
     <?php echo styles(); ?>
-    <?php include_once 'includes/modern-ui.php'; include_once 'includes/article-filter-ui.php'; mu_head(); af_head(); ?>
+    <?php include_once 'includes/modern-ui.php'; include_once 'includes/article-filter-ui.php'; mu_head(); af_head(); am_head(); ?>
 
     <!-- Data Table CSS- -->
 
@@ -192,7 +153,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
       </div>
 
       <div class="af-page"><div class="af-wrap">
-        <form action="" name="articles" class="formouter" method="post">
+        <form action="" name="articles" class="formouter" method="get">
 					<div class="af-bar">
 	
 			<h5 class="widget-title" style="flex:1 1 100%;margin:0;font-size:13px;font-weight:700;color:#14304a;">Get Customer wise FP Articles</h5>
@@ -216,7 +177,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 									      	if(isset($_REQUEST['cust_id']))
 													{
 										    	?>
-										       <option <?php if ($_SESSION['cust_id'] == $res_customers['id']) { echo ' selected="selected"'; } ?> value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
+										       <option <?php if ($flt['cust_id'] == $res_customers['id']) { echo ' selected="selected"'; } ?> value="<?php echo $res_customers['id'] ?>"style="font-weight:500;"><?php echo $res_customers['cust_name'] ?> </option>
 													<?php
 													}
 													else
@@ -258,7 +219,7 @@ while($row_u = $users_r->fetch_assoc())
 $logged_users=mysqli_num_rows(mysqli_query($db,"select * from wf_token_auth where DATE_FORMAT(start_date,'%Y-%m-%d')='".date('Y-m-d')."' and username='".$row_u['user_name']."'"));
 
 	?>   
-<option value="<?php echo $row_u['id'];?>" <?php if($logged_users==0){?> style="color:red;" <?php }else{?>style="color:green;"<?php } ?> <?php if($_SESSION['r_user_id'] ==$row_u['id']){?> selected <?php } ?>><?php echo $row_u['full_name']; ?></option>
+<option value="<?php echo $row_u['id'];?>" data-online="<?php echo $logged_users>0 ? 1 : 0; ?>" <?php if($flt['r_user_id'] ==$row_u['id']){?> selected <?php } ?>><?php echo ($logged_users>0 ? '● ' : '○ ').$row_u['full_name']; ?></option>
     <?php
 }
 ?>
@@ -268,22 +229,19 @@ $logged_users=mysqli_num_rows(mysqli_query($db,"select * from wf_token_auth wher
 			  <label class="control-label" style="color: #222">Choose Status</label>
 			  <div class="d-flex gap-3 mt-3">
 					<div class="inline">
-					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Query" <?php if (in_array("Query", (array)($_SESSION['inpt_status'] ?? []))) { echo 'checked'; } ?>  />
+					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Query" <?php if (in_array("Query", (array)($flt['inpt_status'] ?? []))) { echo 'checked'; } ?>  />
 					<span class="lbl"> Query</span>
 					</div>
 					<div class="inline">
-					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Hold" <?php if (in_array("Hold", (array)($_SESSION['inpt_status'] ?? []))) { echo 'checked'; } ?> />
+					<input type="checkbox" id="inpt_status" name="inpt_status[]" class="ace" value="Hold" <?php if (in_array("Hold", (array)($flt['inpt_status'] ?? []))) { echo 'checked'; } ?> />
 					<span class="lbl"> Hold</span>
 					</div>
 				  </div>
 					</div>
-						</div>
-						<div class="af-actions" style="margin:12px 0 4px;justify-content:flex-end;">
-       <input type="submit" value="Get Articles" name="getaction" class="af-btn primary">
-                 </div>
+<div class="af-actions"><input type="submit" value="Get Articles" name="getaction" class="af-btn primary"></div>
+</div>
 					
        </form></div>
-              </div>
       <!-- Table section -->
 
        <div class="af-card">
@@ -294,11 +252,12 @@ $logged_users=mysqli_num_rows(mysqli_query($db,"select * from wf_token_auth wher
 				  </div>
 
 		<form action="rassign_articles_users.php" id="assign_due_date_form" method="post" autocomplete="off">
+		<input type="hidden" name="return_qs" value="<?php echo htmlspecialchars(http_build_query(array_filter(array_diff_key($flt, array('inpt_status'=>1)), 'strlen'))); ?>">
 		
 		
 											
 			<?php 
-if(isset($_REQUEST['r_user_id'])) {
+if(true) {
 ?>						
               <table id="dynamic-table" class="table custtable table-primary" style="width: 100% !important; overflow:auto !important;text-wrap: nowrap !important;white-space: nowrap !important">
                 <thead>
@@ -326,17 +285,17 @@ if(isset($_REQUEST['r_user_id'])) {
 if($_REQUEST['dep_id']==1 || $_REQUEST['dep_id']==22)
 {
 		
-			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id  and department_id in('1','2','10','14','24')  and assigned_user_id IS NOT NULL  ".$_SESSION['inpt_status_qry']." ".$_SESSION['varname']." ";
+			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id  and department_id in('1','2','10','14','24')  and assigned_user_id IS NOT NULL  ".$f_status." ".$f_var." ";
 			
 			
-				 $query = "SELECT wd.department_id,wd.assign_department_id,c.cust_name,journal_title,fig_complete_status,pub_id,recv_dt,due_dt,target_due_dt,ce_pe_due_date,highpriority,wd.created_dt,wd.issueorgroup_folder,fig,tab,status,approved_by,wd.id,j.j_code,j.jt_id,j.j_division,manuscript_count,stage,work_dir,r.received_date,r.due_date,r.correction_pages,wd.notes,aq_status ,wd.user_working_status,wd.assigned_user_id FROM `inw_inward_dtl` as wd LEFT JOIN inw_revisions_dtl as r ON (wd.`id` =r.`inw_id` and r.r_id = (select r_id from inw_revisions_dtl where inw_id = wd.`id` order by r_id DESC limit 1)), adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND department_id='".$_REQUEST['dep_id']."' and assigned_user_id IS NOT NULL ".$_SESSION['inpt_status_qry']."  ".$_SESSION['varname']."";
+				 $query = "SELECT wd.department_id,wd.assign_department_id,c.cust_name,journal_title,fig_complete_status,pub_id,recv_dt,due_dt,target_due_dt,ce_pe_due_date,highpriority,wd.created_dt,wd.issueorgroup_folder,fig,tab,status,approved_by,wd.id,j.j_code,j.jt_id,j.j_division,manuscript_count,stage,work_dir,r.received_date,r.due_date,r.correction_pages,wd.notes,aq_status ,wd.user_working_status,wd.assigned_user_id FROM `inw_inward_dtl` as wd LEFT JOIN inw_revisions_dtl as r ON (wd.`id` =r.`inw_id` and r.r_id = (select r_id from inw_revisions_dtl where inw_id = wd.`id` order by r_id DESC limit 1)), adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND department_id='".$_REQUEST['dep_id']."' and assigned_user_id IS NOT NULL ".$f_status."  ".$f_var."";
    
 }
 else
 {
-			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and department_id in('1','2','32','10','14','24')  and assigned_od_user_id IS NOT NULL  ".$_SESSION['inpt_status_qry']." ".$_SESSION['varname']." ";
+			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and department_id in('1','2','32','10','14','24')  and assigned_od_user_id IS NOT NULL  ".$f_status." ".$f_var." ";
 			
-		     $query = "SELECT wd.department_id,wd.assign_department_id,c.cust_name,journal_title,fig_complete_status,pub_id,recv_dt,due_dt,target_due_dt,ce_pe_due_date,highpriority,wd.created_dt,wd.issueorgroup_folder,fig,tab,status,approved_by,wd.id,j.j_code,j.jt_id,j.j_division,manuscript_count,stage,work_dir,r.received_date,r.due_date,r.correction_pages,wd.notes,aq_status ,wd.user_working_status,wd.assigned_od_user_id FROM `inw_inward_dtl` as wd LEFT JOIN inw_revisions_dtl as r ON (wd.`id` =r.`inw_id` and r.r_id = (select r_id from inw_revisions_dtl where inw_id = wd.`id` order by r_id DESC limit 1)), adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and department_id='".$_REQUEST['dep_id']."' and assigned_od_user_id IS NOT NULL ".$_SESSION['inpt_status_qry']."  ".$_SESSION['varname']." ";
+		     $query = "SELECT wd.department_id,wd.assign_department_id,c.cust_name,journal_title,fig_complete_status,pub_id,recv_dt,due_dt,target_due_dt,ce_pe_due_date,highpriority,wd.created_dt,wd.issueorgroup_folder,fig,tab,status,approved_by,wd.id,j.j_code,j.jt_id,j.j_division,manuscript_count,stage,work_dir,r.received_date,r.due_date,r.correction_pages,wd.notes,aq_status ,wd.user_working_status,wd.assigned_od_user_id FROM `inw_inward_dtl` as wd LEFT JOIN inw_revisions_dtl as r ON (wd.`id` =r.`inw_id` and r.r_id = (select r_id from inw_revisions_dtl where inw_id = wd.`id` order by r_id DESC limit 1)), adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and department_id='".$_REQUEST['dep_id']."' and assigned_od_user_id IS NOT NULL ".$f_status."  ".$f_var." ";
 }
 
 //echo  $query;
@@ -425,7 +384,7 @@ else
 		?>
                   <tr class="<?php echo  $tr_class;?>">
                     <td class="center"><label class="pos-rel">
-                        <input type="checkbox" class="ace aids" name="aids[]" value="<?php echo $row['id']; ?>" />
+                        <input type="checkbox" class="ace aids" name="aids[]" value="<?php echo $row['id']; ?>" data-owner="<?php echo (int)(isset($row['assigned_user_id']) ? $row['assigned_user_id'] : (isset($row['assigned_od_user_id']) ? $row['assigned_od_user_id'] : 0)); ?>" data-owner-name="<?php echo htmlspecialchars(isset($assigned_user['full_name']) ? $assigned_user['full_name'] : ''); ?>" />
                         <span class="lbl"></span> </label></td>                   
                     <td><?php echo $row['j_code']; ?></td>
                     <td class="hidden-480"><?php echo $row['pub_id']; echo ($row['notes']!='') ? ' <span class="label label-sm label-info">'.substr($row['notes'],0,10).'</span>' : '';?></td>
@@ -443,33 +402,7 @@ else
 
                 </tbody>
               </table>
-			    <style>.assign-panel{margin-top:18px;border:1px solid #e3e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}
-.assign-panel .ap-head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#f7f9fc;border-bottom:1px solid #e3e8ef}
-.assign-panel .ap-title{font-weight:700;color:#1f2d3d;font-size:15px}
-.assign-panel .ap-count{background:#e8eefc;color:#1d4ed8;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:600}
-.assign-panel .ap-count.zero{background:#f1f3f5;color:#6b7280}
-.assign-panel .ap-body{display:grid;grid-template-columns:1.1fr 1.6fr 1.1fr auto;gap:18px;padding:18px;align-items:start}
-.assign-panel label.ap-label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b6675;margin:0 0 6px}
-.assign-panel .ap-label i{color:#d9534f;font-style:normal}
-.assign-panel select,.assign-panel textarea,.assign-panel input.ap-date{width:100%;border:1px solid #cfd6e0;border-radius:8px;padding:9px 12px;font-size:14px;background:#fff;box-sizing:border-box}
-.assign-panel textarea{resize:vertical;min-height:40px;height:40px}
-.assign-panel select:focus,.assign-panel textarea:focus,.assign-panel input.ap-date:focus{outline:0;border-color:#f08a24;box-shadow:0 0 0 3px rgba(240,138,36,.18)}
-.assign-panel .ap-datewrap{position:relative}
-.assign-panel .ap-datewrap i{position:absolute;right:12px;top:11px;color:#6b7280;pointer-events:none}
-.assign-panel .ap-quick{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
-.assign-panel .ap-quick button{border:1px solid #d5dbe5;background:#f7f9fc;border-radius:14px;font-size:12px;padding:2px 10px;color:#374151;cursor:pointer}
-.assign-panel .ap-quick button:hover{background:#fff1e0;border-color:#f08a24}
-.assign-panel .ap-go{align-self:end}
-.assign-panel .ap-go button{height:42px;padding:0 22px;border:0;border-radius:8px;background:#f08a24;color:#fff;font-weight:700;cursor:pointer;white-space:nowrap}
-.assign-panel .ap-go button:disabled{background:#d6dae1;cursor:not-allowed}
-.assign-panel .ap-hint{font-size:12px;color:#6b7280;margin-top:6px;text-align:center}
-#dynamic-table tbody tr.row-selected td{background:#fff6ea !important}
-#dynamic-table tbody tr{cursor:pointer}
-@media(max-width:992px){.assign-panel .ap-body{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.assign-panel .ap-body{grid-template-columns:1fr}}
-.assign-panel.ap-3 .ap-body{grid-template-columns:1.6fr 1fr auto}
-</style>
-<div class="assign-panel ap-3">
+			    <div class="assign-panel ap-3">
 	<div class="ap-head">
 		<span class="ap-title">Re-assign to Another User</span>
 		<span class="ap-count zero" id="ap_count"><b id="ap_count_n">0</b> article(s) selected</span>
@@ -490,7 +423,7 @@ while($row_u = $users_r->fetch_assoc())
 		$logged_users=mysqli_num_rows(mysqli_query($db,"select * from wf_token_auth where DATE_FORMAT(start_date,'%Y-%m-%d')='".date('Y-m-d')."' and username='".$row_u['user_name']."'"));
 	
 	?>   
-<option value="<?php echo $row_u['id'];?>" <?php if($logged_users==0){?> style="color:red;" <?php }else{?>style="color:green;"<?php } ?> <?php if($_SESSION['r_user_id'] ==$row_u['id']){?> selected <?php } ?>><?php echo $row_u['full_name']; ?></option>
+<option value="<?php echo $row_u['id'];?>" data-online="<?php echo $logged_users>0 ? 1 : 0; ?>" <?php if($flt['r_user_id'] ==$row_u['id']){?> selected <?php } ?>><?php echo ($logged_users>0 ? '● ' : '○ ').$row_u['full_name']; ?></option>
     <?php
 }
 ?>
@@ -517,15 +450,13 @@ while($row_u = $users_r->fetch_assoc())
 </div>
 			  <input type="hidden" name="aa_count" id="aa_count" value="">
 			  <input type="hidden" name="dept_id" id="dept_id" value="<?php echo $_REQUEST['dep_id'];?>">
-
-                </tbody>
-              </table>
 			  </form>
 			<?php } ?>
 
 		
 		</div>
       	</div>
+              </div>
 
 
      <!-- Footer Section -->
@@ -627,28 +558,18 @@ jQuery(function($) {
 	
 			
 		</script>
-<script type="text/javascript">
-$(function(){
-  function refreshSel(){
-    var n=$('input[name="aids[]"]:checked').length;
-    $('#ap_count_n').text(n); $('#ap_count').toggleClass('zero',n===0);
-    $('.ap-go button').prop('disabled',n===0);
-    $('#ap_hint').text(n===0?'Tick articles above to enable':'Ready for '+n+' article(s)');
-    $('.aids').each(function(){ $(this).closest('tr').toggleClass('row-selected',this.checked); });
-  }
-  $(document).on('click change','.aids,#checkAll',function(){ setTimeout(refreshSel,0); });
-  $('#dynamic-table tbody').on('click','tr',function(e){
-    if($(e.target).is('input,label,span.lbl,a,button')) return;
-    var cb=$(this).find('.aids')[0]; if(cb) cb.click();
-  });
-  $('.ap-quick button').on('click',function(){
-    var d=new Date(); d.setDate(d.getDate()+parseInt($(this).data('days'),10));
-    var p=function(x){return ('0'+x).slice(-2)};
-    $('.ap-date').val(p(d.getDate())+'-'+p(d.getMonth()+1)+'-'+d.getFullYear()).trigger('change');
-  });
-  refreshSel();
-});
-</script>
+<div class="cm-back" id="cm_back"><div class="cm-box" role="dialog" aria-modal="true">
+	<div class="cm-head"><span id="cm_title">Confirm assignment</span><small id="cm_sub"></small></div>
+	<div class="cm-body">
+		<div class="cm-row"><span id="cm_who_l">Assign to</span><span id="cm_who"></span></div>
+		<div class="cm-row"><span>Due date</span><span id="cm_due"></span></div>
+		<div class="cm-row" id="cm_msg_row"><span>Instructions</span><span id="cm_msg"></span></div>
+		<div class="cm-list">Articles (<span id="cm_n">0</span>)</div>
+		<div class="cm-chips" id="cm_chips"></div>
+	</div>
+	<div class="cm-foot"><button type="button" class="cm-cancel" id="cm_cancel">Cancel</button><button type="button" class="cm-ok" id="cm_ok">Confirm &amp; Assign</button></div>
+</div></div>
+  <?php am_foot(); ?>
   <?php af_foot(); ?>
 </body>
 </html>
