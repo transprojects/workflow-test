@@ -16,7 +16,7 @@ function assign_mail_articles($db, $pub_ids)
 		if ($pid === '') {
 			continue;
 		}
-		$res = mysqli_query($db, "SELECT wd.pub_id, wd.recv_dt, wd.due_dt, wd.manuscript_count, wd.fig, wd.tab, j.j_code, j.journal_title
+		$res = mysqli_query($db, "SELECT wd.pub_id, wd.recv_dt, wd.due_dt, wd.manuscript_count, wd.fig, wd.tab, j.j_code
 			FROM inw_inward_dtl wd LEFT JOIN adm_journals j ON wd.j_id = j.j_id
 			WHERE wd.pub_id = '" . mysqli_real_escape_string($db, $pid) . "' LIMIT 1");
 		$row = $res ? mysqli_fetch_assoc($res) : null;

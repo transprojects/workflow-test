@@ -2,6 +2,7 @@
 include "includes/includes.php";
 session_start();
 include_once("smtpmail/phpmailer/class.phpmailer.php");
+include_once("assign_mail_template.php");
 //$mail_from = "inward@transforma.in";
 //$mail_pass = "Zot60242";
 
@@ -68,26 +69,19 @@ if(isset($_POST['assign']))
 		
 			
 			
-@$body ="Dear ".$userdetails['full_name'].",
-<br/>
-<br/>
-Please note that you have received the article ".$_REQUEST['pub_id'].". Kindly process and complete it promptly.
-<br/><br/>
-Instructions : ".$_REQUEST['message']."
-<br/><br/>
-Login Credentials Below :
-<br/><br/>
-Freelancer Portal URL :<a href='http://103.66.12.3:8010/workflow-new/vportal-new/index.php'>Click here</a><br/>
-Freelancer Username: ".$userdetails['user_name']."<br/>
-Freelancer Password : ".$userdetails_password['password']."
-<br/><br/>
-Thank you.
-<br/><br/>
-Best regards,
-<br/>
-Inward Team";
-
-@$subject = "Article ".$_REQUEST['pub_id']." Assign Notification";	
+$mail_aids = array_filter(array_map('trim', (array)$_POST['aids']));
+@$body = assign_mail_body(array(
+	'full_name'  => $userdetails['full_name'],
+	'user_name'  => $userdetails['user_name'],
+	'password'   => $userdetails_password['password'],
+	'message'    => $_REQUEST['message'],
+	'due_date'   => $_REQUEST['ce_pe_due_date'],
+	'portal_url' => 'http://103.66.12.3:8010/workflow-new/vportal-new/index.php',
+	'reassign'   => true,
+	'articles'   => assign_mail_articles($db, $mail_aids)
+));
+$mail_ids = implode(', ', $mail_aids);
+@$subject = (count($mail_aids) > 1 ? 'Articles ' : 'Article ') . (strlen($mail_ids) > 70 ? substr($mail_ids, 0, 67) . '...' : $mail_ids) . ' Assign Notification';	
 
 		$mail = new PHPMailer();
         $mail->IsSMTP();
