@@ -3,6 +3,79 @@
 header('Content-Type: application/json');
 
 ini_set('display_errors', 0);
+@set_time_limit(0);
+
+
+/*
+==================================================
+UPLOAD SIZE HANDLING
+
+Large PDFs (hundreds of MB) hit the server's
+upload_max_filesize / post_max_size. Say so
+plainly instead of a generic "upload failed".
+==================================================
+*/
+
+function cmpIniBytes($v)
+{
+    $v = trim((string)$v);
+    $n = (float)$v;
+    switch (strtolower(substr($v, -1))) {
+        case 'g': $n *= 1024;
+        case 'm': $n *= 1024;
+        case 'k': $n *= 1024;
+    }
+    return (int)$n;
+}
+
+function cmpFmtSize($b)
+{
+    if ($b >= 1073741824) { return round($b / 1073741824, 2) . ' GB'; }
+    if ($b >= 1048576) { return round($b / 1048576, 2) . ' MB'; }
+    return round($b / 1024, 1) . ' KB';
+}
+
+function cmpUploadError()
+{
+    $codes = [
+        UPLOAD_ERR_INI_SIZE   => 'is larger than the server limit upload_max_filesize (' . ini_get('upload_max_filesize') . ')',
+        UPLOAD_ERR_FORM_SIZE  => 'is larger than the allowed size',
+        UPLOAD_ERR_PARTIAL    => 'was only partly uploaded (connection interrupted) - please try again',
+        UPLOAD_ERR_NO_FILE    => 'was not received',
+        UPLOAD_ERR_NO_TMP_DIR => 'could not be stored: the server has no temporary folder',
+        UPLOAD_ERR_CANT_WRITE => 'could not be written to disk on the server (disk full or no permission)',
+        UPLOAD_ERR_EXTENSION  => 'was stopped by a server extension'
+    ];
+    $msgs = [];
+    foreach (['file1' => 'First PDF', 'file2' => 'Second PDF'] as $key => $label) {
+        $err = $_FILES[$key]['error'] ?? UPLOAD_ERR_NO_FILE;
+        if ($err !== UPLOAD_ERR_OK) {
+            $msgs[] = $label . ' (' . basename($_FILES[$key]['name'] ?? '') . ') ' . ($codes[$err] ?? 'failed to upload (error ' . $err . ')') . '.';
+        }
+    }
+    return 'PDF upload failed. ' . implode(' ', $msgs);
+}
+
+$cmpPostMax = cmpIniBytes(ini_get('post_max_size'));
+
+if (
+    empty($_FILES) &&
+    $cmpPostMax > 0 &&
+    isset($_SERVER['CONTENT_LENGTH']) &&
+    (int)$_SERVER['CONTENT_LENGTH'] > $cmpPostMax
+) {
+
+    echo json_encode([
+        'success' => false,
+        'message' =>
+            'The two PDFs together (' . cmpFmtSize((int)$_SERVER['CONTENT_LENGTH']) .
+            ') are larger than the server limit post_max_size (' . ini_get('post_max_size') .
+            '). Please ask IT to raise upload_max_filesize and post_max_size.'
+    ]);
+
+    exit;
+
+}
 error_reporting(E_ALL);
 
 
@@ -94,7 +167,7 @@ if (
     echo json_encode([
         'success' => false,
         'message' =>
-            'PDF upload failed.'
+            cmpUploadError()
     ]);
 
     exit;
@@ -279,6 +352,15 @@ file_put_contents(
     json_encode([
         'file1_name' =>
             basename($_FILES['file1']['name']),
+
+        'file1_size' =>
+            filesize($file1Path),
+
+        'file2_size' =>
+            filesize($file2Path),
+
+        'uploaded_at' =>
+            date('Y-m-d H:i:s'),
 
         'file2_name' =>
             basename($_FILES['file2']['name'])

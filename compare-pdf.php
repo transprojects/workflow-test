@@ -443,6 +443,29 @@ error_reporting(E_ALL);
                      BUTTONS
                 ========================================== -->
 
+                <?php
+                /* server upload limits, so the page can warn before a 250 MB upload is sent */
+                function cmp_ini_bytes($v)
+                {
+                    $v = trim((string)$v);
+                    $n = (float)$v;
+                    switch (strtolower(substr($v, -1))) {
+                        case 'g': $n *= 1024;
+                        case 'm': $n *= 1024;
+                        case 'k': $n *= 1024;
+                    }
+                    return (int)$n;
+                }
+                ?>
+                <script>
+                    window.cmpLimits = {
+                        file: <?php echo cmp_ini_bytes(ini_get('upload_max_filesize')); ?>,
+                        post: <?php echo cmp_ini_bytes(ini_get('post_max_size')); ?>
+                    };
+                </script>
+
+                <div id="pdf-file-details" class="mt-4" style="display:none; font-size:14px;"></div>
+
                 <div class="meta_nxtbtn container-fluid mt-5 mb-5">
 
                     <div class="row">
@@ -760,6 +783,98 @@ error_reporting(E_ALL);
     ========================================
     */
 
+
+    /*
+    ========================================
+    File details (name, size, last modified),
+    server-limit warnings and time taken
+    ========================================
+    */
+
+    const cmpLimits = window.cmpLimits || {};
+    const detailsBox = document.getElementById('pdf-file-details');
+    let cmpStart = 0;
+    let cmpElapsed = '';
+
+    function fmtSize(b) {
+        if (b >= 1073741824) { return (b / 1073741824).toFixed(2) + ' GB'; }
+        if (b >= 1048576) { return (b / 1048576).toFixed(2) + ' MB'; }
+        if (b >= 1024) { return (b / 1024).toFixed(1) + ' KB'; }
+        return b + ' bytes';
+    }
+
+    function cmpEsc(s) {
+        return String(s).replace(/[&<>"]/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+        });
+    }
+
+    function fileProblems() {
+        const out = [];
+        let total = 0;
+        [file1, file2].forEach(function (f, i) {
+            if (!f.files.length) { return; }
+            const x = f.files[0];
+            total += x.size;
+            if (!/\.pdf$/i.test(x.name)) {
+                out.push('File ' + (i + 1) + ' is not a PDF.');
+            }
+            if (cmpLimits.file > 0 && x.size > cmpLimits.file) {
+                out.push('File ' + (i + 1) + ' (' + fmtSize(x.size) + ') is larger than the server limit of ' + fmtSize(cmpLimits.file) + ' per file.');
+            }
+        });
+        if (cmpLimits.post > 0 && total > cmpLimits.post) {
+            out.push('Both files together (' + fmtSize(total) + ') are larger than the server limit of ' + fmtSize(cmpLimits.post) + ' per upload.');
+        }
+        return out;
+    }
+
+    function renderDetails() {
+        if (!file1.files.length && !file2.files.length) {
+            detailsBox.style.display = 'none';
+            return;
+        }
+        let rows = '';
+        let total = 0;
+        [file1, file2].forEach(function (f, i) {
+            if (!f.files.length) {
+                rows += '<tr><td>File ' + (i + 1) + '</td><td colspan="3" style="color:#888">Not selected</td></tr>';
+                return;
+            }
+            const x = f.files[0];
+            total += x.size;
+            rows += '<tr><td>File ' + (i + 1) + '</td><td style="word-break:break-all">' + cmpEsc(x.name) + '</td><td style="white-space:nowrap">' +
+                fmtSize(x.size) + '</td><td style="white-space:nowrap">' +
+                (x.lastModified ? new Date(x.lastModified).toLocaleString() : '') + '</td></tr>';
+        });
+        const problems = fileProblems();
+        let html = '<div class="table-responsive"><table class="table table-sm table-bordered mb-2" style="background:#fff">' +
+            '<thead><tr><th>#</th><th>File name</th><th>Size</th><th>Last modified</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+            '<div>Total size: <b>' + fmtSize(total) + '</b>';
+        if (cmpLimits.file > 0) {
+            html += ' &nbsp;|&nbsp; Server limit: ' + fmtSize(cmpLimits.file) + ' per file, ' + (cmpLimits.post > 0 ? fmtSize(cmpLimits.post) : 'no limit') + ' per upload';
+        }
+        if (cmpElapsed) {
+            html += ' &nbsp;|&nbsp; ' + cmpElapsed;
+        }
+        html += '</div>';
+        problems.forEach(function (p) {
+            html += '<div style="color:#c0392b;margin-top:4px">' + cmpEsc(p) + '</div>';
+        });
+        detailsBox.innerHTML = html;
+        detailsBox.style.display = 'block';
+        compareButton.disabled = problems.length > 0;
+    }
+
+    function showDone() {
+        const s = Math.round((Date.now() - cmpStart) / 1000);
+        cmpElapsed = 'Compared in ' + Math.floor(s / 60) + ' min ' + (s % 60) + ' sec';
+        renderDetails();
+        return '(' + cmpElapsed + ')';
+    }
+
+    file1.addEventListener('change', function () { cmpElapsed = ''; renderDetails(); });
+    file2.addEventListener('change', function () { cmpElapsed = ''; renderDetails(); });
 
     function setProgress(
         percent,
@@ -1086,7 +1201,7 @@ error_reporting(E_ALL);
 
                         setProgress(
                             100,
-                            'Comparison completed successfully.'
+                            'Comparison completed successfully. ' + showDone()
                         );
 
 
@@ -1294,7 +1409,7 @@ error_reporting(E_ALL);
 
                         setProgress(
                             uploadPercent,
-                            'Uploading PDF files...'
+                            'Uploading PDF files... ' + fmtSize(event.loaded) + ' of ' + fmtSize(event.total)
                         );
 
                     };
@@ -1408,6 +1523,8 @@ error_reporting(E_ALL);
                 ------------------------------------
                 */
 
+
+                cmpStart = Date.now();
 
                 xhr.send(
                     formData
