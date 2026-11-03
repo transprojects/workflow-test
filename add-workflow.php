@@ -2,6 +2,11 @@
 <?php require_once __DIR__.'/includes/form_ui.php'; ?>
 <?php include_once "includes/change_log_mail.php";?>
 <?php
+require_once __DIR__.'/includes/clone_prefill.php';
+$clone_src = clone_row($db, 'adm_workflow_master', 'wf_id');
+$is_clone = isset($_REQUEST['clone']);
+$clone_vals = $clone_src ? array('w_cust_id' => $clone_src['w_cust_id'], 'wf_name' => $clone_src['wf_name'], 'departments[]' => explode(',', $clone_src['wf_code'])) : null;
+$page_title = $is_clone ? 'Clone Workflow' : 'Add Workflow';
 /// Add New record
 if(isset($_POST['action']) && $_POST['action'] == 'insert')
 { 
@@ -12,6 +17,13 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 
 	$insert_query = "INSERT INTO `adm_workflow_master` (`wf_code`, `wf_name`,`created_by`, `created_dt`,`w_cust_id`) VALUES ('". implode(',', $_POST['departments'])."', '". $post['wf_name']."', '". $_COOKIE['user_id']."', CURRENT_TIMESTAMP,'".$post['w_cust_id']."');";	
 
+		if ($is_clone) {
+			$dup = $db->query("SELECT wf_id FROM adm_workflow_master WHERE wf_name = '".$db->real_escape_string($post['wf_name'])."' LIMIT 1");
+			if ($dup && $dup->num_rows > 0) {
+				echo "<script>alert('A workflow with this name already exists. Change the workflow name to save the clone.'); history.back();</script>";
+				die();
+			}
+		}
 		$db->query($insert_query) or die($db->error);
 
 		// Change-log entry + email for the new record
@@ -83,7 +95,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
   <div class="container-fluid" style="justify-content: space-between;">
         <div div class="row pt-4 d-flex align-items-center flex-wrap">
           <div class="col-8 col-lg-10">
-            <p class="articleheading ms-4">Add Workflow</p>
+            <p class="articleheading ms-4"><?php echo $page_title; ?></p>
           </div>
           <div class="col-4 col-lg-2">
             <div class="row  d-flex justify-content-end pe-2">
@@ -97,12 +109,12 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
         </div> 
   </div>
 
-      <?php fu_hero(fu_ui_basic('Add Workflow', 'Add Workflow &rsaquo; Add')); ?>
+      <?php fu_hero(fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
       <div class="container addarticleformouter">
         <div class="container addarticleforminner m-5">
           <form action="" method="post" name="add_workflow" id="add_workflow" enctype="multipart/form-data">
             <div class="container mt-4">
-              <div class="formcont1heading">Add Workflow</div>
+              <div class="formcont1heading"><?php echo $page_title; ?></div>
               <div class="row mt-1 g-4">
               <div class="col-12 col-sm-6 col-lg-4">
                   <label class="mb-2">Customer<span style="color: red">*</span></label>
@@ -182,6 +194,7 @@ $(document).ready(function() {
      
  <!-- Date picker functionality -->
  
-  <?php fu_foot('#add_workflow', null, array(), null, fu_ui_basic('Add Workflow', 'Add Workflow &rsaquo; Add')); ?>
+  <?php fu_foot('#add_workflow', null, array(), null, fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
+<?php clone_prefill($clone_vals); ?>
   </body>
 </html>

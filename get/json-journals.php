@@ -92,7 +92,9 @@ if (isset($data) && is_array($data)) {
 			10 => '<div class="hidden-sm hidden-xs action-buttons">
 		  <a title="Edit Article" class="btn btn-xs btn-warning" href="'.$_COOKIE['set_url'].'/edit-journal/'.$journals['j_id'].'">
 		   <i class="ace-icon fa fa-pencil bigger-120"></i>
-		    </a> <button data-delete="'.$journals['j_id'].'" class="btn btn-danger demo4   delete-article" type="button"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>
+		    </a> <a title="Clone" class="btn btn-xs btn-info" href="'.$_COOKIE['set_url'].'/clone-journal/'.$journals['j_id'].'">
+			   <i class="ace-icon fa fa-clone bigger-120"></i>
+			    </a> <button data-delete="'.$journals['j_id'].'" class="btn btn-danger demo4   delete-article" type="button"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>
 																		 </div>'
 		);
 		$k++;

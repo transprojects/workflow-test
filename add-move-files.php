@@ -5,6 +5,24 @@
 <?php require_once __DIR__.'/includes/move_naming.php'; ?>
 <?php
 $bs = array('BS' => 'BookServices');
+require_once __DIR__.'/includes/clone_prefill.php';
+$clone_src = clone_row($db, 'inw_move_files', 'mf_id');
+$is_clone = isset($_REQUEST['clone']);
+$clone_vals = null;
+$mfn_existing = array();
+if ($clone_src) {
+    $clone_vals = array('cust_id' => $clone_src['cust_id'], 'j_id' => $clone_src['j_id'], 'dept_id' => $clone_src['dept_id']);
+    $cl_rows = $db->query("SELECT stage, dept_id, move_files, move_name_rules, move_folders, cut_move FROM inw_move_files_dept_wise WHERE mf_id = ".(int)$clone_src['mf_id']);
+    while ($cl_rows && ($cl = $cl_rows->fetch_assoc())) {
+        $clone_vals['files['.$cl['stage'].']['.$cl['dept_id'].']'] = $cl['move_files'];
+        $clone_vals['folders['.$cl['stage'].']['.$cl['dept_id'].']'] = $cl['move_folders'];
+        $clone_vals['cutmove['.$cl['stage'].']['.$cl['dept_id'].']'] = $cl['cut_move'];
+        if (!empty($cl['move_name_rules'])) {
+            $mfn_existing[$cl['stage']][$cl['dept_id']] = $cl['move_name_rules'];
+        }
+    }
+}
+$page_title = $is_clone ? 'Clone Move Files' : 'Add Move Files';
 /*$project_status_types = $bs + $project_status_types;
 $project_status_types_bs = $bs + $project_status_types_bs;*/
 $project_status_types_bs = $project_status_types + $bs;
@@ -151,7 +169,7 @@ exit; */
     <div class="container-fluid" style="justify-content: space-between;">
     <div div class="row pt-4 d-flex align-items-center flex-wrap">
           <div class="col-8 col-lg-10">
-            <p class="articleheading ms-2 ms-lg-4">Add Move Files</p>
+            <p class="articleheading ms-2 ms-lg-4"><?php echo $page_title; ?></p>
           </div>
 
           <div class="col-4 col-lg-2">
@@ -166,7 +184,7 @@ exit; */
         </div> 
 
       </div>
-<?php fu_hero(fu_ui_basic('Add Move Files', 'Add Move Files &rsaquo; Add')); ?>
+<?php fu_hero(fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
       <div class="container addarticleformouter">
         <div class="container addarticleforminner m-5">
           <form action="" method="post" name="add_move_files" id="add_move_files" enctype="multipart/form-data">
@@ -415,8 +433,9 @@ $(function () {
   } else { openStage(); }
 });
 </script>
-<?php fu_foot('#add_move_files', null, array(), null, fu_ui_basic('Add Move Files', 'Add Move Files &rsaquo; Add')); ?>
+<?php fu_foot('#add_move_files', null, array(), null, fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
   <?php include __DIR__ . '/includes/move-files-stage-depts.php'; ?>
   <?php include __DIR__ . '/includes/move-name-rules-ui.php'; ?>
+<?php clone_prefill($clone_vals); ?>
 </body>
 </html>

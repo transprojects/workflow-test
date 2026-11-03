@@ -70,7 +70,9 @@ if (isset($data) && is_array($data)) {
 			4 => '<div class="hidden-sm hidden-xs action-buttons">
 		  <a title="Edit Article" class="btn btn-xs btn-warning" href="'.$_COOKIE['set_url'].'/edit-move-files/'.$movefiles['mf_id'].'">
 		   <i class="ace-icon fa fa-pencil bigger-120"></i>
-		    </a> <button data-delete="'.$movefiles['mf_id'].'" class="btn btn-danger demo4   delete-article" type="button"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>
+		    </a> <a title="Clone" class="btn btn-xs btn-info" href="'.$_COOKIE['set_url'].'/clone-move-files/'.$movefiles['mf_id'].'">
+			   <i class="ace-icon fa fa-clone bigger-120"></i>
+			    </a> <button data-delete="'.$movefiles['mf_id'].'" class="btn btn-danger demo4   delete-article" type="button"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>
 																		 </div>'
 		);
 		$k++;

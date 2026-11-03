@@ -2,6 +2,11 @@
 <?php require_once __DIR__.'/includes/form_ui.php'; ?>
 <?php include_once "includes/change_log_mail.php";?>
 <?php
+require_once __DIR__.'/includes/clone_prefill.php';
+$clone_src = clone_row($db, 'jbm_checklist', 'cl_id');
+$is_clone = isset($_REQUEST['clone']);
+$clone_vals = $clone_src ? array_intersect_key($clone_src, array_flip(array('dept_id', 'stage', 'description', 'display_order'))) : null;
+$page_title = $is_clone ? 'Clone Checklist' : 'Add Checklist';
 /// Add New record
 if(isset($_POST['action']) && $_POST['action'] == 'insert')
 { 
@@ -11,7 +16,14 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 
 	$insert_query = "INSERT INTO `jbm_checklist` (`stage`, `description`, `dept_id`,display_order,`created_by`, `created_on`) VALUES ('".$post['stage']."', '".$post['description']."', '".$post['dept_id']."', '".$post['display_order']."','".$_COOKIE['user_id']."', NOW());";	
 
-		$db->query($insert_query) or die($db->error);
+		if ($is_clone) {
+				$dup = $db->query("SELECT cl_id FROM jbm_checklist WHERE dept_id = '".$db->real_escape_string($post['dept_id'])."' AND stage = '".$db->real_escape_string($post['stage'])."' AND description = '".$db->real_escape_string($post['description'])."' LIMIT 1");
+				if ($dup && $dup->num_rows > 0) {
+					echo "<script>alert('This checklist item already exists for the department and stage. Change one of them to save the clone.'); history.back();</script>";
+					die();
+				}
+			}
+			$db->query($insert_query) or die($db->error);
 
 		// Change-log entry + email for the new record
 		log_row_added('Checklist', change_log_ref(array('description')), array_diff_key($_POST, array('action'=>1)), array());
@@ -78,7 +90,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
   <div class="container-fluid" style="justify-content: space-between;">
         <div div class="row pt-4 d-flex align-items-center flex-wrap">
           <div class="col-8 col-lg-10">
-            <p class="articleheading ms-4">Add Checklist</p>
+            <p class="articleheading ms-4"><?php echo $page_title; ?></p>
           </div>
           <div class="col-4 col-lg-2">
             <div class="row d-flex justify-content-end pe-2">
@@ -96,12 +108,12 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 	$customers = $db->query($query) or ($db->error);		
 
 	?>
-      <?php fu_hero(fu_ui_basic('Add Checklist', 'Add Checklist &rsaquo; Add')); ?>
+      <?php fu_hero(fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
       <div class="container addarticleformouter">
         <div class="container addarticleforminner m-5">
           <form action="" method="post" name="add-checklist" id="add-checklist" enctype="multipart/form-data">
             <div class="container mt-4 ">
-              <div class="formcont1heading">Add Checklist</div>
+              <div class="formcont1heading"><?php echo $page_title; ?></div>
               <div class="row mt-1 g-4 ">
               <div class="col-12 col-sm-6 col-lg-4">
                   <label class="mb-2">Department<span style="color: red">*</span></label>
@@ -157,6 +169,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
        <?php echo footer(); ?>
      
  
-  <?php fu_foot('#add-checklist', null, array(), null, fu_ui_basic('Add Checklist', 'Add Checklist &rsaquo; Add')); ?>
+  <?php fu_foot('#add-checklist', null, array(), null, fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
+<?php clone_prefill($clone_vals); ?>
   </body>
 </html>

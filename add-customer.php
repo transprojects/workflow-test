@@ -3,6 +3,10 @@
 <?php
 require_once __DIR__.'/includes/form_ui.php';
 $fu_errors = array();
+require_once __DIR__.'/includes/clone_prefill.php';
+$clone_src = clone_row($db, 'adm_customer_master', 'id');
+$is_clone = isset($_REQUEST['clone']);
+$clone_vals = $clone_src ? array_diff_key($clone_src, array_flip(array('id', 'cust_id', 'created_by', 'created_dt', 'customer_spec'))) : null;
 ?>
 <?php
 /// Add New record
@@ -16,6 +20,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert') {
 
     // Server-side validation: every problem comes back as a popup on the form (nothing is saved)
     $fu_errors = fu_validate($post, fu_rules_customer());
+    if ($is_clone && !$fu_errors) {
+        $dup = $db->query("SELECT id FROM adm_customer_master WHERE cust_name = '".$db->real_escape_string($post['cust_name'])."' LIMIT 1");
+        if ($dup && $dup->num_rows > 0) {
+            $fu_errors[] = array('field' => 'cust_name', 'label' => 'Customer name', 'msg' => 'already exists - change the name to save the clone.');
+        }
+    }
     if (!$fu_errors) {
 
     // Auto-fix integer fields (empty → 0)
@@ -177,7 +187,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert') {
     <div class="container-fluid" style="justify-content: space-between;">
         <div div class="row pt-4 d-flex align-items-center flex-wrap">
           <div class="col-8 col-lg-10">
-            <p class="articleheading ms-4">Add Customers</p>
+            <p class="articleheading ms-4"><?php echo $is_clone ? 'Clone Customer' : 'Add Customers'; ?></p>
           </div>
           <div class="col-4 col-lg-2">
             <div class="row d-flex justify-content-end pe-2">
@@ -191,12 +201,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert') {
         </div>
       </div>
 
-<?php fu_hero(fu_ui_customer('Add Customer', 'Customer &rsaquo; Add')); ?>
+<?php fu_hero(fu_ui_customer($is_clone ? 'Clone Customer' : 'Add Customer', 'Customer &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
       <div class="container addarticleformouter">
         <div class="container addarticleforminner m-5">
           <form action="" method="post" name="add-customer" id="add-customer" enctype="multipart/form-data">
             <div class="container mt-4 separatetitle">
-              <div class="formcont1heading">Add Customer</div>
+              <div class="formcont1heading"><?php echo $is_clone ? 'Clone Customer' : 'Add Customer'; ?></div>
               <div class="row mt-1 g-4 addspacing">
 			  
 			   <div class="col-12 col-sm-6 col-lg-4">
@@ -452,12 +462,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert') {
    
       
       <?php echo scripts(); ?>	
-<?php fu_foot('#add-customer', fu_rules_customer(), $fu_errors, $_POST, fu_ui_customer('Add Customer', 'Customer &rsaquo; Add')); ?>
+<?php fu_foot('#add-customer', fu_rules_customer(), $fu_errors, $_POST, fu_ui_customer($is_clone ? 'Clone Customer' : 'Add Customer', 'Customer &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
 
        <!-- Footer Section -->
        <?php echo footer(); ?>
      
  <!-- Date picker functionality -->
    
+<?php clone_prefill($clone_vals); ?>
   </body>
 </html>

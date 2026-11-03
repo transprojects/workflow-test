@@ -3,6 +3,11 @@
 <?php include_once "includes/change_log_mail.php";?>
 <?php require_once __DIR__.'/sw_switch_lib.php'; sw_dept_ensure($db); ?>
 <?php
+require_once __DIR__.'/includes/clone_prefill.php';
+$clone_src = clone_row($db, 'adm_dept_master', 'dept_code');
+$is_clone = isset($_REQUEST['clone']);
+$clone_vals = $clone_src ? array_intersect_key($clone_src, array_flip(array('parent_id', 'dept_name', 'dept_sn', 'accept_files', 'stage_order', 'dept_email'))) : null;
+$page_title = $is_clone ? 'Clone Department' : 'Add Department';
 /// Add New record
 if(isset($_POST['action']) && $_POST['action'] == 'insert')
 { 
@@ -14,7 +19,14 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 	$dmail = $db->real_escape_string(implode(', ', sw_switch_parse_list($post['dept_email'])['valid']));
 	$insert_query = "INSERT INTO `adm_dept_master` (`dept_email`, `manager_ids`, `dept_name`, `dept_sn`, `parent_id`,stage_order,`created_by`, `created_dt`,accept_files) VALUES ('".$dmail."', '".$mgr."', '".$post['dept_name']."', '".$post['dept_sn']."', '".$post['parent_id']."', '".$post['stage_order']."','".$_COOKIE['user_id']."', NOW(),'".$post['accept_files']."');";	
 
-		$db->query($insert_query) or die($db->error);
+		if ($is_clone) {
+				$dup = $db->query("SELECT dept_code FROM adm_dept_master WHERE dept_name = '".$db->real_escape_string($post['dept_name'])."' AND parent_id = '".$db->real_escape_string($post['parent_id'])."' LIMIT 1");
+				if ($dup && $dup->num_rows > 0) {
+					echo "<script>alert('A department with this name already exists. Change the department name to save the clone.'); history.back();</script>";
+					die();
+				}
+			}
+			$db->query($insert_query) or die($db->error);
 
 		// Change-log entry + email for the new record
 		log_row_added('Department', change_log_ref(array('dept_name')), array_diff_key($_POST, array('action'=>1)), array());
@@ -88,7 +100,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
 
       <div div class="row pt-4 d-flex align-items-center flex-wrap">
           <div class="col-8 col-lg-10">
-            <p class="articleheading ms-sm-2 ms-lg-5">Add Department</p>
+            <p class="articleheading ms-sm-2 ms-lg-5"><?php echo $page_title; ?></p>
           </div>
 
           <div class="col-4 col-lg-2">
@@ -127,7 +139,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
       </div> -->
 
       </div>
-<?php fu_hero(fu_ui_basic('Add Department', 'Add Department &rsaquo; Add')); ?>
+<?php fu_hero(fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
       <div class="container addarticleformouter">
         <div class="container addarticleforminner m-5">
           <form action="" method="post" name="add_department" id="add_department" enctype="multipart/form-data">
@@ -136,7 +148,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
               <div class="row mt-1 g-4 addspacing">
 
             
-              <div class="formcont1heading">Add Department</div>
+              <div class="formcont1heading"><?php echo $page_title; ?></div>
               <div class="row mt-2 g-4 addspacing"> 
               <div class="col-12 col-sm-6 col-lg-4">
               <?php
@@ -181,7 +193,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'insert')
                  <label class="mb-2">Department Managers (reporting)</label>
                  <select class="form-select manager_drop" multiple name="manager_ids[]" id="manager_ids" data-placeholder="Select managers" style="width:100%">
                  <option value="all">Select All</option>
-                 <?php echo sw_dept_manager_options($db, 0, ''); ?>
+                 <?php echo sw_dept_manager_options($db, 0, $clone_src ? $clone_src['manager_ids'] : ''); ?>
                  </select>
                  <small style="color:#6b7a89;">The department e-mail is the To address and the managers are CC'd on department-wise notifications, e.g. "file movement not configured" for an article that is in this department.</small>
                 </div>
@@ -365,6 +377,7 @@ $(document).ready(function() {
 });  
 
   </script> 
-  <?php fu_foot('#add_department', null, array(), null, fu_ui_basic('Add Department', 'Add Department &rsaquo; Add')); ?>
+  <?php fu_foot('#add_department', null, array(), null, fu_ui_basic($page_title, $page_title.' &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
+<?php clone_prefill($clone_vals); ?>
   </body>
 </html>

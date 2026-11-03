@@ -3,6 +3,15 @@
 <?php
 require_once __DIR__.'/includes/form_ui.php';
 $fu_errors = array();
+require_once __DIR__.'/includes/clone_prefill.php';
+$clone_src = clone_row($db, 'adm_journals', 'j_id');
+$is_clone = isset($_REQUEST['clone']);
+$clone_vals = null;
+if ($clone_src) {
+    $clone_vals = array_diff_key($clone_src, array_flip(array('j_id', 'created_by', 'created_on')));
+    $clone_vals['parent_cust_id'] = $clone_src['j_parent_cust_id'];
+    $clone_vals['j_platform'] = array_search($clone_src['j_platform'], $platform_journal_array);
+}
 ?>
 <?php
 /// Add New record
@@ -16,6 +25,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert')
 
     // Server-side validation: every problem comes back as a popup on the form (nothing is saved)
     $fu_errors = fu_validate($post, fu_rules_journal(true));
+    if ($is_clone && !$fu_errors) {
+        $dup = $db->query("SELECT j_id FROM adm_journals WHERE j_cust_id = '".$db->real_escape_string($post['j_cust_id'])."' AND j_name = '".$db->real_escape_string($post['j_name'])."' AND j_code = '".$db->real_escape_string($post['j_code'])."' LIMIT 1");
+        if ($dup && $dup->num_rows > 0) {
+            $fu_errors[] = array('field' => 'j_code', 'label' => 'Journal', 'msg' => 'already exists for this customer with the same name and code - change one to save the clone.');
+        }
+    }
     if (!$fu_errors) {
 
     // Auto-fix integer columns -> if empty = 0
@@ -170,7 +185,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert')
 
       <div div class="row pt-4 d-flex align-items-center flex-wrap">
           <div class="col-8 col-lg-10">
-            <p class="articleheading ms-4">Add Journal</p>
+            <p class="articleheading ms-4"><?php echo $is_clone ? 'Clone Journal' : 'Add Journal'; ?></p>
           </div>
 
           <div class="col-4 col-lg-2">
@@ -209,13 +224,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert')
       </div> -->
 
 </div>
-<?php fu_hero(fu_ui_journal('Add Journal', 'Journal &rsaquo; Add')); ?>
+<?php fu_hero(fu_ui_journal($is_clone ? 'Clone Journal' : 'Add Journal', 'Journal &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?>
       <div class="container addarticleformouter">
         <div class="container addarticleforminner m-5">
           <form action="" method="post" name="add_journal" id="add_journal" enctype="multipart/form-data">
           <input type="hidden" name="action" value="insert">
             <div class="container mt-4 separatetitle">
-              <div class="formcont1heading">Add Journals</div>
+              <div class="formcont1heading"><?php echo $is_clone ? 'Clone Journal' : 'Add Journals'; ?></div>
               <div class="row mt-1 g-4 addspacing">
                 <div class="col-12 col-sm-6 col-lg-4">
                   <label class="mb-2">Customer<span style="color: red">*</span></label>
@@ -763,6 +778,7 @@ function populateSelecte(elementId, data) {
 
     </script>
 
-<?php fu_foot('#add_journal', fu_rules_journal(true), $fu_errors, $_POST, fu_ui_journal('Add Journal', 'Journal &rsaquo; Add')); ?> 
+<?php fu_foot('#add_journal', fu_rules_journal(true), $fu_errors, $_POST, fu_ui_journal($is_clone ? 'Clone Journal' : 'Add Journal', 'Journal &rsaquo; '.($is_clone ? 'Clone' : 'Add'))); ?> 
+<?php clone_prefill($clone_vals); ?>
   </body>
 </html>
