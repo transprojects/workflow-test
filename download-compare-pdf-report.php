@@ -250,7 +250,8 @@ if (!empty($candidateNames)) {
                 $prqcMessage =
                     'Found article ' .
                     $article['pub_id'] .
-                    ' but could not write the report to its PRQC folder (check server path/permissions).';
+                    ' but could not write the report to its PRQC folder (check server path/permissions). Server said: ' .
+                    (($lastErr = error_get_last()) ? $lastErr['message'] : 'no details');
 
             }
 
@@ -260,14 +261,17 @@ if (!empty($candidateNames)) {
                 'Found article ' .
                 $article['pub_id'] .
                 ' but its PRQC folder could not be created: ' .
-                $prqcPath;
+                $prqcPath .
+                ' Server said: ' .
+                (($lastErr = error_get_last()) ? $lastErr['message'] : 'no details');
 
         }
 
     } else {
 
         $prqcMessage =
-            'No matching article (pub_id) found for the compared files.';
+            'No matching article (pub_id) found for the compared files. Names tried: ' .
+            implode(', ', $candidateNames);
 
     }
 
