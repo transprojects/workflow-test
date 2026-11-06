@@ -336,22 +336,10 @@ $f_var .= $am_cust ? " and c.id in (".implode(',', $am_cust).") " : " and 1=0 ";
                   <?php
 
 
-		if($flt['cust_id']=='68')
-		{
-			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in('2')  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$f_status." ".$f_var." ";
-		     $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id='2' and (wd.allocate_to =0 OR allocate_to IS NULL) ".$f_status."  ".$f_var."";
-
-		}
-		elseif($flt['cust_id']==='' || $flt['cust_id']==='all')
-		{
-				$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and ((c.id='68' AND department_id='2') OR (c.id<>'68' AND department_id in ('1','22','32')))  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$f_status." ".$f_var." ";
-		    $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and ((c.id='68' AND department_id='2') OR (c.id<>'68' AND department_id in ('1','22','32'))) and (wd.allocate_to =0 OR allocate_to IS NULL) ".$f_status."  ".$f_var."";
-		}
-		else
-		{
-				$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in('1','22','32')  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$f_status." ".$f_var." ";
-		    $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and department_id in ('1','32') and (wd.allocate_to =0 OR allocate_to IS NULL) ".$f_status."  ".$f_var."";
-		}
+		// GLEAM_DEPT_RULE: one rule for every customer filter. GleamPub (68) articles are listed whether they sit in
+		// department 1/32 (like the other customers) or in department 2; the customer filter narrows the list.
+				$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and (department_id in('1','22','32') OR (c.id='68' AND department_id='2'))  and (wd.allocate_to =0 OR allocate_to IS NULL)  ".$f_status." ".$f_var." ";
+		    $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id AND wd.stage = 'FP' and (department_id in ('1','32') OR (c.id='68' AND department_id='2')) and (wd.allocate_to =0 OR allocate_to IS NULL) ".$f_status."  ".$f_var."";
 
 		$customers = $db->query($query) or ($db->error);				
 		while($row = $customers->fetch_assoc()){ 
