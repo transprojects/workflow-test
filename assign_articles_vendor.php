@@ -31,60 +31,26 @@ if(isset($_POST['assign']))
 		//echo $a_id; 
 		if($a_id!="")
 		{
-		   $article_cust_id=mysqli_fetch_array(mysqli_query($db,"select cust_id,j_id from inw_inward_dtl where pub_id='".$a_id."'"));
+		   $article_cust_id=mysqli_fetch_array(mysqli_query($db,"select cust_id,j_id,wf_id from inw_inward_dtl where pub_id='".$a_id."'"));
 		   
-		        $j_id    = $article_cust_id['j_id'];
 
-				if($article_cust_id['cust_id']=='57')
+				// Workflow comes from the journal's FP workflow setting (journal master, j_fp_wf): no per-customer table.
+				// If the journal has no usable setting the article keeps the workflow it already has.
+				$wf_id = '';
+				$journal_res = mysqli_fetch_array(mysqli_query($db, "SELECT j_fp_wf FROM adm_journals WHERE j_id='".(int)$article_cust_id['j_id']."'"));
+				$wf_code = $journal_res ? trim((string)$journal_res['j_fp_wf']) : '';
+				if($wf_code !== '')
 				{
-				$wf_id='128';	
+					$wf_res = mysqli_fetch_array(mysqli_query($db, "SELECT wf_id FROM adm_workflow_master WHERE wf_name='".mysqli_real_escape_string($db, $wf_code)."' ORDER BY wf_id ASC LIMIT 1"));
+					if($wf_res) { $wf_id = $wf_res['wf_id']; }
 				}
-				elseif($article_cust_id['cust_id']=='68' || $article_cust_id['cust_id']=='69')
-				{
-				$wf_id='176';	
-				}
-				elseif($article_cust_id['cust_id']=='58')
-				{
-				$wf_id='126';
-				}
-				elseif($article_cust_id['cust_id']=='80')
-				{
-				$wf_id='188';
-				}
-				elseif($article_cust_id['cust_id']=='82')
-				{
-				$wf_id='189';
-				}
-				elseif($article_cust_id['cust_id']=='33')
-				{
-				 // Get workflow code from journal table
-				$journal_res = mysqli_fetch_array(mysqli_query($db,"
-					SELECT j_fp_wf 
-					FROM adm_journals 
-					WHERE j_id='".$j_id."'
-				"));
-
-				$wf_code = trim($journal_res['j_fp_wf']);
-
-				// Get wf_id from workflow master using wf_name
-				$wf_res = mysqli_fetch_array(mysqli_query($db,"
-					SELECT wf_id 
-					FROM adm_workflow_master 
-					WHERE wf_name='".$wf_code."'
-					LIMIT 1
-				"));
-
-				$wf_id = $wf_res['wf_id'];
-				}
-				else
-				{
-				$wf_id='128';
-				}
+				// Only write wf_id when it differs from the journal's workflow; a matching article is left as it is.
+				if($wf_id !== '' && (string)$wf_id === (string)$article_cust_id['wf_id']) { $wf_id = ''; }
 				$userdetails=mysqli_fetch_array(mysqli_query($db,"select * from users where id='".$_POST['user_id']."'"));
 
 				$user_working_status = '<span class="label label-sm label-success">CE</span>|<span class="label label-sm label-info">'.$userdetails['user_name'].'</span>|<span class="label label-sm label-warning">Assigned</span>';
 
-				$assigned="`allocate_to` ='".$_POST['user_id']."',vendor_id='".$_POST['user_id']."',vendor_assign_date='".date('Y-m-d H:i:s')."',`allocate_time` ='".date('Y-m-d H:i:s')."',vendor_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',wf_id='".$wf_id."',user_working_status = '".$user_working_status."'";
+				$assigned="`allocate_to` ='".$_POST['user_id']."',vendor_id='".$_POST['user_id']."',vendor_assign_date='".date('Y-m-d H:i:s')."',`allocate_time` ='".date('Y-m-d H:i:s')."',vendor_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."'".($wf_id !== '' ? ",wf_id='".(int)$wf_id."'" : "").",user_working_status = '".$user_working_status."'";
 			
 			$prj_update_query="UPDATE inw_inward_dtl SET $assigned WHERE pub_id = '".$a_id."' "; 
 			//echo $prj_update_query; exit;
