@@ -1034,7 +1034,7 @@ $app_res = $result->fetch_assoc();
 			$all_access_dept_array = explode(",", $_COOKIE['department_id'].','.$_COOKIE['odepartment_id']);			
 			if ( !in_array($app_res['department_id'], $all_access_dept_array)  && !in_array('All', $all_access_dept_array)) {
 				//header("location:projects.php?msg=You do not have access for this Article: ".$app_res['pub_id']);	
-			header("location:".$_COOKIE['set_url']."/currentwork?msg=You do not have access for this Article: ".$app_res['pub_id'].""); 	
+			header("location:".$_COOKIE['set_url']."/currentwork?msg=You do not have access for this Article: ".$app_res['pub_id'].""); 	 exit;
 
 			}
 		}
@@ -4556,6 +4556,21 @@ function frcopy($src, $dest){
 }
   if(isset($_POST['action']) && $_POST['action']=='update')
 { echo '<!--SW_AJAX_START-->';
+	/* guard: refuse a stale/duplicate Completed or Correction Done submit. If this form's transaction is already closed AND the article has
+	   already moved out of the department the form was opened in, running it again would advance the article one more step (skipping a
+	   department). A retry after a failed save is still allowed because the article is then still in the same department. */
+	if (isset($_POST['tr_id'], $_POST['id'], $_POST['department_id']) && (int)$_POST['tr_id'] > 0) {
+		$g_st = (int)$_POST['status'];
+		if ($g_st === 0 && isset($_POST['ostatus'])) { $g_st = (int)$_POST['ostatus']; }
+		if ($g_st === 1 || $g_st === 12) {
+			$g_q = $db->query("SELECT t.end_time, t.completion_status, d.department_id AS cur_dept FROM inw_transactions t JOIN inw_inward_dtl d ON d.id = t.project_id WHERE t.id = ".(int)$_POST['tr_id']." AND t.project_id = ".(int)$_POST['id']);
+			$g_r = $g_q ? $g_q->fetch_assoc() : null;
+			if ($g_r && !empty($g_r['end_time']) && in_array((int)$g_r['completion_status'], array(1, 12), true) && (string)$g_r['cur_dept'] !== (string)$_POST['department_id']) {
+				header('Location: '.$_COOKIE['set_url'].'/currentwork?msg='.rawurlencode('This work was already submitted and the article has moved on, so nothing was changed. Please reload from Current Work.'));
+				exit;
+			}
+		}
+	}
 	/* the article record can hold the tool path (J:/JOURNAL/...) which Apache cannot see: use the E:/New_Workflow_Files copy for every server-side folder below */
 	if (isset($_POST['work_dir'])) { $_POST['work_dir'] = wf_existing_dir($_POST['work_dir']); }
 	sw3_enforce($db);   /* v3: refuse a Completed submit that was not confirmed in the pre-delivery popup */
