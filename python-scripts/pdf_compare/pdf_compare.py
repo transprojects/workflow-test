@@ -34,7 +34,7 @@ def write_status(status_file, **data):
     try:
         with open(temp_file, "w", encoding="utf-8") as f:
             json.dump(payload, f)
-            print(json.dumps(payload))
+            # print(json.dumps(payload))
     except OSError:
         temp_file = None
 
@@ -122,25 +122,33 @@ def normalise_text(text):
     return "".join(normalise_char(c) for c in text)
 
 
+# def canon(text):
+#     return LIG_RE.sub("", text)
+
+
+# def canon_map(text):
+#     chars, idx = [], []
+#     pos = 0
+
+#     for m in LIG_RE.finditer(text):
+#         for k in range(pos, m.start()):
+#             chars.append(text[k])
+#             idx.append(k)
+#         pos = m.end()
+
+#     for k in range(pos, len(text)):
+#         chars.append(text[k])
+#         idx.append(k)
+
+#     return "".join(chars), idx
+
+
 def canon(text):
-    return LIG_RE.sub("", text)
+    return text
 
 
 def canon_map(text):
-    chars, idx = [], []
-    pos = 0
-
-    for m in LIG_RE.finditer(text):
-        for k in range(pos, m.start()):
-            chars.append(text[k])
-            idx.append(k)
-        pos = m.end()
-
-    for k in range(pos, len(text)):
-        chars.append(text[k])
-        idx.append(k)
-
-    return "".join(chars), idx
+    return text, list(range(len(text)))
 
 
 def rect_union(rects):
@@ -1630,8 +1638,6 @@ Blue
 Image Replaced
 
 <br>
-
-Ligature differences (Th, ff, fl, ffi, ffl, fi) are ignored.
 
 </div>
 
