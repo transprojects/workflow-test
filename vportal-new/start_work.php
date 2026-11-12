@@ -1437,19 +1437,14 @@ window.location.href = '".$_COOKIE['set_url']."/allocatedarticles';
 
 if($post['status'] == 1)
 {
-  @$body ="Dear Team,
-<br/>
-<br/>
-
-I have finished editing and submitted the article ".$_REQUEST['pub_id'].". Please proceed accordingly.
-<br/><br/>
-Remarks : ".$_REQUEST['comments']."
-<br/><br/>
-Thank you.
-<br/><br/>
-Best regards,
-<br/>
-".$_COOKIE['user_name']."";
+  include_once(__DIR__ . "/work_complete_mail_template.php");
+  $wc_logo = __DIR__ . '/assets/images/translogo.png';
+  @$body = work_complete_mail_body(array(
+	'article'    => $_REQUEST['pub_id'],
+	'freelancer' => $_COOKIE['user_name'],
+	'remarks'    => $_REQUEST['comments'],
+	'logo_cid'   => file_exists($wc_logo) ? 'transforma_logo' : ''
+  ));
 @$subject = "Article ".$_REQUEST['pub_id']." Completed by ".$_COOKIE['user_name']." ";	
 
 		$mail = new PHPMailer();
@@ -1466,6 +1461,7 @@ Best regards,
         $mail->isHTML(true);
         $mail->Subject =$subject;
         $mail->Body = $body;
+		if (file_exists($wc_logo)) { $mail->AddEmbeddedImage($wc_logo, 'transforma_logo', 'translogo.png', 'base64', 'image/png'); }
 		$to="tvlconversion@transforma.in,pc@transforma.in,coordinator@transforma.in,trans2@transforma.in,indesign@transforma.in,journalqc@transforma.in,art@transforma.in,jeyapriya@transforma.in";
 		$cc="uma@transforma.in,inward@transforma.in,viji@transforma.in,ananthi@transforma.in,".$_COOKIE['user_email']."";
 		$bcc="marimuthu@transforma.in";
