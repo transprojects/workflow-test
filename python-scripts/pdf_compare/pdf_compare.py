@@ -19,6 +19,12 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
+DEBUG_LOG = False
+
+
+def _hexs(text):
+    return [hex(ord(c)) for c in text]
+
 
 def write_status(status_file, **data):
     """Atomically update the job status JSON."""
@@ -34,7 +40,6 @@ def write_status(status_file, **data):
     try:
         with open(temp_file, "w", encoding="utf-8") as f:
             json.dump(payload, f)
-            # print(json.dumps(payload))
     except OSError:
         temp_file = None
 
@@ -69,9 +74,6 @@ def write_status(status_file, **data):
 
 #MARK: Constants
 ZERO_WIDTH = {"\u200b", "\u200c", "\u200d", "\u2060", "\ufeff", "\u00ad"}
-
-LIGATURES = ("ffi", "ffl", "ff", "fi", "fl", "Th")
-LIG_RE = re.compile("|".join(LIGATURES))
 
 PAIR_MIN_RATIO = 0.5       # min similarity to treat two words as "same word, edited"
 PAIRING_LIMIT = 40000      # max n*m for word pairing inside a replaced block
@@ -110,37 +112,141 @@ STRUCT_COLORS = {
 
 
 #MARK: Helpers
+LIGATURES = ("ffi", "ffl", "ff", "fi", "fl", "Th", "ft")
+LIG_SET = set(LIGATURES)
+LIG_ALT = "(?:" + "|".join(LIGATURES) + ")"
+WILDCARD = "\ue000"   # stands for "undecodable glyph, probably a ligature"
+
+
+def _is_unknown_glyph(ch):
+    o = ord(ch)
+    return 0xE000 <= o <= 0xF8FF or o == 0xFFFD
+
+
 def normalise_char(c):
-    if not c or c in ZERO_WIDTH:
+    """Works for single chars and multi-char strings (e.g. 'Th', 'ffi')."""
+    if not c:
         return ""
-    if 0xFB00 <= ord(c) <= 0xFB06:
-        return unicodedata.normalize("NFKC", c)
-    return c
+
+    out = []
+
+    for ch in c:
+        if ch in ZERO_WIDTH:
+            continue
+
+        if ch == "\u2206":                              # INCREMENT -> GREEK CAPITAL DELTA
+            ch = "\u0394"
+
+        o = ord(ch)
+
+        if 0xFB00 <= o <= 0xFB06:
+            ch = unicodedata.normalize("NFKC", ch)      # ﬃ -> ffi, ﬁ -> fi ...
+        elif _is_unknown_glyph(ch):
+            ch = WILDCARD
+
+        out.append(ch)
+
+    return "".join(out)
 
 
 def normalise_text(text):
-    return "".join(normalise_char(c) for c in text)
+    return normalise_char(text)
 
 
-# def canon(text):
-#     return LIG_RE.sub("", text)
+def lig_equivalent(x, y):
+    """
+    True only if the words are identical once an undecodable glyph in one of
+    them is read as a ligature. 'ffi' vs 'fi' is NOT equivalent (missing f).
+    """
+    if WILDCARD not in x and WILDCARD not in y:
+        return False
+
+    if WILDCARD in x and WILDCARD in y:
+        return x == y
+
+    if WILDCARD in y:
+        x, y = y, x
+
+    pattern = "".join(
+        LIG_ALT if ch == WILDCARD else re.escape(ch) for ch in x
+    )
+    return re.fullmatch(pattern, y) is not None
 
 
-# def canon_map(text):
-#     chars, idx = [], []
-#     pos = 0
+def _extent(box, word):
+    dx, dy = word.get("dir", (1, 0))
+    return (box[2] - box[0]) if abs(dx) >= abs(dy) else (box[3] - box[1])
 
-#     for m in LIG_RE.finditer(text):
-#         for k in range(pos, m.start()):
-#             chars.append(text[k])
-#             idx.append(k)
-#         pos = m.end()
 
-#     for k in range(pos, len(text)):
-#         chars.append(text[k])
-#         idx.append(k)
+def _is_lig_part(text, s0, s1):
+    """text[s0:s1] is part of a ligature together with a neighbouring letter."""
+    n = s1 - s0
+    for s in range(max(0, s0 - 2), s0 + 1):
+        for e in range(s1, min(len(text), s1 + 2) + 1):
+            seg = text[s:e]
+            if len(seg) > n and seg in LIG_SET:
+                return True
+    return False
 
-#     return "".join(chars), idx
+
+def _width_tol(word):
+    return max(0.5, 0.1 * (word["style"][1] or 10))
+
+
+def dropped_ligature_letter(a, b):
+    """
+    True if the words differ only by a letter that belongs to a ligature
+    (extraction lost it) AND both words are drawn at the same width.
+    A really missing 'f' (ffi -> fi) makes the word narrower -> not skipped.
+    """
+    ta, tb = a["text"], b["text"]
+
+    if ta == tb:
+        return False
+
+    sm = difflib.SequenceMatcher(None, ta, tb, autojunk=False)
+    diffs = [o for o in sm.get_opcodes() if o[0] != "equal"]
+
+    if not diffs:
+        return False
+
+    for op, i0, i1, j0, j1 in diffs:
+        if op == "delete":
+            ok = _is_lig_part(ta, i0, i1)
+        elif op == "insert":
+            ok = _is_lig_part(tb, j0, j1)
+        else:
+            return False
+
+        if not ok:
+            return False
+
+    return abs(_extent(a["bbox"], a) - _extent(b["bbox"], b)) <= _width_tol(a)
+
+
+def _span(w):
+    # full extent of all characters (a de-hyphenated word covers two lines)
+    return w.get("span", w["bbox"])
+
+
+def merged_equal(first, second, merged):
+    """
+    'first' + 'second' are two words in one PDF, 'merged' is one word in the
+    other PDF (the space was lost in the text). Equal only if the drawn width
+    is the same, so a truly missing space (words touching) is still reported.
+    """
+    if first["key"] + second["key"] != merged["key"]:
+        return False
+
+    box = rect_union([_span(first), _span(second)])
+    line_h = max(first["bbox"][3] - first["bbox"][1], 1.0)
+
+    # one side wraps across two lines (hyphenated): widths are not comparable
+    if (box[3] - box[1]) > 1.5 * line_h or \
+       (_span(merged)[3] - _span(merged)[1]) > 1.5 * line_h:
+        return True
+
+    return abs(_extent(box, merged) - _extent(_span(merged), merged)) <= _width_tol(merged)
 
 
 def canon(text):
@@ -252,21 +358,42 @@ def make_finding(ftype, detail="", rects_a=None, rects_b=None):
 
 
 #MARK: Text style helpers
+_STYLE_PART = re.compile(
+    r"^(regular|roman|book|medium|semibold|demibold|bold|black|heavy|light|"
+    r"italic|ital|it|oblique|obl|slanted|bd)+$", re.I
+)
+
+
+def _style_part(name):
+    n = (name or "").split("+")[-1]
+    parts = re.split(r"[-,]", n)
+    return parts[-1].lower() if len(parts) > 1 else n.lower()
+
+
 def _font_base(name):
-    
-    name = (name or "").split("+")[-1]
-    name = re.sub(r"(bold|italic|oblique|regular)", "", name, flags=re.I)
-    name = re.sub(r"[-,_ ]+", "", name)
-    return name.lower()
+    n = (name or "").split("+")[-1]
+
+    if "-" in n:
+        fam, _, part = n.rpartition("-")
+        if _STYLE_PART.match(part):
+            n = fam
+
+    n = re.sub(r"(bold|italic|oblique|regular)", "", n, flags=re.I)
+    return re.sub(r"[-,_ ]+", "", n).lower()
 
 
 def _is_bold(style):
-    return bool(style[2] & FLAG_BOLD) or "bold" in (style[0] or "").lower()
+    part = _style_part(style[0])
+    return bool(style[2] & FLAG_BOLD) or any(k in part for k in ("bold", "black", "heavy"))
 
 
 def _is_italic(style):
-    low = (style[0] or "").lower()
-    return bool(style[2] & FLAG_ITALIC) or "italic" in low or "oblique" in low
+    part = _style_part(style[0])
+    return (
+        bool(style[2] & FLAG_ITALIC)
+        or part.endswith("it")
+        or any(k in part for k in ("ital", "obl", "slant"))
+    )
 
 
 def _rgb(c):
@@ -306,19 +433,26 @@ def style_difference(sa, sb):
 
 
 #MARK: Extraction
+def _dominant(styles):
+    counts = {}
+    for s in styles:
+        counts[s] = counts.get(s, 0) + 1
+    return max(counts, key=lambda s: (counts[s], -styles.index(s)))
+
 def _make_word(chars, boxes, styles, direction):
     return {
         "text": "".join(chars),
         "chars": list(boxes),          # one bbox per character of "text"
-        "bbox": rect_union(boxes),
+        "bbox": rect_union(boxes),     # used for highlights
+        "span": rect_union(boxes),     # extent of all characters (width checks)
         "dir": direction,              # reading direction as displayed, e.g. (1, 0)
         "style": max(set(styles), key=styles.count),
+        "mixed": len(set(styles)) > 1,
         "eol": False,
     }
 
 
 def _merge_hyphenated(words):
-    
     out = []
     i = 0
 
@@ -336,8 +470,11 @@ def _merge_hyphenated(words):
             merged = dict(w)
             merged["text"] = w["text"][:-1] + nxt["text"]
             merged["chars"] = w["chars"][:-1] + nxt["chars"]
+            merged["span"] = rect_union(merged["chars"])
             merged["eol"] = nxt["eol"]
             merged["style"] = w["style"]
+            merged["mixed"] = w.get("mixed", False) or nxt.get("mixed", False) \
+                or w["style"] != nxt["style"]
             out.append(merged)
             i += 2
         else:
@@ -513,32 +650,36 @@ def render_page(page, dpi):
 
 #MARK: Word diff (text differences + the matching that the structure check needs)
 def _boundary_rect(word, i):
-    
+    """
+    Thin marker at the position where characters are missing.
+    The vertical extent comes from the neighbouring character (not from the
+    word bbox), so a word that wraps over two lines is marked on the right line.
+    """
     chars = word["chars"]
     dx, dy = word.get("dir", (1, 0))
-    bb = word["bbox"]
     n = len(chars)
+
+    ref = chars[min(i, n - 1)]
 
     if abs(dx) >= abs(dy):                      # horizontal text
         if dx >= 0:
             x = chars[i][0] if i < n else chars[-1][2]
         else:
             x = chars[i][2] if i < n else chars[-1][0]
-        return (x - 0.6, bb[1], x + 0.6, bb[3])
+        return (x - 0.6, ref[1], x + 0.6, ref[3])
 
     if dy >= 0:                                 # vertical text, reads downwards
         y = chars[i][1] if i < n else chars[-1][3]
     else:                                       # vertical text, reads upwards
         y = chars[i][3] if i < n else chars[-1][1]
 
-    return (bb[0], y - 0.6, bb[2], y + 0.6)
+    return (ref[0], y - 0.6, ref[2], y + 0.6)
 
 
 def _char_level_rects(a, b):
     """
     Rectangles of only the changed characters of two similar words.
-    Ligature sequences are removed before diffing, so they never produce a
-    highlight, but rectangles are taken from the original glyph boxes.
+    Rectangles are taken from the original glyph boxes.
     """
     ca, ma = canon_map(a["text"])
     cb, mb = canon_map(b["text"])
@@ -550,6 +691,12 @@ def _char_level_rects(a, b):
     for op, i0, i1, j0, j1 in sm.get_opcodes():
         if op == "equal":
             continue
+
+        if DEBUG_LOG:
+            logging.info(
+                "CHAR %s A=%r %s | B=%r %s",
+                op, a["text"], _hexs(a["text"]), b["text"], _hexs(b["text"])
+            )
 
         if i1 > i0:
             rects_a.append(rect_union([a["chars"][ma[k]] for k in range(i0, i1)]))
@@ -615,14 +762,6 @@ def _pair_words(ia, ib, ta, tb):
 
 
 def diff_words(wa, wb):
-    """
-    Returns (text_findings, equal_pairs, moved_findings, changed_a, changed_b).
-
-      text_findings   {"rects_a": [...], "rects_b": [...]} real text differences
-      equal_pairs     (i, j) of words that are the same in both files
-      moved_findings  same text found at a different place ("shifted content")
-      changed_a/b     indices of words involved in a text difference
-    """
     ta = [w["key"] for w in wa]
     tb = [w["key"] for w in wb]
 
@@ -675,6 +814,12 @@ def diff_words(wa, wb):
         if not pend_d and not pend_i:
             return
 
+        if DEBUG_LOG:
+            for i in pend_d:
+                logging.info("DEL A=%r %s", wa[i]["text"], _hexs(wa[i]["text"]))
+            for j in pend_i:
+                logging.info("INS B=%r %s", wb[j]["text"], _hexs(wb[j]["text"]))
+
         findings.append({
             "rects_a": merge_rects([wa[i]["bbox"] for i in pend_d]),
             "rects_b": merge_rects([wb[j]["bbox"] for j in pend_i]),
@@ -707,7 +852,12 @@ def diff_words(wa, wb):
         else:
             ops = [("ins", j) for j in ib]
 
-        for o in ops:
+        k = 0
+
+        while k < len(ops):
+            o = ops[k]
+            k += 1
+
             if o[0] == "del":
                 pend_d.append(o[1])
 
@@ -716,6 +866,31 @@ def diff_words(wa, wb):
 
             else:
                 _, i, j, r = o
+
+                # space lost after a ligature: A has two words, B has one (or reverse)
+                nxt = ops[k] if k < len(ops) else None
+
+                if nxt and nxt[0] == "del" and nxt[1] == i + 1 \
+                        and merged_equal(wa[i], wa[nxt[1]], wb[j]):
+                    equal_pairs.append((i, j))
+                    k += 1
+                    continue
+
+                if nxt and nxt[0] == "ins" and nxt[1] == j + 1 \
+                        and merged_equal(wb[j], wb[nxt[1]], wa[i]):
+                    equal_pairs.append((i, j))
+                    k += 1
+                    continue
+
+                if lig_equivalent(ta[i], tb[j]) or dropped_ligature_letter(wa[i], wb[j]):
+                    equal_pairs.append((i, j))
+                    continue
+
+                if DEBUG_LOG and ta[i] != tb[j]:
+                    logging.info(
+                        "PAIR A=%r %s | B=%r %s (ratio %.2f)",
+                        ta[i], _hexs(ta[i]), tb[j], _hexs(tb[j]), r
+                    )
 
                 if r >= PAIR_MIN_RATIO:
                     flush()
@@ -802,8 +977,27 @@ def compare_images(ia, ib, tol, same_size):
     return findings
 
 
+COLOR_DRAW_TOL = 0.04     # per channel, 0-1
+
+
+def _col_close(c1, c2):
+    if c1 is None or c2 is None:
+        return c1 is None and c2 is None
+    if len(c1) != len(c2):
+        return False
+    return max(abs(x - y) for x, y in zip(c1, c2)) <= COLOR_DRAW_TOL
+
+
+def _style_close(s1, s2):
+    return (
+        _col_close(s1[0], s2[0])
+        and _col_close(s1[1], s2[1])
+        and abs(s1[2] - s2[2]) <= 0.15
+    )
+
+
 def compare_drawings(da, db, tol):
-    
+
     if len(da) + len(db) > MAX_DRAWINGS:
         return [make_finding(
             "shapes_skipped",
@@ -813,17 +1007,21 @@ def compare_drawings(da, db, tol):
             ),
         )]
 
+    def bkey(d):
+        s = d["style"]
+        return (s[3], s[0] is None, s[1] is None)     # kind only, colours compared later
+
     buckets = {}
 
     for i, d in enumerate(da):
-        buckets.setdefault(d["style"], ([], []))[0].append(i)
+        buckets.setdefault(bkey(d), ([], []))[0].append(i)
 
     for j, d in enumerate(db):
-        buckets.setdefault(d["style"], ([], []))[1].append(j)
+        buckets.setdefault(bkey(d), ([], []))[1].append(j)
 
     moved_a, moved_b, removed, added = [], [], [], []
 
-    for style, (ia, ib) in buckets.items():
+    for _, (ia, ib) in buckets.items():
         free_b = list(ib)
         left_a = []
 
@@ -834,7 +1032,10 @@ def compare_drawings(da, db, tol):
             for j in free_b:
                 rb = db[j]["rect"]
 
-                if max(abs(x - y) for x, y in zip(ra, rb)) <= tol:
+                if (
+                    max(abs(x - y) for x, y in zip(ra, rb)) <= tol
+                    and _style_close(da[i]["style"], db[j]["style"])
+                ):
                     hit = j
                     break
 
@@ -850,6 +1051,9 @@ def compare_drawings(da, db, tol):
             best, best_d = None, MOVE_RADIUS
 
             for j in free_b:
+                if not _style_close(da[i]["style"], db[j]["style"]):
+                    continue
+
                 rb = db[j]["rect"]
                 cbx, cby = (rb[0] + rb[2]) / 2, (rb[1] + rb[3]) / 2
                 dist = ((cax - cbx) ** 2 + (cay - cby) ** 2) ** 0.5
@@ -895,6 +1099,60 @@ def compare_drawings(da, db, tol):
     return findings
 
 
+LOOK_PIXEL_DELTA = 40     # per-pixel difference (0-255) that counts as visible
+LOOK_FRACTION = 0.01      # share of changed pixels that counts as a real difference
+LOOK_TYPES = {
+    "shapes_moved", "shapes_removed", "shapes_added",
+    "image_moved", "image_removed", "image_added", "image_changed",
+}
+
+
+def _render_clip(page, clip, dpi):
+    pix = page.get_pixmap(dpi=dpi, clip=clip, alpha=False)
+    img = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, pix.n)
+    return cv2.cvtColor(img, cv2.COLOR_RGBA2BGR if pix.n == 4 else cv2.COLOR_RGB2BGR)
+
+
+def _region_same(page_a, page_b, rect, dpi):
+    clip = fitz.Rect(rect)
+    clip = fitz.Rect(clip.x0 - 1.5, clip.y0 - 1.5, clip.x1 + 1.5, clip.y1 + 1.5)
+    clip = clip & page_a.rect & page_b.rect
+
+    if clip.is_empty:
+        return False
+
+    ia = _render_clip(page_a, clip, dpi)
+    ib = _render_clip(page_b, clip, dpi)
+
+    if ia.shape != ib.shape:
+        return False
+
+    diff = cv2.absdiff(ia, ib).max(axis=2)
+    return float((diff > LOOK_PIXEL_DELTA).mean()) < LOOK_FRACTION
+
+
+def drop_same_looking(findings, page_a, page_b, dpi=100):
+    if page_a.rotation or page_b.rotation:
+        return findings
+
+    out = []
+
+    for f in findings:
+        if f["type"] not in LOOK_TYPES:
+            out.append(f)
+            continue
+
+        ra = [r for r in f["rects_a"] if not _region_same(page_a, page_b, r, dpi)]
+        rb = [r for r in f["rects_b"] if not _region_same(page_a, page_b, r, dpi)]
+
+        if ra or rb:
+            g = dict(f)
+            g["rects_a"], g["rects_b"] = ra, rb
+            out.append(g)
+
+    return out
+
+
 def structure_findings(data_a, data_b, wa, wb, equal_pairs, changed_a, changed_b, cfg):
     tol = cfg["pos_tol"]
 
@@ -931,9 +1189,17 @@ def structure_findings(data_a, data_b, wa, wb, equal_pairs, changed_a, changed_b
     for i, j in equal_pairs:
         a, b = wa[i], wb[j]
 
+        diff= None
         # ---- formatting (font / bold / italic / size / colour) ----
-        diff = style_difference(a["style"], b["style"])
+        if a.get("mixed") or b.get("mixed"):
+            diff = None          # subscripts / symbol fonts: span split differs per PDF
+        else:
+            diff = style_difference(a["style"], b["style"])
         style_items.append((diff, (i, j)))
+
+        if diff and DEBUG_LOG:
+            logging.info("STYLE %r | A=%r | B=%r | %s",
+                         a["text"], a["style"], b["style"], diff)
 
         # ---- position ----
         key = None
@@ -1045,7 +1311,7 @@ def pair_pages(ia, ib, toks_a, toks_b):
 
 
 def align_pages(path_a, path_b):
-    
+
     doc_a = fitz.open(path_a)
     doc_b = fitz.open(path_b)
 
@@ -1222,11 +1488,18 @@ def _compare_page_pair(pa, pb, path_a, path_b, cfg):
         wa = comparable_words(extract_words(page_a, cfg["sort_reading_order"]))
         wb = comparable_words(extract_words(page_b, cfg["sort_reading_order"]))
 
+        if DEBUG_LOG and pa == 2:
+            for tag, ws in (("A", wa), ("B", wb)):
+                for w in ws[:10]:
+                    logging.info("HEAD %s %r %s", tag, w["text"], [round(v) for v in w["bbox"]])
+
         text_found, equal_pairs, moved_found, ch_a, ch_b = diff_words(wa, wb)
 
         struct_found = moved_found + structure_findings(
             data_a, data_b, wa, wb, equal_pairs, ch_a, ch_b, cfg
         )
+
+        struct_found = drop_same_looking(struct_found, page_a, page_b)
 
         if not text_found and not struct_found:
             return result
@@ -1541,6 +1814,14 @@ header {{
     line-height: 2;
 }}
 
+.section-title {{
+    text-align: center;
+    margin: 30px 0 0;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}}
+
 </style>
 </head>
 
@@ -1646,43 +1927,34 @@ Image Replaced
 <div class="gallery">
 """
 
-        for r in mismatched:
+        sections = (
+            ("text_image", "Text Differences", "Text differences"),
+            ("struct_image", "Structural Differences", "Structural differences"),
+        )
 
-            title = html.escape(page_title(r))
+        for key, heading, alt_prefix in sections:
+            section_pages = [r for r in mismatched if r[key]]
+
+            if not section_pages:
+                continue
 
             html_content += f"""
+<h2 class="section-title">{heading}</h2>
+"""
+
+            for r in section_pages:
+                title = html.escape(page_title(r))
+
+                html_content += f"""
 <div class="container">
 
 <h3>{title}</h3>
-"""
-
-            if r["text_image"]:
-                html_content += f"""
-<h4>Text Differences</h4>
 
 <img
-    src="{r['text_image']}"
-    alt="Text differences on {title}"
+    src="{r[key]}"
+    alt="{alt_prefix} on {title}"
 >
-"""
 
-            if r["struct_image"]:
-
-                notes = "".join(
-                    f'<p class="note">{html.escape(n)}</p>'
-                    for n in r["notes"]
-                )
-
-                html_content += f"""
-<h4>Structural Differences</h4>
-
-<img
-    src="{r['struct_image']}"
-    alt="Structural differences on {title}"
->
-"""
-
-            html_content += """
 </div>
 """
 
@@ -1700,6 +1972,7 @@ Image Replaced
             f.write(html_content)
 
         return html_file
+
 
 #MARK: Main
 def main(pdf_1, pdf_2, job_dir):
