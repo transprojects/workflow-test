@@ -376,6 +376,7 @@ foreach ($project_status_types as $id => $val) {
 				<th>Article ID</th>
 				<th>Stage</th>
 				<th>Status</th>
+				<th>Uploaded On</th>
 			</tr>
 		</thead>
 		</table>
@@ -437,7 +438,8 @@ $(document).ready(function () {
             { data: 'journal' },
             { data: 'article_id' },
             { data: 'stage' },
-            { data: 'status_html' }
+            { data: 'status_html' },
+            { data: 'uploaded_on' }
         ]
     });
 

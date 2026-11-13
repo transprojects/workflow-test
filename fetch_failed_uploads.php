@@ -53,6 +53,7 @@ SELECT
     f.stage,
     f.status,
     f.mail_send,
+    f.end_time,
 
     c.cust_name,
     j.j_name
@@ -118,6 +119,8 @@ if ($row['status'] == 'FAILED' || $row['mail_send'] == 'FAILED') {
     $nestedData['article_id'] = $row['article_id'];
     $nestedData['stage'] = $row['stage'];
     $nestedData['status_html'] = $status;
+    /* when the file finished uploading (end_time); '-' while the auto upload is still waiting */
+    $nestedData['uploaded_on'] = !empty($row['end_time']) ? date('d-m-Y h:i A', strtotime($row['end_time'])) : '-';
 
     $data[] = $nestedData;
 }
