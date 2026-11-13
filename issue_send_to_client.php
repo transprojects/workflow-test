@@ -17,6 +17,13 @@ if(isset($_POST['action']) && $_POST['action']=='update')
 		
 	//echo $prj_update_query; exit;
 	$db->query($prj_update_query);
+
+	/* draft-only dispatch: articles outside the draft round may still be in production, so the issue stays on Manage Issues */
+	$idr_f = idr_focus_map(idr_runner_mysqli($db));
+	if (isset($idr_f[(int)$post['id']])) {
+		$left = $db->query("SELECT COUNT(id) AS n FROM inw_inward_dtl WHERE v_issue_id = ".(int)$post['id']." AND status NOT LIKE 'Delivery%' AND status <> 'Client Review'")->fetch_assoc();
+		if ($left && (int)$left['n'] > 0) { $db->query("UPDATE inw_volume_issues SET `status` = '' WHERE vi_id = ".(int)$post['id']); }
+	}
 	
 ///////////////////////////////////////////////////
 /////// Upload the files to Server START HERE /////

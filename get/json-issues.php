@@ -83,6 +83,8 @@ $rec = array(
 
 $k=0;
 $idr_withclient = idr_withclient_map(function ($sql) use ($db_handle) { $r = $db_handle->runBaseQuery($sql); return is_array($r) ? $r : array(); });
+$idr_focus = idr_focus_map(function ($sql) use ($db_handle) { $r = $db_handle->runBaseQuery($sql); return is_array($r) ? $r : array(); });
+$idr_draftopen = idr_draft_open_map(function ($sql) use ($db_handle) { $r = $db_handle->runBaseQuery($sql); return is_array($r) ? $r : array(); });
 $idr_map = idr_issue_map(function ($sql) use ($db_handle) { $r = $db_handle->runBaseQuery($sql); return is_array($r) ? $r : array(); });
 if (isset($data) && is_array($data)) {
 	foreach ($data as $row) {		
@@ -101,13 +103,18 @@ if (isset($data) && is_array($data)) {
 		
 		/* one button group per row so the buttons always sit on one line; colours: Start blue, Upload purple, Collation teal, Skip green */
 		$btns = '';
+		$focus = isset($idr_focus[$row['vi_id']]) ? $idr_focus[$row['vi_id']] : null;   // draft round of 3+ articles: collate those only, skip the rest
+		if($focus && $focus['open'] == 0) {
+			$btns .='<a class="btn btn-xs btn-info" title="Collate the '.htmlspecialchars($focus['round']).' articles only; other articles are skipped" href="show_issues_merge.php?id='.$row['vi_id'].'"><i class="ace-icon fa fa-files-o bigger-120"></i> Collation </a>';
+		}
 		if($row['pcount'] > 0) {
                 $btns .='<a class="btn btn-xs btn-primary" href="show_issues.php?id='.$row['vi_id'].'"><i class="ace-icon fa fa-tasks bigger-120"></i> Start </a><a class="btn btn-xs btn-purple" href="issue_upload_process.php?id='.$row['vi_id'].'"><i class="ace-icon fa fa-upload bigger-120"></i> Upload </a>';
 
 															 $num = preg_replace("/([a-zA-Z])/","",$row['stage']);
-					if(($_COOKIE['department_id'] == 16 || $_COOKIE['user_level'] == 1) && $num > 1 ){
+					$skippable = $row['pcount'] - (isset($idr_draftopen[$row['vi_id']]) ? $idr_draftopen[$row['vi_id']] : 0);   // draft-round articles are never skipped
+						if(($_COOKIE['department_id'] == 16 || $_COOKIE['user_level'] == 1) && $num > 1 && $skippable > 0 ){
                 $btns .='<a class="btn btn-xs btn-danger" title="Skip articles to the next stage" href="skip_issue_articles.php?id='.$row['vi_id'].'"><i class="ace-icon fa fa-fast-forward bigger-120"></i> Skip </a>';
-                 } } else {
+                 } } else if(!($focus && $focus['open'] == 0)) {
                 $btns .='<a class="btn btn-xs btn-info" href="show_issues_merge.php?id='.$row['vi_id'].'"><i class="ace-icon fa fa-files-o bigger-120"></i> Collation </a>';
                 }
 		/* articles of this issue that are with the client can be booked for another draft round, even while other articles are in production */

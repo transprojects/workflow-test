@@ -109,6 +109,43 @@ function idr_issue_cell($map, $vi_id)
 	return $h.'</span>';
 }
 
+/* Draft-focus collation. When the latest draft round of an issue has IDR_FOCUS_MIN or more articles, collation works on those articles only:
+   every other article of the issue is skipped (it may still be in production). Returns
+   [vi_id => ['round' => 'DRAFT2', 'ids' => [article ids], 'open' => how many of them have not reached Delivery yet]]. Smaller rounds are not in the map (normal collation). */
+if (!defined('IDR_FOCUS_MIN')) { define('IDR_FOCUS_MIN', 1); }
+function idr_focus_map($runner)
+{
+	$map = array();
+	if (!idr_table_exists($runner)) { return $map; }
+	$rows = $runner("SELECT x.vi_id, x.draft_no, x.sub_stage, x.article_id, (d.status NOT LIKE 'Delivery%') AS is_open
+		FROM inw_issue_article_drafts x
+		JOIN (SELECT article_id, MAX(draft_no) AS m FROM inw_issue_article_drafts GROUP BY article_id) l ON l.article_id = x.article_id AND l.m = x.draft_no
+		JOIN inw_inward_dtl d ON d.id = x.article_id AND d.v_issue_id = x.vi_id");
+	$top = array();
+	if (is_array($rows)) {
+		foreach ($rows as $r) { if (!isset($top[$r['vi_id']]) || (int)$r['draft_no'] > $top[$r['vi_id']]) { $top[$r['vi_id']] = (int)$r['draft_no']; } }
+		foreach ($rows as $r) {
+			if ((int)$r['draft_no'] != $top[$r['vi_id']]) { continue; }
+			if (!isset($map[$r['vi_id']])) { $map[$r['vi_id']] = array('round' => $r['sub_stage'], 'ids' => array(), 'open' => 0); }
+			$map[$r['vi_id']]['ids'][] = (int)$r['article_id'];
+			$map[$r['vi_id']]['open'] += (int)$r['is_open'];
+		}
+	}
+	foreach ($map as $vi => $f) { if (count($f['ids']) < IDR_FOCUS_MIN) { unset($map[$vi]); } }
+	return $map;
+}
+
+/* [vi_id => number of articles still in production that are in a draft round]. Skip must never touch these: they are being corrected, and
+   skipping would copy the previous stage's files over the corrected ones. */
+function idr_draft_open_map($runner)
+{
+	$map = array();
+	if (!idr_table_exists($runner)) { return $map; }
+	$rows = $runner("SELECT d.v_issue_id, COUNT(d.id) AS n FROM inw_inward_dtl d WHERE d.status NOT IN ('Delivery','DELIVERY-ELX') AND d.id IN (SELECT article_id FROM inw_issue_article_drafts) GROUP BY d.v_issue_id");
+	if (is_array($rows)) { foreach ($rows as $r) { $map[$r['v_issue_id']] = (int)$r['n']; } }
+	return $map;
+}
+
 /* [vi_id => number of articles with the client (Delivery or Client Review)] for issues that ALREADY have a draft round.
    Decides whether the extra "Draft" button is offered on Manage Issues / the issue Start page: an issue that has never been through a
    draft correction is booked from Under Client Issues (where it really is with the client); a plain issue in production whose finished

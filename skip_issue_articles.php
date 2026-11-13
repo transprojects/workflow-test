@@ -1,4 +1,4 @@
-<?php include "includes/includes.php";
+<?php include "includes/includes.php"; include_once "includes/issue_drafts.php";
 
 
 
@@ -37,7 +37,9 @@ function frcopy($src, $dest){
 if(isset($_REQUEST['id']) && $_REQUEST['id'] > 0)
 {
 	//echo "SELECT * FROM inw_inward_dtl WHERE v_issue_id = ".$_REQUEST['id']." AND status !='Delivery';"; exit;
-	$result = $db->query("SELECT * FROM inw_inward_dtl WHERE v_issue_id = ".$_REQUEST['id']." AND status !='Delivery';");
+	/* articles in a draft round are being corrected: skipping would copy the previous stage's files over them, so they are left alone */
+	$skip_not_draft = idr_table_exists(idr_runner_mysqli($db)) ? " AND id NOT IN (SELECT article_id FROM inw_issue_article_drafts)" : "";
+	$result = $db->query("SELECT * FROM inw_inward_dtl WHERE v_issue_id = ".(int)$_REQUEST['id']." AND status !='Delivery'".$skip_not_draft.";");
 	
 	$row_cnt=1;
 	$toatl_count=$result->num_rows;

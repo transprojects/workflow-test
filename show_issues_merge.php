@@ -4,6 +4,11 @@ set_time_limit(0);
  include_once 'includes/issue_drafts.php';
  $idr_art = idr_article_map(idr_runner_mysqli($db));
  $idr_issue = idr_issue_map(idr_runner_mysqli($db));
+ /* draft round of 3+ articles booked for this issue: collate those articles only and skip every other article */
+ $idr_focus_all = idr_focus_map(idr_runner_mysqli($db));
+ $focus_vi = (int)(isset($_POST['vi_id']) ? $_POST['vi_id'] : (isset($_REQUEST['id']) ? $_REQUEST['id'] : 0));
+ $focus = isset($idr_focus_all[$focus_vi]) ? $idr_focus_all[$focus_vi] : null;
+ $focus_ids_sql = $focus ? implode(',', array_map('intval', $focus['ids'])) : '';
 ?>
 <?php
 ob_start();
@@ -88,7 +93,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 			deleteFile($all_files_package);
 			
 			/// To get all article from this issue in inward table execpt FM, Hyperlink and BM  /////
-			$inw_query = "SELECT * FROM `inw_inward_dtl` WHERE ( v_issue_id = '".$volume_dtl['vi_id']."'  AND `pub_id` NOT LIKE '%-FM%' AND `pub_id` NOT LIKE '%-BM%' AND `pub_id` NOT LIKE '%-Hyperlink%' AND `v_issue_sequence_id` >= 1 ) ORDER BY `v_issue_sequence_id` ASC; ";
+			$inw_query = "SELECT * FROM `inw_inward_dtl` WHERE ( v_issue_id = '".$volume_dtl['vi_id']."'  AND `pub_id` NOT LIKE '%-FM%' AND `pub_id` NOT LIKE '%-BM%' AND `pub_id` NOT LIKE '%-Hyperlink%' AND `v_issue_sequence_id` >= 1 ".($focus ? " AND id IN (".$focus_ids_sql.")" : "")." ) ORDER BY `v_issue_sequence_id` ASC; ";
 			$articledetails = $db->query($inw_query) or ($db->error);
 			$toatl_count=$articledetails->num_rows;			
 			if($toatl_count>0)
@@ -437,7 +442,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 		else if($crow['cust_name']  == "ASP")
 		{ 	
 			/// To get all article from this issue in inward table execpt FM, Hyperlink and BM  /////
-			$query = "SELECT * FROM `inw_inward_dtl` WHERE ( v_issue_id = '".$volume_dtl['vi_id']."'  AND `pub_id` NOT LIKE '%-FM%' AND `pub_id` NOT LIKE '%-BM%' AND `pub_id` NOT LIKE '%-Hyperlink%') ORDER BY `v_issue_sequence_id` ASC; ";
+			$query = "SELECT * FROM `inw_inward_dtl` WHERE ( v_issue_id = '".$volume_dtl['vi_id']."'  AND `pub_id` NOT LIKE '%-FM%' AND `pub_id` NOT LIKE '%-BM%' AND `pub_id` NOT LIKE '%-Hyperlink%'".($focus ? " AND id IN (".$focus_ids_sql.")" : "").") ORDER BY `v_issue_sequence_id` ASC; ";
 			$articledetails = $db->query($query) or ($db->error);
 			$toatl_count=$articledetails->num_rows;
 			if($toatl_count>0)
@@ -652,6 +657,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
         <div><small>Issue</small><b>Vol<?php echo htmlspecialchars($voliss_info['volume_number'].$voliss_info['issue_number']); ?></b></div>
         <div><small>Received date</small><b><?php echo $voliss_info['received_date'] ? date('d-m-Y', strtotime($voliss_info['received_date'])) : '&ndash;'; ?></b></div>
         <div><small>Due date</small><b><?php echo $voliss_info['due_date'] ? date('d-m-Y', strtotime($voliss_info['due_date'])) : '&ndash;'; ?></b></div>
+        <?php if($focus) { ?><div><small>Collating</small><b><?php echo htmlspecialchars($focus['round']); ?> &times;<?php echo count($focus['ids']); ?> only</b></div><?php } ?>
         <div><small>Draft status</small><b><?php echo idr_issue_cell($idr_issue, $voliss_info['vi_id']); ?></b></div>
       </div>
     </div></div></div>
@@ -696,7 +702,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 		{
 			$query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,highpriority,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage,work_dir,wd.v_issue_sequence_id FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id  AND wd.v_issue_id ='".$_REQUEST['id']."' AND wd.status IN ('Delivery','DELIVERY-ELX') ORDER BY  `v_issue_sequence_id` ASC ";
 		}
-		//echo $query;
+		if($focus) { $query = str_replace(" ORDER BY  `v_issue_sequence_id`", " AND wd.id IN (".$focus_ids_sql.") ORDER BY  `v_issue_sequence_id`", $query); }
 		$customers = $db->query($query) or ($db->error);				
 		while($row = $customers->fetch_assoc()){ 
 		$tr_class = '';

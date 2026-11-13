@@ -21,6 +21,13 @@ if(isset($_REQUEST['id']) && $_REQUEST['id'] > 0)
 	/// draft rounds: the finished draft articles are now with the client
 	idr_stamp_dispatch($db, (int)$_REQUEST['id'], true);
 
+	/* draft-only dispatch: articles outside the draft round may still be in production, so the issue stays on Manage Issues */
+	$idr_f = idr_focus_map(idr_runner_mysqli($db));
+	if (isset($idr_f[(int)$_REQUEST['id']])) {
+		$left = $db->query("SELECT COUNT(id) AS n FROM inw_inward_dtl WHERE v_issue_id = ".(int)$_REQUEST['id']." AND status NOT LIKE 'Delivery%' AND status <> 'Client Review'")->fetch_assoc();
+		if ($left && (int)$left['n'] > 0) { $db->query("UPDATE inw_volume_issues SET `status` = '' WHERE vi_id = ".(int)$_REQUEST['id']); }
+	}
+
 	//// Adding log to dispatch history table 
 	
 	$result = $db->query("SELECT * FROM inw_volume_issues WHERE vi_id = ".$_REQUEST['id']." "); 	
