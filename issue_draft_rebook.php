@@ -248,7 +248,7 @@ function draft_steps($db, $row, $next_on)
   <table class="dc-tbl">
     <thead><tr>
       <th style="width:36px"><input type="checkbox" id="chk_all" title="Select all"></th>
-      <th>Article</th><th>Job ID</th><th>Title</th><th>Stage</th><th>Current Round</th><th>Next Round</th>
+      <th>Article</th><th>Job ID</th><th>Title</th><th>Stage</th><th>Status</th><th>Current Round</th><th>Next Round</th>
     </tr></thead>
     <tbody>
     <?php foreach ($ARTICLES as $a) {
@@ -260,8 +260,9 @@ function draft_steps($db, $row, $next_on)
         <td><?php echo h($a['job_id']); ?></td>
         <td><?php echo h($a['article_title']); ?></td>
         <td><span class="af-stage" style="--c:#6f42c1"><?php echo h($a['stage']); ?></span></td>
+        <td><span class="af-status" style="--c:<?php echo $with_client ? '#1e9e61' : '#d98a06'; ?>"><?php echo h($a['status']); ?></span></td>
         <td><?php echo $a['last_draft'] ? '<span class="idr-pill">DRAFT'.(int)$a['last_draft'].'</span>' : '<span class="badge-orig">Original</span>'; ?>
-            <?php if (!$with_client) { echo ' <span class="af-sub">'.h($a['status']).'</span>'; } ?></td>
+            </td>
         <td><?php echo $with_client ? '<b>DRAFT'.$next.'</b>' : '&ndash;'; ?></td>
       </tr>
     <?php } ?>
