@@ -32,42 +32,75 @@ $users = $db->query("SELECT id, full_name FROM users WHERE approved='1' ORDER BY
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <?php include('includes/title.php'); ?>
 <?php echo styles(); ?>
+<?php include_once 'includes/modern-ui.php'; include_once 'includes/article-filter-ui.php'; mu_head(); af_head(); ?>
 </head>
 <body>
 <div class="wholeouter">
 <?php include("includes/top-header.php"); ?>
-<div class="container-fluid mt-4">
-	<p class="reportsectionheading ms-4">Article Assignment Log</p>
-	<form method="get" class="row g-2 mx-4 mb-3">
-		<div class="col-auto"><label>From</label><input type="date" name="from_dt" class="form-control" value="<?php echo $h($from); ?>"></div>
-		<div class="col-auto"><label>To</label><input type="date" name="to_dt" class="form-control" value="<?php echo $h($to); ?>"></div>
-		<div class="col-auto"><label>Article ID</label><input type="text" name="article_id" class="form-control" value="<?php echo $h($art); ?>"></div>
-		<div class="col-auto"><label>User (previous or current)</label>
-			<select name="user_id" class="form-control"><option value="0">All</option>
-			<?php while($u = $users->fetch_assoc()) { ?><option value="<?php echo (int)$u['id']; ?>" <?php if($uid==(int)$u['id']) echo 'selected'; ?>><?php echo $h($u['full_name']); ?></option><?php } ?>
-			</select></div>
-		<div class="col-auto"><label>Action</label>
-			<select name="action" class="form-control"><option value="">All</option>
-			<?php foreach(array('assign'=>'Assign','reassign'=>'Reassign','auto'=>'Auto assign','handoff'=>'Hand-off') as $k=>$v) { ?><option value="<?php echo $k; ?>" <?php if($action===$k) echo 'selected'; ?>><?php echo $v; ?></option><?php } ?>
-			</select></div>
-		<div class="col-auto align-self-end"><button type="submit" class="btn btn-primary">Get Result</button></div>
+<div class="container-fluid" style="justify-content: space-between;">
+	<div class="af-page" style="padding-bottom:0;">
+		<div class="af-hero">
+			<div><small>Allocation history</small><h1>Article Assignment Log</h1></div>
+		</div>
+	</div>
+</div>
+
+<div class="af-page"><div class="af-wrap">
+	<form action="" method="get" class="formouter" autocomplete="off">
+		<div class="af-bar">
+			<div class="af-field search">
+				<label class="mb-2">Article ID</label>
+				<input class="form-control" type="text" name="article_id" placeholder="Enter Article ID" value="<?php echo $h($art); ?>">
+			</div>
+			<div class="af-field">
+				<label class="mb-2">From</label>
+				<input type="date" name="from_dt" class="form-control" value="<?php echo $h($from); ?>">
+			</div>
+			<div class="af-field">
+				<label class="mb-2">To</label>
+				<input type="date" name="to_dt" class="form-control" value="<?php echo $h($to); ?>">
+			</div>
+			<div class="af-field">
+				<label class="mb-2">User (previous or current)</label>
+				<select name="user_id" class="form-control"><option value="0">All</option>
+				<?php while($u = $users->fetch_assoc()) { ?><option value="<?php echo (int)$u['id']; ?>" <?php if($uid==(int)$u['id']) echo 'selected'; ?>><?php echo $h($u['full_name']); ?></option><?php } ?>
+				</select>
+			</div>
+			<div class="af-field">
+				<label class="mb-2">Action</label>
+				<select name="action" class="form-control"><option value="">All</option>
+				<?php foreach(array('assign'=>'Assign','reassign'=>'Reassign','auto'=>'Auto assign','handoff'=>'Hand-off') as $k=>$v) { ?><option value="<?php echo $k; ?>" <?php if($action===$k) echo 'selected'; ?>><?php echo $v; ?></option><?php } ?>
+				</select>
+			</div>
+			<div class="af-actions">
+				<button type="submit" class="af-btn primary"><i class="fa fa-search"></i> Get Result</button>
+				<a class="af-btn" href="assignmentlog" title="Reset filters"><i class="fa fa-refresh"></i></a>
+			</div>
+		</div>
 	</form>
-	<div class="mx-4">
-	<table id="alog" class="table table-striped table-bordered">
-		<thead><tr><th>#</th><th>Article</th><th>Stage</th><th>Department</th><th>Previous user</th><th>Current user</th><th>Action</th><th>Assigned by</th><th>Date &amp; time</th></tr></thead>
+</div></div>
+
+<div class="af-page"><div class="af-card">
+	<div class="table-responsive">
+	<table id="alog" class="table custtable table-primary" style="width: 100% !important; text-wrap: nowrap !important; white-space: nowrap !important">
+		<thead><tr>
+			<th class="thcolor">#</th><th class="thcolor">Article</th><th class="thcolor">Stage</th><th class="thcolor">Department</th>
+			<th class="thcolor">Previous user</th><th class="thcolor">Current user</th><th class="thcolor">Action</th>
+			<th class="thcolor">Assigned by</th><th class="thcolor">Date &amp; time</th>
+		</tr></thead>
 		<tbody>
 		<?php $i = 0; while($r = $rows->fetch_assoc()) { $i++; ?>
 			<tr><td><?php echo $i; ?></td><td><?php echo $h($r['pub_id']); ?></td><td><?php echo $h($r['stage']); ?></td><td><?php echo $h($r['dept_name']); ?></td>
 			<td><?php echo $r['prev_user_id'] ? $h($r['prev_name']) : '&mdash;'; ?></td><td><?php echo $h($r['cur_name']); ?></td>
-			<td><?php echo $h($r['action']); ?></td><td><?php echo $h($r['by_name']); ?></td><td><?php echo $h(date('d-m-Y H:i', strtotime($r['assigned_at']))); ?></td></tr>
+			<td><?php echo $h(ucfirst($r['action'])); ?></td><td><?php echo $h($r['by_name']); ?></td><td data-order="<?php echo $h($r['assigned_at']); ?>"><?php echo $h(date('d-m-Y H:i', strtotime($r['assigned_at']))); ?></td></tr>
 		<?php } ?>
 		</tbody>
 	</table>
 	</div>
-</div>
+</div></div>
 <?php echo footer(); ?>
 </div>
 <?php echo scripts(); ?>
-<script>$(document).ready(function(){ $('#alog').DataTable({ pageLength: 25 }); });</script>
+<script>$(document).ready(function(){ $('#alog').DataTable({ pageLength: 25, order: [[8, 'desc']] }); });</script>
 </body>
 </html>
