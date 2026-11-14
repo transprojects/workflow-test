@@ -22,7 +22,7 @@ if(isset($_POST['assign']))
 			
 
 			$assigned_user=mysqli_fetch_array(mysqli_query($db,"select full_name,department_id from users where id='".$_POST['user_id']."'"));
-			$current_user_deptname=mysqli_fetch_array(mysqli_query($db,"select * from adm_dept_master where dept_code='".$assigned_user['department_id']."'"));
+			$current_user_deptname=mysqli_fetch_array(mysqli_query($db,"select * from adm_dept_master where dept_code='".(int)($_REQUEST['dep_id'] ?: $assigned_user['department_id'])."'"));
 			
 			$user_working_status = '<span class="label label-sm label-success">'.$current_user_deptname['dept_name'].'</span>|<span class="label label-sm label-info">'.$assigned_user['full_name'].'</span>|<span class="label label-sm label-warning">Assigned</span>';
 			
