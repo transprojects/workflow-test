@@ -165,8 +165,8 @@ function jc_load_article($db, $job_id)
 /* Heavy part: transactions, dispatch history, users, departments. */
 function jc_load_details($db, $job_id)
 {
-	global $app_res, $REVS, $DRAFTS, $DEPT_MAP, $TX_BY_STAGE, $DISP_BY_STAGE, $USER_MAP, $EDIT_BY_TX, $EDIT_LIST;
-	$DEPT_MAP = array(); $TX_BY_STAGE = array(); $DISP_BY_STAGE = array(); $USER_MAP = array(); $EDIT_BY_TX = array(); $EDIT_LIST = array();
+	global $app_res, $REVS, $DRAFTS, $DEPT_MAP, $TX_BY_STAGE, $DISP_BY_STAGE, $USER_MAP, $EDIT_BY_TX, $EDIT_LIST, $ASSIGN_LIST;
+	$DEPT_MAP = array(); $TX_BY_STAGE = array(); $DISP_BY_STAGE = array(); $USER_MAP = array(); $EDIT_BY_TX = array(); $EDIT_LIST = array(); $ASSIGN_LIST = array();
 	/* what each Edit Article save changed (edit_log_lib.php); the table exists once the first edit has been saved */
 	$chk = $db->query("SHOW TABLES LIKE 'article_edit_log'");
 	if ($chk && $chk->num_rows > 0) {
@@ -199,6 +199,15 @@ function jc_load_details($db, $job_id)
 	foreach ($REVS as $d) { $user_ids[(int)$d['created_by']] = true; }
 	foreach ($DRAFTS as $d) { $user_ids[(int)$d['created_by']] = true; }
 
+	/* assignment history (article_assignment_log); the table exists once the migration has been run */
+	$chk = $db->query("SHOW TABLES LIKE 'article_assignment_log'");
+	if ($chk && $chk->num_rows > 0) {
+		$ar = $db->query("SELECT * FROM article_assignment_log WHERE inw_id = ".(int)$job_id." ORDER BY assigned_at ASC, id ASC");
+		while ($ar && ($a = $ar->fetch_assoc())) {
+			$ASSIGN_LIST[] = $a;
+			foreach (array('assigned_user_id','prev_user_id','assigned_by') as $k) { if ((int)$a[$k] > 0) { $user_ids[(int)$a[$k]] = true; } }
+		}
+	}
 	$r = $db->query("SELECT id, full_name, user_name FROM users WHERE id IN (".implode(',', array_keys($user_ids)).")");
 	while ($u = $r->fetch_assoc()) { $USER_MAP[$u['id']] = $u; }
 }
@@ -355,7 +364,25 @@ function jc_stat($icon, $label, $value, $cls = '')
 }
 
 /* Whole tab body. $stats: [total seconds or null, entries]. */
-function jc_card($stage, $date, $left, $right, $stage_for_depts, $tx, $with_depts = true)
+/* Assignment history of one stage tab: who held the article, who it came from, when and by whom. */
+function jc_assign_panel($log_stage)
+{
+	global $ASSIGN_LIST;
+	$rows = '';
+	foreach ($ASSIGN_LIST as $a) {
+		if (tvl_stage_key($a['stage']) !== tvl_stage_key($log_stage)) { continue; }
+		$rows .= '<tr><td class="nw">'.date('d-m-Y', strtotime($a['assigned_at'])).'<br><small>'.date('h:i:s a', strtotime($a['assigned_at'])).'</small></td>'
+		      .  '<td>'.htmlspecialchars(tvl_dept_name($a['dept_id'])).'</td>'
+		      .  '<td>'.((int)$a['prev_user_id'] > 0 ? jc_user_label((int)$a['prev_user_id']) : '<span class="jc-na">&ndash;</span>').'</td>'
+		      .  '<td>'.jc_user_label((int)$a['assigned_user_id']).'</td>'
+		      .  '<td>'.htmlspecialchars(ucfirst($a['action'])).'</td>'
+		      .  '<td>'.((int)$a['assigned_by'] > 0 ? jc_user_label((int)$a['assigned_by']) : '<span class="jc-na">&ndash;</span>').'</td></tr>';
+	}
+	if ($rows === '') { return ''; }
+	return '<section class="jc-panel"><h3><i class="fa fa-user-plus"></i> Assignment history</h3><div class="jc-table-wrap"><table class="jc-table"><thead><tr><th>Date &amp; time</th><th>Department</th><th>Previous user</th><th>Assigned to</th><th>Action</th><th>Assigned by</th></tr></thead><tbody>'.$rows.'</tbody></table></div></section>';
+}
+
+function jc_card($stage, $date, $left, $right, $stage_for_depts, $tx, $with_depts = true, $log_stage = null)
 {
 	global $customer_info, $journal_info, $app_res;
 	list($tx_html, $diff, $n_rows) = $tx;
@@ -379,6 +406,7 @@ function jc_card($stage, $date, $left, $right, $stage_for_depts, $tx, $with_dept
 
 	if ($with_depts) { $o .= '<section class="jc-panel"><h3><i class="fa fa-sitemap"></i> Time by department</h3>'.$dept_html.'</section>'; }
 	$o .= '<section class="jc-panel"><h3><i class="fa fa-tasks"></i> Production work details</h3>'.$tx_html.'</section>';
+	$o .= jc_assign_panel($log_stage === null ? $stage : $log_stage);
 	global $EDIT_LIST;
 	$mine = array();
 	foreach ($EDIT_LIST as $e) { if ((string)$e['stage'] === (string)$stage) { $mine[] = $e; } }
@@ -421,7 +449,7 @@ function jc_render_main()
 		'Uploaded by' => $count_dis > 0 ? jc_user_label($res_dis['sent_by']) : '',
 	);
 	return jc_card($stage, date("d-m-Y", strtotime($app_res['created_dt'])), $left, $right, 'FP',
-	               jc_tx_table(tvl_joined_rows($stage), true));
+	               jc_tx_table(tvl_joined_rows($stage), true), true, 'FP');
 }
 
 /* ---- revision / PMC / FIN tab ---- */
@@ -523,7 +551,7 @@ function jc_render_draft($d)
 	$tx = jc_tx_table($rows, true);
 	if (!$rows) { $tx[0] = '<div class="jc-empty">No work recorded in '.htmlspecialchars($d['sub_stage']).' yet. The article was booked for this round on '.date('d-m-Y h:i A', strtotime($d['created_on'])).'.</div>'; }
 	return jc_card($stage.' &middot; '.$d['sub_stage'], date("d-m-Y", strtotime($d['created_on'])), $left, $right, $stage,
-	               $tx, false);
+	               $tx, false, $stage);
 }
 
 /* ---------------------------------------------------------------------------
