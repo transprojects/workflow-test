@@ -1,5 +1,5 @@
 <?php include "includes/includes.php";
-session_start();
+session_start();include_once("includes/assignment-log.php");
 
 if(isset($_POST['reassign']))
 {
@@ -26,6 +26,7 @@ if(isset($_POST['reassign']))
 			
 			
 			
+			log_article_assignment($db,$a_id,$_POST['re_user_id'],(strpos($reassigned,'`assigned_user_id`')===0)?'assigned_user_id':'assigned_od_user_id',isset($_REQUEST['dept_id'])?$_REQUEST['dept_id']:(isset($_REQUEST['dep_id'])?$_REQUEST['dep_id']:0),'reassign');
 			$prj_update_query="UPDATE inw_inward_dtl SET $reassigned WHERE id = ".$a_id." "; 
 			//echo $prj_update_query; exit;
 			$db->query($prj_update_query);
@@ -230,7 +231,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 			   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
                 <label class="mb-2">Choose Department</label>
                <?php
-    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','10','14')  ORDER BY `dept_name` ASC ";
+    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','10','14','34','38')  ORDER BY `dept_name` ASC ";
     $customers = $db->query($query) or ($db->error);		
     
     ?><select id="dep_id" name="dep_id" class="form-control"  data-placeholder="Choose" required>

@@ -1,5 +1,6 @@
 <?php
 include ('includes/conn.php');
+include_once(__DIR__.'/includes/assignment-log.php');
 
 // Function to check if the user has been assigned articles today based on assigned_date
 function isAssignedToday($user_id) {
@@ -106,6 +107,7 @@ $query_articles = "SELECT * FROM inw_inward_dtl
 					$assigned="`assigned_od_user_id` ='".$user_id."',od_due_date='".date('Y-m-d')."',user_working_status='".$user_working_status."'";
 				}
 
+				log_article_assignment($db,$article['id'],$user_id,(strpos($assigned,'`assigned_user_id`')===0)?'assigned_user_id':'assigned_od_user_id',$config['department_id'],'auto');
 				$prj_update_query="UPDATE inw_inward_dtl SET $assigned WHERE id = ".$article['id']." "; 
 				
 				$db->query($prj_update_query);

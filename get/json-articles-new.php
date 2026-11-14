@@ -78,6 +78,13 @@ else
 	$gSearch .= 'and wd.v_issue_id <= 0';
 }
 
+// Allocation departments (CE, Pre-Editing, Tex-pre-clean, CE-ELX use assigned_user_id; PAG, PRQC and -ELX use assigned_od_user_id): a user sees only the articles allocated to them; unallocated articles are hidden until allocated.
+if(($_COOKIE['user_level'] != 1) && ($_COOKIE['user_level'] != 5) && ($_COOKIE['user_level'] != 14))
+{
+	$gSearch .= ' and (wd.department_id NOT IN (10,14,34,38) or wd.assigned_od_user_id = '.(int)$_COOKIE['user_id'].')'
+		.' and (wd.department_id NOT IN (1,2,24,32) or wd.assigned_user_id = '.(int)$_COOKIE['user_id'].')';
+}
+
 if(($_REQUEST['cust_id']!='' || $_REQUEST['j_id']!='' || $_REQUEST['stage']!='' || $_REQUEST['dept']!='' || $_REQUEST['graphics_status']!='' || $_REQUEST['article_id']!='' || $_REQUEST['from_dt']!='' || $_REQUEST['to_dt']!='' || $_REQUEST['allocated']!=''))
 {
 	

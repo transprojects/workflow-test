@@ -1,6 +1,7 @@
 <?php include "includes/includes.php";
 session_start();
 include_once("includes/assign-modern.php");
+include_once("includes/assignment-log.php");
 $rqs = '';
 if(!empty($_POST['return_qs'])) {
 	parse_str($_POST['return_qs'], $rq_);
@@ -35,7 +36,8 @@ if(isset($_POST['assign']))
 				$assigned="`assigned_od_user_id` ='".$_POST['user_id']."',od_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
 			}
 			
-			$prj_update_query="UPDATE inw_inward_dtl SET $assigned WHERE id = ".$a_id." "; 
+			log_article_assignment($db,$a_id,$_POST['user_id'],(strpos($assigned,'`assigned_user_id`')===0)?'assigned_user_id':'assigned_od_user_id',$_REQUEST['dep_id'],'assign');
+				$prj_update_query="UPDATE inw_inward_dtl SET $assigned WHERE id = ".$a_id." "; 
 			//echo $prj_update_query; exit;
 			$db->query($prj_update_query);
 			
@@ -184,7 +186,7 @@ if($_COOKIE['user_level']=='3') {
 			   <div class="af-field">
                 <label class="mb-2">Choose Department</label>
                <?php
-    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','5','10','14','24','32')  ORDER BY `dept_name` ASC ";
+    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','5','10','14','24','32','34','38')  ORDER BY `dept_name` ASC ";
     $customers = $db->query($query) or ($db->error);		
     
     ?><select id="dept_id" name="dept_id" class="form-control"  data-placeholder="Choose" required>

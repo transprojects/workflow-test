@@ -577,6 +577,17 @@ $app_res = $result->fetch_assoc();
 
 			}
 		}
+		/* Allocation departments: an Employee can open only an article that is allocated to them (also blocks Force Start / direct URLs). */
+		if(isset($_COOKIE['user_level']) && $_COOKIE['user_level'] == 3 && in_array((string)$app_res['department_id'], array('1','2','24','32','10','14','34','38'), true))
+		{
+			$__col = in_array((string)$app_res['department_id'], array('10','14','34','38'), true) ? 'assigned_od_user_id' : 'assigned_user_id';
+			$__own = $db->query("SELECT $__col AS owner FROM inw_inward_dtl WHERE id = ".(int)$app_res['id']);
+			$__own = $__own ? $__own->fetch_assoc() : null;
+			if(!$__own || (int)$__own['owner'] !== (int)$_COOKIE['user_id'])
+			{
+				header("location:".$_COOKIE['set_url']."/currentwork?msg=This article is not allocated to you: ".$app_res['pub_id']); exit;
+			}
+		}
 		///// Added this for Current user Article working status
 		$prj_update_query="UPDATE inw_inward_dtl SET present_user_id = '".$_COOKIE['user_id']."',file_status='Inprogress' WHERE id = ".$_REQUEST['aid']." ";			
 		$db->query($prj_update_query);
@@ -4977,6 +4988,7 @@ if($post['cust_id']==42 && $post['status']==1 && $post['stage']='FP' && $post['d
 			}	
 			
 			//$prj_update_query="UPDATE inw_inward_dtl SET `status` ='".$dept_res['dept_name']." | Assigned | ".$post['dept_name']."',`department_id` ='". $post['assign_department']."',`prev_dept_id` ='". $post['department_id']."',`assign_department_id` ='". $post['assign_department']."', present_user_id = '0',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."',`assigned_user_id`='".$post['a_user_id']."' WHERE id = ".$post['id']." ";
+			include_once(__DIR__."/includes/assignment-log.php"); if(!empty($post['a_user_id'])){ log_article_assignment($db,$post['id'],$post['a_user_id'],'assigned_user_id',$post['assign_department'],'handoff'); }
 			$prj_update_query="UPDATE inw_inward_dtl SET `status` ='".$assign_dept_status."',`department_id` ='". $post['assign_department']."',`prev_dept_id` ='". $post['department_id']."',`assign_department_id` ='". $post['assign_department']."', present_user_id = '0',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."',`assigned_user_id`='".$post['a_user_id']."' WHERE id = ".$post['id']." ";
 			$db->query($prj_update_query);
 		}
