@@ -5,7 +5,7 @@
 <?php
 //read data
 $dept_id = filter($_REQUEST['dept_id']);
-$query = "SELECT `id`,`user_name`,`full_name` FROM `users` WHERE department_id = '".$dept_id."' and  approved='1' ORDER BY `full_name` ASC ";
+$query = "SELECT `id`,`user_name`,`full_name` FROM `users` WHERE (department_id = '".$dept_id."'".(!empty($_REQUEST['inc_other']) ? " OR FIND_IN_SET('".(int)$dept_id."', access_other_depts)" : "").") and  approved='1' ORDER BY `full_name` ASC ";
 $customers = $db->query($query) or ($db->error);
 ?>
 <option value="">-Select-</option>

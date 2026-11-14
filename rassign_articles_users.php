@@ -12,7 +12,7 @@ if(!empty($_POST['return_qs'])) {
 if(isset($_POST['reassign']))
 {
 	// An article cannot be re-assigned to the user who already holds it: check before changing anything.
-	$od_dept = !($_REQUEST['dept_id']=='1' || $_REQUEST['dept_id']=='22' || $_REQUEST['dep_id']=='24' || $_REQUEST['dep_id']=='32');
+	$od_dept = !(!am_is_od(isset($_REQUEST['dept_id']) ? $_REQUEST['dept_id'] : (isset($_REQUEST['dep_id']) ? $_REQUEST['dep_id'] : '')));
 	$owner_col = $od_dept ? 'assigned_od_user_id' : 'assigned_user_id';
 	$same_owner = array();
 	foreach((array)$_POST['aids'] as $chk_id) {
@@ -36,7 +36,7 @@ if(isset($_POST['reassign']))
 			
 			$user_working_status = '<span class="label label-sm label-success">'.$current_user_deptname['dept_name'].'</span>|<span class="label label-sm label-info">'.$assigned_user['full_name'].'</span>|<span class="label label-sm label-warning">Assigned</span>';
 			
-			if($_REQUEST['dept_id']=='1' || $_REQUEST['dept_id']=='22' || $_REQUEST['dep_id']=='24' || $_REQUEST['dep_id']=='32')
+			if(!am_is_od(isset($_REQUEST['dept_id']) ? $_REQUEST['dept_id'] : (isset($_REQUEST['dep_id']) ? $_REQUEST['dep_id'] : '')))
 			{
 				$reassigned="`assigned_user_id` ='".$_POST['re_user_id']."',ce_pe_due_date='".date('Y-m-d',strtotime(isset($_REQUEST['target_due_dt']) ? $_REQUEST['target_due_dt'] : $_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
 			}
@@ -71,7 +71,7 @@ if($_COOKIE['user_level']=='3') {
 	$f_var .= $am_cust ? " and c.id in (".implode(',', $am_cust).") " : " and 1=0 ";
 }
 if($flt['r_user_id']!=='') {
-	$f_var .= ($flt['dep_id']==10 || $flt['dep_id']==14) ? " and assigned_od_user_id='".intval($flt['r_user_id'])."' " : " and assigned_user_id='".intval($flt['r_user_id'])."' ";
+	$f_var .= am_is_od($flt['dep_id']) ? " and assigned_od_user_id='".intval($flt['r_user_id'])."' " : " and assigned_user_id='".intval($flt['r_user_id'])."' ";
 }
 
 
@@ -211,7 +211,7 @@ if($flt['r_user_id']!=='') {
                 <label class="mb-2">Choose Allocated User</label>
                <?php
 //read data
- $query_user = "SELECT `id`,`user_name`,`full_name` FROM `users` WHERE department_id = '".$_REQUEST['dep_id']."' and  approved='1' ORDER BY `full_name` ASC ";
+ $query_user = "SELECT `id`,`user_name`,`full_name` FROM `users` WHERE (department_id = '".(int)$_REQUEST['dep_id']."' OR FIND_IN_SET('".(int)$_REQUEST['dep_id']."', access_other_depts)) and  approved='1' ORDER BY `full_name` ASC ";
 $users_r = $db->query($query_user) or ($db->error);
 ?><select id="r_user_id" name="r_user_id" class="form-control"  data-placeholder="Choose">
    <option value="">-Select-</option>
@@ -284,7 +284,7 @@ if(true) {
                   <?php
 
 
-if($_REQUEST['dep_id']==1 || $_REQUEST['dep_id']==22)
+if(!am_is_od($_REQUEST['dep_id']))
 {
 		
 			$cnt_query = "SELECT COUNT(wd.id) as num FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id  and department_id in('1','2','10','14','24')  and assigned_user_id IS NOT NULL  ".$f_status." ".$f_var." ";
@@ -306,7 +306,7 @@ else
 		while($row = $customers->fetch_assoc()){ 
 		
 		//echo "select * from users where id='".$row['assigned_user_id']."'";
-		if($_REQUEST['dep_id']==1 || $_REQUEST['dep_id']==22 || $_REQUEST['dep_id']==32)
+		if(!am_is_od($_REQUEST['dep_id']))
 		{
 		$assigned_user=mysqli_fetch_array(mysqli_query($db,"select * from users where id='".$row['assigned_user_id']."'"));
 		}
@@ -414,7 +414,7 @@ else
 			<label class="ap-label" for="re_user_id">New user <i>*</i></label>
 			<?php
 //read data
- $query_user = "SELECT `id`,`user_name`,`full_name` FROM `users` WHERE department_id = '".$_REQUEST['dep_id']."' and id!='".$_REQUEST['r_user_id']."' and  approved='1' ORDER BY `full_name` ASC ";
+ $query_user = "SELECT `id`,`user_name`,`full_name` FROM `users` WHERE (department_id = '".(int)$_REQUEST['dep_id']."' OR FIND_IN_SET('".(int)$_REQUEST['dep_id']."', access_other_depts)) and id!='".$_REQUEST['r_user_id']."' and  approved='1' ORDER BY `full_name` ASC ";
 $users_r = $db->query($query_user) or ($db->error);
 ?>
 	<select id="re_user_id" name="re_user_id" required>
@@ -544,7 +544,7 @@ jQuery(function($) {
             $.ajax({
                 type:'POST',
                 url:'get_ruser.php',
-                data:'dept_id='+dep_id,
+                data:'dept_id='+dep_id+'&inc_other=1',
                 success:function(html){
                     $('#r_user_id').html(html);                    
                 }

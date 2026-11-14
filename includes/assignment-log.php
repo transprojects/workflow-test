@@ -15,3 +15,8 @@ function log_article_assignment($db, $inw_id, $new_user_id, $col, $dept_id, $act
 		. $inw_id . ",'" . $db->real_escape_string((string)$row['pub_id']) . "','" . $db->real_escape_string((string)$row['stage']) . "'," . (int)$dept_id . ","
 		. $new_user_id . "," . $prev . "," . ($by > 0 ? $by : 'NULL') . ",'" . $db->real_escape_string($action) . "','" . date('Y-m-d H:i:s') . "')");
 }
+
+/* Departments whose allocation is stored in assigned_od_user_id (PAG, PRQC, PAG-ELX, PRQC-ELX); every other allocation department uses assigned_user_id. */
+if (!function_exists('am_is_od')) {
+	function am_is_od($dept) { return in_array((string)$dept, array('10','14','34','38'), true); }
+}

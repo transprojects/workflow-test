@@ -15,7 +15,7 @@ if(isset($_POST['reassign']))
 			
 			$user_working_status = '<span class="label label-sm label-success">'.$current_user_deptname['dept_name'].'</span>|<span class="label label-sm label-info">'.$assigned_user['full_name'].'</span>|<span class="label label-sm label-warning">Assigned</span>';
 			
-			if($_REQUEST['dept_id']=='1' || $_REQUEST['dept_id']=='22')
+			if(!am_is_od($_REQUEST['dept_id']))
 			{
 				$reassigned="`assigned_user_id` ='".$_POST['re_user_id']."',ce_pe_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
 			}
