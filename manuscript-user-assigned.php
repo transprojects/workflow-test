@@ -17,11 +17,11 @@ if(isset($_POST['reassign']))
 			
 			if(!am_is_od($_REQUEST['dept_id']))
 			{
-				$reassigned="`assigned_user_id` ='".$_POST['re_user_id']."',ce_pe_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
+				$reassigned="`assigned_user_id` ='".$_POST['re_user_id']."',ce_pe_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',file_status=IF(file_status='Inprogress',file_status,'Assign'),user_working_status='".$user_working_status."'";
 			}
 			else
 			{
-				$reassigned="`assigned_od_user_id` ='".$_POST['re_user_id']."',od_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
+				$reassigned="`assigned_od_user_id` ='".$_POST['re_user_id']."',od_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',file_status=IF(file_status='Inprogress',file_status,'Assign'),user_working_status='".$user_working_status."'";
 			}
 			
 			
