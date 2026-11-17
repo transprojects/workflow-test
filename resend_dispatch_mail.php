@@ -40,15 +40,22 @@ function rdm_fill($t, $x) {
 	}
 	return $t;
 }
+/* mail master entry for a history row; the stage is matched without its digits (REV1 -> REV), like send_to_client.php */
+function rdm_master($db, $cust, $j, $stage) {
+	$st = preg_replace('/[0-9]+/', '', (string)$stage);
+	$r = $db->query("SELECT subject, message FROM inw_dispatch_mail_master WHERE cust_id = " . (int)$cust . " AND j_id = " . (int)$j
+		. " AND stage IN ('" . $db->real_escape_string($st) . "', '" . $db->real_escape_string((string)$stage) . "') ORDER BY (stage = '" . $db->real_escape_string((string)$stage) . "') DESC LIMIT 1");
+	$m = $r ? $r->fetch_assoc() : null;
+	return $m ? $m : array('subject' => '', 'message' => '');
+}
 /* the mail that would go out for one dispatch-history row */
 function rdm_build($db, $idh) {
 	$r = $db->query("SELECT d.idh_id, d.cust_id, d.j_id, d.a_id, d.to_mail, d.to_cc, d.to_bcc, d.mail_subject, d.mail_text, d.stage, d.sent_date,
-			i.pub_id, i.article_title, i.corresponding_author, i.corresponding_other_author, i.page_count, cu.cust_name, j.j_code, j.j_cc_email, j.j_bcc_email, m.subject AS tpl_subject, m.message AS tpl_message
+			i.pub_id, i.article_title, i.corresponding_author, i.corresponding_other_author, i.page_count, cu.cust_name, j.j_code, j.j_cc_email, j.j_bcc_email
 		FROM inw_dispatch_history d
 		JOIN inw_inward_dtl i ON i.id = d.a_id
 		LEFT JOIN adm_journals j ON j.j_id = d.j_id AND j.j_cust_id = d.cust_id
 		LEFT JOIN adm_customer_master cu ON cu.id = d.cust_id
-		LEFT JOIN inw_dispatch_mail_master m ON m.cust_id = d.cust_id AND m.j_id = d.j_id AND m.stage = TRIM(TRAILING '0123456789' FROM d.stage)
 		WHERE d.idh_id = " . (int)$idh . " LIMIT 1");
 	$x = $r ? $r->fetch_assoc() : null;
 	if (!$x) { return null; }
@@ -57,8 +64,9 @@ function rdm_build($db, $idh) {
 	$bcc = rdm_merge($x['to_bcc'], $x['j_bcc_email']);
 	foreach ($to as $k => $_) { unset($cc[$k], $bcc[$k]); }
 	foreach ($cc as $k => $_) { unset($bcc[$k]); }
-	$subj = trim((string)$x['mail_subject']) !== '' ? $x['mail_subject'] : (string)$x['tpl_subject'];
-	$body = trim((string)$x['mail_text']) !== '' ? $x['mail_text'] : (string)$x['tpl_message'];
+	$tpl = rdm_master($db, $x['cust_id'], $x['j_id'], $x['stage']);
+	$subj = trim((string)$x['mail_subject']) !== '' ? $x['mail_subject'] : $tpl['subject'];
+	$body = trim((string)$x['mail_text']) !== '' ? $x['mail_text'] : $tpl['message'];
 	return array('row' => $x, 'to' => $to, 'cc' => $cc, 'bcc' => $bcc,
 		'subject' => rdm_fill($subj, $x), 'body' => rdm_fill($body, $x));
 }
@@ -116,12 +124,12 @@ if ($pub !== '') {
 	while ($r && ($x = $r->fetch_assoc())) {
 		$x['mails'] = array();
 		$h = $db->query("SELECT d.idh_id, d.stage, d.sent_date, d.to_mail, d.mail_subject, d.dispatch_type,
-				(SELECT m.subject FROM inw_dispatch_mail_master m WHERE m.cust_id = d.cust_id AND m.j_id = d.j_id AND m.stage = TRIM(TRAILING '0123456789' FROM d.stage) LIMIT 1) AS tpl_subject,
+				d.cust_id, d.j_id,
 				(SELECT COUNT(*) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS resent,
 				(SELECT MAX(l.sent_on) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS last_resent
 			FROM inw_dispatch_history d WHERE d.a_id = " . (int)$x['id'] . " ORDER BY d.sent_date DESC");
 		while ($h && ($y = $h->fetch_assoc())) {
-			$y['subject_show'] = trim((string)$y['mail_subject']) !== '' ? $y['mail_subject'] : rdm_fill($y['tpl_subject'], array_merge($x, array('a_id' => $x['id'], 'cust_id' => 0, 'j_code' => '', 'page_count' => '')));
+			$y['subject_show'] = trim((string)$y['mail_subject']) !== '' ? $y['mail_subject'] : rdm_fill(rdm_master($db, $y['cust_id'], $y['j_id'], $y['stage'])['subject'], array_merge($x, array('a_id' => $x['id'], 'cust_id' => 0, 'j_code' => '', 'page_count' => '')));
 			$x['mails'][] = $y;
 		}
 		$arts[] = $x;
