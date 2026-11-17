@@ -40,9 +40,13 @@ function rdm_fill($t, $x) {
 	}
 	return $t;
 }
+/* a saved IAP mail text that is a J-stage request */
+function rdm_is_jstage($text) { return stripos((string)$text, 'J-stage Data Files') !== false || stripos((string)$text, 'Jstage Data Files') !== false; }
 /* mail master entry for a history row; the stage is matched without its digits (REV1 -> REV), like send_to_client.php */
-function rdm_master($db, $cust, $j, $stage) {
+function rdm_master($db, $cust, $j, $stage, $jstage = false) {
 	$st = preg_replace('/[0-9]+/', '', (string)$stage);
+	/* IAP (57, 58): a REV mail that is really a J-stage request (send_to_client.php: pap = 'yes') uses the JSTAGE mail */
+	if ($jstage && in_array((int)$cust, array(57, 58), true) && $st === 'REV') { $st = 'JSTAGE'; $stage = 'JSTAGE'; }
 	$r = $db->query("SELECT subject, message FROM inw_dispatch_mail_master WHERE cust_id = " . (int)$cust . " AND j_id = " . (int)$j
 		. " AND stage IN ('" . $db->real_escape_string($st) . "', '" . $db->real_escape_string((string)$stage) . "') ORDER BY (stage = '" . $db->real_escape_string((string)$stage) . "') DESC LIMIT 1");
 	$m = $r ? $r->fetch_assoc() : null;
@@ -64,7 +68,7 @@ function rdm_build($db, $idh) {
 	$bcc = rdm_merge($x['to_bcc'], $x['j_bcc_email']);
 	foreach ($to as $k => $_) { unset($cc[$k], $bcc[$k]); }
 	foreach ($cc as $k => $_) { unset($bcc[$k]); }
-	$tpl = rdm_master($db, $x['cust_id'], $x['j_id'], $x['stage']);
+	$tpl = rdm_master($db, $x['cust_id'], $x['j_id'], $x['stage'], rdm_is_jstage($x['mail_text']));
 	$subj = trim((string)$x['mail_subject']) !== '' ? $x['mail_subject'] : $tpl['subject'];
 	$body = trim((string)$x['mail_text']) !== '' ? $x['mail_text'] : $tpl['message'];
 	return array('row' => $x, 'to' => $to, 'cc' => $cc, 'bcc' => $bcc,
@@ -124,12 +128,12 @@ if ($pub !== '') {
 	while ($r && ($x = $r->fetch_assoc())) {
 		$x['mails'] = array();
 		$h = $db->query("SELECT d.idh_id, d.stage, d.sent_date, d.to_mail, d.mail_subject, d.dispatch_type,
-				d.cust_id, d.j_id,
+				d.cust_id, d.j_id, (d.mail_text LIKE '%J-stage Data Files%' OR d.mail_text LIKE '%Jstage Data Files%') AS is_jstage,
 				(SELECT COUNT(*) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS resent,
 				(SELECT MAX(l.sent_on) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS last_resent
 			FROM inw_dispatch_history d WHERE d.a_id = " . (int)$x['id'] . " ORDER BY d.sent_date DESC");
 		while ($h && ($y = $h->fetch_assoc())) {
-			$y['subject_show'] = trim((string)$y['mail_subject']) !== '' ? $y['mail_subject'] : rdm_fill(rdm_master($db, $y['cust_id'], $y['j_id'], $y['stage'])['subject'], array_merge($x, array('a_id' => $x['id'], 'cust_id' => 0, 'j_code' => '', 'page_count' => '')));
+			$y['subject_show'] = trim((string)$y['mail_subject']) !== '' ? $y['mail_subject'] : rdm_fill(rdm_master($db, $y['cust_id'], $y['j_id'], $y['stage'], (bool)$y['is_jstage'])['subject'], array_merge($x, array('a_id' => $x['id'], 'cust_id' => 0, 'j_code' => '', 'page_count' => '')));
 			$x['mails'][] = $y;
 		}
 		$arts[] = $x;
