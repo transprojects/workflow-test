@@ -9,6 +9,8 @@ $length = $_REQUEST['iDisplayLength'];
 $sSearch = $_REQUEST['sSearch'];
 $col = $_REQUEST['iSortCol_0'];
 $gSearch="";
+// hide the admin roles from this list
+$gSearch .= ' and user_role_name not in ("Super Admin","Portal Admin")';
 
 $arr = array(0 => 'user_role_name', 1 => 'created_on', 2 => 'user_role_id');
 
