@@ -31,22 +31,29 @@ function rdm_merge() {
 /* fill the mail-master tags from the article */
 function rdm_fill($t, $x) {
 	$title = !empty($x['article_title']) ? $x['article_title'] : $x['pub_id'];
-	return str_replace(array('[##FileName##]', '##FileName##', '##ARTICLEID##', '##ARTICLETITLE##', '##AuthorNames##'),
-		array($x['pub_id'], $x['pub_id'], $x['pub_id'], $title, (string)$x['corresponding_author']), (string)$t);
+	$t = str_replace(array('[##FileName##]', '##FileName##', '##ARTICLEID##', 'ARTICLEID', '##ARTICLETITLE##', '##AuthorNames##', 'AUTHORNAME', 'CLIENTNAME'),
+		array($x['pub_id'], $x['pub_id'], $x['pub_id'], $x['pub_id'], $title, (string)$x['corresponding_author'], (string)$x['corresponding_author'], (string)$x['cust_name']), (string)$t);
+	/* e-proofing link/key: same keys as send_to_client.php (customer 42: article id; Sunrise-NOW / TSP: customer:journal:pub_id:page_count) */
+	if (strpos($t, '##EPROOFING_') !== false) {
+		$key = (int)$x['cust_id'] === 42 ? base64_encode($x['a_id']) : base64_encode($x['cust_name'] . ':' . $x['j_code'] . ':' . $x['pub_id'] . ':' . $x['page_count']);
+		$t = str_replace(array('##EPROOFING_LINK##', '##EPROOFING_KEY##'), array(defined('EPROOFING_URL') ? EPROOFING_URL : '', $key), $t);
+	}
+	return $t;
 }
 /* the mail that would go out for one dispatch-history row */
 function rdm_build($db, $idh) {
 	$r = $db->query("SELECT d.idh_id, d.cust_id, d.j_id, d.a_id, d.to_mail, d.to_cc, d.to_bcc, d.mail_subject, d.mail_text, d.stage, d.sent_date,
-			i.pub_id, i.article_title, i.corresponding_author, j.j_cc_email, j.j_bcc_email, m.subject AS tpl_subject, m.message AS tpl_message
+			i.pub_id, i.article_title, i.corresponding_author, i.corresponding_other_author, i.page_count, cu.cust_name, j.j_code, j.j_cc_email, j.j_bcc_email, m.subject AS tpl_subject, m.message AS tpl_message
 		FROM inw_dispatch_history d
 		JOIN inw_inward_dtl i ON i.id = d.a_id
 		LEFT JOIN adm_journals j ON j.j_id = d.j_id AND j.j_cust_id = d.cust_id
-		LEFT JOIN inw_dispatch_mail_master m ON m.cust_id = d.cust_id AND m.j_id = d.j_id AND m.stage = d.stage
+		LEFT JOIN adm_customer_master cu ON cu.id = d.cust_id
+		LEFT JOIN inw_dispatch_mail_master m ON m.cust_id = d.cust_id AND m.j_id = d.j_id AND m.stage = TRIM(TRAILING '0123456789' FROM d.stage)
 		WHERE d.idh_id = " . (int)$idh . " LIMIT 1");
 	$x = $r ? $r->fetch_assoc() : null;
 	if (!$x) { return null; }
 	$to = rdm_clean_list($x['to_mail']);
-	$cc = rdm_merge($x['to_cc'], $x['j_cc_email']);
+	$cc = rdm_merge($x['to_cc'], $x['j_cc_email'], $x['corresponding_other_author']);
 	$bcc = rdm_merge($x['to_bcc'], $x['j_bcc_email']);
 	foreach ($to as $k => $_) { unset($cc[$k], $bcc[$k]); }
 	foreach ($cc as $k => $_) { unset($bcc[$k]); }
@@ -109,12 +116,12 @@ if ($pub !== '') {
 	while ($r && ($x = $r->fetch_assoc())) {
 		$x['mails'] = array();
 		$h = $db->query("SELECT d.idh_id, d.stage, d.sent_date, d.to_mail, d.mail_subject, d.dispatch_type,
-				(SELECT m.subject FROM inw_dispatch_mail_master m WHERE m.cust_id = d.cust_id AND m.j_id = d.j_id AND m.stage = d.stage LIMIT 1) AS tpl_subject,
+				(SELECT m.subject FROM inw_dispatch_mail_master m WHERE m.cust_id = d.cust_id AND m.j_id = d.j_id AND m.stage = TRIM(TRAILING '0123456789' FROM d.stage) LIMIT 1) AS tpl_subject,
 				(SELECT COUNT(*) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS resent,
 				(SELECT MAX(l.sent_on) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS last_resent
 			FROM inw_dispatch_history d WHERE d.a_id = " . (int)$x['id'] . " ORDER BY d.sent_date DESC");
 		while ($h && ($y = $h->fetch_assoc())) {
-			$y['subject_show'] = trim((string)$y['mail_subject']) !== '' ? $y['mail_subject'] : rdm_fill($y['tpl_subject'], $x);
+			$y['subject_show'] = trim((string)$y['mail_subject']) !== '' ? $y['mail_subject'] : rdm_fill($y['tpl_subject'], array_merge($x, array('a_id' => $x['id'], 'cust_id' => 0, 'j_code' => '', 'page_count' => '')));
 			$x['mails'][] = $y;
 		}
 		$arts[] = $x;
