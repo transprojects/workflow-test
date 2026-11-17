@@ -28,10 +28,16 @@ function rdm_merge() {
 	foreach (func_get_args() as $l) { foreach (rdm_clean_list($l) as $k => $v) { $o[$k] = $v; } }
 	return $o;
 }
+/* fill the mail-master tags from the article */
+function rdm_fill($t, $x) {
+	$title = !empty($x['article_title']) ? $x['article_title'] : $x['pub_id'];
+	return str_replace(array('[##FileName##]', '##FileName##', '##ARTICLEID##', '##ARTICLETITLE##', '##AuthorNames##'),
+		array($x['pub_id'], $x['pub_id'], $x['pub_id'], $title, (string)$x['corresponding_author']), (string)$t);
+}
 /* the mail that would go out for one dispatch-history row */
 function rdm_build($db, $idh) {
 	$r = $db->query("SELECT d.idh_id, d.cust_id, d.j_id, d.a_id, d.to_mail, d.to_cc, d.to_bcc, d.mail_subject, d.mail_text, d.stage, d.sent_date,
-			i.pub_id, j.j_cc_email, j.j_bcc_email, m.subject AS tpl_subject, m.message AS tpl_message
+			i.pub_id, i.article_title, i.corresponding_author, j.j_cc_email, j.j_bcc_email, m.subject AS tpl_subject, m.message AS tpl_message
 		FROM inw_dispatch_history d
 		JOIN inw_inward_dtl i ON i.id = d.a_id
 		LEFT JOIN adm_journals j ON j.j_id = d.j_id AND j.j_cust_id = d.cust_id
@@ -46,9 +52,8 @@ function rdm_build($db, $idh) {
 	foreach ($cc as $k => $_) { unset($bcc[$k]); }
 	$subj = trim((string)$x['mail_subject']) !== '' ? $x['mail_subject'] : (string)$x['tpl_subject'];
 	$body = trim((string)$x['mail_text']) !== '' ? $x['mail_text'] : (string)$x['tpl_message'];
-	$tags = array('[##FileName##]', '##FileName##', '##ARTICLEID##');
 	return array('row' => $x, 'to' => $to, 'cc' => $cc, 'bcc' => $bcc,
-		'subject' => str_replace($tags, $x['pub_id'], $subj), 'body' => str_replace($tags, $x['pub_id'], $body));
+		'subject' => rdm_fill($subj, $x), 'body' => rdm_fill($body, $x));
 }
 
 /* ---------- preview (AJAX, POST): what would go out, nothing is sent ---------- */
@@ -104,10 +109,14 @@ if ($pub !== '') {
 	while ($r && ($x = $r->fetch_assoc())) {
 		$x['mails'] = array();
 		$h = $db->query("SELECT d.idh_id, d.stage, d.sent_date, d.to_mail, d.mail_subject, d.dispatch_type,
+				(SELECT m.subject FROM inw_dispatch_mail_master m WHERE m.cust_id = d.cust_id AND m.j_id = d.j_id AND m.stage = d.stage LIMIT 1) AS tpl_subject,
 				(SELECT COUNT(*) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS resent,
 				(SELECT MAX(l.sent_on) FROM inw_dispatch_resend_log l WHERE l.idh_id = d.idh_id AND l.status = 'Sent') AS last_resent
 			FROM inw_dispatch_history d WHERE d.a_id = " . (int)$x['id'] . " ORDER BY d.sent_date DESC");
-		while ($h && ($y = $h->fetch_assoc())) { $x['mails'][] = $y; }
+		while ($h && ($y = $h->fetch_assoc())) {
+			$y['subject_show'] = trim((string)$y['mail_subject']) !== '' ? $y['mail_subject'] : rdm_fill($y['tpl_subject'], $x);
+			$x['mails'][] = $y;
+		}
 		$arts[] = $x;
 	}
 }
@@ -193,7 +202,7 @@ $base = isset($_COOKIE['set_url']) ? $_COOKIE['set_url'] : '';
             <td><span class="rd-stage <?php echo $sc; ?>"><?php echo $e($m['stage']); ?></span></td>
             <td><?php echo $e(date('d-M-Y', strtotime($m['sent_date']))); ?><div style="font-size:11.5px;color:#6b7785"><?php echo $e(date('H:i', strtotime($m['sent_date']))); ?></div></td>
             <td class="rd-to"><?php echo $e($m['to_mail']); ?></td>
-            <td class="rd-sub"><?php echo $e($m['mail_subject'] !== null && $m['mail_subject'] !== '' ? $m['mail_subject'] : '(from the mail master)'); ?></td>
+            <td class="rd-sub"><?php echo $e(trim($m['subject_show']) !== '' ? $m['subject_show'] : '(no subject set)'); ?></td>
             <td><?php echo (int)$m['resent'] ? '<span class="rd-times">' . (int)$m['resent'] . '&times;<small>' . $e(date('d-M H:i', strtotime($m['last_resent']))) . '</small></span>' : '<span style="color:#b3bcc7">&ndash;</span>'; ?></td>
             <td style="text-align:right"><button type="button" class="rd-btn" data-idh="<?php echo (int)$m['idh_id']; ?>"><i class="fa fa-eye"></i> Preview &amp; send</button></td>
           </tr>
