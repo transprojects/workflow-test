@@ -46,8 +46,8 @@ if ($job && $_SERVER['REQUEST_METHOD'] === 'POST') {
 				$mail->isHTML(true); $mail->Subject = 'Your download code for the QC tool reports';
 				$mail->Body = "Your one-time code is <b style='font-size:20px;letter-spacing:3px'>$code</b><br/>It is valid for 10 minutes. If you did not ask for it, ignore this email.";
 				$mail->AltBody = "Your one-time code is $code (valid for 10 minutes).";
-				$mail->addAddress($mail_in); if (!$mail->Send()) { error_log('qc_zip_download otp mail: ' . $mail->ErrorInfo); }
-			}
+				$mail->addAddress($mail_in); if (!$mail->Send()) { error_log('qc_zip_download otp mail: ' . $mail->ErrorInfo); $err = 'The code email could not be sent (' . $mail->ErrorInfo . '). Tell the sender.'; $msg = ''; }
+			} else { error_log('qc_zip_download: email_settings id=1 not found'); $err = 'Mail is not configured on the server. Tell the sender.'; $msg = ''; }
 		}
 	} elseif (isset($_POST['verify'])) {
 		$stage = 'code';
