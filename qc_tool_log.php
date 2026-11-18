@@ -66,6 +66,7 @@ $W = implode(' AND ', $where);
 /* ZIP download: the selected rows (ids[]) or every row matching the current filters (zip_scope=all), from either tab. For each article + tool
    the zip holds the first report AND every bypass report, plus summary.csv with the details. Layout: <article>/first/*.html, <article>/bypass/*.html */
 if (isset($_POST['zip']) && $tbl_ok) {
+	$first_only = $_POST['zip'] === 'first';   // 'first' = first reports only + summary; anything else = first + bypass reports
 	@set_time_limit(0); @ini_set('memory_limit', '512M');
 	if (!class_exists('ZipArchive')) { echo 'PHP zip extension is not enabled on this server.'; exit; }
 	$sel = array();
@@ -86,7 +87,7 @@ if (isset($_POST['zip']) && $tbl_ok) {
 		foreach ($chunk as $x) { $or[] = "(pub_id = '" . $db->real_escape_string($x['pub_id']) . "' AND tool = '" . $db->real_escape_string($x['tool']) . "')"; }
 		$OR = implode(' OR ', $or);
 		if ($has_first)  { $r = $db->query("SELECT * FROM qc_tool_first_report WHERE $OR ORDER BY run_at"); while ($r && ($x = $r->fetch_assoc())) { $firsts[] = $x; } }
-		if ($has_bypass) { $r = $db->query("SELECT * FROM qc_tool_bypass_log WHERE $OR ORDER BY bypassed_at"); while ($r && ($x = $r->fetch_assoc())) { $byps[] = $x; } }
+		if ($has_bypass && !$first_only) { $r = $db->query("SELECT * FROM qc_tool_bypass_log WHERE $OR ORDER BY bypassed_at"); while ($r && ($x = $r->fetch_assoc())) { $byps[] = $x; } }
 	}
 	$custs = array();
 	$r = $db->query("SELECT id, cust_name FROM adm_customer_master"); while ($r && ($x = $r->fetch_assoc())) { $custs[$x['id']] = $x['cust_name']; }
@@ -117,7 +118,7 @@ if (isset($_POST['zip']) && $tbl_ok) {
 	if (!is_file($zpath) || !$nfile) { @unlink($zpath); echo 'No stored HTML reports were found for the selection.'; exit; }
 	while (ob_get_level()) { ob_end_clean(); }
 	header('Content-Type: application/zip');
-	header('Content-Disposition: attachment; filename="QC_tool_reports_' . date('Ymd_His') . '.zip"');
+	header('Content-Disposition: attachment; filename="QC_tool_' . ($first_only ? 'first_reports_' : 'reports_') . date('Ymd_His') . '.zip"');
 	header('Content-Length: ' . filesize($zpath));
 	readfile($zpath); @unlink($zpath);
 	exit;
@@ -216,10 +217,12 @@ $base = isset($_COOKIE['set_url']) ? $_COOKIE['set_url'] : '';
     <form method="post" id="qcZipForm" action="<?php echo $e($qs(array('pg' => ''))); ?>">
 <?php if ($rows) { ?>
     <div class="qc-bar">
-      <button type="submit" name="zip" value="1" id="qcZipSel" disabled>Download ZIP of selected (<span id="qcSelN">0</span>)</button>
-      <button type="submit" name="zip" value="1" class="alt" id="qcZipAll" onclick="document.getElementById('qcScope').value='all';return confirm('Download a ZIP for all <?php echo (int)$total; ?> rows matching the current filters? This can take a while.');">Download ZIP of all <?php echo (int)$total; ?> matching</button>
+      <button type="submit" name="zip" value="first" class="qc-z" data-scope="sel" disabled>First reports only &ndash; selected (<span class="qcSelN">0</span>)</button>
+      <button type="submit" name="zip" value="first" class="qc-z alt" data-scope="all" data-n="<?php echo (int)$total; ?>">First reports only &ndash; all <?php echo (int)$total; ?> matching</button>
+      <button type="submit" name="zip" value="1" class="qc-z" data-scope="sel" disabled>First + bypass reports &ndash; selected (<span class="qcSelN">0</span>)</button>
+      <button type="submit" name="zip" value="1" class="qc-z alt" data-scope="all" data-n="<?php echo (int)$total; ?>">First + bypass &ndash; all <?php echo (int)$total; ?> matching</button>
       <input type="hidden" name="zip_scope" id="qcScope" value="sel">
-      <span class="hint">Each ZIP has the first report and any bypass reports for the article, plus summary.csv.</span>
+      <span class="hint">Every ZIP also has summary.csv.</span>
     </div>
 <?php } ?>
     <div class="qc-card">
@@ -296,11 +299,19 @@ $base = isset($_COOKIE['set_url']) ? $_COOKIE['set_url'] : '';
 <script>
 (function () {
   var f = document.getElementById('qcZipForm'); if (!f) { return; }
-  var rows = f.querySelectorAll('.qc-row'), all = f.querySelector('.qc-all'), n = document.getElementById('qcSelN'), b = document.getElementById('qcZipSel'), sc = document.getElementById('qcScope');
-  function upd() { var c = f.querySelectorAll('.qc-row:checked').length; if (n) { n.textContent = c; } if (b) { b.disabled = !c; } if (all) { all.checked = c && c === rows.length; } }
+  var rows = f.querySelectorAll('.qc-row'), all = f.querySelector('.qc-all'), sc = document.getElementById('qcScope'), bs = f.querySelectorAll('.qc-z');
+  function upd() {
+    var c = f.querySelectorAll('.qc-row:checked').length;
+    f.querySelectorAll('.qcSelN').forEach(function (x) { x.textContent = c; });
+    bs.forEach(function (b) { if (b.getAttribute('data-scope') === 'sel') { b.disabled = !c; } });
+    if (all) { all.checked = c && c === rows.length; }
+  }
   if (all) { all.addEventListener('change', function () { rows.forEach(function (r) { r.checked = all.checked; }); upd(); }); }
   rows.forEach(function (r) { r.addEventListener('change', upd); });
-  if (b) { b.addEventListener('click', function () { sc.value = 'sel'; }); }
+  bs.forEach(function (b) { b.addEventListener('click', function (ev) {
+    sc.value = b.getAttribute('data-scope');
+    if (sc.value === 'all' && !confirm('Download a ZIP for all ' + b.getAttribute('data-n') + ' rows matching the current filters? This can take a while.')) { ev.preventDefault(); }
+  }); });
   upd();
 })();
 </script>
