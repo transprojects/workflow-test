@@ -63,65 +63,180 @@ if ($from_iso)    { $where[] = "t.$datecol >= '" . $from_iso . " 00:00:00'"; }
 if ($to_iso)      { $where[] = "t.$datecol <= '" . $to_iso . " 23:59:59'"; }
 $W = implode(' AND ', $where);
 
-/* ZIP download: the selected rows (ids[]) or every row matching the current filters (zip_scope=all), from either tab. For each article + tool
-   the zip holds the first report AND every bypass report, plus summary.csv with the details. Layout: <article>/first/*.html, <article>/bypass/*.html */
-if (isset($_POST['zip']) && $tbl_ok) {
-	$first_only = $_POST['zip'] === 'first';   // 'first' = first reports only + summary; anything else = first + bypass reports
+/* Email-a-download-link flow (AJAX, step by step so the page can show progress): start -> step (x N) -> finish -> mail.
+   The ZIP is built into E:/Tool_Reports/_zips/<token>.zip and served by qc_zip_download.php?t=<token> (token-protected, expires after 7 days). */
+if (isset($_POST['qz']) && $tbl_ok) {
 	@set_time_limit(0); @ini_set('memory_limit', '512M');
-	if (!class_exists('ZipArchive')) { echo 'PHP zip extension is not enabled on this server.'; exit; }
-	$sel = array();
-	if (isset($_POST['zip_scope']) && $_POST['zip_scope'] === 'all') {
-		$r = $db->query("SELECT t.pub_id, t.tool FROM $tbl t WHERE $W");
-		while ($r && ($x = $r->fetch_assoc())) { $sel[$x['pub_id'] . "\t" . $x['tool']] = $x; }
-	} else {
-		$ids = array_filter(array_map('intval', isset($_POST['ids']) && is_array($_POST['ids']) ? $_POST['ids'] : array()));
-		if ($ids) {
-			$r = $db->query("SELECT t.pub_id, t.tool FROM $tbl t WHERE t.id IN (" . implode(',', $ids) . ")");
-			while ($r && ($x = $r->fetch_assoc())) { $sel[$x['pub_id'] . "\t" . $x['tool']] = $x; }
+	$J = function ($a) { while (ob_get_level()) { ob_end_clean(); } header('Content-Type: application/json; charset=utf-8'); echo json_encode($a); exit; };
+	if (empty($_COOKIE['user_id'])) { $J(array('ok' => false, 'error' => 'Please sign in again.')); }
+	if (!class_exists('ZipArchive')) { $J(array('ok' => false, 'error' => 'PHP zip extension is not enabled on this server.')); }
+	$zdir = $reports_dir . '_zips/';
+	if (!is_dir($zdir)) { @mkdir($zdir, 0775, true); }
+	$db->query("CREATE TABLE IF NOT EXISTS qc_zip_jobs (
+		id INT UNSIGNED NOT NULL AUTO_INCREMENT, token CHAR(40) NOT NULL, created_by VARCHAR(100) NOT NULL DEFAULT '', created_by_name VARCHAR(150) NOT NULL DEFAULT '',
+		created_at DATETIME NOT NULL, expires_at DATETIME NOT NULL, mode VARCHAR(10) NOT NULL DEFAULT 'full', recipients TEXT NULL, note TEXT NULL,
+		items_json MEDIUMTEXT NULL, stats_json TEXT NULL, total INT NOT NULL DEFAULT 0, done INT NOT NULL DEFAULT 0, files INT NOT NULL DEFAULT 0, missing INT NOT NULL DEFAULT 0,
+		status VARCHAR(12) NOT NULL DEFAULT 'building', zip_file VARCHAR(255) NULL, zip_size BIGINT NULL, mail_status VARCHAR(10) NULL, mail_error TEXT NULL,
+		downloads INT NOT NULL DEFAULT 0, last_download DATETIME NULL, PRIMARY KEY (id), UNIQUE KEY uq_token (token)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+	$qz = $_POST['qz'];
+	$uid = $db->real_escape_string((string)$_COOKIE['user_id']);
+	$dfmt = function ($d) { return $d ? date('d-M-Y', strtotime($d)) : ''; };
+	try {
+		if ($qz === 'start') {
+			/* drop expired links + their files */
+			$r = $db->query("SELECT id, zip_file FROM qc_zip_jobs WHERE expires_at < NOW()");
+			while ($r && ($x = $r->fetch_assoc())) { if ($x['zip_file'] && is_file($zdir . $x['zip_file'])) { @unlink($zdir . $x['zip_file']); } @unlink($zdir . $x['zip_file'] . '.csv'); $db->query("DELETE FROM qc_zip_jobs WHERE id = " . (int)$x['id']); }
+			$to = array();
+			foreach (preg_split('/[\s,;]+/', isset($_POST['to']) ? $_POST['to'] : '', -1, PREG_SPLIT_NO_EMPTY) as $m) {
+				if (!filter_var($m, FILTER_VALIDATE_EMAIL)) { $J(array('ok' => false, 'error' => 'Not a valid email address: ' . $m)); }
+				$to[strtolower($m)] = $m;
+			}
+			$mode = isset($_POST['mode']) && $_POST['mode'] === 'first' ? 'first' : 'full';
+			$sel = array();
+			if (isset($_POST['zip_scope']) && $_POST['zip_scope'] === 'all') {
+				$r = $db->query("SELECT t.pub_id, t.tool FROM $tbl t WHERE $W");
+				while ($r && ($x = $r->fetch_assoc())) { $sel[$x['pub_id'] . "\t" . $x['tool']] = $x; }
+			} else {
+				$ids = array_filter(array_map('intval', isset($_POST['ids']) && is_array($_POST['ids']) ? $_POST['ids'] : array()));
+				if ($ids) { $r = $db->query("SELECT t.pub_id, t.tool FROM $tbl t WHERE t.id IN (" . implode(',', $ids) . ")"); while ($r && ($x = $r->fetch_assoc())) { $sel[$x['pub_id'] . "\t" . $x['tool']] = $x; } }
+			}
+			if (!$sel) { $J(array('ok' => false, 'error' => 'Nothing selected.')); }
+			$items = array(); $arts = array(); $tools = array(); $nf = 0; $nb = 0; $dmin = ''; $dmax = ''; $nfail = 0; $npass = 0;
+			foreach (array_chunk(array_values($sel), 200) as $chunk) {
+				$or = array();
+				foreach ($chunk as $x) { $or[] = "(pub_id = '" . $db->real_escape_string($x['pub_id']) . "' AND tool = '" . $db->real_escape_string($x['tool']) . "')"; }
+				$OR = implode(' OR ', $or);
+				if ($has_first) { $r = $db->query("SELECT id, pub_id, tool, status, run_at FROM qc_tool_first_report WHERE $OR ORDER BY run_at");
+					while ($r && ($x = $r->fetch_assoc())) { $items[] = array('first', (int)$x['id']); $arts[$x['pub_id']] = 1; $tools[$x['tool']] = 1; $nf++; if ($x['status'] === 'PASS') { $npass++; } else { $nfail++; }
+						$d = substr($x['run_at'], 0, 10); if ($tab === 'first') { if ($dmin === '' || $d < $dmin) { $dmin = $d; } if ($d > $dmax) { $dmax = $d; } } } }
+				if ($has_bypass && $mode === 'full') { $r = $db->query("SELECT id, pub_id, tool, bypassed_at FROM qc_tool_bypass_log WHERE $OR ORDER BY bypassed_at");
+					while ($r && ($x = $r->fetch_assoc())) { $items[] = array('bypass', (int)$x['id']); $arts[$x['pub_id']] = 1; $tools[$x['tool']] = 1; $nb++;
+						$d = substr($x['bypassed_at'], 0, 10); if ($tab === 'bypass') { if ($dmin === '' || $d < $dmin) { $dmin = $d; } if ($d > $dmax) { $dmax = $d; } } } }
+			}
+			if (!$items) { $J(array('ok' => false, 'error' => 'No reports found for the selection.')); }
+			$tl = array(); foreach (array_keys($tools) as $k) { $tl[] = isset($tool_names[$k]) ? $tool_names[$k] : $k; }
+			$stats = array('tab' => $tab, 'tools' => $tl, 'articles' => count($arts), 'first_n' => $nf, 'bypass_n' => $nb, 'pass' => $npass, 'fail' => $nfail, 'date_min' => $dmin, 'date_max' => $dmax,
+				'f_from' => $from_dt, 'f_to' => $to_dt, 'f_pub' => $pub, 'f_tool' => $tool, 'f_status' => $status, 'f_user' => $user, 'scope' => (isset($_POST['zip_scope']) && $_POST['zip_scope'] === 'all') ? 'all' : 'sel');
+			$token = function_exists('random_bytes') ? bin2hex(random_bytes(20)) : bin2hex(openssl_random_pseudo_bytes(20));
+			$zf = $token . '.zip';
+			$db->query("INSERT INTO qc_zip_jobs (token, created_by, created_by_name, created_at, expires_at, mode, recipients, note, items_json, stats_json, total, status, zip_file) VALUES ('" . $token . "', '" . $uid . "', '" . $db->real_escape_string(isset($_COOKIE['full_name']) ? $_COOKIE['full_name'] : '') . "', NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), '" . $mode . "', '"
+				. $db->real_escape_string(implode(', ', $to)) . "', '" . $db->real_escape_string(isset($_POST['note']) ? trim($_POST['note']) : '') . "', '" . $db->real_escape_string(json_encode($items)) . "', '" . $db->real_escape_string(json_encode($stats)) . "', " . count($items) . ", 'building', '" . $zf . "')");
+			$jid = (int)$db->insert_id;
+			if (!$jid) { $J(array('ok' => false, 'error' => 'Could not create the job: ' . $db->error)); }
+			$J(array('ok' => true, 'job' => $jid, 'total' => count($items), 'articles' => count($arts), 'first_n' => $nf, 'bypass_n' => $nb));
 		}
-	}
-	if (!$sel) { echo 'Nothing selected.'; exit; }
-	$firsts = array(); $byps = array();
-	foreach (array_chunk(array_values($sel), 200) as $chunk) {
-		$or = array();
-		foreach ($chunk as $x) { $or[] = "(pub_id = '" . $db->real_escape_string($x['pub_id']) . "' AND tool = '" . $db->real_escape_string($x['tool']) . "')"; }
-		$OR = implode(' OR ', $or);
-		if ($has_first)  { $r = $db->query("SELECT * FROM qc_tool_first_report WHERE $OR ORDER BY run_at"); while ($r && ($x = $r->fetch_assoc())) { $firsts[] = $x; } }
-		if ($has_bypass && !$first_only) { $r = $db->query("SELECT * FROM qc_tool_bypass_log WHERE $OR ORDER BY bypassed_at"); while ($r && ($x = $r->fetch_assoc())) { $byps[] = $x; } }
-	}
-	$custs = array();
-	$r = $db->query("SELECT id, cust_name FROM adm_customer_master"); while ($r && ($x = $r->fetch_assoc())) { $custs[$x['id']] = $x['cust_name']; }
-	$safe = function ($s) { $s = str_replace('..', '_', preg_replace('/[^A-Za-z0-9._-]+/', '_', trim((string)$s))); return trim($s, '._') === '' ? '_' : $s; };
-	$zpath = tempnam(sys_get_temp_dir(), 'qcz');
-	$zip = new ZipArchive();
-	if ($zip->open($zpath, ZipArchive::OVERWRITE) !== true) { echo 'Could not create the ZIP file.'; exit; }
-	$csv = fopen('php://temp', 'w+');
-	fputcsv($csv, array('Type', 'Article', 'Customer', 'Tool', 'Stage', 'Dept', 'XML file', 'Result', 'Errors', 'Warnings', 'User', 'Date/time', 'Reason', 'IP', 'File in zip'));
-	$used = array(); $nfile = 0; $nmiss = 0;
-	$add = function ($kind, $x, $when, $user) use (&$zip, &$csv, &$used, &$nfile, &$nmiss, $reports_dir, $safe, $custs) {
-		$rf = qc_find_report($reports_dir, $x, $kind, $when);
-		$in = '';
-		if ($rf && strpos($rf, '..') === false && is_file($reports_dir . $rf)) {
-			$in = $safe($x['pub_id']) . '/' . $kind . '/' . basename($rf);
-			for ($n = 2; isset($used[$in]); $n++) { $in = $safe($x['pub_id']) . '/' . $kind . '/' . $n . '_' . basename($rf); }
-			$used[$in] = 1; $zip->addFile($reports_dir . $rf, $in); $nfile++;
-		} else { $nmiss++; }
-		fputcsv($csv, array($kind === 'first' ? 'First report' : 'Bypass', $x['pub_id'], isset($custs[$x['cust_id']]) ? $custs[$x['cust_id']] : '', $x['tool'], $x['stage'], $x['dept'], $x['xml_file'],
-			$kind === 'first' ? $x['status'] : '', $kind === 'first' ? $x['error_count'] : '', $kind === 'first' ? $x['warning_count'] : '', $user, $when,
-			$kind === 'bypass' ? $x['reason'] : '', $kind === 'bypass' ? $x['ip'] : '', $in !== '' ? $in : 'no HTML stored'));
-	};
-	foreach ($firsts as $x) { $add('first', $x, $x['run_at'], $x['run_by']); }
-	foreach ($byps as $x)   { $add('bypass', $x, $x['bypassed_at'], $x['bypassed_by']); }
-	rewind($csv);
-	$zip->addFromString('summary.csv', "\xEF\xBB\xBF" . stream_get_contents($csv));
-	$zip->close();
-	if (!is_file($zpath) || !$nfile) { @unlink($zpath); echo 'No stored HTML reports were found for the selection.'; exit; }
+
+		$jid = isset($_POST['job']) ? (int)$_POST['job'] : 0;
+		$r = $db->query("SELECT * FROM qc_zip_jobs WHERE id = $jid AND created_by = '$uid'");
+		$job = $r ? $r->fetch_assoc() : null;
+		if (!$job) { $J(array('ok' => false, 'error' => 'Job not found.')); }
+		$zpath = $zdir . $job['zip_file']; $cpath = $zpath . '.csv';
+		$items = json_decode($job['items_json'], true); $stats = json_decode($job['stats_json'], true);
+		$safe = function ($s) { $s = str_replace('..', '_', preg_replace('/[^A-Za-z0-9._-]+/', '_', trim((string)$s))); return trim($s, '._') === '' ? '_' : $s; };
+
+		if ($qz === 'step') {
+			if ($job['status'] !== 'building') { $J(array('ok' => true, 'done' => (int)$job['done'], 'total' => (int)$job['total'])); }
+			$batch = array_slice($items, (int)$job['done'], 40);
+			$byk = array('first' => array(), 'bypass' => array());
+			foreach ($batch as $it) { $byk[$it[0]][] = (int)$it[1]; }
+			$rows = array();
+			foreach (array('first' => 'qc_tool_first_report', 'bypass' => 'qc_tool_bypass_log') as $k => $t) {
+				if ($byk[$k]) { $r = $db->query("SELECT * FROM $t WHERE id IN (" . implode(',', $byk[$k]) . ")"); while ($r && ($x = $r->fetch_assoc())) { $rows[$k . $x['id']] = $x; } }
+			}
+			$custs = array(); $r = $db->query("SELECT id, cust_name FROM adm_customer_master"); while ($r && ($x = $r->fetch_assoc())) { $custs[$x['id']] = $x['cust_name']; }
+			$zip = new ZipArchive();
+			if ($zip->open($zpath, ZipArchive::CREATE) !== true) { $J(array('ok' => false, 'error' => 'Could not open the ZIP file for writing.')); }
+			$csv = fopen($cpath, 'a'); $nf = 0; $nm = 0;
+			foreach ($batch as $it) {
+				$kind = $it[0]; $x = isset($rows[$kind . $it[1]]) ? $rows[$kind . $it[1]] : null; if (!$x) { continue; }
+				$when = $kind === 'first' ? $x['run_at'] : $x['bypassed_at']; $who = $kind === 'first' ? $x['run_by'] : $x['bypassed_by'];
+				$rf = qc_find_report($reports_dir, $x, $kind, $when); $in = '';
+				if ($rf && strpos($rf, '..') === false && is_file($reports_dir . $rf)) {
+					$in = $safe($x['pub_id']) . '/' . $kind . '/' . basename($rf);
+					for ($n = 2; $zip->locateName($in) !== false; $n++) { $in = $safe($x['pub_id']) . '/' . $kind . '/' . $n . '_' . basename($rf); }
+					$zip->addFile($reports_dir . $rf, $in); $nf++;
+				} else { $nm++; }
+				fputcsv($csv, array($kind === 'first' ? 'First report' : 'Bypass', $x['pub_id'], isset($custs[$x['cust_id']]) ? $custs[$x['cust_id']] : '', $x['tool'], $x['stage'], $x['dept'], $x['xml_file'],
+					$kind === 'first' ? $x['status'] : '', $kind === 'first' ? $x['error_count'] : '', $kind === 'first' ? $x['warning_count'] : '', $who, $when,
+					$kind === 'bypass' ? $x['reason'] : '', $kind === 'bypass' ? $x['ip'] : '', $in !== '' ? $in : 'no HTML stored'));
+			}
+			fclose($csv); $zip->close();
+			$done = (int)$job['done'] + count($batch);
+			$db->query("UPDATE qc_zip_jobs SET done = $done, files = files + $nf, missing = missing + $nm WHERE id = $jid");
+			$J(array('ok' => true, 'done' => $done, 'total' => (int)$job['total'], 'files' => (int)$job['files'] + $nf, 'missing' => (int)$job['missing'] + $nm));
+		}
+
+		if ($qz === 'finish') {
+			if ((int)$job['files'] < 1) { $db->query("UPDATE qc_zip_jobs SET status = 'failed' WHERE id = $jid"); $J(array('ok' => false, 'error' => 'No stored HTML reports were found for the selection.')); }
+			$zip = new ZipArchive();
+			if ($zip->open($zpath, ZipArchive::CREATE) !== true) { $J(array('ok' => false, 'error' => 'Could not open the ZIP file.')); }
+			$hdr = fopen('php://temp', 'w+');
+			fputcsv($hdr, array('Type', 'Article', 'Customer', 'Tool', 'Stage', 'Dept', 'XML file', 'Result', 'Errors', 'Warnings', 'User', 'Date/time', 'Reason', 'IP', 'File in zip'));
+			rewind($hdr);
+			$zip->addFromString('summary.csv', "\xEF\xBB\xBF" . stream_get_contents($hdr) . (is_file($cpath) ? file_get_contents($cpath) : ''));
+			$zip->close(); @unlink($cpath);
+			$sz = is_file($zpath) ? filesize($zpath) : 0;
+			$db->query("UPDATE qc_zip_jobs SET status = 'ready', zip_size = $sz WHERE id = $jid");
+			$J(array('ok' => true, 'size' => $sz, 'files' => (int)$job['files'], 'missing' => (int)$job['missing']));
+		}
+
+		if ($qz === 'mail') {
+			$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+			$link = $scheme . '://' . $_SERVER['HTTP_HOST'] . rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/') . '/qc_zip_download.php?t=' . $job['token'];
+			$res_es = $db->query("SELECT * FROM email_settings WHERE id = 1"); $es = $res_es ? $res_es->fetch_assoc() : null;
+			if (!$es || empty($es['from_password'])) {
+				$db->query("UPDATE qc_zip_jobs SET mail_status = 'failed', mail_error = 'email_settings id=1 not found' WHERE id = $jid");
+				$J(array('ok' => true, 'link' => $link, 'mailed' => false, 'error' => 'Email settings not found, so no email was sent. Copy the link below.'));
+			}
+			$istb = $stats['tab'] === 'bypass';
+			if ($stats['f_from'] !== '' || $stats['f_to'] !== '') { $range = ($stats['f_from'] !== '' ? $dfmt($stats['f_from'] === '' ? '' : implode('-', array_reverse(explode('-', $stats['f_from'])))) : 'start') . ' and ' . ($stats['f_to'] !== '' ? $dfmt(implode('-', array_reverse(explode('-', $stats['f_to'])))) : 'today'); }
+			else { $range = $dfmt($stats['date_min']) . ' and ' . $dfmt($stats['date_max']); }
+			$toolTxt = implode(', ', $stats['tools']);
+			$td = "style='border:1px solid #d5dde6;padding:6px 10px'"; $th = "style='border:1px solid #d5dde6;padding:6px 10px;background:#eef3f8;text-align:left;width:190px'";
+			$row = function ($k, $v) use ($td, $th) { return "<tr><th $th>" . htmlspecialchars($k) . "</th><td $td>" . $v . "</td></tr>"; };
+			$h  = $row('Tool', htmlspecialchars($toolTxt));
+			$h .= $row($istb ? 'Bypassed between' : 'Run between', htmlspecialchars($range));
+			if ($stats['f_pub'] !== '')    { $h .= $row('Article ID filter', htmlspecialchars($stats['f_pub'])); }
+			if ($stats['f_status'] !== '') { $h .= $row('Result filter', $stats['f_status'] === 'PASS' ? 'Passed' : 'Failed'); }
+			if ($stats['f_user'] !== '')   { $h .= $row($istb ? 'Bypassed by' : 'Run by', htmlspecialchars($stats['f_user'])); }
+			$h .= $row('Contents', $job['mode'] === 'first' ? 'First reports only + summary.csv' : 'First reports + bypass reports + summary.csv');
+			$h .= $row('Articles', (int)$stats['articles']);
+			$h .= $row('First reports', (int)$stats['first_n'] . ($stats['first_n'] ? ' (' . (int)$stats['pass'] . ' passed, ' . (int)$stats['fail'] . ' failed)' : ''));
+			if ($job['mode'] !== 'first') { $h .= $row('Bypass reports', (int)$stats['bypass_n']); }
+			$h .= $row('HTML files in ZIP', (int)$job['files'] . ((int)$job['missing'] ? ' (' . (int)$job['missing'] . ' with no stored HTML, listed in summary.csv)' : ''));
+			$h .= $row('ZIP size', htmlspecialchars($size($job['zip_size'])));
+			$h .= $row('Prepared by', htmlspecialchars($job['created_by_name'] !== '' ? $job['created_by_name'] : 'user ' . $job['created_by']) . ' on ' . date('d-M-Y H:i'));
+			$h .= $row('Link valid until', htmlspecialchars(date('d-M-Y H:i', strtotime($job['expires_at']))));
+			include_once("smtpmail/phpmailer/class.phpmailer.php");
+			$mail = new PHPMailer();
+			$mail->IsSMTP(); $mail->CharSet = 'UTF-8'; $mail->Host = $es['host']; $mail->SMTPAuth = true; $mail->Port = $es['port']; $mail->Timeout = 30;
+			$mail->Username = $es['from_email']; $mail->Password = $es['from_password']; $mail->SMTPSecure = $es['secure'];
+			$mail->From = $es['from_email']; $mail->FromName = $es['from_name'] ?: $es['from_email']; $mail->isHTML(true);
+			$mail->Subject = 'TOOL REPORT ATTACHED - ' . $toolTxt . ' - ' . ($istb ? 'Bypassed' : 'Run') . ' between ' . $range;
+			$mail->Body = "<div style='font-family:Arial,sans-serif;font-size:14px;color:#22303f'>Dear Team,<br/><br/>The QC tool reports are ready to download. Details:<br/><br/>"
+				. "<table style='border-collapse:collapse;font-size:13px'>" . $h . "</table><br/>"
+				. ($job['note'] !== '' ? "<b>Note:</b> " . nl2br(htmlspecialchars($job['note'])) . "<br/><br/>" : '')
+				. "<a href='" . htmlspecialchars($link) . "' style='display:inline-block;background:#e8742a;color:#fff;font-weight:bold;text-decoration:none;padding:10px 22px;border-radius:8px'>Download ZIP</a><br/><br/>"
+				. "If the button does not work, copy this link into your browser:<br/>" . htmlspecialchars($link) . "<br/><br/><i>For security the link only works for the addresses this email was sent to: open it, enter your email address and confirm with the one-time code that is mailed to you.</i><br/><br/>Thanks &amp; Regards,<br/>Workflow System<br/>Transforma Pvt. Ltd.</div>";
+			$mail->AltBody = "QC tool reports ready. Tool: $toolTxt. " . ($istb ? 'Bypassed' : 'Run') . " between $range. Articles: " . (int)$stats['articles'] . ". Download: $link (valid until " . $job['expires_at'] . ")";
+			foreach (explode(',', $job['recipients']) as $m) { $mail->addAddress(trim($m)); }
+			$ok = $mail->Send();
+			$db->query("UPDATE qc_zip_jobs SET status = '" . ($ok ? 'emailed' : 'ready') . "', mail_status = '" . ($ok ? 'sent' : 'failed') . "', mail_error = '" . $db->real_escape_string($ok ? '' : $mail->ErrorInfo) . "' WHERE id = $jid");
+			$J(array('ok' => true, 'link' => $link, 'mailed' => (bool)$ok, 'to' => $job['recipients'], 'error' => $ok ? '' : 'The email could not be sent (' . $mail->ErrorInfo . '). Copy the link below and send it yourself.'));
+		}
+		$J(array('ok' => false, 'error' => 'Unknown step.'));
+	} catch (Exception $ex) { $J(array('ok' => false, 'error' => $ex->getMessage())); }
+}
+
+/* Sender's own download of a finished ZIP job (signed in as the person who prepared it). */
+if (isset($_GET['qzdl'])) {
+	$jid = (int)$_GET['qzdl'];
+	$r = !empty($_COOKIE['user_id']) ? $db->query("SELECT zip_file FROM qc_zip_jobs WHERE id = $jid AND created_by = '" . $db->real_escape_string((string)$_COOKIE['user_id']) . "' AND status IN ('ready','emailed')") : false;
+	$x = $r ? $r->fetch_assoc() : null; $zp = $x ? $reports_dir . '_zips/' . $x['zip_file'] : '';
+	if (!$x || !is_file($zp)) { echo 'This ZIP is no longer available.'; exit; }
 	while (ob_get_level()) { ob_end_clean(); }
-	header('Content-Type: application/zip');
-	header('Content-Disposition: attachment; filename="QC_tool_' . ($first_only ? 'first_reports_' : 'reports_') . date('Ymd_His') . '.zip"');
-	header('Content-Length: ' . filesize($zpath));
-	readfile($zpath); @unlink($zpath);
-	exit;
+	header('Content-Type: application/zip'); header('Content-Disposition: attachment; filename="QC_tool_reports_' . date('Ymd_His') . '.zip"'); header('Content-Length: ' . filesize($zp));
+	readfile($zp); exit;
 }
 
 $total = 0; $rows = array(); $counts = array('first' => 0, 'bypass' => 0);
@@ -184,6 +299,16 @@ $base = isset($_COOKIE['set_url']) ? $_COOKIE['set_url'] : '';
     .qc-bar button{height:40px;padding:0 18px;border:0;border-radius:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,#e8742a,#f08a45);cursor:pointer;} .qc-bar button:disabled{opacity:.45;cursor:default;}
     .qc-bar button.alt{background:#fff;color:#14304a;border:1px solid #cfd8e3;} .qc-bar .hint{color:#6b7785;font-size:13px;}
     .qc-tbl input[type=checkbox]{width:17px;height:17px;cursor:pointer;}
+    .qz-ov{position:fixed;inset:0;background:rgba(20,48,74,.45);display:none;align-items:center;justify-content:center;z-index:9999;} .qz-ov.on{display:flex;}
+    .qz-box{background:#fff;border-radius:16px;width:min(560px,94vw);max-height:92vh;overflow:auto;padding:22px 26px;box-shadow:0 12px 40px rgba(20,48,74,.3);}
+    .qz-box h3{margin:0 0 4px;color:#14304a;font-size:19px;} .qz-box p.sub{margin:0 0 14px;color:#6b7785;font-size:13px;}
+    .qz-box label.row{display:block;margin:6px 0;font-size:14px;cursor:pointer;} .qz-box input[type=text],.qz-box textarea{width:100%;box-sizing:border-box;border:1px solid #d5dde6;border-radius:10px;padding:9px 12px;margin:4px 0 8px;font:inherit;}
+    .qz-box .btns{display:flex;gap:10px;justify-content:flex-end;margin-top:14px;} .qz-box .btns button,.qz-box .btns a{height:40px;line-height:40px;padding:0 20px;border:0;border-radius:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,#e8742a,#f08a45);cursor:pointer;text-decoration:none;display:inline-block;}
+    .qz-box .btns .alt{background:#fff;color:#14304a;border:1px solid #cfd8e3;line-height:38px;}
+    .qz-steps{list-style:none;margin:6px 0 0;padding:0;font-size:14px;} .qz-steps li{padding:6px 0;color:#9aa6b2;display:flex;gap:8px;align-items:center;} .qz-steps li.on{color:#14304a;font-weight:700;} .qz-steps li.done{color:#1f9d6a;} .qz-steps li.bad{color:#d64545;font-weight:700;}
+    .qz-steps li i{width:18px;text-align:center;font-style:normal;}
+    .qz-bar{height:12px;background:#e9eef4;border-radius:999px;overflow:hidden;margin:10px 0 4px;} .qz-bar span{display:block;height:100%;width:0;background:linear-gradient(135deg,#e8742a,#f08a45);transition:width .25s;}
+    .qz-link{display:flex;gap:6px;margin-top:8px;} .qz-link input{flex:1;margin:0 !important;font-size:12px;}
     .qc-empty{padding:40px;text-align:center;color:#6b7785;}
     .qc-view{color:#e8742a;font-weight:700;text-decoration:none;} .qc-sub{color:#6b7785;font-size:12px;}
     .qc-pager{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:12px 2px 0;}
@@ -217,12 +342,9 @@ $base = isset($_COOKIE['set_url']) ? $_COOKIE['set_url'] : '';
     <form method="post" id="qcZipForm" action="<?php echo $e($qs(array('pg' => ''))); ?>">
 <?php if ($rows) { ?>
     <div class="qc-bar">
-      <button type="submit" name="zip" value="first" class="qc-z" data-scope="sel" disabled>First reports only &ndash; selected (<span class="qcSelN">0</span>)</button>
-      <button type="submit" name="zip" value="first" class="qc-z alt" data-scope="all" data-n="<?php echo (int)$total; ?>">First reports only &ndash; all <?php echo (int)$total; ?> matching</button>
-      <button type="submit" name="zip" value="1" class="qc-z" data-scope="sel" disabled>First + bypass reports &ndash; selected (<span class="qcSelN">0</span>)</button>
-      <button type="submit" name="zip" value="1" class="qc-z alt" data-scope="all" data-n="<?php echo (int)$total; ?>">First + bypass &ndash; all <?php echo (int)$total; ?> matching</button>
-      <input type="hidden" name="zip_scope" id="qcScope" value="sel">
-      <span class="hint">Every ZIP also has summary.csv.</span>
+      <button type="button" class="qc-z" data-scope="sel" disabled>Download / email ZIP &ndash; selected (<span class="qcSelN">0</span>)</button>
+      <button type="button" class="qc-z alt" data-scope="all" data-n="<?php echo (int)$total; ?>">Download / email ZIP &ndash; all <?php echo (int)$total; ?> matching</button>
+      <span class="hint">Choose first reports only, or first + bypass reports. Every ZIP also has summary.csv.</span>
     </div>
 <?php } ?>
     <div class="qc-card">
@@ -295,11 +417,32 @@ $base = isset($_COOKIE['set_url']) ? $_COOKIE['set_url'] : '';
 <?php } ?>
   </div>
 </div>
+<div class="qz-ov" id="qzOv"><div class="qz-box">
+  <h3>Download / email ZIP</h3><p class="sub" id="qzScopeTxt"></p>
+  <div id="qzForm">
+    <label class="row"><input type="radio" name="qzmode" value="first" checked> First reports only</label>
+    <label class="row"><input type="radio" name="qzmode" value="full"> First reports + bypass reports</label>
+    <label class="row" style="margin-top:12px"><input type="checkbox" id="qzMailOn"> Also email a secure download link</label>
+    <div id="qzMailBox" style="display:none">
+      <input type="text" id="qzTo" placeholder="Recipient email(s), separated by comma" autocomplete="off">
+      <textarea id="qzNote" rows="2" placeholder="Optional note for the email"></textarea>
+      <p class="sub" style="margin:0">The email carries the run details and a link. Recipients must confirm their address with a one-time code, and the link expires in 7 days.</p>
+    </div>
+  </div>
+  <div id="qzProg" style="display:none">
+    <div class="qz-bar"><span id="qzBar"></span></div><div class="qc-sub" id="qzPct"></div>
+    <ul class="qz-steps" id="qzSteps"><li data-s="1"><i>&#9675;</i>Preparing selection</li><li data-s="2"><i>&#9675;</i><span>Adding reports to the ZIP</span></li><li data-s="3"><i>&#9675;</i>Building summary.csv and closing the ZIP</li><li data-s="4" id="qzMailStep"><i>&#9675;</i>Sending email</li><li data-s="5"><i>&#9675;</i>Downloading</li></ul>
+    <div id="qzMsg" style="margin-top:8px;font-size:13px"></div>
+    <div class="qz-link" id="qzLinkBox" style="display:none"><input type="text" id="qzLink" readonly><button type="button" class="alt" id="qzCopy" style="height:38px;border:1px solid #cfd8e3;background:#fff;color:#14304a;border-radius:10px;font-weight:700;cursor:pointer;padding:0 14px">Copy</button></div>
+  </div>
+  <div class="btns"><a class="alt" id="qzDl" style="display:none">Download again</a><button type="button" class="alt" id="qzClose">Close</button><button type="button" id="qzGo">Start</button></div>
+</div></div>
 <?php echo scripts(); ?>
 <script>
 (function () {
   var f = document.getElementById('qcZipForm'); if (!f) { return; }
-  var rows = f.querySelectorAll('.qc-row'), all = f.querySelector('.qc-all'), sc = document.getElementById('qcScope'), bs = f.querySelectorAll('.qc-z');
+  var $ = function (i) { return document.getElementById(i); };
+  var rows = f.querySelectorAll('.qc-row'), all = f.querySelector('.qc-all'), bs = f.querySelectorAll('.qc-z'), url = f.getAttribute('action'), scope = 'sel', busy = false;
   function upd() {
     var c = f.querySelectorAll('.qc-row:checked').length;
     f.querySelectorAll('.qcSelN').forEach(function (x) { x.textContent = c; });
@@ -308,10 +451,71 @@ $base = isset($_COOKIE['set_url']) ? $_COOKIE['set_url'] : '';
   }
   if (all) { all.addEventListener('change', function () { rows.forEach(function (r) { r.checked = all.checked; }); upd(); }); }
   rows.forEach(function (r) { r.addEventListener('change', upd); });
-  bs.forEach(function (b) { b.addEventListener('click', function (ev) {
-    sc.value = b.getAttribute('data-scope');
-    if (sc.value === 'all' && !confirm('Download a ZIP for all ' + b.getAttribute('data-n') + ' rows matching the current filters? This can take a while.')) { ev.preventDefault(); }
+  bs.forEach(function (b) { b.addEventListener('click', function () {
+    scope = b.getAttribute('data-scope');
+    $('qzScopeTxt').textContent = scope === 'all' ? 'All ' + b.getAttribute('data-n') + ' rows matching the current filters (every page).' : f.querySelectorAll('.qc-row:checked').length + ' selected row(s).';
+    $('qzForm').style.display = ''; $('qzProg').style.display = 'none'; $('qzGo').style.display = ''; $('qzDl').style.display = 'none'; $('qzMsg').innerHTML = ''; $('qzLinkBox').style.display = 'none';
+    try { $('qzTo').value = localStorage.getItem('qzTo') || ''; } catch (e) {}
+    $('qzOv').classList.add('on');
   }); });
+  $('qzMailOn').addEventListener('change', function () { $('qzMailBox').style.display = this.checked ? '' : 'none'; });
+  $('qzClose').addEventListener('click', function () { if (!busy) { $('qzOv').classList.remove('on'); } });
+  $('qzCopy').addEventListener('click', function () { $('qzLink').select(); try { document.execCommand('copy'); this.textContent = 'Copied'; } catch (e) {} });
+
+  function post(d) {
+    var fd = new FormData();
+    Object.keys(d).forEach(function (k) { fd.append(k, d[k]); });
+    if (d.qz === 'start' && scope === 'sel') { f.querySelectorAll('.qc-row:checked').forEach(function (r) { fd.append('ids[]', r.value); }); }
+    return fetch(url, { method: 'POST', body: fd, credentials: 'same-origin' }).then(function (r) { return r.text(); }).then(function (t) {
+      try { return JSON.parse(t); } catch (e) { throw new Error('Unexpected reply from the server.'); }
+    }).then(function (j) { if (!j.ok) { throw new Error(j.error || 'Failed.'); } return j; });
+  }
+  function st(n, state, txt) {
+    var li = document.querySelector('#qzSteps li[data-s="' + n + '"]'); li.className = state;
+    li.firstChild.innerHTML = state === 'done' ? '&#10003;' : state === 'bad' ? '&#10007;' : state === 'on' ? '&#9654;' : '&#9675;';
+    if (txt) { (li.querySelector('span') || li.lastChild).textContent = txt; }
+  }
+  function bar(p, t) { $('qzBar').style.width = p + '%'; $('qzPct').textContent = t || ''; }
+
+  $('qzGo').addEventListener('click', function () {
+    var mail = $('qzMailOn').checked, to = $('qzTo').value.trim();
+    if (mail && !to) { $('qzTo').focus(); return; }
+    var mode = document.querySelector('input[name=qzmode]:checked').value, job = 0, total = 0, jobId;
+    busy = true; $('qzForm').style.display = 'none'; $('qzProg').style.display = ''; $('qzGo').style.display = 'none'; $('qzClose').disabled = true;
+    $('qzMailStep').style.display = mail ? '' : 'none'; $('qzMsg').innerHTML = ''; bar(0, '');
+    ['1', '2', '3', '4', '5'].forEach(function (n) { st(n, ''); });
+    if (mail) { try { localStorage.setItem('qzTo', to); } catch (e) {} }
+    st(1, 'on');
+    post({ qz: 'start', zip_scope: scope, mode: mode, to: mail ? to : '', note: mail ? $('qzNote').value : '' }).then(function (j) {
+      jobId = j.job; total = j.total; st(1, 'done', 'Selection ready: ' + j.articles + ' article(s), ' + j.first_n + ' first report(s)' + (j.bypass_n ? ', ' + j.bypass_n + ' bypass report(s)' : ''));
+      st(2, 'on'); bar(2, '0 / ' + total + ' files');
+      return (function loop() {
+        return post({ qz: 'step', job: jobId }).then(function (r) {
+          var p = Math.round(r.done / total * 85); bar(p, r.done + ' / ' + total + ' files'); st(2, 'on', 'Adding reports to the ZIP (' + r.done + ' / ' + total + ')');
+          return r.done < total ? loop() : r;
+        });
+      })();
+    }).then(function (r) {
+      st(2, 'done', 'Added reports to the ZIP (' + total + ' / ' + total + ')'); st(3, 'on'); bar(88, 'Building summary.csv');
+      return post({ qz: 'finish', job: jobId });
+    }).then(function (r) {
+      st(3, 'done', 'ZIP ready: ' + r.files + ' HTML file(s) + summary.csv' + (r.missing ? ' (' + r.missing + ' row(s) had no stored HTML)' : '')); bar(mail ? 93 : 96, 'ZIP ready');
+      if (!mail) { return null; }
+      st(4, 'on'); return post({ qz: 'mail', job: jobId });
+    }).then(function (m) {
+      if (m) {
+        if (m.mailed) { st(4, 'done', 'Email sent to ' + m.to); } else { st(4, 'bad', 'Email not sent'); $('qzMsg').innerHTML = '<span style="color:#d64545">' + m.error.replace(/</g, '&lt;') + '</span>'; }
+        $('qzLink').value = m.link; $('qzLinkBox').style.display = '';
+      }
+      st(5, 'on'); bar(98, 'Starting download');
+      var dl = url.split('?')[0] + '?qzdl=' + jobId; $('qzDl').href = dl; $('qzDl').style.display = '';
+      var fr = document.createElement('iframe'); fr.style.display = 'none'; fr.src = dl; document.body.appendChild(fr);
+      setTimeout(function () { st(5, 'done', 'Download started'); bar(100, 'Done'); busy = false; $('qzClose').disabled = false; }, 800);
+    }).catch(function (err) {
+      var cur = document.querySelector('#qzSteps li.on'); if (cur) { st(cur.getAttribute('data-s'), 'bad'); }
+      $('qzMsg').innerHTML = '<span style="color:#d64545">' + String(err.message).replace(/</g, '&lt;') + '</span>'; busy = false; $('qzClose').disabled = false;
+    });
+  });
   upd();
 })();
 </script>
