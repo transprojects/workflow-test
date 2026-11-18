@@ -204,7 +204,7 @@ if (isset($_POST['qz']) && $tbl_ok) {
 			$h .= $row('First reports', (int)$stats['first_n'] . ($stats['first_n'] ? ' (' . (int)$stats['pass'] . ' passed, ' . (int)$stats['fail'] . ' failed)' : ''));
 			if ($job['mode'] !== 'first') { $h .= $row('Bypass reports', (int)$stats['bypass_n']); }
 			$h .= $row('HTML files in ZIP', (int)$job['files'] . ((int)$job['missing'] ? ' (' . (int)$job['missing'] . ' with no stored HTML, listed in summary.csv)' : ''));
-			$h .= $row('ZIP size', htmlspecialchars($size($job['zip_size'])));
+			$h .= $row('ZIP size', htmlspecialchars(round($job['zip_size'] / 1048576, 1) . ' MB'));
 			$h .= $row('Prepared by', htmlspecialchars($job['created_by_name'] !== '' ? $job['created_by_name'] : 'user ' . $job['created_by']) . ' on ' . date('d-M-Y H:i'));
 			$h .= $row('Link valid until', htmlspecialchars(date('d-M-Y H:i', strtotime($job['expires_at']))));
 			include_once("smtpmail/phpmailer/class.phpmailer.php");
@@ -225,7 +225,7 @@ if (isset($_POST['qz']) && $tbl_ok) {
 			$J(array('ok' => true, 'link' => $link, 'mailed' => (bool)$ok, 'to' => $job['recipients'], 'error' => $ok ? '' : 'The email could not be sent (' . $mail->ErrorInfo . '). Copy the link below and send it yourself.'));
 		}
 		$J(array('ok' => false, 'error' => 'Unknown step.'));
-	} catch (Exception $ex) { $J(array('ok' => false, 'error' => $ex->getMessage())); }
+	} catch (Exception $ex) { $J(array('ok' => false, 'error' => $ex->getMessage())); } catch (Throwable $ex) { $J(array('ok' => false, 'error' => $ex->getMessage())); }
 }
 
 /* Sender's own download of a finished ZIP job (signed in as the person who prepared it). */
