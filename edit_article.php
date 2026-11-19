@@ -292,6 +292,7 @@ if(isset($_POST['action']) && $_POST['action']=='update')
 	`article_title` = '".$post['article_title']."',	
 	`accpt_dt`= '".$post['accpt_dt']."', 	
 	`pub_id` = '".$post['pub_id']."',
+	job_id = '".$post['pub_id']."',
 	`doi` = '".$post['doi']."', 
 	`pub_dt` = '".$post['pub_dt']."', 
 	`fig` = '".$post['fig']."',
@@ -470,6 +471,7 @@ $insert=mysqli_query($db,"insert into tbl_query_client(`jid`,`cust_id`,`aid`,`fr
 				'cust_id' => $post['cust_id'], 'at_id' => $post['at_id'], 'j_id' => $post['j_id'],
 				'journal_title' => $journal_title, 'article_title' => $post['article_title'],
 				'accpt_dt' => $post['accpt_dt'], 'pub_id' => $post['pub_id'], 'doi' => $post['doi'],
+				'job_id' => $post['pub_id'],
 				'pub_dt' => $post['pub_dt'], 'fig' => $post['fig'], 'tab' => $post['tab'],
 				'location_id' => $post['location_id'], 'stage' => $post['stage'],
 				'manuscript_count' => $post['manuscript_count'],
@@ -1247,6 +1249,49 @@ $ea_h = function ($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8')
                 </div>
             </div>
       </form>
+
+<?php
+/* Edit history of this article: what each Edit Article save changed (written by el_record, see edit_log_lib.php) */
+$eh_rows = array();
+try {
+  require_once __DIR__.'/edit_log_lib.php';
+  $eh_chk = $db->query("SHOW TABLES LIKE 'article_edit_log'");
+  if ($eh_chk && $eh_chk->num_rows > 0) {
+    $eh_q = $db->query("SELECT * FROM article_edit_log WHERE article_id = ".(int)$ea_a['id']." ORDER BY id DESC");
+    while ($eh_q && ($eh_r = $eh_q->fetch_assoc())) { $eh_r['list'] = json_decode($eh_r['changes'], true); if (!is_array($eh_r['list'])) { $eh_r['list'] = array(); } $eh_rows[] = $eh_r; }
+  }
+} catch (Throwable $e) { error_log("edit_article history load failed: ".$e->getMessage()); }
+?>
+      <div class="container-fluid mb-5">
+        <div class="card p-3" id="edit_history" style="border-radius:16px;">
+          <h5 class="mb-3"><i class="fa fa-history"></i> Edit History <small class="text-muted">(<?php echo count($eh_rows); ?>)</small></h5>
+          <?php if (!$eh_rows) { ?>
+            <p class="text-muted mb-0">No edits have been saved for this article yet.</p>
+          <?php } else { ?>
+          <div class="table-responsive">
+            <table class="table table-sm align-middle mb-0">
+              <thead><tr><th>Date &amp; time</th><th>Edited by</th><th>Stage</th><th>Changes</th></tr></thead>
+              <tbody>
+              <?php foreach ($eh_rows as $eh_r) { ?>
+                <tr>
+                  <td style="white-space:nowrap;"><?php echo date('d-m-Y h:i:s a', strtotime($eh_r['created_at'])); ?></td>
+                  <td><?php echo $ea_h(ucwords($eh_r['user_name'])); ?></td>
+                  <td><?php echo $ea_h($eh_r['stage']); ?></td>
+                  <td>
+                    <?php foreach ($eh_r['list'] as $eh_c) { ?>
+                      <div><b><?php echo $ea_h($eh_c['label']); ?>:</b>
+                        <span style="color:#b42318;"><?php echo $eh_c['from'] === '' ? '(empty)' : $ea_h($eh_c['from']); ?></span>
+                        &rarr; <span style="color:#067647;"><?php echo $eh_c['to'] === '' ? '(empty)' : $ea_h($eh_c['to']); ?></span></div>
+                    <?php } ?>
+                  </td>
+                </tr>
+              <?php } ?>
+              </tbody>
+            </table>
+          </div>
+          <?php } ?>
+        </div>
+      </div>
     
         </div>
       </div>

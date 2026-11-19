@@ -40,7 +40,7 @@ function el_labels()
 {
 	return array(
 		'cust_id' => 'Customer', 'at_id' => 'Article type', 'j_id' => 'Journal', 'journal_title' => 'Journal title', 'article_title' => 'Article title',
-		'accpt_dt' => 'Accepted date', 'pub_id' => 'Article ID', 'doi' => 'DOI', 'pub_dt' => 'Publication date', 'fig' => 'Fig count', 'tab' => 'Table count',
+		'accpt_dt' => 'Accepted date', 'pub_id' => 'Article ID', 'job_id' => 'Job ID', 'doi' => 'DOI', 'pub_dt' => 'Publication date', 'fig' => 'Fig count', 'tab' => 'Table count',
 		'location_id' => 'E location ID', 'stage' => 'Stage', 'manuscript_count' => 'Manuscript count', 'corresponding_author' => 'Corresponding author',
 		'notes' => 'Notes', 'instructions' => 'Instructions', 'graphics' => 'Graphics', 'worklocation' => 'Work location', 'highpriority' => 'High priority',
 		'is_conversion' => 'Conversion article', 'late_dispatch' => 'Client approved late dispatch', 'test_article' => 'Test article',
