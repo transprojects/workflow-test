@@ -116,18 +116,15 @@ if(isset($_POST['action']) && $_POST['action']=='update')
 	$customers = $db->query($query) or ($db->error);
 	$crow = $customers->fetch_assoc();
 	
-	/// The journal code inside the Article ID (CUSTOMER_JCODE_NUMBER) wins over a wrong j_id / journal_title ///
+	/// The journal code inside the Article ID (CUSTOMER_JCODE_NUMBER) must match the chosen journal, else error ///
 	$jf_parts = explode('_', trim((string)$post['pub_id']));
 	if (count($jf_parts) >= 3 && $jf_parts[1] !== '') {
 		$jf_cur = $db->query("SELECT j_code FROM `adm_journals` WHERE j_id = '".$db->real_escape_string((string)$post['j_id'])."'");
 		$jf_cur = $jf_cur ? $jf_cur->fetch_assoc() : null;
 		if (!$jf_cur || strcasecmp($jf_cur['j_code'], $jf_parts[1]) !== 0) {
-			$jf_res = $db->query("SELECT j_id FROM `adm_journals` WHERE j_code = '".$db->real_escape_string($jf_parts[1])."' AND j_cust_id = '".$db->real_escape_string((string)$_POST['cust_id'])."'");
-			if ($jf_res && $jf_res->num_rows == 1) {
-				$jf_row = $jf_res->fetch_assoc();
-				$post['j_id'] = $jf_row['j_id'];
-				$_POST['j_id'] = $jf_row['j_id'];
-			}
+			$jf_msg = 'Journal code mismatch: Article ID / Job ID "'.trim((string)$post['pub_id']).'" has journal code "'.$jf_parts[1].'" but the selected journal is "'.($jf_cur ? $jf_cur['j_code'] : 'unknown').'". Nothing was saved.';
+			echo '<script>alert('.json_encode($jf_msg).');history.back();</script>';
+			die();
 		}
 	}
 	//// Journal name ///	
@@ -902,6 +899,7 @@ $ea_h = function ($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8')
                  <label class="mb-2">Article ID</label>
                  <input type="text" class="form-control" name="pub_id" id="pub_id" placeholder="Enter Article ID" value="<?php echo $update_articles[0]['pub_id']; ?>" required>
                 </input>
+                <small id="jc_warn" style="color:#b42318;display:none;"><i class="fa fa-exclamation-triangle"></i> <span></span></small>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4">
                  <label class="mb-2">Job ID <small class="text-muted">(same as Article ID)</small></label>
@@ -1445,9 +1443,26 @@ $ea_stage_wf = array('FP' => (string)$j_wp_fp, 'REV' => (string)$j_rev_wf, 'FIN'
       var el = v && v.errorList && v.errorList[0] && v.errorList[0].element; if (!el) { return; }
       $('html,body').animate({ scrollTop: Math.max(0, $(el).offset().top - 150) }, 300);
     });
+    /* live warning: journal code inside Article ID must match the chosen journal */
+    function jcCheck() {
+      var parts = $.trim($('#pub_id').val()).split('_'), sel = $.trim($('#j_id option:selected').text());
+      var bad = parts.length >= 3 && parts[1] !== '' && sel !== '' && sel !== 'Select Journal' && parts[1].toLowerCase() !== sel.toLowerCase();
+      $('#jc_warn span').text(bad ? 'Journal code mismatch: Article ID / Job ID has "' + parts[1] + '" but the selected journal is "' + sel + '". It cannot be saved until they match.' : '');
+      $('#jc_warn').toggle(bad);
+      $('#pub_id').css('border-color', bad ? '#b42318' : '');
+    }
+    $('#pub_id').on('input change keyup', jcCheck); $('#j_id').on('change', jcCheck); jcCheck();
     $f.on('submit', function (e) {
       var ok = true; try { ok = $f.valid(); } catch (er) { ok = true; }
       if (!ok) { return; }
+      /* journal code inside Article ID / Job ID (CUSTOMER_JCODE_NUMBER) must match the chosen journal */
+      var jfParts = $.trim($('#pub_id').val()).split('_'), jfSel = $.trim($('#j_id option:selected').text());
+      if (jfParts.length >= 3 && jfParts[1] !== '' && jfSel !== '' && jfParts[1].toLowerCase() !== jfSel.toLowerCase()) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        alert('Journal code mismatch: Article ID / Job ID has journal code "' + jfParts[1] + '" but the selected journal is "' + jfSel + '". Please correct the Journal or the Article ID.');
+        $('#pub_id').focus();
+        return false;
+      }
       if (!confirmed) {
         e.preventDefault(); e.stopImmediatePropagation();
         var c = changes();
