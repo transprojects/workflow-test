@@ -889,6 +889,11 @@ $ea_h = function ($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8')
                 </input>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4">
+                 <label class="mb-2">Job ID <small class="text-muted">(same as Article ID)</small></label>
+                 <input type="text" class="form-control" name="job_id" id="job_id" value="<?php echo htmlspecialchars((string)$update_articles[0]['pub_id'], ENT_QUOTES, 'UTF-8'); ?>" readonly>
+                 <script>document.addEventListener('DOMContentLoaded', function () { var p = document.getElementById('pub_id'), j = document.getElementById('job_id'); if (p && j) { var s = function () { j.value = p.value; }; p.addEventListener('input', s); p.addEventListener('change', s); s(); } });</script>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
               <label class="mb-2">Article Title <span style="color: red">*</span></label>
               <input type="text" class="form-control" name="article_title" id="article_title"  value="<?php echo $update_articles[0]['article_title']; ?>" placeholder="Enter Article Title" required>
               </input>
@@ -1987,6 +1992,7 @@ document.getElementById('removeButton').addEventListener('click', function () {
         $('#j_id').change(function() {
 	$('#previous').show();
     $('#pub_id').val($('#j_id option:selected').data('id'));
+    $('#job_id').val($('#pub_id').val());
     $('.previous_aid').text($('#j_id option:selected').data('previous'));
     console.log($('#j_id option:selected').data('id'));
     console.log($('#j_id option:selected').data('previous'));
