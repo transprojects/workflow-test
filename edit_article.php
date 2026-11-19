@@ -1289,28 +1289,52 @@ try {
 <style>
   #ea-hp{display:none;}
   @media (min-width:1500px){
-    #ea-hp{display:block;position:fixed;right:12px;top:150px;width:270px;max-height:calc(100vh - 170px);overflow:auto;background:#fff;border:1px solid #e3e8ee;border-radius:16px;box-shadow:0 6px 24px rgba(20,48,74,.08);padding:14px;z-index:50;}
+    #ea-hp{display:block;position:fixed;right:12px;top:150px;width:290px;max-height:calc(100vh - 170px);overflow:auto;background:#fff;border:1px solid #e3e8ee;border-radius:16px;box-shadow:0 6px 24px rgba(20,48,74,.08);padding:16px 16px 6px;z-index:50;}
     #edit_history{display:none;}
     #ea-hp.flash{box-shadow:0 0 0 3px #7fb3e6;}
   }
-  #ea-hp h6{font-size:14px;margin:0 0 10px;color:#14304a;}
-  #ea-hp .eh-i{border-left:3px solid #c9d8e8;padding:2px 0 2px 10px;margin-bottom:12px;font-size:12.5px;}
-  #ea-hp .eh-m{font-size:11.5px;color:#6b7785;margin-bottom:3px;}
-  #ea-hp .eh-m b{color:#14304a;}
-  #ea-hp .eh-c{word-break:break-word;margin-top:2px;}
+  #ea-hp .eh-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #eef1f5;}
+  #ea-hp .eh-h b{font-size:15px;color:#14304a;} #ea-hp .eh-h i{color:#6b7785;margin-right:6px;}
+  #ea-hp .eh-n{background:#e8f1fa;color:#2a5d8f;border-radius:20px;font-size:11.5px;font-weight:600;padding:1px 9px;}
+  #ea-hp .eh-i{position:relative;padding:0 0 16px 34px;}
+  #ea-hp .eh-i:before{content:"";position:absolute;left:12px;top:26px;bottom:0;width:2px;background:#e3e8ee;}
+  #ea-hp .eh-i:last-child:before{display:none;}
+  #ea-hp .eh-av{position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:#2a5d8f;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  #ea-hp .eh-who{font-size:13.5px;font-weight:600;color:#14304a;line-height:1.2;}
+  #ea-hp .eh-when{font-size:11.5px;color:#7a8794;margin:1px 0 8px;}
+  #ea-hp .eh-st{display:inline-block;background:#f0f3f7;color:#52606d;border-radius:4px;font-size:10.5px;font-weight:600;padding:0 6px;margin-left:4px;}
+  #ea-hp .eh-c{background:#f8fafc;border:1px solid #eef1f5;border-radius:8px;padding:6px 9px;margin-bottom:6px;}
+  #ea-hp .eh-l{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:#7a8794;font-weight:600;margin-bottom:3px;}
+  #ea-hp .eh-v{font-size:12.5px;line-height:1.35;word-break:break-word;}
+  #ea-hp .eh-o{color:#b42318;text-decoration:line-through;text-decoration-color:rgba(180,35,24,.5);}
+  #ea-hp .eh-w{color:#067647;font-weight:600;}
+  #ea-hp .eh-e{color:#9aa5b1;font-style:italic;text-decoration:none;}
+  #ea-hp .eh-ar{color:#9aa5b1;margin:0 3px;}
+  #ea-hp details summary{cursor:pointer;font-size:12px;color:#2a5d8f;font-weight:600;margin:2px 0 6px;list-style:none;}
+  #ea-hp details summary::-webkit-details-marker{display:none;}
+  #ea-hp details[open] summary{display:none;}
 </style>
 <div id="ea-hp">
-  <h6><i class="fa fa-history"></i> Edit History <small class="text-muted">(<?php echo count($eh_rows); ?>)</small></h6>
+  <div class="eh-h"><b><i class="fa fa-history"></i>Edit History</b><span class="eh-n"><?php echo count($eh_rows); ?></span></div>
   <?php if (!$eh_rows) { ?>
-    <p class="text-muted mb-0" style="font-size:12.5px;">No edits have been saved for this article yet.</p>
-  <?php } else { foreach ($eh_rows as $eh_r) { ?>
+    <p class="text-muted" style="font-size:12.5px;">No edits have been saved for this article yet.</p>
+  <?php } else { foreach ($eh_rows as $eh_r) {
+      $eh_nm = trim((string)$eh_r['user_name']); $eh_ini = '';
+      foreach (preg_split('/[\s.]+/', $eh_nm, -1, PREG_SPLIT_NO_EMPTY) as $eh_w) { if (strlen($eh_ini) < 2) { $eh_ini .= strtoupper(substr($eh_w, 0, 1)); } }
+      $eh_cnt = count($eh_r['list']); ?>
     <div class="eh-i">
-      <div class="eh-m"><b><?php echo $ea_h(ucwords($eh_r['user_name'])); ?></b> &middot; <?php echo date('d-m-Y h:i a', strtotime($eh_r['created_at'])); ?><?php echo $eh_r['stage'] !== '' ? ' &middot; '.$ea_h($eh_r['stage']) : ''; ?></div>
-      <?php foreach ($eh_r['list'] as $eh_c) { ?>
-        <div class="eh-c"><b><?php echo $ea_h($eh_c['label']); ?>:</b>
-          <span style="color:#b42318;"><?php echo $eh_c['from'] === '' ? '(empty)' : $ea_h($eh_c['from']); ?></span>
-          &rarr; <span style="color:#067647;"><?php echo $eh_c['to'] === '' ? '(empty)' : $ea_h($eh_c['to']); ?></span></div>
-      <?php } ?>
+      <div class="eh-av"><?php echo $ea_h($eh_ini !== '' ? $eh_ini : '?'); ?></div>
+      <div class="eh-who"><?php echo $ea_h(ucwords($eh_nm)); ?></div>
+      <div class="eh-when"><?php echo date('d M Y, h:i a', strtotime($eh_r['created_at'])); ?><?php echo $eh_r['stage'] !== '' ? '<span class="eh-st">'.$ea_h($eh_r['stage']).'</span>' : ''; ?></div>
+      <?php foreach ($eh_r['list'] as $eh_k => $eh_c) {
+          if ($eh_k == 3 && $eh_cnt > 4) { echo '<details><summary>+ '.($eh_cnt - 3).' more changes</summary>'; } ?>
+        <div class="eh-c">
+          <div class="eh-l"><?php echo $ea_h($eh_c['label']); ?></div>
+          <div class="eh-v">
+            <span class="eh-o<?php echo $eh_c['from'] === '' ? ' eh-e' : ''; ?>"><?php echo $eh_c['from'] === '' ? 'empty' : $ea_h($eh_c['from']); ?></span><span class="eh-ar">&rarr;</span><span class="eh-w<?php echo $eh_c['to'] === '' ? ' eh-e' : ''; ?>"><?php echo $eh_c['to'] === '' ? 'empty' : $ea_h($eh_c['to']); ?></span>
+          </div>
+        </div>
+      <?php } if ($eh_cnt > 4) { echo '</details>'; } ?>
     </div>
   <?php } } ?>
 </div>
