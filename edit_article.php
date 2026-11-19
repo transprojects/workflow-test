@@ -794,7 +794,7 @@ $ea_h = function ($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8')
           <div><h1 class="ea-title">Edit Article Information</h1><div class="ea-crumb">Article &rsaquo; Edit</div></div>
           <span class="ea-sp"></span>
           <a class="ea-refresh" id="ea-refresh" href="#" title="Refresh - reload the saved values"><i class="fa fa-refresh"></i></a>
-          <a class="ea-refresh" href="#edit_history" title="Show edit history" onclick="var e=document.getElementById('edit_history'); if(e){ e.scrollIntoView({behavior:'smooth',block:'start'}); } return false;"><i class="fa fa-history"></i></a>
+          <a class="ea-refresh" href="#edit_history" title="Show edit history" onclick="var p=document.getElementById('ea-hp'); if(p && p.offsetParent){ p.classList.add('flash'); p.scrollTop=0; setTimeout(function(){p.classList.remove('flash');},1200); return false; } var e=document.getElementById('edit_history'); if(e){ e.scrollIntoView({behavior:'smooth',block:'start'}); } return false;"><i class="fa fa-history"></i></a>
           <span class="ea-req" id="ea-req" title="Required fields filled in"><span id="ea-req-t">Required 0 / 0</span><span class="track"><span class="fill" id="ea-req-f"></span></span></span>
         </div>
         <div class="ea-sum">
@@ -1286,6 +1286,34 @@ try {
   }
 } catch (Throwable $e) { error_log("edit_article history load failed: ".$e->getMessage()); }
 ?>
+<style>
+  #ea-hp{display:none;}
+  @media (min-width:1500px){
+    #ea-hp{display:block;position:fixed;right:12px;top:150px;width:270px;max-height:calc(100vh - 170px);overflow:auto;background:#fff;border:1px solid #e3e8ee;border-radius:16px;box-shadow:0 6px 24px rgba(20,48,74,.08);padding:14px;z-index:50;}
+    #edit_history{display:none;}
+    #ea-hp.flash{box-shadow:0 0 0 3px #7fb3e6;}
+  }
+  #ea-hp h6{font-size:14px;margin:0 0 10px;color:#14304a;}
+  #ea-hp .eh-i{border-left:3px solid #c9d8e8;padding:2px 0 2px 10px;margin-bottom:12px;font-size:12.5px;}
+  #ea-hp .eh-m{font-size:11.5px;color:#6b7785;margin-bottom:3px;}
+  #ea-hp .eh-m b{color:#14304a;}
+  #ea-hp .eh-c{word-break:break-word;margin-top:2px;}
+</style>
+<div id="ea-hp">
+  <h6><i class="fa fa-history"></i> Edit History <small class="text-muted">(<?php echo count($eh_rows); ?>)</small></h6>
+  <?php if (!$eh_rows) { ?>
+    <p class="text-muted mb-0" style="font-size:12.5px;">No edits have been saved for this article yet.</p>
+  <?php } else { foreach ($eh_rows as $eh_r) { ?>
+    <div class="eh-i">
+      <div class="eh-m"><b><?php echo $ea_h(ucwords($eh_r['user_name'])); ?></b> &middot; <?php echo date('d-m-Y h:i a', strtotime($eh_r['created_at'])); ?><?php echo $eh_r['stage'] !== '' ? ' &middot; '.$ea_h($eh_r['stage']) : ''; ?></div>
+      <?php foreach ($eh_r['list'] as $eh_c) { ?>
+        <div class="eh-c"><b><?php echo $ea_h($eh_c['label']); ?>:</b>
+          <span style="color:#b42318;"><?php echo $eh_c['from'] === '' ? '(empty)' : $ea_h($eh_c['from']); ?></span>
+          &rarr; <span style="color:#067647;"><?php echo $eh_c['to'] === '' ? '(empty)' : $ea_h($eh_c['to']); ?></span></div>
+      <?php } ?>
+    </div>
+  <?php } } ?>
+</div>
       <div class="container-fluid mb-5">
         <div class="card p-3" id="edit_history" style="border-radius:16px;">
           <h5 class="mb-3"><i class="fa fa-history"></i> Edit History <small class="text-muted">(<?php echo count($eh_rows); ?>)</small></h5>
