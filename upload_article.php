@@ -22,6 +22,22 @@ $article_id        = trim($_POST['pub_id']);
 $group_folder_name = $_POST['group_folder_name'] ?? '0';
 $stage             = $_POST['stage'];
 
+/* journal code inside the Article ID (CUSTOMER_JCODE_NUMBER) must match the chosen journal */
+$jc_parts = array_map('strtolower', explode('_', $article_id));
+$jc_cand = count($jc_parts) >= 3 ? array_slice($jc_parts, 1, -1) : array_slice($jc_parts, 0, -1);
+$jc_r = $db->query("SELECT j_code, j_cust_id FROM `adm_journals` WHERE j_id = " . (int)$j_id);
+$jc_row = $jc_r ? $jc_r->fetch_assoc() : null;
+if ($jc_row && !in_array(strtolower($jc_row['j_code']), $jc_cand, true)) {
+    $jc_o = $db->query("SELECT j_code FROM `adm_journals` WHERE j_cust_id = " . (int)$jc_row['j_cust_id'] . " AND j_id <> " . (int)$j_id);
+    while ($jc_o && ($jc_x = $jc_o->fetch_assoc())) {
+        if (in_array(strtolower($jc_x['j_code']), $jc_cand, true)) {
+            http_response_code(422);
+            echo 'Journal code mismatch: Article ID "' . $article_id . '" has journal code "' . $jc_x['j_code'] . '" but the selected journal is "' . $jc_row['j_code'] . '". Nothing was saved.';
+            exit;
+        }
+    }
+}
+
 setcookie("j_id", $j_id, $cookie_expiration_time, "/");
 setcookie("pub_id", $article_id, $cookie_expiration_time, "/");
 setcookie("group_folder_name", $group_folder_name, $cookie_expiration_time, "/");

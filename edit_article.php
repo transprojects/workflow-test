@@ -117,14 +117,18 @@ if(isset($_POST['action']) && $_POST['action']=='update')
 	$crow = $customers->fetch_assoc();
 	
 	/// The journal code inside the Article ID (CUSTOMER_JCODE_NUMBER) must match the chosen journal, else error ///
-	$jf_parts = explode('_', trim((string)$post['pub_id']));
-	if (count($jf_parts) >= 3 && $jf_parts[1] !== '') {
-		$jf_cur = $db->query("SELECT j_code FROM `adm_journals` WHERE j_id = '".$db->real_escape_string((string)$post['j_id'])."'");
-		$jf_cur = $jf_cur ? $jf_cur->fetch_assoc() : null;
-		if (!$jf_cur || strcasecmp($jf_cur['j_code'], $jf_parts[1]) !== 0) {
-			$jf_msg = 'Journal code mismatch: Article ID / Job ID "'.trim((string)$post['pub_id']).'" has journal code "'.$jf_parts[1].'" but the selected journal is "'.($jf_cur ? $jf_cur['j_code'] : 'unknown').'". Nothing was saved.';
-			echo '<script>alert('.json_encode($jf_msg).');history.back();</script>';
-			die();
+	$jf_parts = array_map('strtolower', explode('_', trim((string)$post['pub_id'])));
+	$jf_cand = count($jf_parts) >= 3 ? array_slice($jf_parts, 1, -1) : array_slice($jf_parts, 0, -1);
+	$jf_cur = $db->query("SELECT j_code, j_cust_id FROM `adm_journals` WHERE j_id = '".$db->real_escape_string((string)$post['j_id'])."'");
+	$jf_cur = $jf_cur ? $jf_cur->fetch_assoc() : null;
+	if ($jf_cur && !in_array(strtolower($jf_cur['j_code']), $jf_cand, true)) {
+		$jf_oth = $db->query("SELECT j_code FROM `adm_journals` WHERE j_cust_id = '".$db->real_escape_string((string)$jf_cur['j_cust_id'])."' AND j_id <> '".$db->real_escape_string((string)$post['j_id'])."'");
+		while ($jf_oth && ($jf_o = $jf_oth->fetch_assoc())) {
+			if (in_array(strtolower($jf_o['j_code']), $jf_cand, true)) {
+				$jf_msg = 'Journal code mismatch: Article ID / Job ID "'.trim((string)$post['pub_id']).'" has journal code "'.$jf_o['j_code'].'" but the selected journal is "'.$jf_cur['j_code'].'". Nothing was saved.';
+				echo '<script>alert('.json_encode($jf_msg).');history.back();</script>';
+				die();
+			}
 		}
 	}
 	//// Journal name ///	
@@ -1445,21 +1449,21 @@ $ea_stage_wf = array('FP' => (string)$j_wp_fp, 'REV' => (string)$j_rev_wf, 'FIN'
     });
     /* live warning: journal code inside Article ID must match the chosen journal */
     function jcCheck() {
-      var parts = $.trim($('#pub_id').val()).split('_'), sel = $.trim($('#j_id option:selected').text());
-      var bad = parts.length >= 3 && parts[1] !== '' && sel !== '' && sel !== 'Select Journal' && parts[1].toLowerCase() !== sel.toLowerCase();
-      $('#jc_warn span').text(bad ? 'Journal code mismatch: Article ID / Job ID has "' + parts[1] + '" but the selected journal is "' + sel + '". It cannot be saved until they match.' : '');
+      var parts = $.trim($('#pub_id').val()).split('_'), sel = $.trim($('#j_id option:selected').text()), other = '', cand = (parts.length >= 3 ? parts.slice(1, -1) : parts.slice(0, -1)), hasSel = false; $.each(cand, function (i, c) { if (c.toLowerCase() === sel.toLowerCase()) { hasSel = true; } }); if (sel !== '' && sel !== 'Select Journal' && !hasSel) { $('#j_id option').each(function () { var t = $.trim($(this).text()); $.each(cand, function (i, c) { if (t !== '' && c.toLowerCase() === t.toLowerCase()) { other = c; } }); }); }
+      var bad = !!other;
+      $('#jc_warn span').text(bad ? 'Journal code mismatch: Article ID / Job ID has journal code "' + other + '" but the selected journal is "' + sel + '". It cannot be saved until they match.' : '');
       $('#jc_warn').toggle(bad);
-      $('#pub_id').css('border-color', bad ? '#b42318' : '');
+      $('#pub_id').css('border-color', bad ? '#b42318' : ''); return bad ? {code: other, sel: sel} : null;
     }
     $('#pub_id').on('input change keyup', jcCheck); $('#j_id').on('change', jcCheck); jcCheck();
     $f.on('submit', function (e) {
       var ok = true; try { ok = $f.valid(); } catch (er) { ok = true; }
       if (!ok) { return; }
       /* journal code inside Article ID / Job ID (CUSTOMER_JCODE_NUMBER) must match the chosen journal */
-      var jfParts = $.trim($('#pub_id').val()).split('_'), jfSel = $.trim($('#j_id option:selected').text());
-      if (jfParts.length >= 3 && jfParts[1] !== '' && jfSel !== '' && jfParts[1].toLowerCase() !== jfSel.toLowerCase()) {
+      var jcm = jcCheck();
+      if (jcm) {
         e.preventDefault(); e.stopImmediatePropagation();
-        alert('Journal code mismatch: Article ID / Job ID has journal code "' + jfParts[1] + '" but the selected journal is "' + jfSel + '". Please correct the Journal or the Article ID.');
+        alert('Journal code mismatch: Article ID / Job ID has journal code "' + jcm.code + '" but the selected journal is "' + jcm.sel + '". Please correct the Journal or the Article ID.');
         $('#pub_id').focus();
         return false;
       }

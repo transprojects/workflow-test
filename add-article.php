@@ -181,6 +181,7 @@
                  <label class="mb-2">Article ID</label>
                  <input type="text" class="form-control" name="pub_id" id="pub_id" placeholder="Enter Article ID" required>
                 </input>
+                <small id="jc_warn" style="color:#b42318;display:none;"><i class="fa fa-exclamation-triangle"></i> <span></span></small>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4">
               <label class="mb-2">Article Title <span style="color: red">*</span></label>
@@ -506,9 +507,20 @@
       var el = v && v.errorList && v.errorList[0] && v.errorList[0].element; if (!el) { return; }
       $('html,body').animate({ scrollTop: Math.max(0, $(el).offset().top - 150) }, 300);
     });
+    /* journal code inside Article ID must match the chosen journal */
+    function jcMismatch() {
+      var parts = $.trim($('#pub_id').val()).split('_'), sel = $.trim($('#j_id option:selected').text()), other = '', cand = (parts.length >= 3 ? parts.slice(1, -1) : parts.slice(0, -1)), hasSel = false; $.each(cand, function (i, c) { if (c.toLowerCase() === sel.toLowerCase()) { hasSel = true; } }); if (sel !== '' && sel !== 'Select Journal' && !hasSel) { $('#j_id option').each(function () { var t = $.trim($(this).text()); $.each(cand, function (i, c) { if (t !== '' && c.toLowerCase() === t.toLowerCase()) { other = c; } }); }); }
+      var bad = !!other;
+      $('#jc_warn span').text(bad ? 'Journal code mismatch: Article ID has journal code "' + other + '" but the selected journal is "' + sel + '". It cannot be added until it matches.' : '');
+      $('#jc_warn').toggle(bad); $('#pub_id').css('border-color', bad ? '#b42318' : '');
+      return bad ? {code: other, sel: sel} : null;
+    }
+    $('#pub_id').on('input change keyup', jcMismatch); $('#j_id').on('change', jcMismatch);
     $f.on('submit', function (e) {
       var ok = true; try { ok = $f.valid(); } catch (er) { ok = true; }
       if (!ok) { return; }
+      var jcm = jcMismatch();
+      if (jcm) { e.preventDefault(); e.stopImmediatePropagation(); alert('Journal code mismatch: Article ID has journal code "' + jcm.code + '" but the selected journal is "' + jcm.sel + '". Please correct the Journal or the Article ID.'); $('#pub_id').focus(); return false; }
       if (!confirmed) {
         e.preventDefault(); e.stopImmediatePropagation();
         var c = entered();
@@ -757,7 +769,7 @@ $(document).ready(function() {
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // Error message
-                    alert("Error submitting form: " + errorThrown);
+                    alert(jqXHR.status == 422 ? jqXHR.responseText : "Error submitting form: " + errorThrown);
                     $('.content_right').hide();
                     $('.btn-next').show();
                     $('.btn-save').hide();
