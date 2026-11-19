@@ -54,6 +54,14 @@ if (isset($_REQUEST['id'])) {
     exit; // Make sure to exit after redirecting
 }
 
+/* adds a file to a package and remembers the ones that could not be added, so the user is told instead of getting an incomplete package */
+function pkg_add($zip, $file, $name)
+{
+	global $pkg_fail;
+	if(!$zip->addFile($file, $name)) { $pkg_fail[] = basename($file); }
+	return true;
+}
+
 function deleteFile($file)
 {
 	/// To delete if zip files available ////
@@ -93,7 +101,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 			deleteFile($all_files_package);
 			
 			/// To get all article from this issue in inward table execpt FM, Hyperlink and BM  /////
-			$inw_query = "SELECT * FROM `inw_inward_dtl` WHERE ( v_issue_id = '".$volume_dtl['vi_id']."'  AND `pub_id` NOT LIKE '%-FM%' AND `pub_id` NOT LIKE '%-BM%' AND `pub_id` NOT LIKE '%-Hyperlink%' AND `v_issue_sequence_id` >= 1 ".($focus ? " AND id IN (".$focus_ids_sql.")" : "")." ) ORDER BY `v_issue_sequence_id` ASC; ";
+			$inw_query = "SELECT * FROM `inw_inward_dtl` WHERE ( v_issue_id = '".$volume_dtl['vi_id']."'  AND `pub_id` NOT LIKE '%-FM%' AND `pub_id` NOT LIKE '%-BM%' AND `pub_id` NOT LIKE '%-Hyperlink%' ".($focus ? " AND id IN (".$focus_ids_sql.")" : " AND `v_issue_sequence_id` >= 1")." ) ORDER BY `v_issue_sequence_id` ASC; ";
 			$articledetails = $db->query($inw_query) or ($db->error);
 			$toatl_count=$articledetails->num_rows;			
 			if($toatl_count>0)
@@ -234,6 +242,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 				
 						
 				// Initialize archive object for Print PDF
+				$pkg_fail = array();
 				$print_zip = new ZipArchive();
 				$zip_ok = true;
 				if($print_zip->open($print_package, ZipArchive::CREATE | ZipArchive::OVERWRITE ) !== TRUE) { $zip_ok = false; }
@@ -309,24 +318,24 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 					
 					if(file_exists($pdf_file))
 					{
-						$web_zip->addFile($pdf_file,$article_info['pub_id'].'.pdf');
-						$all_files_zip->addFile($pdf_file,$article_info['pub_id']."/".$article_info['pub_id'].'.pdf');
+						pkg_add($web_zip, $pdf_file,$article_info['pub_id'].'.pdf');
+						pkg_add($all_files_zip, $pdf_file,$article_info['pub_id']."/".$article_info['pub_id'].'.pdf');
 					}
 					if(file_exists($pdf_res_file))
 					{
 						//$print_zip->addFile($pdf_res_file,$article_info['pub_id'].". ".$article_info['pub_id'].'.pdf');
 						if($article_info['v_issue_sequence_id'] > 0)
 						{
-							$print_zip->addFile($pdf_res_file, $article_info['v_issue_sequence_id'].'. '.$article_info['pub_id'].'.pdf');
+							pkg_add($print_zip, $pdf_res_file, $article_info['v_issue_sequence_id'].'. '.$article_info['pub_id'].'.pdf');
 							
 						} else {
-							$print_zip->addFile($pdf_res_file, $article_info['pub_id'].'.pdf');
+							pkg_add($print_zip, $pdf_res_file, $article_info['pub_id'].'.pdf');
 							
 						}
 					}
 					if(file_exists($xml_file))
 					{
-						$all_files_zip->addFile($xml_file,$article_info['pub_id']."/".$article_info['pub_id'].'.xml');
+						pkg_add($all_files_zip, $xml_file,$article_info['pub_id']."/".$article_info['pub_id'].'.xml');
 						
 						// Adding a folder and its contents (use the folder path and target zip folder path)
     $folderPath = $xml_folder;  // Path to the folder you want to add
@@ -353,7 +362,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 											//print_r($img_path);
 											 if(file_exists($img_path))
 												{
-													$all_files_zip->addFile($img_path,$article_info['pub_id']."/".$img_name);			
+													pkg_add($all_files_zip, $img_path,$article_info['pub_id']."/".$img_name);			
 												}
 									}
 							
@@ -382,7 +391,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 											//print_r($img_path);
 											 if(file_exists($img_path_inline))
 												{
-													$all_files_zip->addFile($img_path_inline,$article_info['pub_id']."/".$img_name_inline);			
+													pkg_add($all_files_zip, $img_path_inline,$article_info['pub_id']."/".$img_name_inline);			
 												}
 									}
 							
@@ -399,15 +408,15 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 					}
 					/*if(file_exists($epub_file))
 					{
-						$all_files_zip->addFile($epub_file,$article_info['pub_id']."/".$article_info['pub_id'].'.epub');
+						pkg_add($all_files_zip, $epub_file,$article_info['pub_id']."/".$article_info['pub_id'].'.epub');
 					}*/
 					if(file_exists($xhtml_file))
 					{
-						$all_files_zip->addFile($xhtml_file,$article_info['pub_id']."/".$article_info['pub_id']."/".$article_info['pub_id'].'.xhtml');
+						pkg_add($all_files_zip, $xhtml_file,$article_info['pub_id']."/".$article_info['pub_id']."/".$article_info['pub_id'].'.xhtml');
 						$css_path = $xhtml_path."css-template.css";
 						if(file_exists($css_path))
 						{
-							$all_files_zip->addFile($css_path,$article_info['pub_id']."/".$article_info['pub_id']."/css-template.css");
+							pkg_add($all_files_zip, $css_path,$article_info['pub_id']."/".$article_info['pub_id']."/css-template.css");
 						}
 						$doc = new DOMDocument();
 						$doc->load( $xhtml_file );
@@ -418,7 +427,7 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 							$xhtml_img = $xhtml_path.$image_name;
 							if(file_exists($xhtml_img))
 							{
-								$all_files_zip->addFile($xhtml_img,$article_info['pub_id']."/".$article_info['pub_id']."/".$image_name);
+								pkg_add($all_files_zip, $xhtml_img,$article_info['pub_id']."/".$article_info['pub_id']."/".$image_name);
 							}
 						}
 					}
@@ -430,12 +439,33 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 					header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode("The zip packages could not be created in ".$dest_path." - please check that this folder exists and can be written to."));
 					exit;
 				}
-				$web_zip->close();
-				$print_zip->close();
-				$all_files_zip->close();
+				$closed = array($web_zip->close(), $print_zip->close(), $all_files_zip->close());
+				if(in_array(false, $closed, true))
+				{
+					header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode("The package files could not be written to ".$dest_path." - please check the folder permission and free disk space."));
+					exit;
+				}
+				if(!empty($pkg_fail))
+				{
+					deleteFile($print_package); deleteFile($web_package); deleteFile($all_files_package);   // an incomplete package must not be kept
+					$bad = array_unique($pkg_fail);
+					header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode("The package was not created because these files could not be added: ".implode(', ', array_slice($bad, 0, 8)).(count($bad) > 8 ? ' and '.(count($bad) - 8).' more' : '').". Please check that they exist and can be read."));
+					exit;
+				}
+
+				if(!file_exists($web_package) || !file_exists($print_package) || !file_exists($all_files_package))
+				{
+					header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode("The package was not created because no PDF/XML file could be added to it. Please check that the PRQC, XML and ePub files of the articles are in the stage folder."));
+					exit;
+				}
 				$prj_update_query="UPDATE inw_volume_issues SET `status` ='Delivery' WHERE vi_id = ".$volume_dtl['vi_id']." ";	
 				$db->query($prj_update_query);
 				header("location:manage_issues.php?msg=Successfully Data set created"); 
+				exit();
+			}
+			else
+			{
+				header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode($focus ? "No article could be found to package for ".$focus['round']." (FM, BM and Hyperlink items are left out). Please check the draft articles of this issue." : "No article of this issue has a sequence number (Seq.no), so there is nothing to package. Please assign the sequence numbers and try again."));
 				exit();
 			}
 		}
