@@ -116,6 +116,20 @@ if(isset($_POST['action']) && $_POST['action']=='update')
 	$customers = $db->query($query) or ($db->error);
 	$crow = $customers->fetch_assoc();
 	
+	/// The journal code inside the Article ID (CUSTOMER_JCODE_NUMBER) wins over a wrong j_id / journal_title ///
+	$jf_parts = explode('_', trim((string)$post['pub_id']));
+	if (count($jf_parts) >= 3 && $jf_parts[1] !== '') {
+		$jf_cur = $db->query("SELECT j_code FROM `adm_journals` WHERE j_id = '".$db->real_escape_string((string)$post['j_id'])."'");
+		$jf_cur = $jf_cur ? $jf_cur->fetch_assoc() : null;
+		if (!$jf_cur || strcasecmp($jf_cur['j_code'], $jf_parts[1]) !== 0) {
+			$jf_res = $db->query("SELECT j_id FROM `adm_journals` WHERE j_code = '".$db->real_escape_string($jf_parts[1])."' AND j_cust_id = '".$db->real_escape_string((string)$_POST['cust_id'])."'");
+			if ($jf_res && $jf_res->num_rows == 1) {
+				$jf_row = $jf_res->fetch_assoc();
+				$post['j_id'] = $jf_row['j_id'];
+				$_POST['j_id'] = $jf_row['j_id'];
+			}
+		}
+	}
 	//// Journal name ///	
 	$query = "SELECT j_name,j_code,tvl_work_departments,j_hid FROM `adm_journals` WHERE j_id = '".$post['j_id']."';";
 	$steps = $db->query($query) or ($db->error);
@@ -779,6 +793,7 @@ $ea_h = function ($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8')
           <div><h1 class="ea-title">Edit Article Information</h1><div class="ea-crumb">Article &rsaquo; Edit</div></div>
           <span class="ea-sp"></span>
           <a class="ea-refresh" id="ea-refresh" href="#" title="Refresh - reload the saved values"><i class="fa fa-refresh"></i></a>
+          <a class="ea-refresh" href="#edit_history" title="Show edit history" onclick="var e=document.getElementById('edit_history'); if(e){ e.scrollIntoView({behavior:'smooth',block:'start'}); } return false;"><i class="fa fa-history"></i></a>
           <span class="ea-req" id="ea-req" title="Required fields filled in"><span id="ea-req-t">Required 0 / 0</span><span class="track"><span class="fill" id="ea-req-f"></span></span></span>
         </div>
         <div class="ea-sum">
@@ -890,8 +905,10 @@ $ea_h = function ($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8')
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4">
                  <label class="mb-2">Job ID <small class="text-muted">(same as Article ID)</small></label>
-                 <input type="text" class="form-control" name="job_id" id="job_id" value="<?php echo htmlspecialchars((string)$update_articles[0]['pub_id'], ENT_QUOTES, 'UTF-8'); ?>" readonly>
-                 <script>document.addEventListener('DOMContentLoaded', function () { var p = document.getElementById('pub_id'), j = document.getElementById('job_id'); if (p && j) { var s = function () { j.value = p.value; }; p.addEventListener('input', s); p.addEventListener('change', s); s(); } });</script>
+                 <input type="text" class="form-control" name="job_id" id="job_id" value="<?php echo htmlspecialchars((string)$update_articles[0]['job_id'], ENT_QUOTES, 'UTF-8'); ?>" readonly>
+                 <?php $jf_mis = trim((string)$update_articles[0]['job_id']) !== trim((string)$update_articles[0]['pub_id']); ?>
+                 <small id="job_id_warn" style="color:#b42318;<?php echo $jf_mis ? '' : 'display:none;'; ?>"><i class="fa fa-exclamation-triangle"></i> Job ID is different from Article ID (saved Job ID: <b><?php echo htmlspecialchars((string)$update_articles[0]['job_id'], ENT_QUOTES, 'UTF-8'); ?></b>). It will be updated to the Article ID when you click Update.</small>
+                 <script>document.addEventListener('DOMContentLoaded', function () { var p = document.getElementById('pub_id'), j = document.getElementById('job_id'), w = document.getElementById('job_id_warn'); if (!p || !j) { return; } var chk = function () { var bad = j.value.trim() !== p.value.trim(); j.style.borderColor = bad ? '#b42318' : ''; j.style.color = bad ? '#b42318' : ''; if (w) { w.style.display = bad ? '' : 'none'; } }; var s = function () { j.value = p.value; chk(); }; p.addEventListener('input', s); p.addEventListener('change', s); chk(); });</script>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4">
               <label class="mb-2">Article Title <span style="color: red">*</span></label>
@@ -1992,7 +2009,7 @@ document.getElementById('removeButton').addEventListener('click', function () {
         $('#j_id').change(function() {
 	$('#previous').show();
     $('#pub_id').val($('#j_id option:selected').data('id'));
-    $('#job_id').val($('#pub_id').val());
+    document.getElementById('pub_id').dispatchEvent(new Event('change'));
     $('.previous_aid').text($('#j_id option:selected').data('previous'));
     console.log($('#j_id option:selected').data('id'));
     console.log($('#j_id option:selected').data('previous'));
