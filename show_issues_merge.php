@@ -439,10 +439,16 @@ if(isset($_POST['create_issue']) &&  $_POST['create_issue'] == 'Save')
 					header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode("The zip packages could not be created in ".$dest_path." - please check that this folder exists and can be written to."));
 					exit;
 				}
-				$closed = array($web_zip->close(), $print_zip->close(), $all_files_zip->close());
-				if(in_array(false, $closed, true))
+				/* libzip reads the files while closing, so an unreadable file only shows up here */
+				$close_err = array();
+				foreach(array('Online PDF' => $web_zip, 'Print PDF' => $print_zip, 'All files' => $all_files_zip) as $zname => $zobj)
 				{
-					header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode("The package files could not be written to ".$dest_path." - please check the folder permission and free disk space."));
+					if(!$zobj->close()) { $close_err[] = $zname.' package: '.$zobj->getStatusString(); }
+				}
+				if(!empty($close_err))
+				{
+					deleteFile($print_package); deleteFile($web_package); deleteFile($all_files_package);   // an incomplete package must not be kept
+					header("location:show_issues_merge.php?id=" . $_POST['vi_id'] . "&ermsg=".urlencode("The package was not created - ".implode('; ', $close_err).". Please check that every PDF, XML, ePub and graphic file of the articles exists and can be read, and that the dispatch folder is writable and has free space."));
 					exit;
 				}
 				if(!empty($pkg_fail))
