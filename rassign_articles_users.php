@@ -196,7 +196,7 @@ if($flt['r_user_id']!=='') {
 			   <div class="af-field">
                 <label class="mb-2">Choose Department</label>
                <?php
-    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','10','14','24','32','34','38')  ORDER BY `dept_name` ASC ";
+    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','5','9','10','14','16','22','24','32','34','38')  ORDER BY `dept_name` ASC ";
     $customers = $db->query($query) or ($db->error);		
     
     ?><select id="dep_id" name="dep_id" class="form-control"  data-placeholder="Choose" required>

@@ -231,7 +231,7 @@ if($_SESSION['from_dt']!='' && $_SESSION['to_dt']){
 			   <div class="col-12 col-sm-6 col-md-3 col-lg-2">
                 <label class="mb-2">Choose Department</label>
                <?php
-    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','10','14','34','38')  ORDER BY `dept_name` ASC ";
+    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','5','9','10','14','16','22','24','32','34','38')  ORDER BY `dept_name` ASC ";
     $customers = $db->query($query) or ($db->error);		
     
     ?><select id="dep_id" name="dep_id" class="form-control"  data-placeholder="Choose" required>

@@ -26,7 +26,7 @@ if(isset($_POST['assign']))
 			
 			$user_working_status = '<span class="label label-sm label-success">'.$current_user_deptname['dept_name'].'</span>|<span class="label label-sm label-info">'.$assigned_user['full_name'].'</span>|<span class="label label-sm label-warning">Assigned</span>';
 			
-			if($_REQUEST['dep_id']=='1' || $_REQUEST['dep_id']=='22' || $_REQUEST['dep_id']=='24' || $_REQUEST['dep_id']=='2' || $_REQUEST['dep_id']=='5' || $_REQUEST['dep_id']=='32')
+			if(!am_is_od($_REQUEST['dep_id']))
 			{
 				$assigned="`assigned_user_id` ='".$_POST['user_id']."',ce_pe_due_date='".date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date']))."',user_working_status='".$user_working_status."'";
 			}
@@ -186,7 +186,7 @@ if($_COOKIE['user_level']=='3') {
 			   <div class="af-field">
                 <label class="mb-2">Choose Department</label>
                <?php
-    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','5','10','14','24','32','34','38')  ORDER BY `dept_name` ASC ";
+    $query = "SELECT dept_name,dept_code FROM `adm_dept_master` WHERE dept_code in('1','2','5','9','10','14','16','22','24','32','34','38')  ORDER BY `dept_name` ASC ";
     $customers = $db->query($query) or ($db->error);		
     
     ?><select id="dept_id" name="dept_id" class="form-control"  data-placeholder="Choose" required>
@@ -298,9 +298,9 @@ if($_REQUEST['dept_id']==1 || $_REQUEST['dept_id']==22 || $_REQUEST['dept_id']==
 else
 {
 			 
-		   // $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and assigned_od_user_id IS NULL AND (wd.stage ='FP' or wd.stage  LIKE '%REV%'   or wd.stage  LIKE '%FIN%') AND wd.stage  NOT LIKE '%ISSFIN1%' $var";
+		   // $query = "SELECT c.cust_name,journal_title,pub_id,recv_dt,due_dt,wd.created_dt,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,stage, wd.notes FROM `inw_inward_dtl` as wd, adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and ".(am_is_od($_REQUEST['dept_id']) ? 'assigned_od_user_id' : 'assigned_user_id')." IS NULL AND (wd.stage ='FP' or wd.stage  LIKE '%REV%'   or wd.stage  LIKE '%FIN%') AND wd.stage  NOT LIKE '%ISSFIN1%' $var";
 		   
-		     $query = "SELECT wd.department_id,wd.assign_department_id,c.cust_name,journal_title,fig_complete_status,pub_id,recv_dt,due_dt,target_due_dt,ce_pe_due_date,highpriority,wd.created_dt,wd.issueorgroup_folder,fig,tab,status,approved_by,wd.id,j.j_code,j.jt_id,j.j_division,manuscript_count,stage,work_dir,r.received_date,r.due_date,r.correction_pages,wd.notes,aq_status,wd.user_working_status  FROM `inw_inward_dtl` as wd LEFT JOIN inw_revisions_dtl as r ON (wd.`id` =r.`inw_id` and r.r_id = (select r_id from inw_revisions_dtl where inw_id = wd.`id` order by r_id DESC limit 1)), adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and assigned_od_user_id IS NULL AND (wd.stage ='FP' or wd.stage  LIKE '%REV%'   or wd.stage  LIKE '%FIN%') AND wd.stage  NOT LIKE '%ISSFIN1%' and (present_user_id=0 or present_user_id is NULL) and is_conversion='no' $var";
+		     $query = "SELECT wd.department_id,wd.assign_department_id,c.cust_name,journal_title,fig_complete_status,pub_id,recv_dt,due_dt,target_due_dt,ce_pe_due_date,highpriority,wd.created_dt,wd.issueorgroup_folder,fig,tab,status,approved_by,wd.id,j.j_code,j.jt_id,j.j_division,manuscript_count,stage,work_dir,r.received_date,r.due_date,r.correction_pages,wd.notes,aq_status,wd.user_working_status  FROM `inw_inward_dtl` as wd LEFT JOIN inw_revisions_dtl as r ON (wd.`id` =r.`inw_id` and r.r_id = (select r_id from inw_revisions_dtl where inw_id = wd.`id` order by r_id DESC limit 1)), adm_customer_master as c, adm_journals as j WHERE wd.cust_id = c.id and wd.j_id = j.j_id and ".(am_is_od($_REQUEST['dept_id']) ? 'assigned_od_user_id' : 'assigned_user_id')." IS NULL AND (wd.stage ='FP' or wd.stage  LIKE '%REV%'   or wd.stage  LIKE '%FIN%') AND wd.stage  NOT LIKE '%ISSFIN1%' and (present_user_id=0 or present_user_id is NULL) and is_conversion='no' $var";
 }
 	
 		$customers = $db->query($query) or ($db->error);				

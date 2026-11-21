@@ -578,7 +578,7 @@ $app_res = $result->fetch_assoc();
 			}
 		}
 		/* Allocation departments: an Employee can open only an article that is allocated to them (also blocks Force Start / direct URLs). */
-		if(isset($_COOKIE['user_level']) && $_COOKIE['user_level'] == 3 && in_array((string)$app_res['department_id'], array('1','2','24','32','10','14','34','38'), true))
+		if(isset($_COOKIE['user_level']) && $_COOKIE['user_level'] == 3 && in_array((string)$app_res['department_id'], array('1','2','5','9','16','22','24','32','10','14','34','38'), true))
 		{
 			$__col = in_array((string)$app_res['department_id'], array('10','14','34','38'), true) ? 'assigned_od_user_id' : 'assigned_user_id';
 			$__own = $db->query("SELECT $__col AS owner FROM inw_inward_dtl WHERE id = ".(int)$app_res['id']);
