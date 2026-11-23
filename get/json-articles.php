@@ -428,7 +428,7 @@ else
 	//$start='<a title="Start work"  class="btn btn-xs btn-primary"><i class="ace-icon fa fa-tasks bigger-120"></i>Not</a>';
 	$start='';
 }
-if(!$is_employee_role && !isset($my_assigned[(int)$articles['id']]) && !in_array((string)$articles['department_id'], array_filter(explode(',', $_COOKIE['department_id'].','.$_COOKIE['odepartment_id'])), true)) { $start=''; }   /* all-articles view: no Start on other departments' unassigned articles */
+if(!$is_employee_role && !$is_full_access && !isset($my_assigned[(int)$articles['id']]) && !in_array((string)$articles['department_id'], array_filter(explode(',', $_COOKIE['department_id'].','.$_COOKIE['odepartment_id'])), true)) { $start=''; }   /* all-articles view: no Start on other departments' unassigned articles */
 if(!empty($articles['aq_status'])){  $aq_status='|<span class="label label-sm label bg-secondary text-white">'.$articles['aq_status'].'</span>'; }else{ $aq_status=''; }
 	if($articles['user_working_status']!='' && $articles['user_working_status']!='<span class="label label-sm label-success">Client Review</span>' && $articles['user_working_status']!='<span class="label label-sm label-success">Delivery</span>')
 {
