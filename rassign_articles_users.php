@@ -51,6 +51,7 @@ if(isset($_POST['reassign']))
 			$prj_update_query="UPDATE inw_inward_dtl SET $reassigned WHERE id = ".$a_id." "; 
 			//echo $prj_update_query; exit;
 			$db->query($prj_update_query);
+			am_record_assignment($db, $a_id, (!empty($_REQUEST['dept_id']) ? $_REQUEST['dept_id'] : $_REQUEST['dep_id']), $_POST['re_user_id'], 'reassign', date('Y-m-d',strtotime(isset($_REQUEST['target_due_dt']) ? $_REQUEST['target_due_dt'] : $_REQUEST['ce_pe_due_date'])));
 			
 		}
 		

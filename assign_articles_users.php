@@ -40,6 +40,7 @@ if(isset($_POST['assign']))
 				$prj_update_query="UPDATE inw_inward_dtl SET $assigned WHERE id = ".$a_id." "; 
 			//echo $prj_update_query; exit;
 			$db->query($prj_update_query);
+			am_record_assignment($db, $a_id, $_REQUEST['dep_id'], $_POST['user_id'], 'assign', date('Y-m-d',strtotime($_REQUEST['ce_pe_due_date'])));
 			
 		}
 

@@ -137,13 +137,8 @@ $domain_url = rtrim($domain_url, '/');
     }
   /// Auto Assign starts here 
   // First-time login: assume you have the user_id from session or other login process 
-	include("auto_assign_articles.php");
-	//$user_id = 242;  // Example user ID
-	$user_id = $userid[0]["id"];  // Example user ID
-	// Check if the user has already been assigned articles today
-	if (!isAssignedToday($user_id)) {
-		assignArticles($user_id);
-	}
+	/* Auto-assign at login is switched off: articles are allocated manually (Assign / Re-assign pages) and handed back by the start work page. auto_assign_articles.php is kept but no longer included. */
+	$user_id = $userid[0]["id"];
 	/// Auto Assign ends here
 
   if($userid[0]["department_id"]==9)

@@ -4374,6 +4374,8 @@ $insert=mysqli_query($db,"insert into tbl_query_client(`jid`,`cust_id`,`aid`,`fr
 			$prj_update_query="UPDATE inw_inward_dtl SET ".$corresponding_author_details ." ".$page_count." `status` ='".$dept_res['dept_name']."',`department_id` ='". $department_id."',`assign_department_id` ='0',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."', present_user_id = '0' WHERE id = ".$post['id']." "; 
 			//echo $prj_update_query; exit;
 			$db->query($prj_update_query);
+			/* moved on to PRQC (or Proofing): hand it back to the user who handled it in that department before */
+			include_once(__DIR__."/includes/assignment-log.php"); am_on_dept_change($db, $post['id'], $post['department_id'], $department_id);
 			
 			/// If completed the work files we will move to other department ////
 			if($post['status'] == 1  || $post['status'] == 12)
@@ -4625,6 +4627,7 @@ while($fef_info = $fef_result->fetch_assoc())
 			{
 				//echo "1";exit;
 			$prj_update_query=mysqli_query($db,"UPDATE inw_inward_dtl SET  `status` ='".$dept_res['dept_name']."',`department_id` ='". $department_id."',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."' WHERE id = ".$post['id']." ");
+			include_once(__DIR__."/includes/assignment-log.php"); am_on_dept_change($db, $post['id'], $post['department_id'], $department_id);
 
 			}
 			else
@@ -4988,9 +4991,13 @@ if($post['cust_id']==42 && $post['status']==1 && $post['stage']='FP' && $post['d
 			}	
 			
 			//$prj_update_query="UPDATE inw_inward_dtl SET `status` ='".$dept_res['dept_name']." | Assigned | ".$post['dept_name']."',`department_id` ='". $post['assign_department']."',`prev_dept_id` ='". $post['department_id']."',`assign_department_id` ='". $post['assign_department']."', present_user_id = '0',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."',`assigned_user_id`='".$post['a_user_id']."' WHERE id = ".$post['id']." ";
-			include_once(__DIR__."/includes/assignment-log.php"); if(!empty($post['a_user_id'])){ log_article_assignment($db,$post['id'],$post['a_user_id'],'assigned_user_id',$post['assign_department'],'handoff'); }
-			$prj_update_query="UPDATE inw_inward_dtl SET `status` ='".$assign_dept_status."',`department_id` ='". $post['assign_department']."',`prev_dept_id` ='". $post['department_id']."',`assign_department_id` ='". $post['assign_department']."', present_user_id = '0',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."',`assigned_user_id`='".$post['a_user_id']."' WHERE id = ".$post['id']." ";
+			include_once(__DIR__."/includes/assignment-log.php"); $ho_od = am_is_od($post['assign_department']); if($ho_od && empty($post['a_user_id'])){ log_article_clear($db,$post['id'],'assigned_od_user_id',$post['assign_department']); } if(!empty($post['a_user_id'])){ log_article_assignment($db,$post['id'],$post['a_user_id'],($ho_od ? 'assigned_od_user_id' : 'assigned_user_id'),$post['assign_department'],'handoff'); }
+			$prj_update_query="UPDATE inw_inward_dtl SET `status` ='".$assign_dept_status."',`department_id` ='". $post['assign_department']."',`prev_dept_id` ='". $post['department_id']."',`assign_department_id` ='". $post['assign_department']."', present_user_id = '0',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."',".($ho_od ? "`assigned_od_user_id`=".(!empty($post['a_user_id']) ? "'".$post['a_user_id']."'" : "NULL") : "`assigned_user_id`='".$post['a_user_id']."'")." WHERE id = ".$post['id']." ";
 			$db->query($prj_update_query);
+			if (!empty($post['a_user_id'])) { am_record_assignment($db, $post['id'], $post['assign_department'], $post['a_user_id'], 'handoff'); }
+			elseif ($ho_od) { am_record_clear($db, $post['id'], $post['assign_department']); }
+			/* handed to PRQC / Proofing with no user picked: give it back to the user who handled it there before */
+			if (empty($post['a_user_id'])) { am_on_dept_change($db, $post['id'], $post['department_id'], $post['assign_department']); }
 		}
 		
 		
@@ -5143,6 +5150,21 @@ $row = $check_result->fetch_assoc();
 	}
 }
 				
+		/* Popup note: where the article went and who it is assigned to (shown under the "Work Status Updated" message) */
+		$sw_assign_note = '';
+		{
+			$nq = $db->query("SELECT i.department_id, i.assigned_user_id, i.assigned_od_user_id, d.dept_name FROM inw_inward_dtl i LEFT JOIN adm_dept_master d ON d.dept_code = i.department_id WHERE i.id = ".(int)$post['id']);
+			$nr = $nq ? $nq->fetch_assoc() : null;
+			if ($nr && (int)$nr['department_id'] > 0 && (string)$nr['department_id'] !== (string)$post['department_id'])
+			{
+				include_once(__DIR__."/includes/assignment-log.php");
+				$n_uid = (int)(am_is_od($nr['department_id']) ? $nr['assigned_od_user_id'] : $nr['assigned_user_id']);
+				$n_name = '';
+				if ($n_uid > 0) { $uq = $db->query("SELECT full_name FROM users WHERE id = ".$n_uid); $ur = $uq ? $uq->fetch_assoc() : null; $n_name = $ur ? $ur['full_name'] : ''; }
+				$sw_assign_note = ($n_name !== '') ? 'Moved to '.$nr['dept_name'].' - assigned to '.$n_name : 'Moved to '.$nr['dept_name'].' - not assigned to anyone yet';
+				$sw_assign_note = addslashes(str_replace(array(chr(13), chr(10)), ' ', $sw_assign_note));   // safe inside the JS single-quoted string below
+			}
+		}
 		///// Artile Details /////
 		
 			if($_POST['v_issue_id'] > 0)
@@ -5153,6 +5175,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." for Issue Article Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5180,6 +5203,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5198,6 +5222,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5216,6 +5241,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5238,6 +5264,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5259,6 +5286,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5278,6 +5306,7 @@ $row = $check_result->fetch_assoc();
 				echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5297,6 +5326,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',
@@ -5316,6 +5346,7 @@ $row = $check_result->fetch_assoc();
 					echo "<script type='text/javascript'>";
  echo "swal({
     title: 'Work Status Updated as ".$project_status_array[$post['status']]." Successfully',
+    text: '".$sw_assign_note."',
     type: 'success',
     confirmButtonColor: '#DD6B55',
     confirmButtonText: 'CLOSE',

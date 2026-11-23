@@ -64,7 +64,7 @@ function assignArticles($user_id) {
                 $department_id = $config['department_id'];
 
 // Determine the appropriate column for assigned user ID based on department_id
-if ($department_id == 1 || $department_id == 22) {
+if (!am_is_od($department_id)) {   // same rule as manual allocation: only PAG / PRQC (10, 14, 34, 38) use the od column
     $assigned_user_column = 'assigned_user_id';
 } else {
     $assigned_user_column = 'assigned_od_user_id';
@@ -97,7 +97,7 @@ $query_articles = "SELECT * FROM inw_inward_dtl
 
 				$user_working_status = '<span class="label label-sm label-success">'.$current_user_deptname['dept_name'].'</span>|<span class="label label-sm label-info">'.$assigned_user['full_name'].'</span>|<span class="label label-sm label-warning">Assigned</span>';
 
-				if($config['department_id']=='1' || $config['department_id']=='22')
+				if(!am_is_od($config['department_id']))
 				{
 					$assigned="`assigned_user_id` ='".$user_id."',ce_pe_due_date='".date('Y-m-d')."',user_working_status='".$user_working_status."'";
 				}
@@ -111,6 +111,7 @@ $query_articles = "SELECT * FROM inw_inward_dtl
 				$prj_update_query="UPDATE inw_inward_dtl SET $assigned WHERE id = ".$article['id']." "; 
 				
 				$db->query($prj_update_query);
+				am_record_assignment($db, $article['id'], $config['department_id'], $user_id, 'auto', date('Y-m-d'));
 			
 			
                     
