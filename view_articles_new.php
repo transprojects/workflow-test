@@ -467,7 +467,7 @@ foreach ($sql_department as $res_department) {
            <button type="button" class="af-tab d3" data-tab="d3"><i class="fa fa-calendar-o"></i> Due in 3 days <b>0</b></button>
            <button type="button" class="af-tab d4" data-tab="d4"><i class="fa fa-calendar-check-o"></i> Due in 4+ days <b>0</b></button>
            <button type="button" class="af-tab query" data-tab="query"><i class="fa fa-question-circle"></i> Query <b>0</b></button>
-           <span class="af-tab-hint">Listed by due date, earliest first &middot; High priority = flagged articles &middot; Query = articles waiting on a query</span>
+           <span class="af-tab-hint">Listed by due date, earliest first &middot; High priority = flagged articles &middot; Query = articles waiting on a query<?php if (!in_array((string)$_COOKIE['user_level'], array('3'), true)) { ?> &middot; <span style="background:#fff3b0;border-left:4px solid #f0ad00;padding:0 6px;font-weight:600;">Yellow row</span> = assigned to you (shown first)<?php } ?></span>
          </div>
        </div>
        <div class="af-page"><div class="af-card">
