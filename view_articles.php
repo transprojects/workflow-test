@@ -720,6 +720,10 @@ $graphics_status = implode(",", $graphics_status);
         $('td', nRow).css('background-color', '#fff');
 		
       }
+	  if (aData[14] == "1") {
+        $('td', nRow).css({'background-color': '#fff3b0', 'font-weight': '600'});
+        $('td:first', nRow).css('border-left', '4px solid #f0ad00');
+      }
 	  if (aData[13] == "1") {
         $('td', nRow).css('background-color', 'rgb(255, 0, 0,.5)');
 		

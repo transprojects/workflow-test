@@ -34,7 +34,10 @@ if (!empty($_COOKIE['stage_access'])) {
 }
 
 
-if(($_COOKIE['user_level'] != 1) &&  ($_COOKIE['user_level'] != 5) &&  ($_COOKIE['user_level'] != 14))
+/* Only the Employee role (user_level 3) is limited to its own customer/department scope. Every other role (team leader, coordinator, project manager ...) sees all articles. */
+$is_employee_role = ((string)$_COOKIE['user_level'] === '3');
+$my_uid = (int)$_COOKIE['user_id'];
+if($is_employee_role)
 {
 
 
@@ -152,13 +155,27 @@ if(isset($_REQUEST['allocated']) && $_REQUEST['allocated']!='')
 	
 
 }
-else
+elseif($is_employee_role)
 {
 $gSearch .= 'and wd.v_issue_id <= 0 and test_article!=1 and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'"))
 and department_id in ('.$_COOKIE['department_id'].')';
 }
 
 $_SESSION['varname'] = $gSearch;
+
+/* Non-employee roles: articles assigned to the logged-in user float to the top (the procedure appends sort_by to ORDER BY). */
+if(!$is_employee_role && $my_uid > 0)
+{
+	/* the procedure's sort_by / sort_type params are VARCHAR(50) each, so split the expression across both */
+	$sort_type = 'DESC'.($sort_by != '' ? ','.$sort_by.' '.$sort_type : '');
+	$sort_by = $my_uid.' IN(assigned_user_id,assigned_od_user_id)';
+}
+$my_assigned = array();
+if(!$is_employee_role && $my_uid > 0)
+{
+	$mq = mysqli_query($db, "SELECT id FROM inw_inward_dtl WHERE assigned_user_id=".$my_uid." OR assigned_od_user_id=".$my_uid);
+	if($mq) { while($mr = mysqli_fetch_row($mq)) { $my_assigned[(int)$mr[0]] = 1; } }
+}
 
 //echo $gSearch; exit;
 //echo $sort_by_d;
@@ -410,6 +427,7 @@ else
 	//$start='<a title="Start work"  class="btn btn-xs btn-primary"><i class="ace-icon fa fa-tasks bigger-120"></i>Not</a>';
 	$start='';
 }
+if(!$is_employee_role && !isset($my_assigned[(int)$articles['id']]) && !in_array((string)$articles['department_id'], array_filter(explode(',', $_COOKIE['department_id'].','.$_COOKIE['odepartment_id'])), true)) { $start=''; }   /* all-articles view: no Start on other departments' unassigned articles */
 if(!empty($articles['aq_status'])){  $aq_status='|<span class="label label-sm label bg-secondary text-white">'.$articles['aq_status'].'</span>'; }else{ $aq_status=''; }
 	if($articles['user_working_status']!='' && $articles['user_working_status']!='<span class="label label-sm label-success">Client Review</span>' && $articles['user_working_status']!='<span class="label label-sm label-success">Delivery</span>')
 {
@@ -520,7 +538,8 @@ else
 
 		 11 =>$articles['id'],
 		 12 =>$articles['highpriority'],
-		 13 =>$due_highlight
+		 13 =>$due_highlight,
+		 14 =>(isset($my_assigned[(int)$articles['id']]) ? '1' : '0')
 			//7 => $payment['status'] == '0' ? 'Success' : 'Failed',
 			//6 => $articles['id']
 		);
