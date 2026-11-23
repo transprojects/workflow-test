@@ -19,7 +19,7 @@
  *   PMC  articles whose stage is PMC*, same rules (due = due date of the latest revision, i.e. the PMC round)
  *   JSTAGE  articles whose stage is JSTAGE*, same rules (due = due date of the latest revision, i.e. the JSTAGE round)
  *   ISS  volume issues not Delivery / Client Review / Completed                 due = issue due date   (department filter does not apply, as before)
- * Columns: "overdue" = due from the range start up to yesterday;  one column per day from today to the end of the range;
+ * Columns: "overdue" = everything open that was due before the range start (up to yesterday);  one column per day from today to the end of the range;
  *          "total" = due anywhere in the range.
  * ========================================================================== */
 
@@ -44,7 +44,10 @@ function wip_matrix($custs, $dept, $from, $to)
 {
     $today = date('Y-m-d');
     $yest = date('Y-m-d', strtotime('-1 day'));
-    $qEnd = $to > $yest ? $to : $yest;                       // "overdue" can reach past the end of the range
+    $qEnd = $to > $yest ? $to : $yest;                       // (kept for the day columns / range total)
+    $qFrom = '2000-01-01';                                   // "overdue" = everything open that fell due BEFORE the range start, however old
+    $odEnd = date('Y-m-d', strtotime($from . ' -1 day'));   // last day counted as overdue: the day before the range, never later than yesterday
+    if ($odEnd > $yest) { $odEnd = $yest; }
     $cA = cust_sql_str('wd', $custs);
     $cI = cust_sql_int('vi', $custs);
     $dA = dept_sql($dept);
@@ -52,7 +55,7 @@ function wip_matrix($custs, $dept, $from, $to)
     $parts = array();
     if (rs_row_enabled('FP')) $parts[] = "SELECT 'FP' AS stg, wd.due_dt AS d, COUNT(*) AS c
                 FROM inw_inward_dtl wd
-                WHERE wd.due_dt BETWEEN '$from' AND '$qEnd' AND wd.stage = 'FP' AND wd.status <> 'Client Review' $cA $dA
+                WHERE wd.due_dt BETWEEN '$qFrom' AND '$qEnd' AND wd.stage = 'FP' AND wd.status <> 'Client Review' $cA $dA
                 GROUP BY wd.due_dt";
     $parts[] = "SELECT IF(LEFT(wd.stage,3) = 'REV', 'REV', 'FIN') AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c
                 FROM inw_inward_dtl wd
@@ -60,7 +63,7 @@ function wip_matrix($custs, $dept, $from, $to)
                 JOIN inw_revisions_dtl r ON r.inw_id = wd.id
                 WHERE " . rs_rev_fin_cond('ALL') . "
                   AND wd.status <> 'Client Review' AND wd.status NOT IN ('Client Review','Completed')
-                  AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$from' AND '$qEnd'
+                  AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$qFrom' AND '$qEnd'
                   AND NOT EXISTS (SELECT 1 FROM inw_revisions_dtl x WHERE x.inw_id = r.inw_id AND x.r_id > r.r_id) $cA $dA
                 GROUP BY stg, r.due_date";
     if (rs_row_enabled('PMC')) $parts[] = "SELECT 'PMC' AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c
@@ -69,7 +72,7 @@ function wip_matrix($custs, $dept, $from, $to)
                 JOIN inw_revisions_dtl r ON r.inw_id = wd.id
                 WHERE wd.stage LIKE 'PMC%'
                   AND wd.status <> 'Client Review' AND wd.status NOT IN ('Client Review','Completed')
-                  AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$from' AND '$qEnd'
+                  AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$qFrom' AND '$qEnd'
                   AND NOT EXISTS (SELECT 1 FROM inw_revisions_dtl x WHERE x.inw_id = r.inw_id AND x.r_id > r.r_id) $cA $dA
                 GROUP BY r.due_date";
     if (rs_row_enabled('JSTAGE')) $parts[] = "SELECT 'JSTAGE' AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c
@@ -78,13 +81,13 @@ function wip_matrix($custs, $dept, $from, $to)
                 JOIN inw_revisions_dtl r ON r.inw_id = wd.id
                 WHERE wd.stage LIKE 'JSTAGE%'
                   AND wd.status <> 'Client Review' AND wd.status NOT IN ('Client Review','Completed')
-                  AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$from' AND '$qEnd'
+                  AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$qFrom' AND '$qEnd'
                   AND NOT EXISTS (SELECT 1 FROM inw_revisions_dtl x WHERE x.inw_id = r.inw_id AND x.r_id > r.r_id) $cA $dA
                 GROUP BY r.due_date";
     if (rs_row_enabled('ISS')) $parts[] = "SELECT 'ISS' AS stg, vi.due_date AS d, COUNT(DISTINCT vi.vi_id) AS c
                 FROM inw_volume_issues vi
                 JOIN adm_journals j ON j.j_cust_id = vi.cust_id AND j.j_id = vi.j_id
-                WHERE vi.status NOT IN ('Delivery','Client Review','Completed') AND vi.due_date BETWEEN '$from' AND '$qEnd' $cI
+                WHERE vi.status NOT IN ('Delivery','Client Review','Completed') AND vi.due_date BETWEEN '$qFrom' AND '$qEnd' $cI
                 GROUP BY vi.due_date";
     if (!$parts) { $parts[] = "SELECT 'FP' AS stg, NULL AS d, 0 AS c FROM dual WHERE 1=0"; }
     $res = q(implode(' UNION ALL ', $parts));
@@ -101,14 +104,14 @@ function wip_matrix($custs, $dept, $from, $to)
     foreach ($by as $s => $m) {
         $prev = 0; $range = 0; $counts = array_fill(0, count($days), 0);
         foreach ($m as $d => $c) {
-            if ($d >= $from && $d <= $yest) { $prev += $c; }
+            if ($d <= $odEnd) { $prev += $c; }
             if ($d >= $from && $d <= $to) { $range += $c; }
         }
         foreach ($days as $i => $d) { if (isset($m[$d])) { $counts[$i] = $m[$d]; $per_day[$i] += $m[$d]; } }
         $rows[$s] = array('prev' => $prev, 'counts' => $counts, 'total' => $range);
         $tot_prev += $prev; $tot_range += $range;
     }
-    return array('today' => $today, 'overdue_range' => array('from' => $from, 'to' => ($from <= $yest ? $yest : null)),
+    return array('today' => $today, 'overdue_range' => array('before' => $from, 'to' => $odEnd),
                  'days' => $days, 'rows' => $rows, 'totals' => array('prev' => $tot_prev, 'per_day' => $per_day, 'grand' => $tot_range));
 }
 
@@ -273,6 +276,7 @@ if ($action === 'meta') {
 }
 
 list($from, $to) = resolve_range(date('Y-m-d', strtotime('-5 days')), date('Y-m-d', strtotime('+2 days')));
+if (!empty($_REQUEST['over'])) { $from = '2000-01-01'; }       // overdue drawer / export: from/to = the one day before the range; open it up to everything older
 $custs = resolve_customers();
 $dept = resolve_dept();
 $params = array('cust_id' => $custs === null ? 'all' : $custs, 'dept' => $dept === null ? 'all' : $dept, 'from' => $from, 'to' => $to);

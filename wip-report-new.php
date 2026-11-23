@@ -195,7 +195,7 @@ if (isset($_GET['wcust_id']) || isset($_GET['date_wise']) || isset($_GET['wgetac
   /* what a drawer bucket means as a due-date window */
   function bucketWindow(b) {
     var r = range();
-    if (b === 'over') { return { from: r.from, to: yestIso }; }
+    if (b === 'over') { var e = iso(addDays(new Date(r.from + 'T00:00:00'), -1)); if (e > yestIso) { e = yestIso; } return { from: e, to: e, over: 1 }; }
     if (b === 'range') { return { from: r.from, to: r.to }; }
     return { from: b, to: b };
   }
@@ -281,8 +281,7 @@ if (isset($_GET['wcust_id']) || isset($_GET['date_wise']) || isset($_GET['wgetac
   }
   function renderHint() {
     var d = S.data, r = range(), parts = [];
-    if (d.overdue_range.to) { parts.push('<b>Overdue</b> = due from ' + fmtLong(r.from) + ' up to yesterday (' + fmtLong(d.overdue_range.to) + ') and still open'); }
-    else { parts.push('Nothing in this range is overdue yet'); }
+    parts.push('<b>Overdue</b> = still open and due before ' + fmtLong(r.from));
     parts.push('<b style="color:var(--navy)">Total</b> = everything due between ' + fmtLong(r.from) + ' and ' + fmtLong(r.to));
     var dn = deptName(); if (dn) { parts.push('department ' + esc(dn) + ' (issues are not split by department)'); }
     $('#ifxHint').innerHTML = parts.join(' &middot; ') + '.';
@@ -322,6 +321,7 @@ if (isset($_GET['wcust_id']) || isset($_GET['date_wise']) || isset($_GET['wgetac
   /* ------------------------------------------------------------ drawer */
   function drawerParams(extra) {
     var w = bucketWindow(S.dr.bucket), p = filterParams({ stage: S.dr.stage, from: w.from, to: w.to });
+    if (w.over) { p.over = 1; }
     if (S.sort) { p.sort = S.sort; p.dir = S.dir; }
     if (S.q) { p.q = S.q; }
     for (var k in extra) { p[k] = extra[k]; }
