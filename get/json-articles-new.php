@@ -46,7 +46,10 @@ function buildStartBtn($aid, $tid, $dept, $fs = 0, $labelOverride = "") {
 }
 
 
-if(($_COOKIE['user_level'] != 1) &&  ($_COOKIE['user_level'] != 5) &&  ($_COOKIE['user_level'] != 14))
+/* Only the Employee role (user_level 3) is limited to its own scope. Every other role (team leader, coordinator, project manager ...) sees all articles; the ones assigned to them are listed first and highlighted. */
+$is_employee_role = ((string)$_COOKIE['user_level'] === '3');
+$my_uid = (int)$_COOKIE['user_id'];
+if($is_employee_role)
 {
 
 
@@ -79,7 +82,7 @@ else
 }
 
 // Allocation departments (CE, Pre-Editing, XML, Graphics, Inward, Pre-clean, Tex-pre-clean, CE-ELX use assigned_user_id; PAG, PRQC and -ELX use assigned_od_user_id): a user sees only the articles allocated to them; unallocated articles are hidden until allocated.
-if(($_COOKIE['user_level'] != 1) && ($_COOKIE['user_level'] != 5) && ($_COOKIE['user_level'] != 14))
+if($is_employee_role)
 {
 	$gSearch .= ' and (wd.department_id NOT IN (10,14,34,38) or wd.assigned_od_user_id = '.(int)$_COOKIE['user_id'].')'
 		.' and (wd.department_id NOT IN (1,2,5,9,16,22,24,32) or wd.assigned_user_id = '.(int)$_COOKIE['user_id'].')';
@@ -171,7 +174,7 @@ if(isset($_REQUEST['allocated']) && $_REQUEST['allocated']!='')
 	
 
 }
-else
+elseif($is_employee_role)
 {
 // leading space: the admin branch above has already written "... <= 0", and "0and" is a syntax error
 $gSearch .= ' and wd.v_issue_id <= 0 and test_article!=1 and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'"))
@@ -235,6 +238,14 @@ if ($col_i !== 5 && isset($by[$col_i])) {
     $order_sql = ' ORDER BY (' . $due_expr . ' IS NULL) ASC, ' . $due_expr . ' ' . ($col_i === 5 ? $sdir : 'ASC') . ', wd.id DESC';
 }
 
+/* non-employee roles: the user's own assigned articles first (ahead of the chosen sort) */
+$mine_select = ', 0 AS is_mine';
+if(!$is_employee_role && $my_uid > 0)
+{
+	$mine_select = ', (wd.assigned_user_id = '.$my_uid.' OR wd.assigned_od_user_id = '.$my_uid.') AS is_mine';
+	$order_sql = ' ORDER BY is_mine DESC,' . substr($order_sql, strlen(' ORDER BY '));
+}
+
 $_SESSION['varname'] = $gSearch;
 
 //echo $gSearch; exit;
@@ -244,7 +255,7 @@ $_SESSION['varname'] = $gSearch;
 // $res_prof = $auth->showArticlelist($sSearch, $sort_by, $sort_type, $sort_by_d, $sort_type_d, $start, $length,$gSearch);
  if (true) {   // always the direct query: it can sort by the date expressions above, which the stored procedure (VARCHAR(50) sort argument) cannot
     $res_prof = array();
-    $lq = $db->query('SELECT c.cust_name as cn,c.id as custid,journal_title,pub_id,recv_dt,due_dt,wd.inw_type,highpriority,wd.created_dt,file_flow,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,graphics,fig_complete_status,wd.stage,wd.page_count,r.received_date,r.due_date,r.correction_pages,r.revision_count, r.created_on,wd.target_due_dt,wd.department_id,wd.present_user_id,wd.file_status,wd.issueorgroup_folder,wd.fig,wd.tab,wd.aq_status,wd.user_working_status,wd.last_transaction_id,wd.graphic_working_status,wd.assigned_od_user_id,wd.od_due_date,wd.xperttrack_sync' . $js_select
+    $lq = $db->query('SELECT c.cust_name as cn,c.id as custid,journal_title,pub_id,recv_dt,due_dt,wd.inw_type,highpriority,wd.created_dt,file_flow,fig,tab,status,approved_by,wd.id,j.j_code,manuscript_count,graphics,fig_complete_status,wd.stage,wd.page_count,r.received_date,r.due_date,r.correction_pages,r.revision_count, r.created_on,wd.target_due_dt,wd.department_id,wd.present_user_id,wd.file_status,wd.issueorgroup_folder,wd.fig,wd.tab,wd.aq_status,wd.user_working_status,wd.last_transaction_id,wd.graphic_working_status,wd.assigned_od_user_id,wd.od_due_date,wd.xperttrack_sync' . $js_select . $mine_select
         . $from_list . $_SESSION['varname']
         . $order_sql
         . ' LIMIT ' . (int)$start . ', ' . ((int)$length > 0 ? (int)$length : 10));
@@ -527,6 +538,8 @@ if ($articles['approved_by'] > 0) {
     }
 }
 
+/* all-articles view: no Start on other departments' articles that are not assigned to this user */
+if(!$is_employee_role && empty($articles['is_mine']) && !in_array((string)$articles['department_id'], array_filter(explode(',', $_COOKIE['department_id'].','.$_COOKIE['odepartment_id'])), true)) { $start = ''; }
 if(!empty($articles['aq_status'])){  $aq_status='|<span class="label label-sm label bg-secondary text-white">'.$articles['aq_status'].'</span>'; }else{ $aq_status=''; }
 	if($articles['user_working_status']!='' && $articles['user_working_status']!='<span class="label label-sm label-success">Client Review</span>' && $articles['user_working_status']!='<span class="label label-sm label-success">Delivery</span>')
 {
@@ -641,7 +654,8 @@ else
 		 11 =>$articles['id'],
 		 12 =>$articles['highpriority'],
 		 13 =>$due_highlight,
-		 14 =>$row_cat
+		 14 =>$row_cat,
+		 15 =>(empty($articles['is_mine']) ? '0' : '1')
 			//7 => $payment['status'] == '0' ? 'Success' : 'Failed',
 			//6 => $articles['id']
 		);

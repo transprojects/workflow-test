@@ -719,7 +719,8 @@ $graphics_status = implode(",", $graphics_status);
 			
 			 "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
       var cls = {1: 'af-row-high', 2: 'af-row-overdue', 3: 'af-row-today'}[aData[14]] || '';
-      $(nRow).removeClass('af-row-high af-row-overdue af-row-today').addClass(cls);
+      $(nRow).removeClass('af-row-high af-row-overdue af-row-today af-row-mine').addClass(cls);
+      if (aData[15] == '1') { $(nRow).addClass('af-row-mine'); }   // assigned to the logged-in user
     },
 				 
 				"columns": [

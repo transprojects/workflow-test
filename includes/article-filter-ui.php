@@ -106,6 +106,7 @@ function af_head()
 .af-card table.dataTable tbody tr.af-row-high{--stripe:#d64545;} .af-card table.dataTable tbody tr.af-row-high td{background:#fff5f5 !important;}
 .af-card table.dataTable tbody tr.af-row-overdue{--stripe:#e8742a;} .af-card table.dataTable tbody tr.af-row-overdue td{background:#fff8f1 !important;}
 .af-card table.dataTable tbody tr.af-row-today{--stripe:#1b6ca8;} .af-card table.dataTable tbody tr.af-row-today td{background:#f3f8ff !important;}
+.af-card table.dataTable tbody tr.af-row-mine{--stripe:#f0ad00;font-weight:600;} .af-card table.dataTable tbody tr.af-row-mine td{background:#fff3b0 !important;}
 .af-card table.dataTable tbody tr.af-row-flag{--stripe:#d64545;}
 .af-card table.dataTable tbody tr.af-row-pri{--stripe:#1b6ca8;}
 .af-card table.dataTable tbody tr.af-row-warn{--stripe:#d98a06;}
@@ -308,6 +309,7 @@ body:has(.bootbox.show) .modal-backdrop.show{background:#0f2034;opacity:.5;backd
   .af-card table.af-sticky-act tbody td:last-child{background:#fff !important;box-shadow:-10px 0 12px -8px rgba(20,48,74,.22);}
   .af-card table.af-sticky-act tbody tr.af-row-overdue td:last-child{background:#fff8f1 !important;}
   .af-card table.af-sticky-act tbody tr.af-row-today td:last-child{background:#f3f8ff !important;}
+  .af-card table.af-sticky-act tbody tr.af-row-mine td:last-child{background:#fff3b0 !important;}
 }
 </style>
 <?php
