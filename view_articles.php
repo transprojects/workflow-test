@@ -266,7 +266,7 @@ else
 												    <option value="all">Select All</option>
 
 										  <?php
-										   if($_COOKIE['user_level']=='1')
+										   if(in_array((string)$_COOKIE['user_level'], array('1','15'), true))
 										  {
 											$sql_customers = $auth->showCustomerlist();
 										  }
@@ -299,7 +299,7 @@ else
 												    <option value="all">Select All</option>
 
 											<?php
-										    if($_COOKIE['user_level']=='1')
+										    if(in_array((string)$_COOKIE['user_level'], array('1','15'), true))
 										  {
 											$sql_journals = $auth->showJournallist('0',2);
 										  }
@@ -334,7 +334,7 @@ else
                  <?php
 // Get allowed stages from cookie only if user_level is 3
 $allowed_stages = [];
-if (isset($_COOKIE['user_level']) && $_COOKIE['user_level'] == '3' && isset($_COOKIE['stage_access'])) {
+if (isset($_COOKIE['user_level']) && !in_array((string)$_COOKIE['user_level'], array('1','15'), true) && isset($_COOKIE['stage_access'])) {
     $allowed_stages = explode(',', $_COOKIE['stage_access']);
     $allowed_stages = array_map('trim', $allowed_stages); // remove any extra spaces
 }
@@ -367,7 +367,7 @@ $sql_department = $auth->getAlldepartment('0', 2);
 
 // Build allowed dept list only if user_level == 3
 $allowed_departments = [];
-if (isset($_COOKIE['user_level']) && $_COOKIE['user_level'] == '3') {
+if (isset($_COOKIE['user_level']) && !in_array((string)$_COOKIE['user_level'], array('1','15'), true)) {
     if (!empty($_COOKIE['department_id'])) {
         $allowed_departments = array_merge($allowed_departments, explode(',', $_COOKIE['department_id']));
     }
