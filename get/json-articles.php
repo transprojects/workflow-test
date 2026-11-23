@@ -34,14 +34,15 @@ if (!empty($_COOKIE['stage_access'])) {
 }
 
 
-/* Only the Employee role (user_level 3) is limited to its own customer/department scope. Every other role (team leader, coordinator, project manager ...) sees all articles. */
+/* Access scope: Only Portal Admin and Super Admin (levels 1, 15) see everything. Every other role sees the customers and departments given to the user (default + other). Only the Employee role (level 3) is further limited to articles allocated to them; team leaders etc. see all articles in their access, with their own assigned ones first and highlighted. */
 $is_employee_role = ((string)$_COOKIE['user_level'] === '3');
 $my_uid = (int)$_COOKIE['user_id'];
-if($is_employee_role)
+$is_full_access = in_array((string)$_COOKIE['user_level'], array('1','15'), true);
+if(!$is_full_access)
 {
 
 
-	if(($_COOKIE['department_id'] == '1' || $_COOKIE['department_id'] == '2') && ($_REQUEST['dept']==''))
+	if($is_employee_role && ($_COOKIE['department_id'] == '1' || $_COOKIE['department_id'] == '2') && ($_REQUEST['dept']==''))
 	{
 		$gSearch .= 'and wd.v_issue_id <= 0 and test_article!=1 and assigned_user_id='.$_COOKIE['user_id'].'  and (wd.cust_id = '.$_COOKIE['cust_id'].' OR FIND_IN_SET(wd.cust_id,"'.$_COOKIE['ocust_id'].'"))
 		AND department_id in ('.$_COOKIE['department_id'].')' . $stage_condition;
