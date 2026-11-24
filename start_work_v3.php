@@ -6438,7 +6438,7 @@ $("#Author_Validaion").click(function () {
 
     $.ajax({
         type: "POST", 
-        url: "http://10.10.10.94/workflow/author_email_validation.php",
+        url: "http://10.10.10.94/workflow/author_email_validation_test.php",
         data: { work_dir: work_dir, stage: stage, articleId: articleId, username: username, cust_id: cust_id },
         success: function (response) {
             // Fetch finished on the 94 server: re-read the author details from the DB and fill the fields - no page reload
