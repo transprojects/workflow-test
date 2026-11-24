@@ -68,14 +68,14 @@ function sw_ajax_parse($full)
 		}
 	}
 
-	$errors = array(); $successes = array();
+	$errors = array(); $successes = array(); $success_text = '';
 	if (preg_match_all("/swal\\(\\{(.*?)\\}\\)/s", $tail, $blocks, PREG_SET_ORDER)) {
 		foreach ($blocks as $b) {
 			$title = $text = $type = '';
 			if (preg_match("/title:\\s*'((?:\\\\.|[^'\\\\])*)'/s", $b[1], $m)) { $title = sw_ajax_unescape($m[1]); }
 			if (preg_match("/text:\\s*'((?:\\\\.|[^'\\\\])*)'/s",  $b[1], $m)) { $text  = sw_ajax_unescape($m[1]); }
 			if (preg_match("/type:\\s*'(\\w+)'/", $b[1], $m))                     { $type  = $m[1]; }
-			if ($type === 'success') { $successes[] = $title; }
+			if ($type === 'success') { $successes[] = $title; $success_text = $text; }
 			else                     { $errors[] = trim($title.($text !== '' ? ': '.$text : '')); }
 		}
 	}
@@ -85,7 +85,7 @@ function sw_ajax_parse($full)
 		             'message' => implode("\n", $errors));
 	}
 	if ($errors)    { return array('ok' => false, 'type' => 'error', 'title' => 'Could not complete', 'message' => implode("\n", $errors)); }
-	if ($successes) { return array('ok' => true, 'type' => 'success', 'title' => end($successes), 'message' => ''); }
+	if ($successes) { return array('ok' => true, 'type' => 'success', 'title' => end($successes), 'message' => $success_text); }
 
 	if ($redirect_msg !== '') { return array('ok' => false, 'type' => 'error', 'title' => 'Could not complete', 'message' => $redirect_msg); }
 
@@ -261,6 +261,15 @@ function sw_required_files_core($db, $cust_id, $j_id, $dept_id, $stage, $pub_id,
 	if ($J_name != 'EPL' && $J_name != 'NCC' && $cust_id != 33) { $will_move = true; }
 	else { $will_move = ($stage != 'FP' && $dept_name != 'PRQC') || ($stage_norm != 'REV' && $dept_name != 'XML') || ($stage != 'REV2' && $dept_name != 'ePub'); }
 	if (!$will_move) { return $none; }
+	/* J-STAGE workflow: no file movement validation (the submit still moves files as Move Files says) */
+	if ((int)$wf_id > 0) {
+		$r  = $db->query("SELECT j_jstage_wf FROM `adm_journals` WHERE j_id = ".$j_id);
+		$jw = $r ? $r->fetch_assoc() : null;
+		$r  = $db->query("SELECT wf_name FROM `adm_workflow_master` WHERE wf_id = ".(int)$wf_id);
+		$wn = $r ? $r->fetch_assoc() : null;
+		$jv = $jw ? trim((string)$jw['j_jstage_wf']) : '';
+		if ($jv !== '' && ($jv === (string)(int)$wf_id || ($wn && $jv === (string)$wn['wf_name']))) { return $none; }
+	}
 
 	$r  = $db->query("SELECT mf_id FROM `inw_move_files` WHERE cust_id = ".$cust_id." AND j_id = ".$j_id." AND dept_id = ".$dept_id);
 	$fe = $r ? $r->fetch_assoc() : null;
@@ -5620,7 +5629,7 @@ else if($post['status'] == 6)
 		
 				$assigned_user=mysqli_fetch_array(mysqli_query($db,"select full_name,department_id from users where id='".$_COOKIE['user_id']."'"));
 
-				$graphic_working_status = ", graphic_working_status = '<span class='label label-sm label-success'>Graphics</span>'";
+				$graphic_working_status = ", graphic_working_status = '<span class=\"label label-sm label-success\">Graphics</span>'";
 				
 				$user_working_status = '<span class="label label-sm label-success">Graphics</span>|<span class="label label-sm label-warning">Assigned By</span> | <span class="label label-sm label-info">'.$assigned_user['full_name'].' ('.$current_user_deptname['dept_name'].')</span>';
 
@@ -6979,7 +6988,7 @@ $("#Author_Validaion").click(function () {
     }).done(function (r) {
       loaderOff();
       if (r && r.ok) {
-        swal({ title: r.title, type: 'success', confirmButtonText: 'CLOSE', confirmButtonColor: '#1e9e61', allowOutsideClick: false })
+        swal({ title: r.title, text: r.message || '', type: 'success', confirmButtonText: 'CLOSE', confirmButtonColor: '#1e9e61', allowOutsideClick: false })
           .then(function () {
             try { if (window.opener) { window.opener.focus(); window.opener.location.reload(); } } catch (e) {}
             try { window.close(); } catch (e) {}

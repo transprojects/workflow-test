@@ -514,6 +514,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
 					
             $stage_check=preg_replace("/FIN([0-9]+)/","FIN",$app_res['stage']);
             $stage_pmc=preg_replace("/PMC([0-9]+)/","PMC",$app_res['stage']);
+            $stage_jstage=preg_replace("/PMC([0-9]+)/","JSTAGE",$app_res['stage']);
 			
 			if($app_res['stage']=='FP')
 			{
@@ -522,6 +523,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'update') {
 			elseif($stage_check=='FIN')
             {
                 include ('linux_iap_client_portal_fin.php');
+            }
+			elseif($stage_jstage=='JSTAGE')
+            {
+                include ('linux_iap_client_portal_jstage.php');
             }
 			elseif($stage_pmc=='PMC')
             {
