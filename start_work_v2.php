@@ -2994,8 +2994,10 @@ function swAuthorGate(onPass) {
       if (last === "true") { onPass(); return; }
       var rep = String(resp).match(/HTML report written to:\s*(\S+)/g);
       var repPath = rep ? rep[rep.length - 1].replace(/^HTML report written to:\s*/, "") : "";
-      var repHtml = repPath ? '<iframe sandbox="" src="' + "<?php echo $_COOKIE['set_url'];?>" + '/author_validation_report.php?f=' + encodeURIComponent(repPath) + '" style="width:100%;height:480px;border:1px solid #cfd8e3;border-radius:8px;margin-top:10px;"></iframe>' : '';
-      bootbox.dialog({ size: "large", message: '<br/><div class="alert alert-danger"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml, buttons: { "button": { "label": "Close", "className": "btn-sm" } } });
+      var repHtml = repPath ? '<iframe sandbox="" src="' + "<?php echo $_COOKIE['set_url'];?>" + '/author_validation_report.php?f=' + encodeURIComponent(repPath) + '" style="width:100%;height:72vh;border:1px solid #cfd8e3;border-radius:8px;margin-top:10px;"></iframe>' : '';
+      var failHtml = '<div class="alert alert-danger" style="margin:0 0 8px;"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml;
+      if (window.swal) { swal({ title: 'Error', html: failHtml, type: 'error', width: '94%', confirmButtonText: 'Close', confirmButtonColor: '#1b6ca8' }); }
+      else { bootbox.dialog({ size: "large", message: '<br/>' + failHtml, buttons: { "button": { "label": "Close", "className": "btn-sm" } } }); }
     },
     error: function (xhr, status, err) {
       $("#ajaxLoader_AV").hide(); $("#overlay").hide();
