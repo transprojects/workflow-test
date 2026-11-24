@@ -2532,7 +2532,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
                           <label class="mb-2" >Corresponding Author Name  :<span style="color: red">*</span></label>
                           
                             <div class="clearfix">
-                              <input type="text" name="corresponding_author" id="corresponding_author" class="form-control" required  placeholder="Corresponding Author Name" value="<?php echo  $app_res['corresponding_author']; ?>">
+                              <input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_author" id="corresponding_author" class="form-control" required  placeholder="Corresponding Author Name" value="<?php echo  $app_res['corresponding_author']; ?>">
                             </div>
                           
                         </div>
@@ -2541,7 +2541,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
 						<div class="col-12 col-sm-6 col-lg-6"> <!-- Increased col width -->
 							<label class="mb-2">Corresponding Author Email ID  :<span style="color: red">*</span></label>
 							<div class="input-group">
-								<input type="text" name="corresponding_mail" id="corresponding_mail" 
+								<input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_mail" id="corresponding_mail" 
 									   class="form-control" required  
 									   placeholder="Corresponding Author Email ID" 
 									   value="<?php echo $app_res['corresponding_mail']; ?>">
@@ -2567,6 +2567,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
 					<div class="space-2"></div>
 
 			<div id="email_error_box" style="color:red; margin-top:8px;"></div>
+<div class="col-12" style="margin:6px 0 10px;color:#6b7785;font-size:13px;"><i class="fa fa-lock"></i> These author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</div>
 			<?php 
 			if($app_res['cust_id']=="42")
 			{
@@ -2574,7 +2575,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
 			<div class="col-12 col-sm-6 col-lg-6"> <!-- Increased col width -->
 				<label class="mb-2">Co-Author Email ID :<span style="color: red">*</span></label>
 				<div class="input-group">
-					<input type="text" name="corresponding_other_author" id="corresponding_other_author" 
+					<input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_other_author" id="corresponding_other_author" 
 						   class="form-control" required  
 						   placeholder="Co-Author Email ID" 
 						   value="<?php echo $app_res['corresponding_other_author']; ?>">
@@ -3481,7 +3482,7 @@ function swAuthorGate(onPass) {
       var repPath = rep ? rep[rep.length - 1].replace(/^HTML report written to:\s*/, "") : "";
       var showFail = function () {
       var repHtml = repPath ? '<iframe sandbox="" src="' + "<?php echo $_COOKIE['set_url'];?>" + '/author_validation_report.php?f=' + encodeURIComponent(repPath) + '" style="width:100%;height:72vh;border:1px solid #cfd8e3;border-radius:8px;margin-top:10px;"></iframe>' : '';
-      var failHtml = '<div class="alert alert-danger" style="margin:0 0 8px;"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml;
+      var failHtml = '<div class="alert alert-danger" style="margin:0 0 8px;"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml + '<div style="margin-top:8px;color:#6b7785;font-size:13px;">The author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</div>';
       if (window.swal) { swal({ title: 'Error', html: failHtml, type: 'error', width: '94%', customClass: 'sw-wide', confirmButtonText: 'Close', confirmButtonColor: '#1b6ca8' }); }
       else { bootbox.dialog({ size: "large", message: '<br/>' + failHtml, buttons: { "button": { "label": "Close", "className": "btn-sm" } } }); }
       };
