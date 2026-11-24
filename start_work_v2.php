@@ -2979,6 +2979,28 @@ $(this).hide();
     }
     
     
+/* Author validation gate: before "Completed" is submitted with the author fields open, the 10.10.10.94 validator
+   must answer true (last output line). Anything else - or no answer - blocks the completion. */
+var SW_AUTHOR_VALID_URL = "http://10.10.10.94/workflow/workflow-author-valid.php";
+function swAuthorGate(onPass) {
+  $("#ajaxLoader_AV").show(); $("#overlay").show();
+  $.ajax({
+    type: "POST", url: SW_AUTHOR_VALID_URL, timeout: 180000,
+    data: { work_dir: $("#work_dir").val(), pubid: $("#pub_id").val() },
+    success: function (resp) {
+      $("#ajaxLoader_AV").hide(); $("#overlay").hide();
+      var lines = $.trim(String(resp)).split("\n");
+      var last = $.trim(lines[lines.length - 1]).toLowerCase();
+      if (last === "true") { onPass(); return; }
+      bootbox.dialog({ message: '<br/><div class="alert alert-danger"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.<pre style="margin-top:8px;max-height:200px;overflow:auto;">' + $("<div>").text($.trim(String(resp)) || "(no response)").html() + '</pre></div>', buttons: { "button": { "label": "Close", "className": "btn-sm" } } });
+    },
+    error: function (xhr, status, err) {
+      $("#ajaxLoader_AV").hide(); $("#overlay").hide();
+      bootbox.dialog({ message: '<br/><div class="alert alert-danger"><strong>Author validation could not be completed</strong> (' + (err || status) + '). Please try again; the work cannot be completed until validation passes.</div>', buttons: { "button": { "label": "Close", "className": "btn-sm" } } });
+    }
+  });
+}
+
 $.validator.setDefaults({
   submitHandler: function(form) {
     var a_id = $("input[name='id']").val();
@@ -2990,6 +3012,11 @@ $.validator.setDefaults({
       // radio buttons instead of the #status dropdown — value 1 = Completed.
       var checkedStatus = $("input[name='status']:checked").val();
       status = (checkedStatus == "1") ? "Completed" : "";
+    }
+    var authorGated = form.__authOK; form.__authOK = false;
+    if (!authorGated && status == "Completed" && $("#corresponding_mail").length) {
+      swAuthorGate(function () { form.__authOK = true; $.validator.defaults.submitHandler(form); });
+      return false;
     }
     if(dept_name == "PAG" && status == "Completed")
     {
