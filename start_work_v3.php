@@ -2567,7 +2567,6 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
 					<div class="space-2"></div>
 
 			<div id="email_error_box" style="color:red; margin-top:8px;"></div>
-<div class="col-12" style="margin:6px 0 10px;color:#6b7785;font-size:13px;"><i class="fa fa-lock"></i> These author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</div>
 			<?php 
 			if($app_res['cust_id']=="42")
 			{
@@ -2584,6 +2583,8 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
 			<?php 
 			}
 			?>
+			<div class="col-12" style="margin-top:14px;"><div style="display:flex;align-items:center;gap:12px;background:#f4f7fb;border:1px solid #dbe4ee;border-left:4px solid #1b6ca8;border-radius:10px;padding:11px 16px;color:#33475b;font-size:13.5px;"><i class="fa fa-lock" style="font-size:17px;color:#1b6ca8;"></i><span>These author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</span></div></div>
+
 
 
 						 <?php } ?>
