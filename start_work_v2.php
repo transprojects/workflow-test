@@ -2062,13 +2062,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
 									   value="<?php echo $app_res['corresponding_mail']; ?>">
 
 									   <?php 
-										if (
-											!isset($app_res['corresponding_mail']) || trim($app_res['corresponding_mail']) === '' ||
-											!isset($app_res['corresponding_author']) || trim($app_res['corresponding_author']) === '' ||
-											!isset($app_res['corresponding_other_author']) || trim($app_res['corresponding_other_author']) === ''
-										) {
-										?>
-											<button type="button" class="btn btn-danger ms-2" id="Author_Validaion">
+										if (true) { /* always show Fetch Author Details */ ?><button type="button" class="btn btn-danger ms-2" id="Author_Validaion">
 												<i class="ace-icon fa fa-check-circle-o align-top bigger-125"></i> Fetch Author Details
 											</button>
 										<?php 
@@ -5886,8 +5880,7 @@ $("#Author_Validaion").click(function () {
                 if (d.title) { $("#article_title").val(d.title); }
                 $("#corresponding_author,#corresponding_mail,#corresponding_other_author").css("background", "#e8f6ee");
                 setTimeout(function () { $("#corresponding_author,#corresponding_mail,#corresponding_other_author").css("background", ""); }, 2500);
-                if (d.author && d.mail && d.other) { $("#Author_Validaion").hide(); }
-                var got = !!(d.author || d.mail || d.other);
+                                var got = !!(d.author || d.mail || d.other);
                 if (window.swal) {
                     swal({ title: got ? "Author details fetched" : "Nothing fetched", html: got ? "The author details were updated on this page." : "No author details were found for this article.", type: got ? "success" : "warning", confirmButtonText: "OK", confirmButtonColor: "#1b6ca8" });
                 } else {
