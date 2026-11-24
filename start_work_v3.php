@@ -2528,56 +2528,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
                           
                         </div>
 						 <div class="space-2"></div>
-						   <div class="col-12 col-sm-6 col-lg-4">
-                          <label class="mb-2" >Corresponding Author Name  :<span style="color: red">*</span></label>
-                          
-                            <div class="clearfix">
-                              <input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_author" id="corresponding_author" class="form-control" required  placeholder="Corresponding Author Name" value="<?php echo  $app_res['corresponding_author']; ?>">
-                            </div>
-                          
-                        </div>
-						 <div class="space-2"></div>
-						
-						<div class="col-12 col-sm-6 col-lg-6"> <!-- Increased col width -->
-							<label class="mb-2">Corresponding Author Email ID  :<span style="color: red">*</span></label>
-							<div class="input-group">
-								<input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_mail" id="corresponding_mail" 
-									   class="form-control" required  
-									   placeholder="Corresponding Author Email ID" 
-									   value="<?php echo $app_res['corresponding_mail']; ?>">
-
-									   <?php 
-										if (true) { /* always show Fetch Author Details */ ?><button type="button" class="btn btn-danger ms-2" id="Author_Validaion">
-												<i class="ace-icon fa fa-check-circle-o align-top bigger-125"></i> Fetch Author Details
-											</button>
-										<?php 
-										}
-										?>
-
-
-
-							</div>
-						</div>
-					<div class="space-2"></div>
-
-			<div id="email_error_box" style="color:red; margin-top:8px;"></div>
-			<?php 
-			if($app_res['cust_id']=="42")
-			{
-			?>
-			<div class="col-12 col-sm-6 col-lg-6"> <!-- Increased col width -->
-				<label class="mb-2">Co-Author Email ID :<span style="color: red">*</span></label>
-				<div class="input-group">
-					<input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_other_author" id="corresponding_other_author" 
-						   class="form-control" required  
-						   placeholder="Co-Author Email ID" 
-						   value="<?php echo $app_res['corresponding_other_author']; ?>">
-				</div>
-			</div>
-			<?php 
-			}
-			?>
-			<div class="col-12" style="margin-top:14px;"><div style="display:flex;align-items:center;gap:12px;background:#f4f7fb;border:1px solid #dbe4ee;border-left:4px solid #1b6ca8;border-radius:10px;padding:11px 16px;color:#33475b;font-size:13.5px;"><i class="fa fa-lock" style="font-size:17px;color:#1b6ca8;"></i><span>These author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</span></div></div>
+						   
 
 
 
@@ -2652,7 +2603,41 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
                             <select id="skip_dept" name="skip_dept" data-placeholder="Choose" class="form-select customer_drop" >
                               <option value="">-Select-</option>
                               <?php while($row = $customers->fetch_assoc()){ ?>
-                              <option value="<?php echo $row['dept_code']; ?>" <?php if($app_res['parent_id'] == $row['dept_code']){?> selected <?php } ?>><?php echo $row['dept_name']; ?></option>
+                              <option value="<?php echo $row['dept_code']; ?>" <?php if($app_res['parent_id'] == $row['dept_code']){?> selected <?php } ?>
+<?php if(($app_res['department_id']==14  || $app_res['department_id']==10 || $app_res['department_id']==18) && ($app_res['status']=="PRQC" || $app_res['status']=="Proofing") && ($app_res['cust_id']=="42" || $app_res['cust_id']=="66"  || $app_res['cust_id']=="77" || $app_res['cust_id']=="80") && $app_res['stage']=="FP"){ ?>
+<div class="space-2"></div>
+<div class="col-12 sw-wide">
+ <div id="sw-author-card" style="background:#fff;border:1px solid #dbe4ee;border-radius:14px;box-shadow:0 4px 18px rgba(20,48,74,.06);overflow:hidden;margin-top:6px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 20px;background:#f4f7fb;border-bottom:1px solid #dbe4ee;">
+   <div style="font-weight:700;color:#14304a;font-size:15px;"><i class="fa fa-user" style="color:#1b6ca8;margin-right:8px;"></i>Author Details</div>
+   <button type="button" class="btn btn-danger" id="Author_Validaion"><i class="ace-icon fa fa-check-circle-o align-top bigger-125"></i> Fetch Author Details</button>
+  </div>
+  <div style="padding:18px 20px 20px;">
+   <div class="row g-3">
+    <div class="col-12 col-md-6">
+     <label class="mb-2">Corresponding Author Name :<span style="color: red">*</span></label>
+     <input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_author" id="corresponding_author" class="form-control" required placeholder="Corresponding Author Name" value="<?php echo $app_res['corresponding_author']; ?>">
+    </div>
+    <div class="col-12 col-md-6">
+     <label class="mb-2">Corresponding Author Email ID :<span style="color: red">*</span></label>
+     <input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_mail" id="corresponding_mail" class="form-control" required placeholder="Corresponding Author Email ID" value="<?php echo $app_res['corresponding_mail']; ?>">
+    </div>
+    <?php if($app_res['cust_id']=="42"){ ?>
+    <div class="col-12">
+     <label class="mb-2">Co-Author Email ID :<span style="color: red">*</span></label>
+     <input type="text" readonly style="background:#f1f5f9;cursor:not-allowed;" name="corresponding_other_author" id="corresponding_other_author" class="form-control" required placeholder="Co-Author Email ID" value="<?php echo $app_res['corresponding_other_author']; ?>">
+    </div>
+    <?php } ?>
+   </div>
+   <div id="email_error_box" style="color:red; margin-top:8px;"></div>
+   <div style="display:flex;align-items:center;gap:12px;background:#f4f7fb;border:1px solid #dbe4ee;border-left:4px solid #1b6ca8;border-radius:10px;padding:11px 16px;margin-top:14px;color:#33475b;font-size:13.5px;">
+    <i class="fa fa-lock" style="font-size:17px;color:#1b6ca8;"></i>
+    <span>These author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</span>
+   </div>
+  </div>
+ </div>
+</div>
+<?php } ?>><?php echo $row['dept_name']; ?></option>
                               <?php } ?>
                             </select>
                         </div>
