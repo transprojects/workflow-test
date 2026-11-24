@@ -19,7 +19,7 @@
  *   PMC  articles whose stage is PMC*, same rules (due = due date of the latest revision, i.e. the PMC round)
  *   JSTAGE  articles whose stage is JSTAGE*, same rules (due = due date of the latest revision, i.e. the JSTAGE round)
  *   ISS  volume issues not Delivery / Client Review / Completed                 due = issue due date   (department filter does not apply, as before)
- * Columns: "overdue" = everything open that was due before the range start (up to yesterday);  one column per day from today to the end of the range;
+ * Columns: "overdue" = everything open that was due before the range start (up to yesterday), leaving out articles on Hold;  one column per day from today to the end of the range;
  *          "total" = due anywhere in the range.
  * ========================================================================== */
 
@@ -53,11 +53,11 @@ function wip_matrix($custs, $dept, $from, $to)
     $dA = dept_sql($dept);
 
     $parts = array();
-    if (rs_row_enabled('FP')) $parts[] = "SELECT 'FP' AS stg, wd.due_dt AS d, COUNT(*) AS c
+    if (rs_row_enabled('FP')) $parts[] = "SELECT 'FP' AS stg, wd.due_dt AS d, COUNT(*) AS c, SUM(wd.status = 'Hold') AS h
                 FROM inw_inward_dtl wd
                 WHERE wd.due_dt BETWEEN '$qFrom' AND '$qEnd' AND wd.stage = 'FP' AND wd.status <> 'Client Review' $cA $dA
                 GROUP BY wd.due_dt";
-    $parts[] = "SELECT IF(LEFT(wd.stage,3) = 'REV', 'REV', 'FIN') AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c
+    $parts[] = "SELECT IF(LEFT(wd.stage,3) = 'REV', 'REV', 'FIN') AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c, COUNT(DISTINCT IF(wd.status = 'Hold', wd.id, NULL)) AS h
                 FROM inw_inward_dtl wd
                 JOIN adm_journals j ON j.j_id = wd.j_id
                 JOIN inw_revisions_dtl r ON r.inw_id = wd.id
@@ -66,7 +66,7 @@ function wip_matrix($custs, $dept, $from, $to)
                   AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$qFrom' AND '$qEnd'
                   AND NOT EXISTS (SELECT 1 FROM inw_revisions_dtl x WHERE x.inw_id = r.inw_id AND x.r_id > r.r_id) $cA $dA
                 GROUP BY stg, r.due_date";
-    if (rs_row_enabled('PMC')) $parts[] = "SELECT 'PMC' AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c
+    if (rs_row_enabled('PMC')) $parts[] = "SELECT 'PMC' AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c, COUNT(DISTINCT IF(wd.status = 'Hold', wd.id, NULL)) AS h
                 FROM inw_inward_dtl wd
                 JOIN adm_journals j ON j.j_id = wd.j_id
                 JOIN inw_revisions_dtl r ON r.inw_id = wd.id
@@ -75,7 +75,7 @@ function wip_matrix($custs, $dept, $from, $to)
                   AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$qFrom' AND '$qEnd'
                   AND NOT EXISTS (SELECT 1 FROM inw_revisions_dtl x WHERE x.inw_id = r.inw_id AND x.r_id > r.r_id) $cA $dA
                 GROUP BY r.due_date";
-    if (rs_row_enabled('JSTAGE')) $parts[] = "SELECT 'JSTAGE' AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c
+    if (rs_row_enabled('JSTAGE')) $parts[] = "SELECT 'JSTAGE' AS stg, r.due_date AS d, COUNT(DISTINCT wd.id) AS c, COUNT(DISTINCT IF(wd.status = 'Hold', wd.id, NULL)) AS h
                 FROM inw_inward_dtl wd
                 JOIN adm_journals j ON j.j_id = wd.j_id
                 JOIN inw_revisions_dtl r ON r.inw_id = wd.id
@@ -84,16 +84,17 @@ function wip_matrix($custs, $dept, $from, $to)
                   AND r.created_on > '2023-01-01' AND r.due_date BETWEEN '$qFrom' AND '$qEnd'
                   AND NOT EXISTS (SELECT 1 FROM inw_revisions_dtl x WHERE x.inw_id = r.inw_id AND x.r_id > r.r_id) $cA $dA
                 GROUP BY r.due_date";
-    if (rs_row_enabled('ISS')) $parts[] = "SELECT 'ISS' AS stg, vi.due_date AS d, COUNT(DISTINCT vi.vi_id) AS c
+    if (rs_row_enabled('ISS')) $parts[] = "SELECT 'ISS' AS stg, vi.due_date AS d, COUNT(DISTINCT vi.vi_id) AS c, SUM(vi.status = 'Hold') AS h
                 FROM inw_volume_issues vi
                 JOIN adm_journals j ON j.j_cust_id = vi.cust_id AND j.j_id = vi.j_id
                 WHERE vi.status NOT IN ('Delivery','Client Review','Completed') AND vi.due_date BETWEEN '$qFrom' AND '$qEnd' $cI
                 GROUP BY vi.due_date";
-    if (!$parts) { $parts[] = "SELECT 'FP' AS stg, NULL AS d, 0 AS c FROM dual WHERE 1=0"; }
+    if (!$parts) { $parts[] = "SELECT 'FP' AS stg, NULL AS d, 0 AS c, 0 AS h FROM dual WHERE 1=0"; }
     $res = q(implode(' UNION ALL ', $parts));
 
     $by = array('FP' => array(), 'REV' => array(), 'FIN' => array(), 'PMC' => array(), 'JSTAGE' => array(), 'ISS' => array());
-    while ($r = $res->fetch_assoc()) { $by[$r['stg']][$r['d']] = (int)$r['c']; }
+    $hold = array('FP' => array(), 'REV' => array(), 'FIN' => array(), 'PMC' => array(), 'JSTAGE' => array(), 'ISS' => array());   // articles on Hold: not counted as overdue
+    while ($r = $res->fetch_assoc()) { $by[$r['stg']][$r['d']] = (int)$r['c']; $hold[$r['stg']][$r['d']] = (int)$r['h']; }
 
     $days = array();
     $d0 = $today > $from ? $today : $from;                   // one column per day from today (or the range start, if later) to the end
@@ -104,7 +105,7 @@ function wip_matrix($custs, $dept, $from, $to)
     foreach ($by as $s => $m) {
         $prev = 0; $range = 0; $counts = array_fill(0, count($days), 0);
         foreach ($m as $d => $c) {
-            if ($d <= $odEnd) { $prev += $c; }
+            if ($d <= $odEnd) { $prev += $c - (isset($hold[$s][$d]) ? $hold[$s][$d] : 0); }
             if ($d >= $from && $d <= $to) { $range += $c; }
         }
         foreach ($days as $i => $d) { if (isset($m[$d])) { $counts[$i] = $m[$d]; $per_day[$i] += $m[$d]; } }
@@ -121,6 +122,7 @@ function detail_union($custs, $dept, $from, $to, $stage)
     $cA = cust_sql_str('wd', $custs);
     $cI = cust_sql_int('vi', $custs);
     $dA = dept_sql($dept);
+    if (!empty($_REQUEST['over'])) { $dA .= " AND wd.status <> 'Hold'"; $cI .= " AND vi.status <> 'Hold'"; }   // overdue list: articles on Hold are left out, as in the overdue count
     $want = function ($s) use ($stage) { return ($stage === 'ALL' || $stage === $s) && rs_row_enabled($s); };   // only the stages in $report_stage_types
     $parts = array();
     $common = "wd.id AS id, 'A' AS kind, wd.pub_id AS ref, c.cust_name AS customer, j.j_code AS j_code, j.j_name AS j_name, wd.volume_folder AS folder,

@@ -281,7 +281,7 @@ if (isset($_GET['wcust_id']) || isset($_GET['date_wise']) || isset($_GET['wgetac
   }
   function renderHint() {
     var d = S.data, r = range(), parts = [];
-    parts.push('<b>Overdue</b> = still open and due before ' + fmtLong(r.from));
+    parts.push('<b>Overdue</b> = still open and due before ' + fmtLong(r.from) + ', excluding articles on Hold');
     parts.push('<b style="color:var(--navy)">Total</b> = everything due between ' + fmtLong(r.from) + ' and ' + fmtLong(r.to));
     var dn = deptName(); if (dn) { parts.push('department ' + esc(dn) + ' (issues are not split by department)'); }
     $('#ifxHint').innerHTML = parts.join(' &middot; ') + '.';
