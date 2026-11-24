@@ -2604,6 +2604,13 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
                               <option value="">-Select-</option>
                               <?php while($row = $customers->fetch_assoc()){ ?>
                               <option value="<?php echo $row['dept_code']; ?>" <?php if($app_res['parent_id'] == $row['dept_code']){?> selected <?php } ?>
+><?php echo $row['dept_name']; ?></option>
+                              <?php } ?>
+                            </select>
+                        </div>
+                        </div>
+                        </div>
+		<?php } ?>
 <?php if(($app_res['department_id']==14  || $app_res['department_id']==10 || $app_res['department_id']==18) && ($app_res['status']=="PRQC" || $app_res['status']=="Proofing") && ($app_res['cust_id']=="42" || $app_res['cust_id']=="66"  || $app_res['cust_id']=="77" || $app_res['cust_id']=="80") && $app_res['stage']=="FP"){ ?>
 <div class="space-2"></div>
 <div class="col-12 sw-wide">
@@ -2637,13 +2644,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
   </div>
  </div>
 </div>
-<?php } ?>><?php echo $row['dept_name']; ?></option>
-                              <?php } ?>
-                            </select>
-                        </div>
-                        </div>
-                        </div>
-		<?php } ?>
+<?php } ?>
         
                         
                         <div class="space-2"></div>
