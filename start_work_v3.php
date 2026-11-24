@@ -5,6 +5,17 @@ if (isset($_POST['assign_department']) && (string)(isset($_POST['status']) ? $_P
 /* Emergency off switch: an empty file named start_work_v3.disabled next to this script sends everybody to start_work_v2.php (same query string). */
 if (is_file(__DIR__ . '/start_work_v3.disabled')) { header('Location: start_work_v2.php' . (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] !== '' ? '?' . $_SERVER['QUERY_STRING'] : '')); exit; }
 require_once __DIR__ . '/includes/path_map.php';   /* J:/ -> E:/New_Workflow_Files/ for server-side folder checks */
+require_once __DIR__ . '/includes/change_log_mail.php';
+if (!function_exists('sw_log_author_change')) {
+	function sw_log_author_change($old, $module) {
+		global $db; if (empty($old)) return;
+		$new = change_log_snapshot('inw_inward_dtl','id',$old['id']);
+		$f = array('corresponding_author','corresponding_mail','corresponding_other_author');
+		$o = array(); $n = array();
+		foreach ($f as $c) { if (array_key_exists($c,$old)) { $o[$c]=$old[$c]; $n[$c]=$new[$c]; } }
+		if ($o !== $n) log_row_change($module, 'inw_inward_dtl#'.$old['id'], $o, $n);
+	}
+}
 /* Login-token cache (this page only). includes/check.php validates the auth cookies on every request: one scan of
    wf_token_auth plus two bcrypt checks. Once that has passed, remember it in the session for 5 minutes and hide the
    two token cookies from that validation for the next requests. The shared includes are left exactly as they were. */
@@ -4725,6 +4736,7 @@ function frcopy($src, $dest){
 				$update_other_author = ", corresponding_other_author = '".$post['corresponding_other_author']."'";
 			}
 
+			$aud_old = function_exists('change_log_snapshot') ? change_log_snapshot('inw_inward_dtl','id',$post['id']) : array();
 			$prj_update_querys = mysqli_query($db, "
 				UPDATE inw_inward_dtl SET
 					corresponding_author = '".$post['corresponding_author']."',
@@ -4733,6 +4745,7 @@ function frcopy($src, $dest){
 					".$update_article_title."
 				WHERE id = ".$post['id']."
 			");
+			sw_log_author_change($aud_old, 'Start Work (manual author edit)');
 		}
 	//}
 		
@@ -4957,9 +4970,11 @@ $insert=mysqli_query($db,"insert into tbl_query_client(`jid`,`cust_id`,`aid`,`fr
 
 			}	
 			//}
+			$aud_old = ($corresponding_author_details != '') ? change_log_snapshot('inw_inward_dtl','id',$post['id']) : array();
 			$prj_update_query="UPDATE inw_inward_dtl SET ".$corresponding_author_details ." ".$page_count." `status` ='".$dept_res['dept_name']."',`department_id` ='". $department_id."',`assign_department_id` ='0',`file_status` ='".$project_status_array[$post['status']]."',`last_worked_user_id`='".$_COOKIE['user_id']."', present_user_id = '0' WHERE id = ".$post['id']." "; 
 			//echo $prj_update_query; exit;
 			$db->query($prj_update_query);
+			if ($corresponding_author_details != '') sw_log_author_change($aud_old, 'Start Work (XML author fetch)');
 			/* moved on to PRQC (or Proofing): hand it back to the user who handled it in that department before */
 			include_once(__DIR__."/includes/assignment-log.php"); am_on_dept_change($db, $post['id'], $post['department_id'], $department_id);
 			

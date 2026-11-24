@@ -43,4 +43,8 @@ if (mysqli_connect_errno())
 {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+// Audit: tell the inw_inward_dtl audit trigger who/what is running this connection (empty = direct DB edit)
+if ($db) {
+  @mysqli_query($db, "SET @app_user_id='".mysqli_real_escape_string($db, isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '')."', @app_script='".mysqli_real_escape_string($db, substr(isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : '', 0, 250))."', @app_ip='".mysqli_real_escape_string($db, isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '')."'");
+}
 ?>
