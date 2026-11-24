@@ -82,6 +82,8 @@ if(isset($_POST['action']) && $_POST['action']=='update')
 	$post['pub_dt'] = convert_mdy_ymd($post['pub_dt']);
 	
 	
+	/* the Department dropdown now shows the saved department: picking the same one is "no change" (no re-assign, no transaction) */
+	if ($_POST['dept_id'] > 0 && $_POST['dept_id'] == $_POST['old_department_id']) { $_POST['dept_id'] = ''; $post['dept_id'] = ''; }
 	//// Same Stage and change the Department ///////
 	if($_POST['dept_id'] > 0)
 	{
@@ -1175,7 +1177,7 @@ $ea_h = function ($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8')
                               <select id="dept_id" name="dept_id" class="form-select" aria-label="search-input" data-placeholder="Choose">
                                 <option value="">-Select-</option>                                
                                 <?php while($row = $customers->fetch_assoc()){ ?>
-                                <option value="<?php echo $row['dept_code']; ?>"><?php echo $row['dept_name']; ?></option>
+                                <option value="<?php echo $row['dept_code']; ?>"<?php if ($row['dept_code'] == $update_articles[0]['department_id']) { echo ' selected'; } ?>><?php echo $row['dept_name']; ?></option>
                                 <?php } ?>
 								
 								</select>
@@ -1423,7 +1425,7 @@ $ea_stage_wf = array('FP' => (string)$j_wp_fp, 'REV' => (string)$j_rev_wf, 'FIN'
     $f.on('input change keyup', req); setTimeout(req, 300); setTimeout(req, 1200);
 
     /* ---------- stage -> workflow -> department ---------- */
-    var $wfSel = $('#wf_id'), $deptSel = $('#dept_id'), $stage = $('#stage'), initStage = $stage.val(), initWf = $wfSel.val();   /* the saved values, to come back to */
+    var $wfSel = $('#wf_id'), $deptSel = $('#dept_id'), $stage = $('#stage'), initStage = $stage.val(), initWf = $wfSel.val(), initDept = $deptSel.val();   /* the saved values, to come back to */
     function hint($after, id) { var $h = $('#' + id); if (!$h.length) { $h = $('<div class="ea-hint" id="' + id + '"></div>').insertAfter($after); } return $h; }
     function flash($el) { $el.removeClass('ea-flash'); void $el[0].offsetWidth; $el.addClass('ea-flash'); setTimeout(function () { $el.removeClass('ea-flash'); }, 1400); }
     function rebuildDept(wfId, byUser) {
@@ -1445,7 +1447,7 @@ $ea_stage_wf = array('FP' => (string)$j_wp_fp, 'REV' => (string)$j_rev_wf, 'FIN'
     $stage.on('change.ea', function () {
       var st = $(this).val(); if (!st) { return; }
       if (st === initStage && initWf) {   /* back to the saved stage: the saved workflow, no department change */
-        $wfSel.val(String(initWf)); flash($wfSel); rebuildDept(initWf, false); $deptSel.val(''); $('#ea-dept-hint').remove();
+        $wfSel.val(String(initWf)); flash($wfSel); rebuildDept(initWf, false); $deptSel.val(initDept); $('#ea-dept-hint').remove();
         hint($wfSel, 'ea-wf-hint').removeClass('warn').html('<i class="fa fa-undo"></i> Back to the saved stage &mdash; the saved workflow is restored.'); return;
       }
       var name = STAGE_WF[st], id = null;
