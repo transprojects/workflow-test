@@ -3479,10 +3479,17 @@ function swAuthorGate(onPass) {
       if (last === "true") { onPass(); return; }
       var rep = String(resp).match(/HTML report written to:\s*(\S+)/g);
       var repPath = rep ? rep[rep.length - 1].replace(/^HTML report written to:\s*/, "") : "";
+      var showFail = function () {
       var repHtml = repPath ? '<iframe sandbox="" src="' + "<?php echo $_COOKIE['set_url'];?>" + '/author_validation_report.php?f=' + encodeURIComponent(repPath) + '" style="width:100%;height:72vh;border:1px solid #cfd8e3;border-radius:8px;margin-top:10px;"></iframe>' : '';
       var failHtml = '<div class="alert alert-danger" style="margin:0 0 8px;"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml;
       if (window.swal) { swal({ title: 'Error', html: failHtml, type: 'error', width: '94%', customClass: 'sw-wide', confirmButtonText: 'Close', confirmButtonColor: '#1b6ca8' }); }
       else { bootbox.dialog({ size: "large", message: '<br/>' + failHtml, buttons: { "button": { "label": "Close", "className": "btn-sm" } } }); }
+      };
+      if (repPath) {
+        $.getJSON("<?php echo $_COOKIE['set_url'];?>/author_validation_report.php", { f: repPath, status: 1 })
+          .done(function (d) { if (d && d.pass) { onPass(); } else { showFail(); } })
+          .fail(showFail);
+      } else { showFail(); }
     },
     error: function (xhr, status, err) {
       $("#ajaxLoader_AV").hide(); $("#overlay").hide();
@@ -6432,18 +6439,31 @@ $("#Author_Validaion").click(function () {
         url: "http://10.10.10.94/workflow/author_email_validation.php",
         data: { work_dir: work_dir, stage: stage, articleId: articleId, username: username, cust_id: cust_id },
         success: function (response) {
-            // Hide loader and remove opacity overlay
-            $("#ajaxLoader_AV").hide();
-            $("#overlay").hide();
-
-            // Handle the response from the server
-            $("#result_av").show();
-            $("#result_av").html(response);
-
-            // ✅ Reload the page after successful fetch
-            setTimeout(function () {
-                location.reload();
-            }, 1500); // reload after 1.5 sec (so user sees the response)
+            // Fetch finished on the 94 server: re-read the author details from the DB and fill the fields - no page reload
+            $.getJSON("<?php echo $_COOKIE['set_url'];?>/author_details_json.php", { id: $("input[name='id']").val() })
+            .done(function (d) {
+                $("#ajaxLoader_AV").hide();
+                $("#overlay").hide();
+                if (!d || !d.ok) { $("#result_av").show().html(response); return; }
+                $("#corresponding_author").val(d.author);
+                $("#corresponding_mail").val(d.mail);
+                if ($("#corresponding_other_author").length) { $("#corresponding_other_author").val(d.other); }
+                if (d.title) { $("#article_title").val(d.title); }
+                $("#corresponding_author,#corresponding_mail,#corresponding_other_author").css("background", "#e8f6ee");
+                setTimeout(function () { $("#corresponding_author,#corresponding_mail,#corresponding_other_author").css("background", ""); }, 2500);
+                if (d.author && d.mail && d.other) { $("#Author_Validaion").hide(); }
+                var got = !!(d.author || d.mail || d.other);
+                if (window.swal) {
+                    swal({ title: got ? "Author details fetched" : "Nothing fetched", html: got ? "The author details were updated on this page." : "No author details were found for this article.", type: got ? "success" : "warning", confirmButtonText: "OK", confirmButtonColor: "#1b6ca8" });
+                } else {
+                    $("#result_av").show().html(response);
+                }
+            })
+            .fail(function () {
+                $("#ajaxLoader_AV").hide();
+                $("#overlay").hide();
+                $("#result_av").show().html(response);
+            });
         },
         error: function (xhr, status, error) {
             $("#ajaxLoader_AV").hide();

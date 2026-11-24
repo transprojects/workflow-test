@@ -12,6 +12,15 @@ if ($f === '' || strpos($f, '..') !== false || !preg_match('#^[A-Za-z]:/JOURNAL/
 }
 foreach (sw_path_candidates($f) as $c) {
     if (@is_file($c)) {
+        if (isset($_GET['status'])) {
+            /* pass/fail check: the report's own "Status: SUCCESS / ERROR" line decides */
+            header('Content-Type: application/json; charset=utf-8');
+            header('Cache-Control: no-store');
+            $txt = strip_tags(html_entity_decode((string) @file_get_contents($c)));
+            $pass = (preg_match('/Status:\s*(SUCCESS|ERROR)/i', $txt, $m) && strtoupper($m[1]) === 'SUCCESS');
+            echo json_encode(array('ok' => true, 'pass' => $pass));
+            exit;
+        }
         header('Content-Type: text/html; charset=utf-8');
         header('Content-Security-Policy: sandbox');
         header('Cache-Control: no-store');
