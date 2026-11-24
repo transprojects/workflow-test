@@ -2152,7 +2152,7 @@ if($app_res['department_id']==24 && $app_res['stage']=='FP')
    <div id="email_error_box" style="color:red; margin-top:8px;"></div>
    <div style="display:flex;align-items:center;gap:12px;background:#f4f7fb;border:1px solid #dbe4ee;border-left:4px solid #1b6ca8;border-radius:10px;padding:11px 16px;margin-top:14px;color:#33475b;font-size:13.5px;">
     <i class="fa fa-lock" style="font-size:17px;color:#1b6ca8;"></i>
-    <span>These author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</span>
+    <span>These author details are read-only. If any change is needed, please request it manually from your Team Leader.</span>
    </div>
   </div>
  </div>
@@ -2976,7 +2976,7 @@ function swAuthorGate(onPass) {
       var repPath = rep ? rep[rep.length - 1].replace(/^HTML report written to:\s*/, "") : "";
       var showFail = function () {
       var repHtml = repPath ? '<iframe sandbox="" src="' + "<?php echo $_COOKIE['set_url'];?>" + '/author_validation_report.php?f=' + encodeURIComponent(repPath) + '" style="width:100%;height:72vh;border:1px solid #cfd8e3;border-radius:8px;margin-top:10px;"></iframe>' : '';
-      var failHtml = '<div class="alert alert-danger" style="margin:0 0 8px;"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml + '<div style="margin-top:8px;color:#6b7785;font-size:13px;">The author details are read-only. If any change is needed, please request it manually from the XML team / your Project Manager.</div>';
+      var failHtml = '<div class="alert alert-danger" style="margin:0 0 8px;"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml + '<div style="margin-top:8px;color:#6b7785;font-size:13px;">The author details are read-only. If any change is needed, please request it manually from your Team Leader.</div>';
       if (window.swal) { swal({ title: 'Error', html: failHtml, type: 'error', width: '94%', customClass: 'sw-wide', confirmButtonText: 'Close', confirmButtonColor: '#1b6ca8' }); }
       else { bootbox.dialog({ size: "large", message: '<br/>' + failHtml, buttons: { "button": { "label": "Close", "className": "btn-sm" } } }); }
       };

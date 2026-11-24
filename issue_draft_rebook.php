@@ -15,6 +15,12 @@ if (!(isset($_COOKIE['department_id']) && $_COOKIE['department_id'] == 16) && !(
 $vi_id = isset($_REQUEST['id']) ? (int)$_REQUEST['id'] : 0;
 if ($vi_id <= 0) { idr_fail('manage_issues.php', '', 'Invalid issue.'); }
 
+/* statuses meaning the article is with the client: 'Client Review' and every Delivery department (Delivery, DELIVERY-ELX ...) */
+$client_status = array('Client Review');
+$cs = $db->query("SELECT dept_name FROM adm_dept_master WHERE dept_name LIKE 'Delivery%'");
+while ($cs && $c = $cs->fetch_assoc()) { $client_status[] = $c['dept_name']; }
+$client_status_sql = "'".implode("','", array_map(array($db, 'real_escape_string'), $client_status))."'";
+
 /* create the table on first use */
 $chk = $db->query("SHOW TABLES LIKE 'inw_issue_article_drafts'");
 if ($chk && $chk->num_rows == 0)
@@ -86,7 +92,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert')
 	if ($error == '')
 	{
 		/// Only articles of this issue that are with the client can be re-booked
-		$res = $db->query("SELECT * FROM `inw_inward_dtl` WHERE `v_issue_id` = ".$vi_id." AND status IN ('Delivery','Client Review') AND id IN (".implode(',', $ids).")");
+		$res = $db->query("SELECT * FROM `inw_inward_dtl` WHERE `v_issue_id` = ".$vi_id." AND status IN (".$client_status_sql.") AND id IN (".implode(',', $ids).")");
 		$articles = array();
 		while ($r = $res->fetch_assoc()) { $articles[] = $r; }
 		if (count($articles) != count($ids)) { $error = 'Some selected articles are not with the client (status Delivery or Client Review).'; }
@@ -131,7 +137,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'insert')
 			$work_dir = WF_DIR."/production/JOURNALS/".$customer_info['cust_name']."/".$journal_info['j_code']."/".$stage_dir."/".$a['pub_id']."/".$a['stage']."/".$dept_res['dept_name'];
 			if (!is_dir($work_dir)) { mkdir($work_dir, 0777, true); }
 
-			$ok = $ok && $db->query("UPDATE inw_inward_dtl SET `prev_stage` ='".$db->real_escape_string($a['stage'])."',`prev_workflow` ='".(int)$a['wf_id']."',`prev_dept_id` ='".(int)$a['department_id']."',`prev_status` ='".$db->real_escape_string($a['status'])."',wf_id = ".$wf_id.", `status` ='".$db->real_escape_string($dept_res['dept_name'])."',`department_id` =".(int)$dept_info[0]." WHERE id = ".(int)$a['id']);
+			$ok = $ok && $db->query("UPDATE inw_inward_dtl SET `prev_stage` ='".$db->real_escape_string($a['stage'])."',`prev_workflow` ='".(int)$a['wf_id']."',`prev_dept_id` ='".(int)$a['department_id']."',`prev_status` ='".$db->real_escape_string($a['status'])."',wf_id = ".$wf_id.", `status` ='".$db->real_escape_string($dept_res['dept_name'])."',`department_id` =".(int)$dept_info[0].",user_working_status = '".$db->real_escape_string('<span class="label label-sm label-success">'.$dept_res['dept_name'].'</span>')."' WHERE id = ".(int)$a['id']);
 		}
 		/// Issue goes back to production (same as the revise page)
 		$ok = $ok && $db->query("UPDATE inw_volume_issues SET `status` ='' WHERE vi_id = ".$vi_id);
@@ -194,6 +200,7 @@ function draft_steps($db, $row, $next_on)
   .dc-info div{padding:8px 12px;border:1px solid var(--line,#e4e9ef);border-radius:10px;background:#f9fbfd;}
   .dc-info small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#6b7785;}
   .dc-info b{color:#14304a;font-size:14px;}
+  .dc-front{position:relative;z-index:20;}   /* the date picker opens below this card: keep it above the history card that follows */
   .dc-h{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#14304a;}
   .dc-h i{color:#e8742a;}
   .dc-note{color:#6b7785;margin:0 0 12px;}
@@ -252,7 +259,7 @@ function draft_steps($db, $row, $next_on)
     </tr></thead>
     <tbody>
     <?php foreach ($ARTICLES as $a) {
-		$with_client = in_array($a['status'], array('Delivery', 'Client Review'));
+		$with_client = in_array($a['status'], $client_status);
 		$next = (int)$a['last_draft'] + 1; ?>
       <tr class="<?php echo $with_client ? '' : 'dc-off'; ?>">
         <td><?php if ($with_client) { ?><input type="checkbox" class="chk_art" name="article_ids[]" value="<?php echo (int)$a['id']; ?>" <?php echo (isset($_POST['article_ids']) && in_array($a['id'], $_POST['article_ids'])) ? 'checked' : ''; ?>><?php } ?></td>
@@ -272,7 +279,7 @@ function draft_steps($db, $row, $next_on)
   <p style="margin:6px 0 0;">Selected: <span class="dc-sel-count" id="sel_count">0</span></p>
 </div></div>
 
-<div class="af-page"><div class="af-card">
+<div class="af-page dc-front"><div class="af-card">
   <h3 class="dc-h"><i class="fa fa-pencil-square-o"></i> Correction details</h3>
   <div class="dc-form af-wrap" style="margin-top:12px;">
     <div class="af-field dvr-field">

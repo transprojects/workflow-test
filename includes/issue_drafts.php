@@ -78,7 +78,7 @@ function idr_stamp_dispatch($db, $vi_id, $delivery_only)
 		JOIN (SELECT article_id, MAX(draft_no) AS m FROM inw_issue_article_drafts GROUP BY article_id) l ON l.article_id = x.article_id AND l.m = x.draft_no
 		JOIN inw_inward_dtl d ON d.id = x.article_id
 		SET x.dispatched_on = NOW(), x.dispatched_by = '".$user."'
-		WHERE x.vi_id = ".(int)$vi_id." AND x.dispatched_on IS NULL".($delivery_only ? " AND d.status = 'Delivery'" : ""));
+		WHERE x.vi_id = ".(int)$vi_id." AND x.dispatched_on IS NULL".($delivery_only ? " AND d.status LIKE 'Delivery%'" : ""));
 }
 
 /* [vi_id => [ 'DRAFT1' => array('n' => articles booked in this round, 'open' => of those, still in production in this round, 'sent' => last dispatch date or '') ]] */
@@ -87,7 +87,7 @@ function idr_issue_map($runner)
 	$map = array();
 	if (!idr_table_exists($runner)) { return $map; }
 	$sent = idr_has_sent_cols($runner) ? 'MAX(x.dispatched_on)' : 'NULL';
-	$rows = $runner("SELECT x.vi_id, x.sub_stage, COUNT(*) AS n, SUM(l.m = x.draft_no AND d.status NOT IN ('Delivery','Client Review')) AS open_n, ".$sent." AS sent_on
+	$rows = $runner("SELECT x.vi_id, x.sub_stage, COUNT(*) AS n, SUM(l.m = x.draft_no AND (d.status NOT LIKE 'Delivery%' AND d.status <> 'Client Review')) AS open_n, ".$sent." AS sent_on
 		FROM inw_issue_article_drafts x
 		JOIN (SELECT article_id, MAX(draft_no) AS m FROM inw_issue_article_drafts GROUP BY article_id) l ON l.article_id = x.article_id
 		JOIN inw_inward_dtl d ON d.id = x.article_id
@@ -109,7 +109,7 @@ function idr_issue_cell($map, $vi_id)
 	return $h.'</span>';
 }
 
-/* Draft-focus collation. When the latest draft round of an issue has IDR_FOCUS_MIN or more articles, collation works on those articles only:
+/* Draft-focus collation. When an issue has a draft round (IDR_FOCUS_MIN article(s) or more), collation works on those articles only:
    every other article of the issue is skipped (it may still be in production). Returns
    [vi_id => ['round' => 'DRAFT2', 'ids' => [article ids], 'open' => how many of them have not reached Delivery yet]]. Smaller rounds are not in the map (normal collation). */
 if (!defined('IDR_FOCUS_MIN')) { define('IDR_FOCUS_MIN', 1); }
@@ -154,7 +154,7 @@ function idr_withclient_map($runner)
 {
 	$map = array();
 	if (!idr_table_exists($runner)) { return $map; }
-	$rows = $runner("SELECT v_issue_id, COUNT(id) AS n FROM inw_inward_dtl WHERE status IN ('Delivery','Client Review') AND v_issue_id IN (SELECT DISTINCT vi_id FROM inw_issue_article_drafts) GROUP BY v_issue_id");
+	$rows = $runner("SELECT v_issue_id, COUNT(id) AS n FROM inw_inward_dtl WHERE (status LIKE 'Delivery%' OR status = 'Client Review') AND v_issue_id IN (SELECT DISTINCT vi_id FROM inw_issue_article_drafts) GROUP BY v_issue_id");
 	if (is_array($rows)) { foreach ($rows as $r) { $map[$r['v_issue_id']] = (int)$r['n']; } }
 	return $map;
 }
