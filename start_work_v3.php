@@ -3481,7 +3481,7 @@ function swAuthorGate(onPass) {
       var repPath = rep ? rep[rep.length - 1].replace(/^HTML report written to:\s*/, "") : "";
       var repHtml = repPath ? '<iframe sandbox="" src="' + "<?php echo $_COOKIE['set_url'];?>" + '/author_validation_report.php?f=' + encodeURIComponent(repPath) + '" style="width:100%;height:72vh;border:1px solid #cfd8e3;border-radius:8px;margin-top:10px;"></iframe>' : '';
       var failHtml = '<div class="alert alert-danger" style="margin:0 0 8px;"><strong>Author validation failed.</strong> The work cannot be completed until the author details pass validation.</div>' + repHtml;
-      if (window.swal) { swal({ title: 'Error', html: failHtml, type: 'error', width: '94%', confirmButtonText: 'Close', confirmButtonColor: '#1b6ca8' }); }
+      if (window.swal) { swal({ title: 'Error', html: failHtml, type: 'error', width: '94%', customClass: 'sw-wide', confirmButtonText: 'Close', confirmButtonColor: '#1b6ca8' }); }
       else { bootbox.dialog({ size: "large", message: '<br/>' + failHtml, buttons: { "button": { "label": "Close", "className": "btn-sm" } } }); }
     },
     error: function (xhr, status, err) {
@@ -6522,6 +6522,7 @@ $("#Author_Validaion").click(function () {
   .swal2-popup,.swal2-popup *{font-family:'Open Sans','Segoe UI',Arial,sans-serif !important;}
   .swal2-popup .fa{font-family:FontAwesome !important;}
   .swal2-popup{--ac:#e8932a;--acbg:#fff3e0;--acring:rgba(232,147,42,.18);width:460px !important;max-width:92vw !important;padding:0 0 24px !important;border-radius:18px !important;overflow:hidden !important;position:relative;box-shadow:0 28px 70px rgba(15,35,60,.38),0 2px 6px rgba(15,35,60,.12) !important;}
+  .swal2-popup.sw-wide{width:94vw !important;max-width:1500px !important;}
   .swal2-popup:has(.swal2-icon.swal2-success:not([style*="display: none"])){--ac:#1e9e61;--acbg:#e5f6ed;--acring:rgba(30,158,97,.18);}
   .swal2-popup:has(.swal2-icon.swal2-error:not([style*="display: none"])){--ac:#d64545;--acbg:#fdeaea;--acring:rgba(214,69,69,.18);}
   .swal2-popup:has(.swal2-icon.swal2-info:not([style*="display: none"])),.swal2-popup:has(.swal2-icon.swal2-question:not([style*="display: none"])){--ac:#1b6ca8;--acbg:#e6f1fa;--acring:rgba(27,108,168,.18);}
