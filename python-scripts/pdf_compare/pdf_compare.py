@@ -6,6 +6,7 @@ import hashlib
 import logging
 import difflib
 import unicodedata
+from collections import Counter
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
@@ -75,14 +76,26 @@ def write_status(status_file, **data):
 #MARK: Constants
 ZERO_WIDTH = {"\u200b", "\u200c", "\u200d", "\u2060", "\ufeff", "\u00ad"}
 
+# Code points that look identical but differ between the two PDFs (font encodings)
+CHAR_MAP = {
+    "\u2206": "\u0394",   # INCREMENT      -> GREEK CAPITAL DELTA
+    "\u2126": "\u03a9",   # OHM SIGN       -> GREEK CAPITAL OMEGA
+    "\u00b5": "\u03bc",   # MICRO SIGN     -> GREEK SMALL MU
+}
+
+# A gap wider than this (in em) between two characters is a word break, even if the
+# PDF has no space character there (one PDF may store "Ω denote" as "Ωdenote").
+# Set to None to switch off.
+SPLIT_GAP_EM = 0.25
+
 PAIR_MIN_RATIO = 0.5       # min similarity to treat two words as "same word, edited"
 PAIRING_LIMIT = 40000      # max n*m for word pairing inside a replaced block
 MOVE_RADIUS = 80.0         # pt, max distance for "shape moved" matching
 MAX_RECTS = 400            # max highlight rectangles stored per finding
 MAX_DRAWINGS = 6000        # above this, vector objects are not compared one by one
 
-FONT_SIZE_TOL = 0.1        # pt: font size differences up to this are ignored
-COLOR_TOL = 8              # per RGB channel (0-255): colour differences up to this are ignored
+# FONT_SIZE_TOL = 0.1
+# COLOR_TOL = 8
 
 HIGHLIGHT_ALPHA = 0.40
 MIN_HIGHLIGHT_PX = 6       # thin lines / zero-height shapes are drawn at least this thick
@@ -108,6 +121,7 @@ STRUCT_COLORS = {
     "shapes_added": RED,
     "image_changed": BLUE,      # image replaced
     "format_changed": ORANGE,   # same text, different font / size / bold / italic / colour
+    "reflowed": (200, 0, 160),  # purple: content moved to / from another page
 }
 
 
@@ -124,7 +138,6 @@ def _is_unknown_glyph(ch):
 
 
 def normalise_char(c):
-    """Works for single chars and multi-char strings (e.g. 'Th', 'ffi')."""
     if not c:
         return ""
 
@@ -134,8 +147,7 @@ def normalise_char(c):
         if ch in ZERO_WIDTH:
             continue
 
-        if ch == "\u2206":                              # INCREMENT -> GREEK CAPITAL DELTA
-            ch = "\u0394"
+        ch = CHAR_MAP.get(ch, ch)
 
         o = ord(ch)
 
@@ -194,11 +206,6 @@ def _width_tol(word):
 
 
 def dropped_ligature_letter(a, b):
-    """
-    True if the words differ only by a letter that belongs to a ligature
-    (extraction lost it) AND both words are drawn at the same width.
-    A really missing 'f' (ffi -> fi) makes the word narrower -> not skipped.
-    """
     ta, tb = a["text"], b["text"]
 
     if ta == tb:
@@ -220,6 +227,10 @@ def dropped_ligature_letter(a, b):
 
         if not ok:
             return False
+
+    if DEBUG_LOG:
+        logging.info("LIG-WIDTH %r vs %r: A=%.2f B=%.2f tol=%.2f",
+                     ta, tb, _extent(a["bbox"], a), _extent(b["bbox"], b), _width_tol(a))
 
     return abs(_extent(a["bbox"], a) - _extent(b["bbox"], b)) <= _width_tol(a)
 
@@ -249,8 +260,18 @@ def merged_equal(first, second, merged):
     return abs(_extent(box, merged) - _extent(_span(merged), merged)) <= _width_tol(merged)
 
 
+_LIG_COLLAPSE = re.compile(r"ffi|ffl|ff|fi|fl|ft|Th")
+
+
 def canon(text):
-    return text
+    """
+    Comparison key. One PDF may extract a ligature glyph as plain text ("The",
+    "after") while the other drops its second letter ("Te", "afer"). Collapsing
+    every ligature sequence to its first letter makes both read the same, so those
+    words align in the diff. diff_words() re-checks the real glyph width afterwards,
+    so a genuinely missing letter is still reported.
+    """
+    return _LIG_COLLAPSE.sub(lambda m: m.group(0)[0], text)
 
 
 def canon_map(text):
@@ -405,32 +426,44 @@ def _hex(c):
     return "#%02x%02x%02x" % _rgb(c)
 
 
-def style_difference(sa, sb):
+def _fmt_state(states, name):
+    if len(states) > 1:
+        return f"partly {name}"
+    return name if True in states else f"not {name}"
+
+
+def style_difference(fa, fb):
+    """fa / fb: set of (bold, italic, script) tuples found in a word."""
+    if fa == fb:
+        return None
+
     diffs = []
 
-    if _font_base(sa[0]) != _font_base(sb[0]):
+    for idx, name in ((0, "bold"), (1, "italic")):
+        sa = {f[idx] for f in fa}
+        sb = {f[idx] for f in fb}
+
+        if sa != sb:
+            diffs.append(f"{name}: {_fmt_state(sa, name)} → {_fmt_state(sb, name)}")
+
+    sa = {f[2] or "normal" for f in fa}
+    sb = {f[2] or "normal" for f in fb}
+
+    if sa != sb:
         diffs.append(
-            f"font {sa[0].split('+')[-1] or '?'} → {sb[0].split('+')[-1] or '?'}"
+            "script: " + "/".join(sorted(sa)) + " → " + "/".join(sorted(sb))
         )
 
-    ba, bb = _is_bold(sa), _is_bold(sb)
-
-    if ba != bb:
-        diffs.append("bold → regular" if ba else "regular → bold")
-
-    ia, ib = _is_italic(sa), _is_italic(sb)
-
-    if ia != ib:
-        diffs.append("italic → upright" if ia else "upright → italic")
-
-    if abs(sa[1] - sb[1]) > FONT_SIZE_TOL:
-        diffs.append(f"size {sa[1]:g} → {sb[1]:g} pt")
-
-    if max(abs(x - y) for x, y in zip(_rgb(sa[3]), _rgb(sb[3]))) > COLOR_TOL:
-        diffs.append(f"colour {_hex(sa[3])} → {_hex(sb[3])}")
+    # if _font_base(sa[0]) != _font_base(sb[0]):
+    #     diffs.append(f"font {sa[0].split('+')[-1] or '?'} → {sb[0].split('+')[-1] or '?'}")
+    #
+    # if abs(sa[1] - sb[1]) > FONT_SIZE_TOL:
+    #     diffs.append(f"size {sa[1]:g} → {sb[1]:g} pt")
+    #
+    # if max(abs(x - y) for x, y in zip(_rgb(sa[3]), _rgb(sb[3]))) > COLOR_TOL:
+    #     diffs.append(f"colour {_hex(sa[3])} → {_hex(sb[3])}")
 
     return tuple(diffs) or None
-
 
 #MARK: Extraction
 def _dominant(styles):
@@ -448,8 +481,13 @@ def _make_word(chars, boxes, styles, direction):
         "dir": direction,              # reading direction as displayed, e.g. (1, 0)
         "style": max(set(styles), key=styles.count),
         "mixed": len(set(styles)) > 1,
+        "feat": _feat_set(styles),
         "eol": False,
     }
+
+
+def _feat_set(styles):
+    return frozenset((_is_bold(s), _is_italic(s), s[4]) for s in styles)
 
 
 def _merge_hyphenated(words):
@@ -475,6 +513,7 @@ def _merge_hyphenated(words):
             merged["style"] = w["style"]
             merged["mixed"] = w.get("mixed", False) or nxt.get("mixed", False) \
                 or w["style"] != nxt["style"]
+            merged["feat"] = w["feat"] | nxt["feat"]
             out.append(merged)
             i += 2
         else:
@@ -511,12 +550,36 @@ def extract_words(page, sort_reading_order=False):
             line_words = []
             cur_t, cur_b, cur_s = [], [], []
 
+            # baseline of the main text of the line (span with most characters)
+            horizontal = abs(dx) >= abs(dy) and dx > 0
+
+            def _base_y(sp):
+                p = fitz.Point(sp["origin"])
+                return (p * rm).y if rm is not None else p.y
+
+            main = max(line["spans"], key=lambda s: len(s["chars"]), default=None)
+            ref_y = _base_y(main) if main else 0.0
+
             for span in line["spans"]:
+                size = round(float(span.get("size", 0) or 0), 1)
+                raw_flags = int(span.get("flags", 0) or 0)
+
+                script = None
+                if raw_flags & 1:                       # PyMuPDF superscript flag
+                    script = "sup"
+                elif horizontal and size:
+                    off = _base_y(span) - ref_y         # y grows downwards
+                    if off < -0.2 * size:
+                        script = "sup"
+                    elif off > 0.2 * size:
+                        script = "sub"
+
                 style = (
                     span.get("font", "") or "",
-                    round(float(span.get("size", 0) or 0), 1),
-                    int(span.get("flags", 0) or 0) & (FLAG_BOLD | FLAG_ITALIC),
+                    size,
+                    raw_flags & (FLAG_BOLD | FLAG_ITALIC),
                     int(span.get("color", 0) or 0),
+                    script,
                 )
 
                 for ch in span["chars"]:
@@ -534,6 +597,11 @@ def extract_words(page, sort_reading_order=False):
                         continue
 
                     box = rotate_rect(ch["bbox"], rm)
+
+                    if (SPLIT_GAP_EM and horizontal and cur_t and size
+                            and box[0] - cur_b[-1][2] > SPLIT_GAP_EM * size):
+                        line_words.append(_make_word(cur_t, cur_b, cur_s, direction))
+                        cur_t, cur_b, cur_s = [], [], []
 
                     for piece in c:   # ligatures expand to several characters
                         cur_t.append(piece)
@@ -833,7 +901,25 @@ def diff_words(wa, wb):
     for op, a0, a1, b0, b1 in opcodes:
 
         if op == "equal":
-            equal_pairs.extend(zip(range(a0, a1), range(b0, b1)))
+            for i, j in zip(range(a0, a1), range(b0, b1)):
+                x, y = wa[i], wb[j]
+
+                if (
+                    x["text"] == y["text"]
+                    or lig_equivalent(x["text"], y["text"])
+                    or dropped_ligature_letter(x, y)
+                ):
+                    equal_pairs.append((i, j))
+                else:
+                    # same key, but the drawn width differs: a letter is really missing
+                    rects_a, rects_b = _char_level_rects(x, y)
+
+                    if rects_a or rects_b:
+                        findings.append({"rects_a": rects_a, "rects_b": rects_b})
+
+                    changed_a.add(i)
+                    changed_b.add(j)
+
             continue
 
         if op == "delete" and (a0, a1) in moved_a:
@@ -996,6 +1082,30 @@ def _style_close(s1, s2):
     )
 
 
+def pixel_diff_findings(page_a, page_b, dpi=100, min_area=40):
+    ia = render_page(page_a, dpi)
+    ib = render_page(page_b, dpi)
+    if ia.shape != ib.shape:
+        return [make_finding("page_size", "Rendered page size differs")]
+
+    diff = cv2.absdiff(ia, ib).max(axis=2)
+    mask = (diff > LOOK_PIXEL_DELTA).astype(np.uint8) * 255
+    mask = cv2.dilate(mask, np.ones((9, 9), np.uint8))
+
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    s = 72.0 / dpi
+    rects = []
+    for c in contours:
+        x, y, w, h = cv2.boundingRect(c)
+        if w * h >= min_area:
+            rects.append((x * s, y * s, (x + w) * s, (y + h) * s))
+
+    if not rects:
+        return []
+    return [make_finding("shapes_moved",
+                         f"{len(rects)} visual difference region(s) in dense graphics",
+                         rects, rects)]
+
 def compare_drawings(da, db, tol):
 
     if len(da) + len(db) > MAX_DRAWINGS:
@@ -1113,7 +1223,7 @@ def _render_clip(page, clip, dpi):
     return cv2.cvtColor(img, cv2.COLOR_RGBA2BGR if pix.n == 4 else cv2.COLOR_RGB2BGR)
 
 
-def _region_same(page_a, page_b, rect, dpi):
+def _region_same(page_a, page_b, rect, dpi, fraction=LOOK_FRACTION, blur=False):
     clip = fitz.Rect(rect)
     clip = fitz.Rect(clip.x0 - 1.5, clip.y0 - 1.5, clip.x1 + 1.5, clip.y1 + 1.5)
     clip = clip & page_a.rect & page_b.rect
@@ -1127,9 +1237,17 @@ def _region_same(page_a, page_b, rect, dpi):
     if ia.shape != ib.shape:
         return False
 
-    diff = cv2.absdiff(ia, ib).max(axis=2)
-    return float((diff > LOOK_PIXEL_DELTA).mean()) < LOOK_FRACTION
+    if blur:
+        ia = cv2.GaussianBlur(ia, (5, 5), 0)
+        ib = cv2.GaussianBlur(ib, (5, 5), 0)
 
+    diff = cv2.absdiff(ia, ib).max(axis=2)
+    frac = float((diff > LOOK_PIXEL_DELTA).mean())
+
+    if DEBUG_LOG and blur:
+        logging.info("LOOK frac=%.4f (limit %.4f) rect=%s", frac, fraction, rect)
+
+    return frac < fraction
 
 def drop_same_looking(findings, page_a, page_b, dpi=100):
     if page_a.rotation or page_b.rotation:
@@ -1149,6 +1267,32 @@ def drop_same_looking(findings, page_a, page_b, dpi=100):
             g = dict(f)
             g["rects_a"], g["rects_b"] = ra, rb
             out.append(g)
+
+    return out
+
+
+TEXT_LOOK_FRACTION = 0.12 
+
+
+def drop_same_looking_text(findings, page_a, page_b, dpi=150):
+    if page_a.rotation or page_b.rotation:
+        return findings
+
+    out = []
+
+    for f in findings:
+        ra, rb = [], []
+
+        for side, rects, keep in (("A", f["rects_a"], ra), ("B", f["rects_b"], rb)):
+            for r in rects:
+                if _region_same(page_a, page_b, r, dpi, TEXT_LOOK_FRACTION, blur= True):
+                    if DEBUG_LOG:
+                        logging.info("TEXT same-look dropped %s rect=%s", side, r)
+                else:
+                    keep.append(r)
+
+        if ra or rb:
+            out.append({"rects_a": ra, "rects_b": rb})
 
     return out
 
@@ -1189,17 +1333,13 @@ def structure_findings(data_a, data_b, wa, wb, equal_pairs, changed_a, changed_b
     for i, j in equal_pairs:
         a, b = wa[i], wb[j]
 
-        diff= None
-        # ---- formatting (font / bold / italic / size / colour) ----
-        if a.get("mixed") or b.get("mixed"):
-            diff = None          # subscripts / symbol fonts: span split differs per PDF
-        else:
-            diff = style_difference(a["style"], b["style"])
+        diff = style_difference(a["feat"], b["feat"])
         style_items.append((diff, (i, j)))
 
         if diff and DEBUG_LOG:
-            logging.info("STYLE %r | A=%r | B=%r | %s",
-                         a["text"], a["style"], b["style"], diff)
+            logging.info("STYLE %r | A=%s | B=%s | %s",
+                         a["text"], sorted(a["feat"], key=repr),
+                         sorted(b["feat"], key=repr), diff)
 
         # ---- position ----
         key = None
@@ -1350,6 +1490,337 @@ def align_pages(path_a, path_b):
     return pairs
 
 
+#MARK: Document-level reflow pre-pass
+# The per-page worker cannot tell "text was edited" from "text moved to another
+# page". This pre-pass diffs the whole document once, finds content that matched
+# on a page that is NOT the aligned counterpart, and records it as "reflowed".
+# Workers then remove that content from the text diff and report it as ONE block
+# in the Structure section instead.
+
+MARGIN_FRAC = 0.09        # top / bottom share of the page treated as header / footer band
+REPEAT_FRAC = 0.40        # a margin word on >= this share of pages is a header / footer
+REFLOW_MIN_WORDS = 3      # shorter cross-page runs are left to the normal diff
+REFLOW_MIN_MOVED = 4      # min run for a block that moved out of order (second pass)
+DRAW_REFLOW_MIN = 3       # min vector shapes (per page) to call them a reflowed table / figure
+
+
+def _doc_page_data(path, sort_reading_order):
+    """One serial pass over a PDF: words, image hashes and vector signatures per page."""
+    doc = fitz.open(path)
+    pages = []
+
+    try:
+        for page in doc:
+            words = comparable_words(extract_words(page, sort_reading_order))
+            draws = extract_drawings(page)
+
+            if len(draws) > MAX_DRAWINGS:
+                sigs = Counter()
+            else:
+                sigs = Counter(
+                    (round(d["rect"][2] - d["rect"][0]),
+                     round(d["rect"][3] - d["rect"][1]),
+                     d["style"])
+                    for d in draws
+                )
+
+            pages.append({
+                "height": page.rect.height,
+                "words": [(w["key"], w["bbox"]) for w in words],   # same indexing as the worker
+                "images": [im["digest"] for im in extract_images(page) if im["digest"]],
+                "sigs": sigs,
+            })
+    finally:
+        doc.close()
+
+    return pages
+
+
+def _stripped_indices(pages):
+    """
+    Headers, footers and page numbers repeat on many pages (digits normalised),
+    so they would match across pages and look like reflow. They are excluded from
+    the pre-pass only; the per-page diff still compares them normally.
+    """
+    per_page, counts = [], Counter()
+
+    for pg in pages:
+        h, found = pg["height"], {}
+
+        for idx, (key, bb) in enumerate(pg["words"]):
+            yc = (bb[1] + bb[3]) / 2
+
+            if yc < MARGIN_FRAC * h or yc > (1 - MARGIN_FRAC) * h:
+                found[idx] = (re.sub(r"\d", "#", key), int(yc // 4))
+
+        per_page.append(found)
+        counts.update(set(found.values()))
+
+    need = max(2, int(REPEAT_FRAC * len(pages) + 0.999))
+
+    return [
+        {idx for idx, sig in found.items() if counts[sig] >= need}
+        for found in per_page
+    ]
+
+
+def _flatten(pages, stripped):
+    keys, refs = [], []
+
+    for p, pg in enumerate(pages):
+        for i, (key, _) in enumerate(pg["words"]):
+            if i not in stripped[p]:
+                keys.append(key)
+                refs.append((p, i))
+
+    return keys, refs
+
+
+def _word_reflow(pages_a, pages_b, paired):
+    ka, ra = _flatten(pages_a, _stripped_indices(pages_a))
+    kb, rb = _flatten(pages_b, _stripped_indices(pages_b))
+
+    ops = difflib.SequenceMatcher(None, ka, kb, autojunk=False).get_opcodes()
+
+    cands = []                 # (flat index in A, flat index in B)
+    used_a, used_b = set(), set()
+
+    for op, a0, a1, b0, b1 in ops:
+        if op == "equal":
+            cands.extend(zip(range(a0, a1), range(b0, b1)))
+            used_a.update(range(a0, a1))
+            used_b.update(range(b0, b1))
+
+    # Second pass. A diff can only match words in order, so a table or figure that
+    # moved several pages (while the text between stayed) is left over as "deleted in
+    # A / inserted in B". Match the leftovers against each other: identical text that
+    # was deleted in one place and inserted in another has moved.
+    left_a = [i for i in range(len(ka)) if i not in used_a]
+    left_b = [j for j in range(len(kb)) if j not in used_b]
+
+    if left_a and left_b:
+        sm2 = difflib.SequenceMatcher(
+            None,
+            [ka[i] for i in left_a],
+            [kb[j] for j in left_b],
+            autojunk=False,
+        )
+
+        for blk in sm2.get_matching_blocks():
+            if blk.size >= REFLOW_MIN_MOVED:
+                cands.extend(
+                    (left_a[blk.a + t], left_b[blk.b + t]) for t in range(blk.size)
+                )
+
+    cands.sort()
+
+    reflow_a, reflow_b = {}, {}
+    run = []
+
+    def close_run():
+        if len(run) >= REFLOW_MIN_WORDS:
+            for fa, fb in run:
+                (pa, i), (pb, j) = ra[fa], rb[fb]
+                reflow_a.setdefault(pa, {})[i] = pb
+                reflow_b.setdefault(pb, {})[j] = pa
+        run.clear()
+
+    for fa, fb in cands:
+        (pa, _), (pb, _) = ra[fa], rb[fb]
+
+        if (pa, pb) in paired:          # same aligned page pair: normal diff handles it
+            close_run()
+            continue
+
+        if run:
+            lfa, lfb = run[-1]
+            if not (fa == lfa + 1 and fb == lfb + 1
+                    and ra[lfa][0] == pa and rb[lfb][0] == pb):
+                close_run()
+
+        run.append((fa, fb))
+
+    close_run()
+    return reflow_a, reflow_b
+
+
+def _image_reflow(pages_a, pages_b, paired):
+    """Image present on page p of A but not on its aligned B page(s), yet on another B page."""
+    def run(src, dst, pair_set):
+        out = {}
+
+        for p, pg in enumerate(src):
+            partners = [q for (x, q) in pair_set if x == p]
+            partner_imgs = {d for q in partners for d in dst[q]["images"]}
+
+            for d in set(pg["images"]) - partner_imgs:
+                if any(d in other["images"] for r, other in enumerate(dst) if r not in partners):
+                    out.setdefault(p, set()).add(d)
+
+        return out
+
+    return (
+        run(pages_a, pages_b, paired),
+        run(pages_b, pages_a, {(b, a) for a, b in paired}),
+    )
+
+
+def _drawing_reflow(pages_a, pages_b, paired):
+    """Vector shapes (tables, boxes, figures) that exist on both sides but on different pages."""
+    exc_a, exc_b = {}, {}
+
+    for pa, pb in sorted(paired):
+        ca, cb = pages_a[pa]["sigs"], pages_b[pb]["sigs"]
+
+        for sig, n in (ca - cb).items():
+            exc_a.setdefault(sig, []).append([pa, n])
+
+        for sig, n in (cb - ca).items():
+            exc_b.setdefault(sig, []).append([pb, n])
+
+    out_a, out_b = {}, {}
+
+    for sig, la in exc_a.items():
+        lb = exc_b.get(sig)
+
+        if not lb:
+            continue
+
+        for ea in la:
+            for eb in lb:
+                if ea[1] <= 0 or eb[1] <= 0:
+                    continue
+
+                m = min(ea[1], eb[1])
+                ea[1] -= m
+                eb[1] -= m
+                out_a.setdefault(ea[0], Counter())[sig] += m
+                out_b.setdefault(eb[0], Counter())[sig] += m
+
+    def big_enough(d):
+        return {p: c for p, c in d.items() if sum(c.values()) >= DRAW_REFLOW_MIN}
+
+    return big_enough(out_a), big_enough(out_b)
+
+
+def analyse_reflow(path_a, path_b, pairs, sort_reading_order=False):
+    """
+    Document-level pre-pass. Returns plain dicts keyed by 0-based page index
+    (picklable, so they can be sent to the worker processes through cfg).
+    """
+    paired = {(a, b) for a, b in pairs if a is not None and b is not None}
+
+    pages_a = _doc_page_data(path_a, sort_reading_order)
+    pages_b = _doc_page_data(path_b, sort_reading_order)
+
+    words_a, words_b = _word_reflow(pages_a, pages_b, paired)
+    img_a, img_b = _image_reflow(pages_a, pages_b, paired)
+    draw_a, draw_b = _drawing_reflow(pages_a, pages_b, paired)
+
+    return {
+        "words_a": words_a, "words_b": words_b,      # {page: {word_idx: other_page}}
+        "images_a": img_a, "images_b": img_b,        # {page: {digest}}
+        "draws_a": draw_a, "draws_b": draw_b,        # {page: Counter(signature -> n)}
+    }
+
+
+#MARK: Reflow helpers for the page worker
+def reflow_findings(wa_all, wb_all, map_a, map_b):
+    """One finding per (side, other page); the rectangles follow the moved lines."""
+    findings = []
+
+    for words, mapping, side in ((wa_all, map_a, "a"), (wb_all, map_b, "b")):
+        by_target = {}
+
+        for i, target in mapping.items():
+            by_target.setdefault(target, []).append(words[i]["bbox"])
+
+        for target in sorted(by_target):
+            boxes = by_target[target]
+            rects = merge_rects(boxes)
+
+            if side == "a":
+                findings.append(make_finding(
+                    "reflowed",
+                    f"Content reflowed to page {target + 1} of second PDF ({len(boxes)} word(s))",
+                    rects, [],
+                ))
+            else:
+                findings.append(make_finding(
+                    "reflowed",
+                    f"Content reflowed from page {target + 1} of first PDF ({len(boxes)} word(s))",
+                    [], rects,
+                ))
+
+    return findings
+
+
+def split_reflowed_images(images, digests, side):
+    keep = [im for im in images if im["digest"] not in digests]
+    moved = [im for im in images if im["digest"] in digests]
+
+    findings = [
+        make_finding(
+            "reflowed",
+            "Image reflowed to another page" if side == "a" else "Image reflowed from another page",
+            [im["bbox"]] if side == "a" else [],
+            [im["bbox"]] if side == "b" else [],
+        )
+        for im in moved
+    ]
+
+    return keep, findings
+
+
+def split_reflowed_drawings(draws, counter, other_draws, tol, side):
+    """
+    Remove up to counter[sig] shapes per signature; prefer shapes that have no
+    same-position counterpart on the aligned page (those are the ones that moved).
+    """
+    if not counter:
+        return draws, []
+
+    def sig(d):
+        r = d["rect"]
+        return (round(r[2] - r[0]), round(r[3] - r[1]), d["style"])
+
+    left = Counter(counter)
+    moved_idx = set()
+
+    for i, d in enumerate(draws):
+        s = sig(d)
+
+        if left[s] <= 0:
+            continue
+
+        same_place = any(
+            sig(o) == s and max(abs(x - y) for x, y in zip(d["rect"], o["rect"])) <= tol
+            for o in other_draws
+        )
+
+        if not same_place:
+            moved_idx.add(i)
+            left[s] -= 1
+
+    keep = [d for i, d in enumerate(draws) if i not in moved_idx]
+    moved = [draws[i]["rect"] for i in sorted(moved_idx)]
+
+    if not moved:
+        return keep, []
+
+    detail = (
+        f"{len(moved)} line(s) / shape(s) reflowed to another page"
+        if side == "a" else
+        f"{len(moved)} line(s) / shape(s) reflowed from another page"
+    )
+
+    return keep, [make_finding(
+        "reflowed", detail,
+        [rect_union(moved)] if side == "a" else [],
+        [rect_union(moved)] if side == "b" else [],
+    )]
+
+
 #MARK: Overlay
 def build_overlay(img_a, img_b, findings, scale, color_for):
     ha, wa = img_a.shape[:2]
@@ -1437,6 +1908,7 @@ def _compare_page_pair(pa, pb, path_a, path_b, cfg):
         "struct_image": None,
         "text_count": 0,
         "struct_count": 0,
+        "manual_check": False,
         "notes": [],
         "error": None,
     }
@@ -1469,7 +1941,6 @@ def _compare_page_pair(pa, pb, path_a, path_b, cfg):
             result["text_count"] = 1
             return result
 
-        # ---- normal page pair ----
         page_a = doc_a.load_page(pa)
         page_b = doc_b.load_page(pb)
 
@@ -1485,8 +1956,34 @@ def _compare_page_pair(pa, pb, path_a, path_b, cfg):
             "drawings": extract_drawings(page_b),
         }
 
-        wa = comparable_words(extract_words(page_a, cfg["sort_reading_order"]))
-        wb = comparable_words(extract_words(page_b, cfg["sort_reading_order"]))
+        wa_all = comparable_words(extract_words(page_a, cfg["sort_reading_order"]))
+        wb_all = comparable_words(extract_words(page_b, cfg["sort_reading_order"]))
+
+        # content that the document-level pre-pass found to be reflowed to / from
+        # another page is taken out of the per-page diff and reported separately
+        rf = cfg.get("reflow") or {}
+        map_a = rf.get("words_a", {}).get(pa, {})
+        map_b = rf.get("words_b", {}).get(pb, {})
+
+        wa = [w for i, w in enumerate(wa_all) if i not in map_a]
+        wb = [w for i, w in enumerate(wb_all) if i not in map_b]
+
+        reflow_found = reflow_findings(wa_all, wb_all, map_a, map_b)
+
+        orig_da, orig_db = data_a["drawings"], data_b["drawings"]
+
+        data_a["images"], f = split_reflowed_images(
+            data_a["images"], rf.get("images_a", {}).get(pa, set()), "a")
+        reflow_found += f
+        data_b["images"], f = split_reflowed_images(
+            data_b["images"], rf.get("images_b", {}).get(pb, set()), "b")
+        reflow_found += f
+        data_a["drawings"], f = split_reflowed_drawings(
+            orig_da, rf.get("draws_a", {}).get(pa), orig_db, cfg["pos_tol"], "a")
+        reflow_found += f
+        data_b["drawings"], f = split_reflowed_drawings(
+            orig_db, rf.get("draws_b", {}).get(pb), orig_da, cfg["pos_tol"], "b")
+        reflow_found += f
 
         if DEBUG_LOG and pa == 2:
             for tag, ws in (("A", wa), ("B", wb)):
@@ -1494,6 +1991,7 @@ def _compare_page_pair(pa, pb, path_a, path_b, cfg):
                     logging.info("HEAD %s %r %s", tag, w["text"], [round(v) for v in w["bbox"]])
 
         text_found, equal_pairs, moved_found, ch_a, ch_b = diff_words(wa, wb)
+        text_found = drop_same_looking_text(text_found, page_a, page_b)
 
         struct_found = moved_found + structure_findings(
             data_a, data_b, wa, wb, equal_pairs, ch_a, ch_b, cfg
@@ -1501,7 +1999,26 @@ def _compare_page_pair(pa, pb, path_a, path_b, cfg):
 
         struct_found = drop_same_looking(struct_found, page_a, page_b)
 
-        if not text_found and not struct_found:
+        # reflow findings are added after drop_same_looking so they are never filtered out
+        struct_found += reflow_found
+        # skipped = [f for f in struct_found if f["type"] == "shapes_skipped"]
+        # struct_found = [f for f in struct_found if f["type"] != "shapes_skipped"]
+
+        # if any(f["type"] == "shapes_skipped" for f in struct_found):
+        #     struct_found = [f for f in struct_found if f["type"] != "shapes_skipped"]
+        #     struct_found += pixel_diff_findings(page_a, page_b)
+
+        skipped = [f for f in struct_found if f["type"] == "shapes_skipped"]
+        struct_found = [f for f in struct_found if f["type"] != "shapes_skipped"]
+
+        if skipped:
+            result["manual_check"] = True
+            result["notes"].append(
+                f"This page has more vectors than the threshold, so lines / shapes were not compared. "
+                f"Please check this page manually."
+            )
+
+        if not text_found and not struct_found and not skipped:
             return result
 
         img_a = render_page(page_a, dpi)
@@ -1515,7 +2032,13 @@ def _compare_page_pair(pa, pb, path_a, path_b, cfg):
             result["text_image"] = f"Images/{path.name}"
             result["text_count"] = len(text_found)
 
-        if struct_found:
+        if struct_found or skipped:
+            for f in struct_found:
+                if DEBUG_LOG:
+                    logging.info("STRUCT p%s %s | %s | A=%d B=%d",
+                                 label, f["type"], f["detail"],
+                                 len(f["rects_a"]), len(f["rects_b"]))
+
             canvas = build_overlay(img_a, img_b, struct_found, scale, struct_colors)
             path = img_dir / f"structure_page_{label}.png"
             cv2.imwrite(str(path), canvas)
@@ -1618,6 +2141,23 @@ class PDFComparator:
         if page_count == 0:
             return
 
+        # document-level pre-pass: find content that moved between pages
+        self.update_status(
+            status="processing",
+            progress=0,
+            current_page=0,
+            total_pages=page_count,
+            message="Analysing reflow across pages..."
+        )
+
+        try:
+            self.cfg["reflow"] = analyse_reflow(
+                path_a, path_b, pairs, self.cfg["sort_reading_order"]
+            )
+        except Exception:
+            logging.exception("Reflow pre-pass failed; falling back to per-page diff")
+            self.cfg["reflow"] = {}
+
         completed = 0
 
         max_workers = min(
@@ -1681,18 +2221,19 @@ class PDFComparator:
 
         mismatched = [
             r for r in self.results
-            if r["text_image"] or r["struct_image"]
+            if r["text_image"] or r["struct_count"] > 0
         ]
+        manual = [r for r in self.results if r["manual_check"]]
 
         failed = [r for r in self.results if r["error"]]
 
         text_pages = sum(1 for r in mismatched if r["text_image"])
-        struct_pages = sum(1 for r in mismatched if r["struct_image"])
+        struct_pages = sum(1 for r in mismatched if r["struct_count"] > 0)
 
         name_a = html.escape(Path(pdf_path_a).name)
         name_b = html.escape(Path(pdf_path_b).name)
 
-        if not mismatched and not failed:
+        if not mismatched and not failed and not manual:
 
             result_message = """
             <div class="success">
@@ -1702,8 +2243,7 @@ class PDFComparator:
             </div>
             """
 
-        else:
-
+        elif mismatched:
             result_message = f"""
             <div class="warning">
                 ⚠ {len(mismatched)}
@@ -1711,11 +2251,24 @@ class PDFComparator:
             </div>
             """
 
+        else:
+            result_message= ""
+
         for r in failed:
             result_message += (
                 '<div class="warning">'
                 f"{html.escape(page_title(r))} could not be compared: "
                 f"{html.escape(r['error'])}"
+                "</div>"
+            )
+
+        if manual:
+            pages = ", ".join(page_title(r) for r in manual)
+            result_message += (
+                '<div class="warning">'
+                f"{len(manual)} page(s) have more shapes than the threshold, so "
+                "shapes were not compared. Check manually: "
+                f"{html.escape(pages)}"
                 "</div>"
             )
 
@@ -1852,6 +2405,11 @@ Pages With Structural Differences:
 <strong>{struct_pages}</strong>
 </div>
 
+<div class="summary">
+Pages To Check Manually:
+<strong>{len(manual)}</strong>
+</div>
+
 {result_message}
 
 <div class="legend">
@@ -1918,6 +2476,16 @@ Blue
 </span>:
 Image Replaced
 
+|
+
+<span style="
+background-color:rgba(160,0,200,0.3);
+padding:2px 5px;
+font-weight:bold;">
+Purple
+</span>:
+Reflowed To / From Another Page
+
 <br>
 
 </div>
@@ -1933,7 +2501,7 @@ Image Replaced
         )
 
         for key, heading, alt_prefix in sections:
-            section_pages = [r for r in mismatched if r[key]]
+            section_pages = [r for r in self.results if r[key]] 
 
             if not section_pages:
                 continue
@@ -1945,10 +2513,17 @@ Image Replaced
             for r in section_pages:
                 title = html.escape(page_title(r))
 
+                notes_html = ""
+                if key == "struct_image":
+                    notes_html = "".join(
+                        f'<p class="note">⚠ {html.escape(n)}</p>' for n in r["notes"]
+                    )
+
                 html_content += f"""
 <div class="container">
 
 <h3>{title}</h3>
+{notes_html}
 
 <img
     src="{r[key]}"

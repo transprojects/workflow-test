@@ -184,7 +184,7 @@ if ($article_count[0]['count'] == 0) {
             UPDATE inw_inward_dtl SET
                 volume_folder = 'Vol00000',
                 approved_by = 1,
-                department_id = 1,
+                department_id = $dept_code,
                 work_dir = '$work_dir_esc',
                 at_id = '".(int)$_POST['at_id']."'
             WHERE id = '$db_article_id'
