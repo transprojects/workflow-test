@@ -30,6 +30,17 @@ include "includes/includes-sw2.php";
 foreach ($__sw_hidden as $__k => $__v) { $_COOKIE[$__k] = $__v; }
 if ($__sw_hidden) { $isLoggedIn = true; }   /* includes/header.php (via top-header.php) redirects to the login page when this is false */
 if ($__sw_sig !== null && !$__sw_hidden && !empty($isLoggedIn)) { $_SESSION['sw_auth_sig'] = $__sw_sig; $_SESSION['sw_auth_t'] = time(); }
+/* Submit with an ended login (expired, or the same username logged in elsewhere): say so and keep the form. Without this,
+   includes/header.php redirects to the login page further down and the popup only said "The server redirected the request." */
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sw_ajax']) && empty($isLoggedIn)) {
+	while (ob_get_level() > 0) { ob_end_clean(); }
+	header('Content-Type: application/json; charset=utf-8');
+	header('Cache-Control: no-store');
+	echo json_encode(array('ok' => false, 'type' => 'warning', 'session_expired' => true, 'title' => 'Your login has ended',
+		'message' => 'The work status was NOT saved. Your login expired, or this username was logged in on another computer or browser. Keep this tab open, log in again in a new tab with the same username, then come back and click Submit.',
+		'login_url' => rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/').'/index'));
+	exit;
+}
 ?>
 <?php
 /* ============================================================================
@@ -6339,6 +6350,10 @@ $("#Author_Validaion").click(function () {
             try { window.close(); } catch (e) {}
             setTimeout(function () { location.href = SET_URL + '/currentwork'; }, 400);
           });
+      } else if (r && r.session_expired) {   /* the form stays as typed; log in again in another tab and Submit again */
+        busy = false; $('#submit-btn').prop('disabled', false).show();
+        swal({ title: r.title, type: 'warning', confirmButtonText: 'OK', confirmButtonColor: '#1b6ca8', allowOutsideClick: false,
+               html: '<div class="sw-msg">' + esc(r.message) + '</div><div style="margin-top:14px"><a href="' + esc(r.login_url) + '" target="_blank" rel="noopener" style="font-weight:700;text-decoration:underline">Open the login page in a new tab</a></div>' });
       } else {
         busy = false; $('#submit-btn').prop('disabled', false).show();
         alertBox((r && r.type) || 'error', (r && r.title) || 'Error', (r && r.message) || 'Unknown error.');
